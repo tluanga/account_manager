@@ -5,8 +5,15 @@ class NewTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: child,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Ledger Master'),
+      ),
+      body: Column(
+        children: [
+          TextField(),
+        ],
+      ),
     );
   }
 }

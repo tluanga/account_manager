@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+import 'package:account_manager/static/route.dart';
 
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(
           context,
-          rAddLedgerMaster,
+          rNewLedgerMaster,
         ),
         child: Text('+'),
       ),

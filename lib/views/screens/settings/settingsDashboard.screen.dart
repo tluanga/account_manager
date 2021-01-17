@@ -16,36 +16,11 @@ class SettingsDashboard extends StatelessWidget {
           UICard(
             title: 'Ledger Master',
             routeUrl: rLedgerMasterDashboard,
-          )
-          // Consumer<Count>(
-          //   builder: (context, count, child) {
-          //     return Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: GestureDetector(
-          //         onTap: () {
-          //           count.setCount(100 + 1);
-
-          //           // Navigator.pop(context);
-          //         },
-          //         child: Container(
-          //           width: 100,
-          //           height: 100,
-          //           decoration: BoxDecoration(
-          //             color: Colors.amber.shade300,
-          //           ),
-          //           child: Text('Set Count to 8000'),
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
-          // Consumer<Count>(
-          //   builder: (context, count, child) {
-          //     return Text(
-          //       count.a.toString(),
-          //     );
-          //   },
-          // )
+          ),
+          UICard(
+            title: 'Transaction Type',
+            routeUrl: rTransactionTypeDashboard,
+          ),
         ],
       ),
     );
