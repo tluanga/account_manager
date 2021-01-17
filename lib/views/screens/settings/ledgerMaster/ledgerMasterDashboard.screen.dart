@@ -1,7 +1,8 @@
-import 'package:account_manager/business_logic/models/ledgerMaster.data.dart';
-import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 class LedgerMasterDashboard extends StatefulWidget {
@@ -18,10 +19,13 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
       appBar: AppBar(
         title: Text('Ledger Master Dashboard'),
       ),
-      body: Consumer<LedgerMasterData>(
-          builder: (context, ledgerMasterData, child) {
-        return Text(
-          ledgerMasterData.ledgerMasterList.length.toString(),
+      body: Consumer<LedgerMasterViewModel>(
+          builder: (context, ledgerMaster, child) {
+        return Stack(
+          children: [
+            Text('No of Ledger Master'),
+            Text(ledgerMaster.ledgerMasterList.length.toString()),
+          ],
         );
       }),
       //  ListView.builder(itemBuilder: (context, index) {
@@ -34,19 +38,6 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         ),
         child: Text('+'),
       ),
-    );
-  }
-}
-
-class LedgerMasterTile extends StatelessWidget {
-  final String name;
-
-  LedgerMasterTile({this.name});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(this.name),
     );
   }
 }
