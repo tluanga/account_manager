@@ -1,5 +1,4 @@
-import 'package:account_manager/business_logic/models/count.models.dart';
-
+import 'package:account_manager/business_logic/models/ledgerMaster.data.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/addLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => Count(),
+      create: (context) => LedgerMasterData(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Accounting Manager',

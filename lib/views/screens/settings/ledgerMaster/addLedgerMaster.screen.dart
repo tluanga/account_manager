@@ -10,7 +10,9 @@ class AddLedgerMaster extends StatelessWidget {
         title: Text('Add Ledger Master'),
       ),
       body: Column(
-        children: [],
+        children: [
+          Text('test'),
+        ],
       ),
     );
   }

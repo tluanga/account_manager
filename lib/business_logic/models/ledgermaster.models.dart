@@ -1,5 +1,10 @@
 class LedgerMaster {
   int id;
   String name;
-  LedgerMaster({this.id, this.name});
+  bool active;
+  LedgerMaster({this.id, this.name, this.active = true});
+
+  setActive() {
+    active = !active;
+  }
 }

@@ -1,9 +1,10 @@
-// import 'package:flutter/widgets.dart';
+import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:flutter/foundation.dart';
 
-// class NewLedgerMaster extends ChangeNotifier {
+class NewLedgerMasterViewModel extends ChangeNotifier {
+  List<LedgerMaster> _ledgerMasters = [];
 
-//   void newLedgerMaster(){
-
-//     notifyListeners()
-//   }
-// }
+  void loadData() async {
+    notifyListeners();
+  }
+}
