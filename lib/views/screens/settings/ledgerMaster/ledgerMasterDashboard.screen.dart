@@ -1,3 +1,4 @@
+import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 
 class LedgerMasterDashboard extends StatelessWidget {
@@ -13,6 +14,13 @@ class LedgerMasterDashboard extends StatelessWidget {
         children: [
           Text('ledgerMaster Screen'),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(
+          context,
+          rAddLedgerMaster,
+        ),
+        child: Text('+'),
       ),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:account_manager/business_logic/models/count.models.dart';
 
 import 'package:account_manager/static/route.dart';
-import 'package:account_manager/views/screens/settings/ledgerMasterDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/addLedgerMaster.screen.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           // ------Settings-------------
           rSettingsDashboard: (context) => SettingsDashboard(),
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),
+          rAddLedgerMaster: (context) => AddLedgerMaster(),
         },
         home: Dashboard(),
       ),

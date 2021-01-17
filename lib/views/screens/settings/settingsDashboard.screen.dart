@@ -1,8 +1,6 @@
-import 'package:account_manager/business_logic/models/count.models.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/widgets/uiCard.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SettingsDashboard extends StatelessWidget {
   const SettingsDashboard({Key key}) : super(key: key);
