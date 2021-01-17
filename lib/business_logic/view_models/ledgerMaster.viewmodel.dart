@@ -7,4 +7,16 @@ class LedgerMasterViewModel extends ChangeNotifier {
     LedgerMaster(id: 2, name: 'Machinery Account'),
     LedgerMaster(id: 3, name: 'Purchase Account'),
   ];
+  void newLedgerMaster(LedgerMaster ledgerMaster) {
+    ledgerMasterList.add(ledgerMaster);
+  }
+
+  void removeLedgerMaster(int id) {
+    // find the leger Master to remove
+
+    // ledgerMasterList.remove(value)
+  }
+  void findLedgerMasterList(int id) {
+    ledgerMasterList.where((element) => false);
+  }
 }

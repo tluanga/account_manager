@@ -11,7 +11,7 @@ class AddLedgerMaster extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text('test'),
+          TextField(),
         ],
       ),
     );

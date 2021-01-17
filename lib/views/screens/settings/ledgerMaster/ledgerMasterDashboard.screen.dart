@@ -21,7 +21,7 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
       ),
       body: Consumer<LedgerMasterViewModel>(
           builder: (context, ledgerMaster, child) {
-        return Stack(
+        return Column(
           children: [
             Text('No of Ledger Master'),
             Text(ledgerMaster.ledgerMasterList.length.toString()),
