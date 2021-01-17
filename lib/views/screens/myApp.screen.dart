@@ -4,8 +4,10 @@ import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/transactionType/ledgerSelect.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
+import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +40,9 @@ class MyApp extends StatelessWidget {
           rNewLedgerMaster: (context) => NewLedgerMaster(),
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),
+          rLedgerSelect: (context) => LedgerSelect(),
+          // ------------Transaction---------------
+          rNewTransaction: (context) => NewTransaction(),
         },
         home: Dashboard(),
       ),

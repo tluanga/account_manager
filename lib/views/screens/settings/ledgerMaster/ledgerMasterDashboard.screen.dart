@@ -36,7 +36,10 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
           context,
           rNewLedgerMaster,
         ),
-        child: Text('+'),
+        child: Text(
+          '+',
+          style: TextStyle(fontSize: 30),
+        ),
       ),
     );
   }

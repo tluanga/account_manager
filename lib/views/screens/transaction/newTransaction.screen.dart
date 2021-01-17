@@ -7,11 +7,43 @@ class NewTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Ledger Master'),
+        title: Text('New Transaction'),
       ),
       body: Column(
         children: [
-          TextField(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Amount',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Description',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Date',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

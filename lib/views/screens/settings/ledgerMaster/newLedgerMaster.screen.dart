@@ -11,7 +11,28 @@ class NewLedgerMaster extends StatelessWidget {
       ),
       body: Column(
         children: [
-          TextField(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Description',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
