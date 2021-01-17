@@ -11,5 +11,9 @@ const String rNewTransaction = 'newTransaction';
 const String rLei = '/lei';
 const String rHralh = '/hralh';
 
+// -------------Books
+const String rLedgerDashboard = '/books/ledgerDashboard';
+const String rLedger = 'books/ledger';
+
 // -----------------Dashboard route----------
 const String rDashBoard = '/dashboard';

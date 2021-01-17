@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NewLedgerMaster extends StatelessWidget {
-  const NewLedgerMaster({Key key}) : super(key: key);
+  final String name;
+
+  NewLedgerMaster({this.name});
 
   @override
   Widget build(BuildContext context) {

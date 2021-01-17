@@ -14,13 +14,13 @@ class TransactionTypeDashboard extends StatelessWidget {
       ),
       body: Consumer<TransactionTypeViewModel>(
         builder: (context, transactiontype, child) {
-          return Column(
-            children: [
-              Text('Number of Transaction Types'),
-              Text(
-                transactiontype.transactionTypes.length.toString(),
-              )
-            ],
+          return ListView.builder(
+            itemCount: transactiontype.transactionTypes.length,
+            itemBuilder: (BuildContext context, int index) {
+              return TransactionTypeListItem(
+                name: transactiontype.transactionTypes[index].name,
+              );
+            },
           );
         },
       ),
@@ -36,6 +36,18 @@ class TransactionTypeDashboard extends StatelessWidget {
           style: TextStyle(fontSize: 30),
         ),
       ),
+    );
+  }
+}
+
+class TransactionTypeListItem extends StatelessWidget {
+  final String name;
+  TransactionTypeListItem({this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(this.name),
     );
   }
 }

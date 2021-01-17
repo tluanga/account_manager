@@ -19,6 +19,10 @@ class Dashboard extends StatelessWidget {
               title: 'New Transaction',
               routeUrl: rNewTransaction,
             ),
+            UICard(
+              title: 'Ledgers',
+              routeUrl: rLedgerDashboard,
+            ),
           ],
         ),
       ),

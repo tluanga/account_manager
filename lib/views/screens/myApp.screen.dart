@@ -1,6 +1,8 @@
 import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/settings/books/ledgers/ledger.screen.dart';
+import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
@@ -43,6 +45,9 @@ class MyApp extends StatelessWidget {
           rLedgerSelect: (context) => LedgerSelect(),
           // ------------Transaction---------------
           rNewTransaction: (context) => NewTransaction(),
+          //-------------Book------------------------
+          rLedgerDashboard: (context) => LedgerDashboard(),
+          rLedger: (context) => Ledger(),
         },
         home: Dashboard(),
       ),
