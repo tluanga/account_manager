@@ -65,8 +65,6 @@ class MyApp extends StatelessWidget {
 
 
 
-
-
 class BottomNavigationBarMain extends StatefulWidget {
   @override
   _BottomNavigationBarMainState createState() =>
@@ -77,6 +75,10 @@ class _BottomNavigationBarMainState
     extends State<BottomNavigationBarMain> {
   var currentTab = [
     LedgerMasterDashboard(),
+    TransactionTypeDashboard(),
+    NewLedgerMaster(), 
+    
+    LedgerDashboard(),
     SettingsDashboard(),
   ];
 
@@ -84,26 +86,50 @@ class _BottomNavigationBarMainState
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationBarProvider>(context);
     return Scaffold(
+      
       body: currentTab[provider.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: provider.currentIndex,
+         currentIndex: provider.currentIndex,
         onTap: (index) {
           provider.currentIndex = index;
         },
+        
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
             label: 'Home',
           ),
 
+           BottomNavigationBarItem(
+            icon: new Icon(Icons.menu_book),
+            label: 'Books',
+          ),
+
+           BottomNavigationBarItem(
+            icon: new Icon(Icons.add),
+            label: 'Add',
+          ),
+
+           BottomNavigationBarItem(
+            icon: new Icon(Icons.analytics),
+            label: 'Analytics',
+          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
-          )
+          ),
+          
         ],
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
 }
+
+
+
+
+
 
 
