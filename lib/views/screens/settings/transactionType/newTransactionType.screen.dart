@@ -71,6 +71,16 @@ class NewTransactionType extends StatelessWidget {
               ),
             ),
             Container(
+              height: 50,
+              width: 400,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.green),
+              ),
+              child: Text(
+                'transactiontype.ledgers[0].name',
+              ),
+            ),
+            Container(
               child: Text('Submit'),
             )
           ],

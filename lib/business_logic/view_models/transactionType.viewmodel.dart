@@ -23,5 +23,13 @@ class TransactionTypeViewModel extends ChangeNotifier {
 
   void addLedger(TransactionType transactionType, int ledgerID) {
     transactionType.ledger.add(ledgerID);
+    notifyListeners();
+  }
+
+  bool findLedger(int id) {
+    if (ledgers.contains(id)) {
+      return true;
+    } else
+      return false;
   }
 }
