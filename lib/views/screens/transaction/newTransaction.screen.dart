@@ -80,18 +80,18 @@ class NewTransaction extends StatelessWidget {
               ),
             ),
           ),
-          Consumer<TransactionTypeViewModel>(
-            builder: (context, transactionType, model) {
-              return Consumer<TransactionViewModel>(
-                builder: (context, transaction, child) {
-                  return Container(
-                    child: Text(transactionType
-                        .transactionTypes[transaction.transactionTypeId].name),
-                  );
-                },
-              );
-            },
-          ),
+          // Consumer<TransactionTypeViewModel>(
+          //   builder: (context, transactionType, model) {
+          //     return Consumer<TransactionViewModel>(
+          //       builder: (context, transaction, child) {
+          //         return Container(
+          //           child: Text(transactionType
+          //               .transactionTypes[transaction.transactionTypeId].name),
+          //         );
+          //       },
+          //     );
+          //   },
+          // ),
           SizedBox(height: 20),
           GestureDetector(
             child: Container(
