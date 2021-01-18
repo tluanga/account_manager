@@ -14,4 +14,14 @@ class TransactionTypeViewModel extends ChangeNotifier {
       ledger: [1, 2],
     ),
   ];
+  List<int> ledgers = [];
+  void newTransactionType(int id, String name, String description) {
+    var transactionType =
+        TransactionType.widthId(id: id, name: name, description: description);
+    transactionTypes.add(transactionType);
+  }
+
+  void addLedger(TransactionType transactionType, int ledgerID) {
+    transactionType.ledger.add(ledgerID);
+  }
 }

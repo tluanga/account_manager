@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,16 +12,42 @@ class LedgerSelect extends StatelessWidget {
       appBar: AppBar(
         title: Text('Ledger Selection Screen'),
       ),
-      body: Consumer<TransactionTypeViewModel>(
-          builder: (context, transactiontype, child) {
-        return Column(
-          children: [
-            Text('Number of Transaction Types'),
-            Text(
-              transactiontype.transactionTypes.length.toString(),
-            )
-          ],
-        );
+      body: Consumer<LedgerMasterViewModel>(builder: (context, ledger, child) {
+        return ListView.builder(
+            itemCount: ledger.ledgerMasterList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Consumer<TransactionTypeViewModel>(
+                  builder: (context, transactionType, child) {
+                    return GestureDetector(
+                      onTap: () {
+                        transactionType.ledgers.add(
+                          ledger.ledgerMasterList[index].id,
+                        );
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            ledger.ledgerMasterList[index].name,
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            });
       }),
     );
   }

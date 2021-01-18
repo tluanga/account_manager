@@ -69,6 +69,9 @@ class NewTransactionType extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            Container(
+              child: Text('Submit'),
             )
           ],
         );
