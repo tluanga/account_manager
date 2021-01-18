@@ -1,5 +1,6 @@
 import 'package:account_manager/business_logic/view_models/bottomNavigationBarProvider.dart';
 import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/settings/books/ledgers/ledger.screen.dart';
@@ -11,6 +12,7 @@ import 'package:account_manager/views/screens/settings/transactionType/ledgerSel
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +34,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LedgerMasterViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => TransactionViewModel(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -52,23 +57,20 @@ class MyApp extends StatelessWidget {
           rLedgerSelect: (context) => LedgerSelect(),
           // ------------Transaction---------------
           rNewTransaction: (context) => NewTransaction(),
+          rTransactionTypeSelect: (context) => TransactionTypeSelect(),
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
           rLedger: (context) => Ledger(),
         },
-      //  home: Dashboard(),
-      home: ChangeNotifierProvider<BottomNavigationBarProvider>(
-        child: BottomNavigationBarMain(),
-        create: (BuildContext context) => BottomNavigationBarProvider(),
-      ),
+        //  home: Dashboard(),
+        home: ChangeNotifierProvider<BottomNavigationBarProvider>(
+          child: BottomNavigationBarMain(),
+          create: (BuildContext context) => BottomNavigationBarProvider(),
+        ),
       ),
     );
   }
 }
-
-
-
-
 
 class BottomNavigationBarMain extends StatefulWidget {
   @override
@@ -76,10 +78,12 @@ class BottomNavigationBarMain extends StatefulWidget {
       _BottomNavigationBarMainState();
 }
 
-class _BottomNavigationBarMainState
-    extends State<BottomNavigationBarMain> {
+class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
   var currentTab = [
     LedgerMasterDashboard(),
+    TransactionTypeDashboard(),
+    NewTransaction(),
+    LedgerDashboard(),
     SettingsDashboard(),
   ];
 
@@ -98,15 +102,25 @@ class _BottomNavigationBarMainState
             icon: new Icon(Icons.home),
             label: 'Home',
           ),
-
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.menu_book),
+            label: 'Books',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.add),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.analytics),
+            label: 'Analytics',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
-          )
+          ),
         ],
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
 }
-
-

@@ -9,7 +9,7 @@ class TransactionTypeViewModel extends ChangeNotifier {
       ledger: [1, 2],
     ),
     TransactionType.widthId(
-      id: 1,
+      id: 2,
       name: 'Purchase of Other Equipments',
       ledger: [1, 2],
     ),
@@ -23,6 +23,13 @@ class TransactionTypeViewModel extends ChangeNotifier {
 
   void addLedger(TransactionType transactionType, int ledgerID) {
     transactionType.ledger.add(ledgerID);
-    notifyListener();
+    notifyListeners();
+  }
+
+  bool findLedger(int id) {
+    if (ledgers.contains(id)) {
+      return true;
+    } else
+      return false;
   }
 }

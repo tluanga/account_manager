@@ -60,20 +60,44 @@ class NewTransactionType extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 90),
-              child: FlatButton(
+            Consumer<TransactionTypeViewModel>(
+              builder: (context, transactionType, child) {
+                return Container(
+                  height: 50,
+                  width: 400,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green),
+                  ),
+                  child: ListView.builder(
+                    itemCount: transactionType.ledgers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Text('test');
+                    },
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              child: Container(
+                width: 400,
                 height: 50,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                color: Theme.of(context).primaryColor,
-                onPressed: (){}, 
-                child: Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                )
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Center(
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
               ),
-            )
+            ),
           ],
         );
       }),
