@@ -18,3 +18,7 @@ const String rLedger = 'books/ledger';
 
 // -----------------Dashboard route----------
 const String rDashBoard = '/dashboard';
+
+// -----------------Login Pin--------------
+const String rCreateLoginPin = '/createLoginPin';
+const String rEnterLoginPin = '/loginPin';
