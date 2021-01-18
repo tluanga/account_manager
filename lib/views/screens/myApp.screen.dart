@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/view_models/bottomNavigationBarProvider.dart';
 import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
@@ -49,8 +50,57 @@ class MyApp extends StatelessWidget {
           rLedgerDashboard: (context) => LedgerDashboard(),
           rLedger: (context) => Ledger(),
         },
-        home: Dashboard(),
+      //  home: Dashboard(),
+      home: ChangeNotifierProvider<BottomNavigationBarProvider>(
+        child: BottomNavigationBarMain(),
+        create: (BuildContext context) => BottomNavigationBarProvider(),
+      ),
       ),
     );
   }
 }
+
+
+
+
+
+class BottomNavigationBarMain extends StatefulWidget {
+  @override
+  _BottomNavigationBarMainState createState() =>
+      _BottomNavigationBarMainState();
+}
+
+class _BottomNavigationBarMainState
+    extends State<BottomNavigationBarMain> {
+  var currentTab = [
+    LedgerMasterDashboard(),
+    SettingsDashboard(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    var provider = Provider.of<BottomNavigationBarProvider>(context);
+    return Scaffold(
+      body: currentTab[provider.currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: provider.currentIndex,
+        onTap: (index) {
+          provider.currentIndex = index;
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            label: 'Home',
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
