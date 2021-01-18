@@ -70,19 +70,44 @@ class NewTransactionType extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: 50,
-              width: 400,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
-              ),
-              child: Text(
-                'transactiontype.ledgers[0].name',
+            Consumer<TransactionTypeViewModel>(
+              builder: (context, transactionType, child) {
+                return Container(
+                  height: 50,
+                  width: 400,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green),
+                  ),
+                  child: ListView.builder(
+                    itemCount: transactionType.ledgers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Text('test');
+                    },
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              child: Container(
+                width: 400,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Center(
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
               ),
             ),
-            Container(
-              child: Text('Submit'),
-            )
           ],
         );
       }),

@@ -8,6 +8,7 @@ const String rLedgerSelect = 'setting/ledgerSelect';
 
 // -------------New Transaction-----------------
 const String rNewTransaction = 'newTransaction';
+const String rTransactionTypeSelect = '/transactionTypeSelect';
 const String rLei = '/lei';
 const String rHralh = '/hralh';
 

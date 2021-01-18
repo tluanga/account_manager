@@ -9,7 +9,7 @@ class TransactionTypeViewModel extends ChangeNotifier {
       ledger: [1, 2],
     ),
     TransactionType.widthId(
-      id: 1,
+      id: 2,
       name: 'Purchase of Other Equipments',
       ledger: [1, 2],
     ),
