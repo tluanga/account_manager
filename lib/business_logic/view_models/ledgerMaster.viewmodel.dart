@@ -9,6 +9,7 @@ class LedgerMasterViewModel extends ChangeNotifier {
   ];
   void newLedgerMaster(LedgerMaster ledgerMaster) {
     ledgerMasterList.add(ledgerMaster);
+    notifyListeners();
   }
 
   void removeLedgerMaster(int id) {
@@ -18,5 +19,6 @@ class LedgerMasterViewModel extends ChangeNotifier {
   }
   void findLedgerMasterList(int id) {
     ledgerMasterList.where((element) => false);
+    notifyListeners();
   }
 }
