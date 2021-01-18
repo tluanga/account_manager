@@ -23,5 +23,6 @@ class TransactionTypeViewModel extends ChangeNotifier {
 
   void addLedger(TransactionType transactionType, int ledgerID) {
     transactionType.ledger.add(ledgerID);
+    notifyListener();
   }
 }

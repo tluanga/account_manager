@@ -1,3 +1,4 @@
+import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:flutter/material.dart';
 
 class NewLedgerMaster extends StatelessWidget {
@@ -7,35 +8,22 @@ class NewLedgerMaster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Ledger Master'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+    return GestureDetector(
+      onTap: ()=> FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Add Ledger Master'),
+        ),
+        body: Column(
+          children: [
+            MyTextBox(
+              title: 'Name',
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Description',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-          ),
-        ],
+            MyTextBox(
+              title: 'Description',
+            )
+          ],
+        )
       ),
     );
   }
