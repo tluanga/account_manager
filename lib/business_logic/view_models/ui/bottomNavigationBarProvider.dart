@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-
 class BottomNavigationBarProvider with ChangeNotifier {
   int _currentIndex = 0;
 

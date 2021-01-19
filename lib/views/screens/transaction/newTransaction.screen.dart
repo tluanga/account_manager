@@ -5,8 +5,8 @@ import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 
-class NewTransaction extends StatelessWidget {
-  const NewTransaction({Key key}) : super(key: key);
+// class NewTransaction extends StatelessWidget {
+//   const NewTransaction({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
