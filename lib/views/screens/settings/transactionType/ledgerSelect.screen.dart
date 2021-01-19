@@ -13,6 +13,7 @@ class LedgerSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Ledger Selection Screen'),
       ),
       body: Consumer2<LedgerMasterViewModel, TransactionTypeViewModel>(

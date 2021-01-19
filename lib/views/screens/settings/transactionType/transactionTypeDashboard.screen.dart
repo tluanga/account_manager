@@ -10,6 +10,7 @@ class TransactionTypeDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Transaction Type Dashboard'),
       ),
       body: Consumer<TransactionTypeViewModel>(
@@ -57,21 +58,13 @@ class TransactionTypeListItem extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.teal[100],
-                  blurRadius: 1.0
-                )
-              ],
+              boxShadow: [BoxShadow(color: Colors.teal[100], blurRadius: 1.0)],
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
                 this.name,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Color(0xFF757575)
-                ),
+                style: TextStyle(fontSize: 20, color: Color(0xFF757575)),
               ),
             ),
           ),
@@ -80,4 +73,3 @@ class TransactionTypeListItem extends StatelessWidget {
     );
   }
 }
-

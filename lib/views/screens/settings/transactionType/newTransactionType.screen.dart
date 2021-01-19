@@ -11,6 +11,7 @@ class NewTransactionType extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(' New Transaction Type'),
       ),
       body: Consumer<TransactionTypeViewModel>(
@@ -24,7 +25,9 @@ class NewTransactionType extends StatelessWidget {
             MyTextBox(
               title: 'Description',
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, rLedgerSelect);
@@ -100,4 +103,3 @@ class NewTransactionType extends StatelessWidget {
     );
   }
 }
-

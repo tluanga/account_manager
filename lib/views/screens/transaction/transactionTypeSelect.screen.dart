@@ -10,6 +10,7 @@ class TransactionTypeSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Transaction Type Select'),
       ),
       body: Consumer<TransactionTypeViewModel>(

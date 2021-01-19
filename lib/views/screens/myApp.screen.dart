@@ -5,6 +5,7 @@ import 'package:account_manager/business_logic/view_models/transactionType.viewm
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
+import 'package:account_manager/views/screens/settings/books/booksDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/books/ledgers/ledger.screen.dart';
 import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
@@ -15,6 +16,7 @@ import 'package:account_manager/views/screens/settings/transactionType/newTransa
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
           rEnterLoginPin: (context) => LoginPin(),
 
           // ------Settings-------------
+          rBooksDashboard: (context) => BooksDashboard(),
           rSettingsDashboard: (context) => SettingsDashboard(),
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),
           rNewLedgerMaster: (context) => NewLedgerMaster(),
@@ -87,7 +90,7 @@ class BottomNavigationBarMain extends StatefulWidget {
 class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
   var currentTab = [
     LedgerMasterDashboard(),
-    TransactionTypeDashboard(),
+    BooksDashboard(),
     NewTransaction(),
     LedgerDashboard(),
     SettingsDashboard(),

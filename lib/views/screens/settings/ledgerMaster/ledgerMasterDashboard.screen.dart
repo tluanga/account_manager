@@ -17,6 +17,7 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Ledger Master Dashboard'),
       ),
       body: Consumer<LedgerMasterViewModel>(
@@ -66,12 +67,7 @@ class LedgerMasterListItem extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.teal[100],
-                  blurRadius: 1.0
-                )
-              ],
+              boxShadow: [BoxShadow(color: Colors.teal[100], blurRadius: 1.0)],
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(

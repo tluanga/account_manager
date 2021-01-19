@@ -1,4 +1,5 @@
 // -----------------Settings Route--------------
+const String rBooksDashboard = '/booksDashboard';
 const String rSettingsDashboard = '/settingsDashboard';
 const String rLedgerMasterDashboard = '/settings/ledgerMasterDashboard';
 const String rNewLedgerMaster = 'settings/NewLedgerMaster';
@@ -13,6 +14,7 @@ const String rLei = '/lei';
 const String rHralh = '/hralh';
 
 // -------------Books
+
 const String rLedgerDashboard = '/books/ledgerDashboard';
 const String rLedger = 'books/ledger';
 
