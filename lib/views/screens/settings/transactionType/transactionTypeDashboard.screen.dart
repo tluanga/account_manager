@@ -13,17 +13,20 @@ class TransactionTypeDashboard extends StatelessWidget {
         centerTitle: true,
         title: Text('Transaction Type Dashboard'),
       ),
-      body: Consumer<TransactionTypeViewModel>(
-        builder: (context, transactiontype, child) {
-          return ListView.builder(
-            itemCount: transactiontype.transactionTypes.length,
-            itemBuilder: (BuildContext context, int index) {
-              return TransactionTypeListItem(
-                name: transactiontype.transactionTypes[index].name,
-              );
-            },
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Consumer<TransactionTypeViewModel>(
+          builder: (context, transactiontype, child) {
+            return ListView.builder(
+              itemCount: transactiontype.transactionTypes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return TransactionTypeListItem(
+                  name: transactiontype.transactionTypes[index].name,
+                );
+              },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {

@@ -1,7 +1,9 @@
-import 'package:account_manager/business_logic/view_models/bottomNavigationBarProvider.dart';
-import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
+
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
@@ -30,17 +32,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => LedgerMasterViewModel(),
+          create: (context) => LedgerMasterDashboardViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => TransactionTypeViewModel(),
+          create: (context) => NewLedgerMasterViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => LedgerMasterViewModel(),
+          create: (context) => TransactionTypeDashboardViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => TransactionViewModel(),
-        ),
+            create: (context) => NewTransactionTypeViewModel())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
 
         // ----------------------Route Table------------------------
         routes: {
-          rDashBoard: (context) => Dashboard(),
+          rDashBoard: (context) => DashBoard(),
           //-------------Login Pin----------------
           rCreateLoginPin: (context) => CreateLoginPin(),
           rEnterLoginPin: (context) => LoginPin(),
@@ -63,9 +64,9 @@ class MyApp extends StatelessWidget {
           rNewLedgerMaster: (context) => NewLedgerMaster(),
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),
-          rLedgerSelect: (context) => LedgerSelect(),
+          // rLedgerSelect: (context) => LedgerSelect(),
           // ------------Transaction---------------
-          rNewTransaction: (context) => NewTransaction(),
+          // rNewTransaction: (context) => NewTransaction(),
           rTransactionTypeSelect: (context) => TransactionTypeSelect(),
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),

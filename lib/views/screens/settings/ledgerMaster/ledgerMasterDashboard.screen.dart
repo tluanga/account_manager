@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
 
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         centerTitle: true,
         title: Text('Ledger Master Dashboard'),
       ),
-      body: Consumer<LedgerMasterViewModel>(
+      body: Consumer<LedgerMasterDashboardViewModel>(
         builder: (context, ledgerMaster, child) {
           return ListView.builder(
             itemCount: ledgerMaster.ledgerMasterList.length,
