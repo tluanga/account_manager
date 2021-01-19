@@ -1,3 +1,4 @@
+import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 
 class DashBoard extends StatelessWidget {
@@ -14,8 +15,8 @@ class DashBoard extends StatelessWidget {
                   child: Text(
                     'CURRENT MONTH',
                     style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 25,
                     ),
                   ),
                 ),
@@ -41,9 +42,9 @@ class DashBoard extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Text('PEK CHHUAH', textAlign: TextAlign.start, style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),),
+                        Text('PEK CHHUAH', textAlign: TextAlign.start, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
                         SizedBox(height:15),
-                        Text('Rs 2000', textAlign: TextAlign.center, style: TextStyle(fontSize: 17, color: Colors.red[700]),)
+                        Text('Rs 2000', textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Colors.red[700]),)
                       ],
                     ),
                   ),
@@ -65,9 +66,9 @@ class DashBoard extends StatelessWidget {
                     ),
                     child: Column(
                         children: [
-                          Text('LAKLUH', textAlign: TextAlign.start, style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),),
+                          Text('LAKLUH', textAlign: TextAlign.start, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
                           SizedBox(height:15),
-                          Text('Rs 5000', textAlign: TextAlign.center, style: TextStyle(fontSize: 17, color: Colors.green),)
+                          Text('Rs 5000', textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Colors.green[800]),)
                         ],
                       ),
                   ),
@@ -137,19 +138,22 @@ class _CategoriesState extends State<Categories> {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal:5),
-        child: Container(
-          width: 115,
-          decoration: BoxDecoration(
-            color: selectedIndex == index ? Colors.teal[50] : Colors.transparent,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: selectedIndex == index ? Colors.teal : Colors.grey)
-          ),
-          child: Center(
-            child: Text(
-              categories[index],
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: selectedIndex == index ? Colors.teal : Colors.grey[600],
+        child: MaterialButton(
+          onPressed: navigateCategories(),
+          child: Container(
+            width: 115,
+            decoration: BoxDecoration(
+              color: selectedIndex == index ? Colors.teal[50] : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: selectedIndex == index ? Colors.teal : Colors.grey)
+            ),
+            child: Center(
+              child: Text(
+                categories[index],
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: selectedIndex == index ? Colors.teal : Colors.grey[600],
+                ),
               ),
             ),
           ),
@@ -157,27 +161,12 @@ class _CategoriesState extends State<Categories> {
       ),
     );
   }
+  navigateCategories(){
+    if (selectedIndex == 0)
+      return rLedgerDashboard;
+    else if (selectedIndex == 1)
+      return rNewTransaction;
+    else if (selectedIndex == 2)
+      return rLedgerDashboard;
+  }
 }
-
-// Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 5),
-//         child: Container(
-//           width: 100,
-//           height: 5,
-//           decoration: BoxDecoration(
-//             color: selectedIndex == index ? Colors.pink[50] : Colors.transparent,
-//             borderRadius: BorderRadius.circular(20),
-//             border: Border.all(color: selectedIndex == index ? Colors.pink : Colors.grey)
-//           ),
-//           child: Center(
-//             child: Text(
-//               categories[index],
-//               textAlign: TextAlign.center,
-//               style: TextStyle(
-//                 fontWeight: FontWeight.bold,
-//                 color: selectedIndex == index ? Colors.pink : Colors.grey[600],
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),

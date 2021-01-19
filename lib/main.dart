@@ -1,12 +1,13 @@
 // import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
+import 'package:account_manager/views/screens/dashBoard.screen.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 // import 'views/screens/authentication/LoginPin.screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
 class App extends StatelessWidget {
@@ -14,9 +15,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: "Nunito"),
+      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
-      home: CreateLoginPin(),
+      home: MyApp(),
     );
   }
 }
