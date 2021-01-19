@@ -1,13 +1,18 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 
-import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class NewTransactionType extends StatelessWidget {
+class NewTransactionType extends StatefulWidget {
   const NewTransactionType({Key key}) : super(key: key);
 
+  @override
+  _NewTransactionTypeState createState() => _NewTransactionTypeState();
+}
+
+class _NewTransactionTypeState extends State<NewTransactionType> {
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,16 +23,31 @@ class NewTransactionType extends StatelessWidget {
       body: Consumer<NewTransactionTypeViewModel>(
           builder: (context, transactiontype, child) {
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            MyTextBox(
-              title: 'Name',
+            Stack(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    count = count + transactiontype.countSelectedLedgers();
+                    print(
+                      count.toString(),
+                    );
+                  },
+                  child: Text('Add'),
+                ),
+              ],
             ),
-            MyTextBox(
-              title: 'Description',
-            ),
-            SizedBox(
-              height: 20,
+            // MyTextBox(
+            //   title: 'Name',
+            // ),
+            // MyTextBox(
+            //   title: 'Description',
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            Text(
+              transactiontype.countSelectedLedgers().toString(),
             ),
             GestureDetector(
               onTap: () {
@@ -64,27 +84,32 @@ class NewTransactionType extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              child: Container(
-                width: 400,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Center(
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+
+            // ListView.builder(
+            //     itemCount: transactiontype.getSelectedLedger().length,
+            //     itemBuilder: (BuildContext context, int index) {
+            //       var ledgerId = transactiontype.getSelectedLedger()[index];
+            //       return Text(ledgerId.toString());
+            //     }),
+
+            // GestureDetector(
+            //   child: Container(
+            //     width: 400,
+            //     height: 50,
+            //     decoration: BoxDecoration(
+            //         color: Colors.blue,
+            //         borderRadius: BorderRadius.circular(20)),
+            //     child: Center(
+            //       child: Text(
+            //         'Submit',
+            //         style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 18,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         );
       }),
