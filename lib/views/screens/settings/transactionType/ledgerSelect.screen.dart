@@ -17,40 +17,32 @@ class LedgerSelect extends StatelessWidget {
           return ListView.builder(
             itemCount: ledger.ledgerList.length,
             itemBuilder: (BuildContext context, int index) {
-              return LedgerSelectListItem();
+              return GestureDetector(
+                onTap: () {
+                  ledger.selectLedgers(ledger.ledgerList[index].id);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.green.shade300,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(ledger.ledgerList[index].name),
+                      ],
+                    ),
+                  ),
+                ),
+              );
             },
           );
         },
-      ),
-    );
-  }
-}
-
-class LedgerSelectListItem extends StatelessWidget {
-  final String title;
-
-  LedgerSelectListItem({this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.green.shade300,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(ledger.ledgerList[index].name),
-            ],
-          ),
-        ),
       ),
     );
   }
