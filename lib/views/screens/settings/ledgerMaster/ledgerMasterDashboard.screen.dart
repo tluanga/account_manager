@@ -26,11 +26,20 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         return ListView.builder(
           itemCount: ledgerMaster.ledgerMasterList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              child: Row(
-                children: [
-                  Text(ledgerMaster.ledgerMasterList[index].name),
-                ],
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.green.shade300,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Text(ledgerMaster.ledgerMasterList[index].name),
+                  ],
+                ),
               ),
             );
           },
