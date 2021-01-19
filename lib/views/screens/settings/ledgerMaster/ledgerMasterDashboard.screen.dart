@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
 
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
       appBar: AppBar(
         title: Text('Ledger Master Dashboard'),
       ),
-      body: Consumer<LedgerMasterViewModel>(
+      body: Consumer<LedgerMasterDashboardViewModel>(
         builder: (context, ledgerMaster, child) {
           return ListView.builder(
             itemCount: ledgerMaster.ledgerMasterList.length,
@@ -66,12 +66,7 @@ class LedgerMasterListItem extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.teal[100],
-                  blurRadius: 1.0
-                )
-              ],
+              boxShadow: [BoxShadow(color: Colors.teal[100], blurRadius: 1.0)],
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(

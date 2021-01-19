@@ -1,4 +1,3 @@
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,9 @@ class NewTransactionType extends StatelessWidget {
             MyTextBox(
               title: 'Description',
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, rLedgerSelect);
@@ -104,4 +105,3 @@ class NewTransactionType extends StatelessWidget {
     );
   }
 }
-
