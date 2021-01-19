@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,56 +16,45 @@ class NewTransactionType extends StatelessWidget {
       body: Consumer<TransactionTypeViewModel>(
           builder: (context, transactiontype, child) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
+            MyTextBox(
+              title: 'Name',
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
+            MyTextBox(
+              title: 'Description',
             ),
+            SizedBox(height: 20,),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, rLedgerSelect);
               },
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   height: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
+                    border: Border.all(color: Colors.teal),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Text(
-                          'Select Ledgers',
-                          style: TextStyle(
-                            fontSize: 16,
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Select Ledgers',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         width: 20,
                       ),
-                      Icon(Icons.arrow_forward_ios_outlined, color: Colors.blue)
+                      Icon(Icons.arrow_forward_ios_outlined, color: Colors.teal)
                     ],
                   ),
                 ),
@@ -110,3 +100,4 @@ class NewTransactionType extends StatelessWidget {
     );
   }
 }
+

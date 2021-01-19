@@ -3,6 +3,8 @@ import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmode
 import 'package:account_manager/business_logic/view_models/transaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
+import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/settings/books/ledgers/ledger.screen.dart';
 import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
@@ -40,11 +42,18 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+        ),
         title: 'Accounting Manager',
 
         // ----------------------Route Table------------------------
         routes: {
           rDashBoard: (context) => Dashboard(),
+          //-------------Login Pin----------------
+          rCreateLoginPin: (context) => CreateLoginPin(),
+          rEnterLoginPin: (context) => LoginPin(),
+
           // ------Settings-------------
           rSettingsDashboard: (context) => SettingsDashboard(),
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),

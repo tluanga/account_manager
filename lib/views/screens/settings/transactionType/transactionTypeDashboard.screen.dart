@@ -47,22 +47,31 @@ class TransactionTypeListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 40,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.blue,
+        child: Material(
+          borderRadius: BorderRadius.circular(10),
+          elevation: 10,
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.teal[100],
+                  blurRadius: 1.0
+                )
+              ],
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Center(
-            child: Text(
-              this.name,
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 18,
+            child: Center(
+              child: Text(
+                this.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFF757575)
+                ),
               ),
             ),
           ),
@@ -71,3 +80,4 @@ class TransactionTypeListItem extends StatelessWidget {
     );
   }
 }
+

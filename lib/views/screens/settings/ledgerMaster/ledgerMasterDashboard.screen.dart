@@ -59,18 +59,28 @@ class LedgerMasterListItem extends StatelessWidget {
       onTap: () {},
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.blue),
-          ),
-          child: Center(
-            child: Text(
-              this.name,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.blue,
+        child: Material(
+          borderRadius: BorderRadius.circular(10),
+          elevation: 10,
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.teal[100],
+                  blurRadius: 1.0
+                )
+              ],
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(
+                this.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.grey[700],
+                ),
               ),
             ),
           ),
