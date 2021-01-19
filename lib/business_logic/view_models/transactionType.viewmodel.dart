@@ -20,6 +20,7 @@ class TransactionTypeViewModel extends ChangeNotifier {
     var transactionType =
         TransactionType.widthId(id: id, name: name, description: description);
     transactionTypes.add(transactionType);
+    notifyListeners();
   }
 
   void addLedger(TransactionType transactionType, int ledgerID) {
@@ -30,7 +31,7 @@ class TransactionTypeViewModel extends ChangeNotifier {
   bool findLedger(int id) {
     if (ledgers.contains(id)) {
       return true;
-    } else
-      return false;
+    }
+    return false;
   }
 }

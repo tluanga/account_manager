@@ -2,53 +2,52 @@ import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/widgets/uiCard.widget.dart';
 import 'package:flutter/material.dart';
 
-class SettingsDashboard extends StatelessWidget {
-  const SettingsDashboard({Key key}) : super(key: key);
+class BooksDashboard extends StatelessWidget {
+  const BooksDashboard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Settings Dashboard'),
+        title: Text('Books Dashboard'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
-              title: 'Company Profile',
+              title: 'General journal',
               routeUrl: rLedgerMasterDashboard,
-              iconName: Icons.work,
+              iconName: Icons.book_outlined,
             ),
             UICard(
-              title: 'Accounting Year',
+                title: 'General ledger',
+                routeUrl: rTransactionTypeDashboard,
+                iconName: Icons.account_balance_wallet_outlined),
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            UICard(
+              title: 'Cash receipt journal',
+              routeUrl: rLedgerMasterDashboard,
+              iconName: Icons.article_outlined,
+            ),
+            UICard(
+              title: 'Cash disbursement journal',
               routeUrl: rTransactionTypeDashboard,
-              iconName: Icons.today,
+              iconName: Icons.assignment_outlined,
             ),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
-              title: 'Ledger Master',
+              title: 'Sales journal',
               routeUrl: rLedgerMasterDashboard,
-              iconName: Icons.library_books,
+              iconName: Icons.money,
             ),
             UICard(
-              title: 'Transaction Type',
+              title: 'Purchase journal',
               routeUrl: rTransactionTypeDashboard,
-              iconName: Icons.sync_alt,
-            ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            UICard(
-              title: 'History',
-              routeUrl: rLedgerMasterDashboard,
-              iconName: Icons.history,
-            ),
-            UICard(
-              title: 'Backup',
-              routeUrl: rTransactionTypeDashboard,
-              iconName: Icons.backup,
+              iconName: Icons.assignment_ind_outlined,
             ),
           ]),
         ],

@@ -17,23 +17,34 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Ledger Master Dashboard'),
       ),
       body: Consumer<LedgerMasterDashboardViewModel>(
-        builder: (context, ledgerMaster, child) {
-          return ListView.builder(
-            itemCount: ledgerMaster.ledgerMasterList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return LedgerMasterListItem(
-                name: ledgerMaster.ledgerMasterList[index].name,
-              );
-            },
-          );
-        },
-      ),
-      //  ListView.builder(itemBuilder: (context, index) {
-      //   return LedgerMasterTile(name: ledgerMasterList[index].name);
-      // }),
+          builder: (context, ledgerMaster, child) {
+        ledgerMaster.loadData();
+        return ListView.builder(
+          itemCount: ledgerMaster.ledgerMasterList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.green.shade300,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Text(ledgerMaster.ledgerMasterList[index].name),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(
           context,

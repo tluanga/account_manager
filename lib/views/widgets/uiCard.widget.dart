@@ -42,16 +42,19 @@ class UICard extends StatelessWidget {
                 children: [
                   Icon(
                     iconName,
-                    size: 40,
+                    size: 50,
                     color: Colors.teal.shade300,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Text(
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xff4F665E),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ],
