@@ -21,20 +21,21 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         title: Text('Ledger Master Dashboard'),
       ),
       body: Consumer<LedgerMasterDashboardViewModel>(
-        builder: (context, ledgerMaster, child) {
-          return ListView.builder(
-            itemCount: ledgerMaster.ledgerMasterList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return LedgerMasterListItem(
-                name: ledgerMaster.ledgerMasterList[index].name,
-              );
-            },
-          );
-        },
-      ),
-      //  ListView.builder(itemBuilder: (context, index) {
-      //   return LedgerMasterTile(name: ledgerMasterList[index].name);
-      // }),
+          builder: (context, ledgerMaster, child) {
+        ledgerMaster.loadData();
+        return ListView.builder(
+          itemCount: ledgerMaster.ledgerMasterList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              child: Row(
+                children: [
+                  Text(ledgerMaster.ledgerMasterList[index].name),
+                ],
+              ),
+            );
+          },
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(
           context,

@@ -13,7 +13,7 @@ import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashb
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
-import 'package:account_manager/views/screens/settings/transactionType/ledgerSelect.screen.dart';
+
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
