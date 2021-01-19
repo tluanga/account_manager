@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
 
         // ----------------------Route Table------------------------
         routes: {
-          rDashBoard: (context) => Dashboard(),
+          rDashBoard: (context) => DashBoard(),
           //-------------Login Pin----------------
           rCreateLoginPin: (context) => CreateLoginPin(),
           rEnterLoginPin: (context) => LoginPin(),
@@ -86,7 +86,7 @@ class BottomNavigationBarMain extends StatefulWidget {
 
 class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
   var currentTab = [
-    LedgerMasterDashboard(),
+    DashBoard(),
     TransactionTypeDashboard(),
     NewTransaction(),
     LedgerDashboard(),
