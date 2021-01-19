@@ -22,6 +22,30 @@ class LedgerSelect extends StatelessWidget {
               ListView.builder(
                 itemCount: ledger.ledgerList.length,
                 itemBuilder: (BuildContext context, int index) {
+                  if (ledger
+                      .checkLedgerforSelection(ledger.ledgerList[index].id)) {
+                    return GestureDetector(
+                      onTap: () {
+                        ledger.deSelectLedger(ledger.ledgerList[index].id);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade300,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(ledger.ledgerList[index].name),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
                   return GestureDetector(
                     onTap: () {
                       ledger.selectLedgers(ledger.ledgerList[index].id);
