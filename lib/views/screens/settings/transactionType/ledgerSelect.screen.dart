@@ -2,14 +2,9 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LedgerSelect extends StatefulWidget {
+class LedgerSelect extends StatelessWidget {
   const LedgerSelect({Key key}) : super(key: key);
 
-  @override
-  _LedgerSelectState createState() => _LedgerSelectState();
-}
-
-class _LedgerSelectState extends State<LedgerSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +16,6 @@ class _LedgerSelectState extends State<LedgerSelect> {
           ledger.loadData();
           return Stack(
             children: [
-              // Text('Selected Ledgers'),
               Text(
                 ledger.countSelectedLedgers().toString(),
               ),
