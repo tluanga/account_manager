@@ -3,6 +3,8 @@ const String rBooksDashboard = '/booksDashboard';
 const String rSettingsDashboard = '/settingsDashboard';
 const String rLedgerMasterDashboard = '/settings/ledgerMasterDashboard';
 const String rNewLedgerMaster = 'settings/NewLedgerMaster';
+
+// ---------Setting---Transaction Type-------------------
 const String rTransactionTypeDashboard = 'settings/transactionTypeDashboard';
 const String rNewTransactionType = 'setting/newTransactionType';
 const String rLedgerSelect = 'setting/ledgerSelect';

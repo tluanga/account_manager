@@ -1,6 +1,4 @@
-import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TransactionTypeSelect extends StatelessWidget {
   const TransactionTypeSelect({Key key}) : super(key: key);

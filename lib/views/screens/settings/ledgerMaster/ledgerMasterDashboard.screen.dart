@@ -26,21 +26,8 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         return ListView.builder(
           itemCount: ledgerMaster.ledgerMasterList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.green.shade300,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Text(ledgerMaster.ledgerMasterList[index].name),
-                  ],
-                ),
-              ),
+            return LedgerMasterListItem(
+              title: ledgerMaster.ledgerMasterList[index].name,
             );
           },
         );
@@ -60,35 +47,28 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
 }
 
 class LedgerMasterListItem extends StatelessWidget {
-  final String name;
+  final String title;
+  final String targetRoute;
 
-  LedgerMasterListItem({this.name});
-
+  LedgerMasterListItem({this.title, this.targetRoute = ''});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Material(
-          borderRadius: BorderRadius.circular(10),
-          elevation: 10,
-          child: Container(
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.teal[100], blurRadius: 1.0)],
-              borderRadius: BorderRadius.circular(10),
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.green.shade300,
             ),
-            child: Center(
-              child: Text(
-                this.name,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey[700],
-                ),
-              ),
-            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(title),
+            ],
           ),
         ),
       ),

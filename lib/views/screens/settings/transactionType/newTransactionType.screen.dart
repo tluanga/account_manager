@@ -1,4 +1,5 @@
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
+
 import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class NewTransactionType extends StatelessWidget {
         centerTitle: true,
         title: Text(' New Transaction Type'),
       ),
-      body: Consumer<TransactionTypeViewModel>(
+      body: Consumer<NewTransactionTypeViewModel>(
           builder: (context, transactiontype, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -61,19 +62,6 @@ class NewTransactionType extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            ),
-            Container(
-              height: 50,
-              width: 400,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
-              ),
-              child: ListView.builder(
-                itemCount: transactiontype.ledgers.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Text('test');
-                },
               ),
             ),
             SizedBox(
