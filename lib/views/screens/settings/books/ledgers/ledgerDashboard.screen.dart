@@ -1,3 +1,4 @@
+import 'package:account_manager/static/search_bar.dart';
 import 'package:flutter/material.dart';
 
 class LedgerDashboard extends StatelessWidget {
@@ -5,38 +6,23 @@ class LedgerDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Ledger Dashboard'),
-      ),
-      body: Column(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+          appBar: AppBar(
+      centerTitle: true,
+      title: Text('Ledger Dashboard'),
+          ),
+          body: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.all(15),
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 5,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.teal.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(20)
-            ),
-            child: TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                icon: Icon(
-                  Icons.search
-                ),
-                hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.white)
-              )
-            ),
-          )
+          SearchBar(),
         ],
       ),
+          ),
+        ),
     );
   }
 }
+

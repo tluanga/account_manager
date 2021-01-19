@@ -1,7 +1,87 @@
 import 'package:account_manager/static/route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashBoard extends StatelessWidget {
+
+class DashBoard extends StatefulWidget {
+   final String title;
+  DashBoard({ this.title});
+
+  @override
+  _DashBoardState createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+
+int theriGroupVakue = 0;
+
+final Map<int, Widget> logoWidgets = const<int,Widget>{
+
+  0:Text("Ledgers"),
+  1:Text("Transactions"),
+  2:Text("Parties")
+
+};
+
+static Widget giveCenter(String yourText){
+  return Center(
+    child: Text("Text: $yourText",style: TextStyle(color: Colors.blue,fontSize: 20.0),),
+  );
+}
+
+List<Widget> bodies = [
+  First(),
+  giveCenter("Home Page"),
+  giveCenter("Search Page"),
+  giveCenter("Chat Room")
+];
+
+  @override
+  Widget build(BuildContext context) {
+   return Scaffold(
+      body:bodies[theriGroupVakue],
+      appBar: AppBar(
+        elevation: 2.0,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+      //  title: Text("Title",style: TextStyle(color: Colors.black),),
+        bottom: PreferredSize(
+          preferredSize: Size(double.infinity, 45.0),
+          child: Padding(
+            padding: EdgeInsets.only(top: 5.0,bottom: 10.0),child: Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 15.0,
+                ),
+
+                Expanded(
+                  child: CupertinoSegmentedControl(
+                    groupValue:theriGroupVakue,
+                    onValueChanged: (changeFromGroupValue){
+                      setState(() {
+                        theriGroupVakue =changeFromGroupValue;
+                      });
+                    },
+                    children: logoWidgets,
+                  ),
+                ),
+
+                SizedBox(
+                  width: 15.0,
+                ),                
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+class First extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +107,7 @@ class DashBoard extends StatelessWidget {
               children: [
                 Material(
                   borderRadius: BorderRadius.circular(10),
-                  elevation: 20,
+                  elevation: 5,
                   child: Container(
                     padding: EdgeInsets.only(top: 4),
                     height: 80,
@@ -37,20 +117,21 @@ class DashBoard extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [BoxShadow(
                         color: Colors.cyan,
-                        blurRadius: 1
+                        blurRadius: 0.5
                       )]
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('PEK CHHUAH', textAlign: TextAlign.start, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
-                        SizedBox(height:15),
+                        Text('Pek Chhuah', textAlign: TextAlign.start, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500,color: Colors.grey.shade500,),),
+                        SizedBox(height:3),
                         Text('Rs 2000', textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Colors.red[700]),)
                       ],
                     ),
                   ),
                 ),
                 Material(
-                  elevation: 20,
+                  elevation: 5,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     padding: EdgeInsets.only(top: 4),
@@ -61,13 +142,14 @@ class DashBoard extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [BoxShadow(
                         color: Colors.cyan,
-                        blurRadius: 1
+                        blurRadius: 0.5
                       )]
                     ),
                     child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('LAKLUH', textAlign: TextAlign.start, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
-                          SizedBox(height:15),
+                          Text('Lakluh', textAlign: TextAlign.start, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.grey.shade500,),),
+                          SizedBox(height: 3),                          
                           Text('Rs 5000', textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Colors.green[800]),)
                         ],
                       ),
@@ -83,8 +165,8 @@ class DashBoard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('CLD Enterprise', textAlign: TextAlign.left, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
-                  Text('Rs 5000', textAlign: TextAlign.right, style: TextStyle(color:Colors.green, fontSize: 15, fontWeight: FontWeight.w500),),
+                  Text('CLD Enterprise', textAlign: TextAlign.left, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                  Text('Rs 5000', textAlign: TextAlign.right, style: TextStyle(color:Colors.green, fontSize: 15, fontWeight: FontWeight.w300),),
                 ],
               ),
             ),
@@ -94,8 +176,8 @@ class DashBoard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Rics Technology', textAlign: TextAlign.left, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
-                  Text('Rs 9000', textAlign: TextAlign.right, style: TextStyle(color:Colors.green, fontSize: 15, fontWeight: FontWeight.w500),),
+                  Text('Rics Technology', textAlign: TextAlign.left, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                  Text('Rs 9000', textAlign: TextAlign.right, style: TextStyle(color:Colors.green, fontSize: 15, fontWeight: FontWeight.w300),),
                 ],
               ),
             )
@@ -138,35 +220,24 @@ class _CategoriesState extends State<Categories> {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal:5),
-        child: MaterialButton(
-          onPressed: navigateCategories(),
-          child: Container(
-            width: 115,
-            decoration: BoxDecoration(
-              color: selectedIndex == index ? Colors.teal[50] : Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: selectedIndex == index ? Colors.teal : Colors.grey)
-            ),
-            child: Center(
-              child: Text(
-                categories[index],
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: selectedIndex == index ? Colors.teal : Colors.grey[600],
-                ),
+        child: Container(
+          width: 115,
+          decoration: BoxDecoration(
+            color: selectedIndex == index ? Colors.teal[50] : Colors.transparent,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: selectedIndex == index ? Colors.teal : Colors.grey)
+          ),
+          child: Center(
+            child: Text(
+              categories[index],
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: selectedIndex == index ? Colors.teal : Colors.grey[600],
               ),
             ),
           ),
         ),
       ),
     );
-  }
-  navigateCategories(){
-    if (selectedIndex == 0)
-      return rLedgerDashboard;
-    else if (selectedIndex == 1)
-      return rNewTransaction;
-    else if (selectedIndex == 2)
-      return rLedgerDashboard;
   }
 }

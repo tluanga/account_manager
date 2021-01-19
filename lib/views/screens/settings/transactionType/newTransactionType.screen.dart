@@ -84,7 +84,7 @@ class NewTransactionType extends StatelessWidget {
                 width: 400,
                 height: 50,
                 decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.teal,
                     borderRadius: BorderRadius.circular(20)),
                 child: Center(
                   child: Text(

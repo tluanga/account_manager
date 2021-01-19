@@ -36,7 +36,7 @@ class NewTransaction extends StatelessWidget {
                 child: Container(
                   height: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
+                    border: Border.all(color: Colors.teal),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
@@ -79,7 +79,7 @@ class NewTransaction extends StatelessWidget {
                   width: 400,
                   height: 50,
                   decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.teal,
                       borderRadius: BorderRadius.circular(20)),
                   child: Center(
                     child: Text(
