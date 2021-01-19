@@ -12,5 +12,11 @@ class LedgerSelectViewModel extends ChangeNotifier {
 
   void selectLedgers(int ledgerId) {
     selectedLedgers.add(ledgerId);
+    notifyListeners();
+  }
+
+  int countSelectedLedgers() {
+    notifyListeners();
+    return selectedLedgers.length;
   }
 }

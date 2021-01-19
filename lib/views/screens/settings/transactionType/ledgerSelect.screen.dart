@@ -2,9 +2,14 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LedgerSelect extends StatelessWidget {
+class LedgerSelect extends StatefulWidget {
   const LedgerSelect({Key key}) : super(key: key);
 
+  @override
+  _LedgerSelectState createState() => _LedgerSelectState();
+}
+
+class _LedgerSelectState extends State<LedgerSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,33 +19,41 @@ class LedgerSelect extends StatelessWidget {
       body: Consumer<LedgerSelectViewModel>(
         builder: (context, ledger, child) {
           ledger.loadData();
-          return ListView.builder(
-            itemCount: ledger.ledgerList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {
-                  ledger.selectLedgers(ledger.ledgerList[index].id);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.green.shade300,
+          return Stack(
+            children: [
+              // Text('Selected Ledgers'),
+              Text(
+                ledger.countSelectedLedgers().toString(),
+              ),
+              ListView.builder(
+                itemCount: ledger.ledgerList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      ledger.selectLedgers(ledger.ledgerList[index].id);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.green.shade300,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(ledger.ledgerList[index].name),
+                          ],
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(ledger.ledgerList[index].name),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ),
+            ],
           );
         },
       ),
