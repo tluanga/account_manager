@@ -8,7 +8,6 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
 
   void loadData() {
     transactionTypes = transactionTypesData;
-    notifyListeners();
   }
 
   void setTransactionType(int id) {

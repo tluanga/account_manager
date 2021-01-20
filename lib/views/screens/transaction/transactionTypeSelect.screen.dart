@@ -8,77 +8,110 @@ class TransactionTypeSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Transaction Type Select'),
-      ),
-      body: Column(
-        children: [
-          Text('Please Select Transaction Type'),
-          Expanded(
-            child: Consumer<TransactionTypeSelectViewModel>(
-              builder: (context, transactionType, child) {
-                transactionType.loadData();
-                return Text('Test');
-                // return ListView.builder(
-                //   itemCount: transactionType.transactionTypes.length,
-                //   itemBuilder: (BuildContext context, int index) {
-                //     if (transactionType.checkTransactionTypeForSelection(
-                //         transactionType.transactionTypes[index].id)) {
-                //       return GestureDetector(
-                //         onTap: () {
-                //           transactionType.deSelectTransactionType(
-                //               transactionType.transactionTypes[index].id);
-                //         },
-                //         child: Padding(
-                //           padding: const EdgeInsets.all(8.0),
-                //           child: Container(
-                //             height: 50,
-                //             decoration: BoxDecoration(
-                //               color: Colors.green.shade300,
-                //               borderRadius: BorderRadius.circular(10),
-                //             ),
-                //             child: Row(
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 Text(transactionType
-                //                     .transactionTypes[index].name),
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //       );
-                //     }
-                //     return GestureDetector(
-                //       onTap: () {
-                //         transactionType.setTransactionType(
-                //             transactionType.transactionTypes[index].id);
-                //       },
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Container(
-                //           height: 50,
-                //           decoration: BoxDecoration(
-                //             border: Border.all(
-                //               color: Colors.green.shade300,
-                //             ),
-                //             borderRadius: BorderRadius.circular(10),
-                //           ),
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text(
-                //                   transactionType.transactionTypes[index].name),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     );
-                //   },
-                // );
-              },
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Please Select Transaction Type',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
             ),
-          )
-        ],
+            Expanded(
+              child: Consumer<TransactionTypeSelectViewModel>(
+                builder: (context, transactionType, child) {
+                  transactionType.loadData();
+
+                  return ListView.builder(
+                    itemCount: transactionType.transactionTypes.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (transactionType.checkTransactionTypeForSelection(
+                          transactionType.transactionTypes[index].id)) {
+                        return GestureDetector(
+                          onTap: () {
+                            transactionType.deSelectTransactionType(
+                                transactionType.transactionTypes[index].id);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade300,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(transactionType
+                                      .transactionTypes[index].name),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      return GestureDetector(
+                        onTap: () {
+                          transactionType.setTransactionType(
+                              transactionType.transactionTypes[index].id);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.green.shade300,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(transactionType
+                                    .transactionTypes[index].name),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 50,
+                  width: 420,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
