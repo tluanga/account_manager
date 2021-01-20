@@ -5,3 +5,7 @@ List<LedgerMaster> ledgerMasterDataList = [
   LedgerMaster(id: 2, name: 'Machinery Account', ledgerType: 2),
   LedgerMaster(id: 3, name: 'Purchase Account', ledgerType: 3),
 ];
+
+// --------Find ledgerMaster by Id---------
+LedgerMaster findLedgerMaster(int id) =>
+    ledgerMasterDataList.firstWhere((element) => element.id == id);

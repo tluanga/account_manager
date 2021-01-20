@@ -14,3 +14,5 @@ List<TransactionType> transactionTypesData = [
 ];
 
 List<int> selectedLedgers = [];
+
+// --------Search Transaction Type by Its Id
