@@ -1,4 +1,3 @@
-import 'package:account_manager/static/route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

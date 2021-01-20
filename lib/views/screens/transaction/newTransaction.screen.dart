@@ -2,6 +2,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newTransa
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class NewTransaction extends StatelessWidget {
   const NewTransaction({Key key}) : super(key: key);
@@ -16,6 +17,7 @@ class NewTransaction extends StatelessWidget {
             vertical: 20,
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 child: Text(
@@ -30,6 +32,20 @@ class NewTransaction extends StatelessWidget {
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Particulars'),
+              ),
+              ToggleSwitch(
+                initialLabelIndex: 0,
+                labels: ['Ba', 'Balo'],
+                onToggle: (index) {
+                  print('switched to: $index');
+                },
+              ),
+              ToggleSwitch(
+                initialLabelIndex: 0,
+                labels: ['Cash', 'Bank'],
+                onToggle: (index) {
+                  print('switched to: $index');
+                },
               ),
               GestureDetector(
                 onTap: () {
