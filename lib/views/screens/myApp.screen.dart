@@ -109,7 +109,8 @@ class BottomNavigationBarMain extends StatefulWidget {
 
 class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
   var currentTab = [
-    LedgerMasterDashboard(),
+    //LedgerMasterDashboard(),
+    DashBoard(),
     BooksDashboard(),
     NewTransaction(),
     LedgerDashboard(),
