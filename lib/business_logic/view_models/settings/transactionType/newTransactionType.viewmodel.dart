@@ -8,7 +8,6 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
   }
 
   List<int> getSelectedLedger() {
-    notifyListeners();
     return selectedLedgers;
   }
 

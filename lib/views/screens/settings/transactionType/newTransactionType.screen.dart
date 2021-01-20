@@ -9,55 +9,142 @@ class NewTransactionType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('New Transaction Type'),
-      ),
       body: Consumer<NewTransactionTypeViewModel>(
         builder: (context, transactionType, child) {
-          print(transactionType.countSelectedLedgers().toString());
-          return Stack(
-            children: [
-              Text(
-                transactionType.getSelectedLedger().length.toString(),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, rLedgerSelect);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
+          return SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(color: Colors.grey.shade200),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.teal),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              'Select Ledgers',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
+                    child: Center(
+                      child: Text(
+                        'New Transaction Type',
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Icon(Icons.arrow_forward_ios_outlined,
-                            color: Colors.teal)
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                      decoration: InputDecoration(
+                    labelText: 'Name',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                      decoration: InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, rLedgerSelect);
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.green.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Select Ledger'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      rTransactionTypeDashboard,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 50,
+                      width: 420,
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade200,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
+          // return Stack(
+          //   children: [
+          //     Text(
+          //       transactionType.getSelectedLedger().length.toString(),
+          //     ),
+          //     GestureDetector(
+          //       onTap: () {
+          //         Navigator.pushNamed(context, rLedgerSelect);
+          //       },
+          //       child: Padding(
+          //         padding: const EdgeInsets.all(15.0),
+          //         child: Container(
+          //           padding: EdgeInsets.symmetric(horizontal: 20),
+          //           height: 50,
+          //           decoration: BoxDecoration(
+          //             border: Border.all(color: Colors.teal),
+          //             borderRadius: BorderRadius.circular(10),
+          //           ),
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Expanded(
+          //                 child: Center(
+          //                   child: Text(
+          //                     'Select Ledgers',
+          //                     style: TextStyle(
+          //                       fontSize: 16,
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ),
+          //               SizedBox(
+          //                 width: 20,
+          //               ),
+          //               Icon(Icons.arrow_forward_ios_outlined,
+          //                   color: Colors.teal)
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // );
         },
       ),
     );

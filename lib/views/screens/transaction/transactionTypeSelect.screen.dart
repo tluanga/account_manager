@@ -18,62 +18,63 @@ class TransactionTypeSelect extends StatelessWidget {
             child: Consumer<TransactionTypeSelectViewModel>(
               builder: (context, transactionType, child) {
                 transactionType.loadData();
-                return ListView.builder(
-                  itemCount: transactionType.transactionTypes.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (transactionType.checkTransactionTypeForSelection(
-                        transactionType.transactionTypes[index].id)) {
-                      return GestureDetector(
-                        onTap: () {
-                          transactionType.deSelectTransactionType(
-                              transactionType.transactionTypes[index].id);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.green.shade300,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(transactionType
-                                    .transactionTypes[index].name),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    return GestureDetector(
-                      onTap: () {
-                        transactionType.setTransactionType(
-                            transactionType.transactionTypes[index].id);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.green.shade300,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                  transactionType.transactionTypes[index].name),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
+                return Text('Test');
+                // return ListView.builder(
+                //   itemCount: transactionType.transactionTypes.length,
+                //   itemBuilder: (BuildContext context, int index) {
+                //     if (transactionType.checkTransactionTypeForSelection(
+                //         transactionType.transactionTypes[index].id)) {
+                //       return GestureDetector(
+                //         onTap: () {
+                //           transactionType.deSelectTransactionType(
+                //               transactionType.transactionTypes[index].id);
+                //         },
+                //         child: Padding(
+                //           padding: const EdgeInsets.all(8.0),
+                //           child: Container(
+                //             height: 50,
+                //             decoration: BoxDecoration(
+                //               color: Colors.green.shade300,
+                //               borderRadius: BorderRadius.circular(10),
+                //             ),
+                //             child: Row(
+                //               mainAxisAlignment: MainAxisAlignment.center,
+                //               children: [
+                //                 Text(transactionType
+                //                     .transactionTypes[index].name),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //       );
+                //     }
+                //     return GestureDetector(
+                //       onTap: () {
+                //         transactionType.setTransactionType(
+                //             transactionType.transactionTypes[index].id);
+                //       },
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Container(
+                //           height: 50,
+                //           decoration: BoxDecoration(
+                //             border: Border.all(
+                //               color: Colors.green.shade300,
+                //             ),
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //           child: Row(
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             children: [
+                //               Text(
+                //                   transactionType.transactionTypes[index].name),
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // );
               },
             ),
           )
