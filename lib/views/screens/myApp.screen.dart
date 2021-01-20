@@ -3,6 +3,7 @@ import 'package:account_manager/business_logic/view_models/settings/ledgerMaster
 import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 
@@ -46,9 +47,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewTransactionTypeViewModel(),
         ),
+        // ---------NEW TRANSACTION----------------
+        ChangeNotifierProvider(
+          create: (context) => NewTransactionViewModel(),
+        ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
         ),
+
+        // -------SETTINGS--------------
         ChangeNotifierProvider(
           create: (context) => LedgerSelectViewModel(),
         ),
@@ -78,7 +85,7 @@ class MyApp extends StatelessWidget {
           rNewTransactionType: (context) => NewTransactionType(),
           rLedgerSelect: (context) => LedgerSelect(),
           // ------------Transaction---------------
-          // rNewTransaction: (context) => NewTransaction(),
+          rNewTransaction: (context) => NewTransaction(),
           rTransactionTypeSelect: (context) => TransactionTypeSelect(),
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
