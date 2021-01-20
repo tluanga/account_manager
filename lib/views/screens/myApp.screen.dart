@@ -1,7 +1,9 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 
 import 'package:account_manager/static/route.dart';
@@ -13,6 +15,7 @@ import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashb
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/transactionType/ledgerSelect.screen.dart';
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
@@ -41,7 +44,14 @@ class MyApp extends StatelessWidget {
           create: (context) => TransactionTypeDashboardViewModel(),
         ),
         ChangeNotifierProvider(
-            create: (context) => NewTransactionTypeViewModel())
+          create: (context) => NewTransactionTypeViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TransactionTypeSelectViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LedgerSelectViewModel(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -60,11 +70,13 @@ class MyApp extends StatelessWidget {
           // ------Settings-------------
           rBooksDashboard: (context) => BooksDashboard(),
           rSettingsDashboard: (context) => SettingsDashboard(),
+
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),
           rNewLedgerMaster: (context) => NewLedgerMaster(),
+
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),
-          // rLedgerSelect: (context) => LedgerSelect(),
+          rLedgerSelect: (context) => LedgerSelect(),
           // ------------Transaction---------------
           // rNewTransaction: (context) => NewTransaction(),
           rTransactionTypeSelect: (context) => TransactionTypeSelect(),

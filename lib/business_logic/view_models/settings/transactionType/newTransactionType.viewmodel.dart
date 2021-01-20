@@ -6,4 +6,13 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
   void newTransactionType(TransactionType transactionType) {
     transactionTypesData.add(transactionType);
   }
+
+  List<int> getSelectedLedger() {
+    notifyListeners();
+    return selectedLedgers;
+  }
+
+  int countSelectedLedgers() {
+    return selectedLedgers.length;
+  }
 }

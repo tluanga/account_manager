@@ -1,4 +1,5 @@
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
+
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,13 +16,14 @@ class TransactionTypeDashboard extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Consumer<TransactionTypeViewModel>(
+        child: Consumer<TransactionTypeDashboardViewModel>(
           builder: (context, transactiontype, child) {
+            transactiontype.loadData();
             return ListView.builder(
-              itemCount: transactiontype.transactionTypes.length,
+              itemCount: transactiontype.transactionTypeList.length,
               itemBuilder: (BuildContext context, int index) {
                 return TransactionTypeListItem(
-                  name: transactiontype.transactionTypes[index].name,
+                  name: transactiontype.transactionTypeList[index].name,
                 );
               },
             );
