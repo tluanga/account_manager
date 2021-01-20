@@ -16,3 +16,6 @@ List<TransactionType> transactionTypesData = [
 List<int> selectedLedgers = [];
 
 // --------Search Transaction Type by Its Id
+TransactionType searchTransactionType(int id) {
+  return transactionTypesData.firstWhere((element) => element.id == id);
+}
