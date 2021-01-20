@@ -13,59 +13,84 @@ class LedgerSelect extends StatelessWidget {
         child: Consumer<LedgerSelectViewModel>(
           builder: (context, ledger, child) {
             ledger.loadData();
-            return ListView.builder(
-              itemCount: ledger.ledgerList.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (ledger
-                    .checkLedgerforSelection(ledger.ledgerList[index].id)) {
-                  return GestureDetector(
-                    onTap: () {
-                      ledger.deSelectLedger(ledger.ledgerList[index].id);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.green.shade300,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(ledger.ledgerList[index].name),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }
-                return GestureDetector(
-                  onTap: () {
-                    ledger.selectLedgers(ledger.ledgerList[index].id);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.green.shade300,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(ledger.ledgerList[index].name),
-                        ],
-                      ),
+            return Column(
+              children: [
+                Container(
+                  child: Text('Please Select Ledger'),
+                ),
+                Container(
+                  child: TextField(
+                    decoration: InputDecoration(hintText: 'Search'),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: ListView.builder(
+                      itemCount: ledger.ledgerList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (ledger.checkLedgerforSelection(
+                            ledger.ledgerList[index].id)) {
+                          return GestureDetector(
+                            onTap: () {
+                              ledger
+                                  .deSelectLedger(ledger.ledgerList[index].id);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade300,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(ledger.ledgerList[index].name),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            ledger.selectLedgers(ledger.ledgerList[index].id);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.green.shade300,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(ledger.ledgerList[index].name),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                );
-              },
+                ),
+              ],
             );
           },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, rNewTransactionType);
+        },
+        child: Container(
+          child: Text('Submit'),
         ),
       ),
     );
