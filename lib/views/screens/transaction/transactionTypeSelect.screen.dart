@@ -13,35 +13,38 @@ class TransactionTypeSelect extends StatelessWidget {
       ),
       body: Consumer<TransactionTypeSelectViewModel>(
         builder: (context, transactionType, child) {
-          return Stack(
+          return Column(
             children: [
-              ListView.builder(
-                itemCount: 12,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '',
-                            style: TextStyle(
+              Text('Select Transaction Type'),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 12,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            border: Border.all(
                               color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '',
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ],
           );
