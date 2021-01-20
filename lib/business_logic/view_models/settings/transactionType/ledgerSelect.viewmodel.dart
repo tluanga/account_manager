@@ -21,7 +21,6 @@ class LedgerSelectViewModel extends ChangeNotifier {
   }
 
   int countSelectedLedgers() {
-    notifyListeners();
     return selectedLedgers.length;
   }
 

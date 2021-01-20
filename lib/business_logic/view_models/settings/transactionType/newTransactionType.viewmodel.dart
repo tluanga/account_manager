@@ -13,7 +13,6 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
   }
 
   int countSelectedLedgers() {
-    notifyListeners();
     return selectedLedgers.length;
   }
 }
