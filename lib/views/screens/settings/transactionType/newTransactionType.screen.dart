@@ -65,7 +65,30 @@ class NewTransactionType extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Select Ledger'),
+                          Text('Select Debit Side Ledger'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, rLedgerSelect);
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.green.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Select Credit Side Ledger'),
                         ],
                       ),
                     ),

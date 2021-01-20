@@ -2,10 +2,7 @@ import 'package:account_manager/business_logic/models/transactionType.models.dar
 
 List<TransactionType> transactionTypesData = [
   TransactionType.widthId(
-    id: 1,
-    name: 'Purchase of Equipment',
-    ledger: [1, 2],
-  ),
+      id: 1, name: 'Purchase of Equipment', description: ''),
   TransactionType.widthId(
     id: 2,
     name: 'Purchase of Other Equipments',
