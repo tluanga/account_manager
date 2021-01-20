@@ -15,4 +15,16 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
     selectedTransactionType = id;
     notifyListeners();
   }
+
+  void deSelectTransactionType(int id) {
+    selectedTransactionType = null;
+    notifyListeners();
+  }
+
+  bool checkTransactionTypeForSelection(int transactionTypeId) {
+    if (selectedTransactionType == transactionTypeId) {
+      return true;
+    } else
+      return false;
+  }
 }

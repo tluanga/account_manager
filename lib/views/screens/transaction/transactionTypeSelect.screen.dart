@@ -11,44 +11,73 @@ class TransactionTypeSelect extends StatelessWidget {
       appBar: AppBar(
         title: Text('Transaction Type Select'),
       ),
-      body: Consumer<TransactionTypeSelectViewModel>(
-        builder: (context, transactionType, child) {
-          return Column(
-            children: [
-              Text('Select Transaction Type'),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 12,
+      body: Column(
+        children: [
+          Text('Please Select Transaction Type'),
+          Expanded(
+            child: Consumer<TransactionTypeSelectViewModel>(
+              builder: (context, transactionType, child) {
+                transactionType.loadData();
+                return ListView.builder(
+                  itemCount: transactionType.transactionTypes.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {},
+                    if (transactionType.checkTransactionTypeForSelection(
+                        transactionType.transactionTypes[index].id)) {
+                      return GestureDetector(
+                        onTap: () {
+                          transactionType.deSelectTransactionType(
+                              transactionType.transactionTypes[index].id);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade300,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(transactionType
+                                    .transactionTypes[index].name),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    return GestureDetector(
+                      onTap: () {
+                        transactionType.setTransactionType(
+                            transactionType.transactionTypes[index].id);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 40,
+                          height: 50,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.blue,
+                              color: Colors.green.shade300,
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Center(
-                            child: Text(
-                              '',
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                  transactionType.transactionTypes[index].name),
+                            ],
                           ),
                         ),
                       ),
                     );
                   },
-                ),
-              ),
-            ],
-          );
-        },
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
