@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
-import 'package:account_manager/services/ledgerMaster/serviceLocator.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/route.dart';
 
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Ledger Master Dashboard'),
+        backgroundColor: Colors.grey.shade500,
       ),
       body: Consumer<LedgerMasterDashboardViewModel>(
           builder: (context, ledgerMaster, child) {

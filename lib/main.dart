@@ -1,5 +1,5 @@
 // import 'package:account_manager/views/screens/myApp.screen.dart';
-import 'package:account_manager/services/ledgerMaster/serviceLocator.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:flutter/material.dart';
