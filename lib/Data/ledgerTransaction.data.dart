@@ -25,5 +25,6 @@ void createLedgerTransaction(
     debitOrCredit: debitOrCredit,
     cashOrBank: cashOrBank,
   );
+
   ledgerTransactionDataList.add(newData);
 }

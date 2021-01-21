@@ -91,7 +91,7 @@ class NewTransaction extends StatelessWidget {
               ),
               Consumer<NewTransactionViewModel>(
                 builder: (context, transaction, child) {
-                  if (transaction.getSelectedTransacitionType() != 0) {
+                  if (transaction.getSelectedTransactionType() != 0) {
                     String name = transaction.getSelectedTransactionTypeName();
                     print(name);
                     return Container(

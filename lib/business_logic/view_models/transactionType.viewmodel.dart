@@ -1,20 +1,14 @@
+import 'package:account_manager/Data/transactionType.data.dart';
 import 'package:account_manager/business_logic/models/transactionType.models.dart';
 import 'package:flutter/foundation.dart';
 
 class TransactionTypeViewModel extends ChangeNotifier {
-  List<TransactionType> transactionTypes = [
-    TransactionType.widthId(
-      id: 1,
-      name: 'Purchase of Equipment',
-      ledger: [1, 2],
-      
-    ),
-    TransactionType.widthId(
-      id: 2,
-      name: 'Purchase of Other Equipments',
-      ledger: [1, 2],
-    ),
-  ];
+  List<TransactionType> transactionTypes = [];
+
+  void loadData() {
+    transactionTypes = transactionTypesData;
+  }
+
   List<int> ledgers = [];
   void newTransactionType(int id, String name, String description) {
     var transactionType =
@@ -23,8 +17,13 @@ class TransactionTypeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addLedger(TransactionType transactionType, int ledgerID) {
-    transactionType.ledger.add(ledgerID);
+  void setDebitSideLedger(TransactionType transactionType, int ledgerMasterID) {
+    transactionType.debitSideLedger = ledgerMasterID;
+    notifyListeners();
+  }
+
+  void setCreditSideLedger(TransactionType transactionType, int ledgerID) {
+    transactionType.creditSideLedger = (ledgerID);
     notifyListeners();
   }
 

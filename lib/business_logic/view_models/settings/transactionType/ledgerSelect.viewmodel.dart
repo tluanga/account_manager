@@ -7,7 +7,7 @@ class LedgerSelectViewModel extends ChangeNotifier {
   List<LedgerMaster> ledgerList = [];
 
   void loadData() {
-    ledgerList = ledgerMasterDataList;
+    ledgerList = LedgerMasterData().ledgerMasterDataList;
   }
 
   void selectLedgers(int ledgerId) {
