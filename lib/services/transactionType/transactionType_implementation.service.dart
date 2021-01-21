@@ -7,6 +7,7 @@ class TransactionTypeImpl implements TransactionTypeService {
       id: 1,
       name: 'Purchase of Material',
       description: 'Purchase of Material for reselling or Raw Material',
+      type: 0, //Buy
       debitSideLedger: 1,
       creditSideLedger: 2,
     )
