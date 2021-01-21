@@ -34,6 +34,9 @@ class NewTransaction extends StatelessWidget {
                 decoration: InputDecoration(labelText: 'Particulars'),
               ),
               ToggleSwitch(
+                minWidth: 120.0,
+                minHeight: 40.0,
+                fontSize: 16.0,
                 initialLabelIndex: 0,
                 labels: ['Ba', 'Balo'],
                 onToggle: (index) {
@@ -41,6 +44,8 @@ class NewTransaction extends StatelessWidget {
                 },
               ),
               ToggleSwitch(
+                minWidth: 120.0,
+                minHeight: 40.0,
                 initialLabelIndex: 0,
                 labels: ['Cash', 'Bank'],
                 onToggle: (index) {

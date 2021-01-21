@@ -3,6 +3,8 @@ class TransactionType {
   String name;
   String description;
   List<int> ledger;
+  int debitSideLedger;
+  int creditSideLedger;
 
   // 0 - when Incomplete and 1- when Complete
 
