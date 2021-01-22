@@ -1,11 +1,11 @@
-import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/creditSideLedgerSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CreditSideLedgerSelectScreen extends StatelessWidget {
-  final LedgerSelectViewModel _model = serviceLocator<LedgerSelectViewModel>();
+  final CreditSideLedgerSelectViewModel _model =
+      serviceLocator<CreditSideLedgerSelectViewModel>();
 
   CreditSideLedgerSelectScreen() {
     _model.loadData();
@@ -15,8 +15,9 @@ class CreditSideLedgerSelectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Consumer<LedgerSelectViewModel>(
-          builder: (context, ledger, child) {
+        child: Consumer<CreditSideLedgerSelectViewModel>(
+          builder: (context, model, child) {
+            model.loadData();
             return Column(
               children: [
                 Container(
@@ -27,13 +28,40 @@ class CreditSideLedgerSelectScreen extends StatelessWidget {
                     decoration: InputDecoration(hintText: 'Search'),
                   ),
                 ),
+                Container(
+                  child: Text(
+                    model.getCreditSideLedger(),
+                  ),
+                ),
                 Expanded(
                   child: Container(
                     child: ListView.builder(
-                        itemCount: ledger.ledgerList.length,
+                        itemCount: model.ledgerList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return LedgerListItem(
-                            id: index,
+                          return GestureDetector(
+                            onTap: () {
+                              model.setCreditSideLedger(
+                                  model.ledgerList[index].id);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: model.setFillColorDependingOnSelection(
+                                      model.ledgerList[index].id),
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(model.ledgerList[index].name),
+                                    Text(model.ledgerList[index].description),
+                                  ],
+                                ),
+                              ),
+                            ),
                           );
                         }),
                   ),
@@ -43,100 +71,6 @@ class CreditSideLedgerSelectScreen extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, rNewTransactionType);
-        },
-        child: Container(
-          child: Text('Submit'),
-        ),
-      ),
     );
   }
 }
-
-class LedgerListItem extends StatelessWidget {
-  final debitOrCredit;
-  final Colors fillColor;
-  final int id;
-
-  LedgerListItem({
-    this.debitOrCredit,
-    this.fillColor,
-    this.id,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, model, child) {
-        return GestureDetector(
-          onTap: () {
-            // model.selectLedgers(ledger.ledgerList[index].id);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.green.shade300,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(model.ledgerList[id].name),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-// class LedgerListItem extends StatelessWidget {
-//   final debitOrCredit;
-//   final Colors fillColor;
-//   final int id;
-
-//   LedgerListItem({
-//     this.debitOrCredit,
-//     this.fillColor,
-//     this.id,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Consumer<LedgerSelectViewModel>(
-//       builder: (context, model, child) {
-//         return GestureDetector(
-//           onTap: () {
-//             // model.selectLedgers(ledger.ledgerList[index].id);
-//           },
-//           child: Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Container(
-//               height: 50,
-//               decoration: BoxDecoration(
-//                 border: Border.all(
-//                   color: Colors.green.shade300,
-//                 ),
-//                 borderRadius: BorderRadius.circular(20),
-//               ),
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Text(model.ledgerList[id].name),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }

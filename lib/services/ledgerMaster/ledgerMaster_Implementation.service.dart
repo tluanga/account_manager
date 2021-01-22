@@ -4,12 +4,13 @@ import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 class LedgerMasterImpl implements LedgerMasterService {
   List<LedgerMaster> _list = [
     LedgerMaster(
-      id: 1,
-      name: 'Cash Account',
-    ),
+        id: 1,
+        name: 'Cash Account',
+        description: 'Every thing related to Cash Transaction'),
     LedgerMaster(
       id: 2,
       name: 'Purchase Account',
+      description: 'Purchase of product by cash',
     ),
   ];
 

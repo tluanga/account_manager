@@ -1,15 +1,16 @@
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
 
 class NewTransactionTypeViewModel extends ChangeNotifier {
-  // void newTransactionType(TransactionType transactionType) {
-  //   transactionTypesData.add(transactionType);
-  // }
+  TransactionTypeService _transactionTypeService =
+      serviceLocator<TransactionTypeService>();
 
-  // List<int> getSelectedLedger() {
-  //   return selectedLedgers;
-  // }
+  String getDebitSideLedger() {
+    return _transactionTypeService.getCurrentDebitSideLedger().toString();
+  }
 
-  // int countSelectedLedgers() {
-  //   return selectedLedgers.length;
-  // }
+  String getCreditSideLedger() {
+    return _transactionTypeService.getCurrentCreditSideLedger().toString();
+  }
 }

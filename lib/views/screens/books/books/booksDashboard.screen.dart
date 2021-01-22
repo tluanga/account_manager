@@ -14,7 +14,7 @@ class BooksDashboard extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
               title: 'General journal',
-              routeUrl: rLedgerMasterDashboard,
+              routeUrl: rGeneralJournalDashboard,
               iconName: Icons.book_outlined,
             ),
             UICard(

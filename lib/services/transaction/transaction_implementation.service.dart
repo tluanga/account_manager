@@ -22,6 +22,7 @@ class TransactionImpl implements TransactionService {
   // Saving new Ledger Master
   @override
   Future<void> createNewTransaction(Transaction data) async {
+    print(data.particular);
     _list.add(data);
   }
 }

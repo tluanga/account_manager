@@ -13,4 +13,12 @@ class TransactionTypeDashboardViewModel extends ChangeNotifier {
     transactionTypeList = _transactionTypeList;
     notifyListeners();
   }
+
+  String getDebitSideLedger() {
+    return _transactionTypeService.getCurrentDebitSideLedger().toString();
+  }
+
+  String getCreditSideLedger() {
+    return _transactionTypeService.getCurrentCreditSideLedger().toString();
+  }
 }

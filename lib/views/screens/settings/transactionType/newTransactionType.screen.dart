@@ -19,7 +19,7 @@ class _AppState extends State<NewTransactionType> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<NewTransactionTypeViewModel>(
-        builder: (context, transactionType, child) {
+        builder: (context, model, child) {
           return SafeArea(
             child: Column(
               children: [
@@ -63,6 +63,9 @@ class _AppState extends State<NewTransactionType> {
                     border: Border.all(color: Colors.green[300])
                   ),
                   child:getSearchableDropdown(localData, "local"),
+                ),
+                Container(
+                  child: Text(model.getCreditSideLedger()),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

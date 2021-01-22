@@ -218,11 +218,11 @@ class _OtpScreenState extends State<OtpScreen> {
       strPin += e;
     });
     // if (pinIndex == 4) print(strPin);
-    if (pinIndex==4){
-        Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => ConfirmPin()),
-  );
+    if (pinIndex == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ConfirmPin()),
+      );
     }
   }
 

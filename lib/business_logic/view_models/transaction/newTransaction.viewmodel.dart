@@ -1,3 +1,9 @@
+import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
+import 'package:account_manager/business_logic/models/transactionType.models.dart';
+import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
+
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
 
 class NewTransactionViewModel extends ChangeNotifier {
@@ -8,6 +14,26 @@ class NewTransactionViewModel extends ChangeNotifier {
     bool cashOrBank,
     int transactionTypeId,
   ) {
+    TransactionTypeService _transactionTypeService =
+        serviceLocator<TransactionTypeService>();
+
+    // 1. Get Transaction Type Object
+    TransactionType transactionType;
+    transactionType =
+        _transactionTypeService.getTransactionTypeObject(transactionTypeId);
+    print(
+      transactionType.creditSideLedger,
+    );
+    // Create a ledgerTransaction Entry
+    LedgerTransaction ledgerTransactionData =
+        new LedgerTransaction(id: 12, amount: 1000);
+    LedgerTransactionService _ledgerTransactionService =
+        serviceLocator<LedgerTransactionService>();
+    _ledgerTransactionService.createNewLedgerTransaction(ledgerTransactionData);
+
+    // Transaction type hnuaia debitLedger and creditLedger kan mamawh
+    // we have the transaction id
+
     // step1--get the id of debit side ledger
 
     // step 2- make ledger Transaction

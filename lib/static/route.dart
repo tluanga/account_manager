@@ -13,13 +13,12 @@ const String rCreditSideLedger = 'setting/newTransactionType/creditSideLedger';
 // -------------New Transaction-----------------
 const String rNewTransaction = 'newTransaction';
 const String rTransactionTypeSelect = '/transactionTypeSelect';
-const String rLei = '/lei';
-const String rHralh = '/hralh';
 
 // -------------Books
 
 const String rLedgerDashboard = '/books/ledgerDashboard';
 const String rLedger = 'books/ledger';
+const String rGeneralJournalDashboard = '/generalJournalDashboard';
 
 // -----------------Dashboard route----------
 const String rDashBoard = '/dashboard';
