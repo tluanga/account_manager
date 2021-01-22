@@ -1,3 +1,5 @@
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
 
 class NewTransactionViewModel extends ChangeNotifier {
@@ -8,6 +10,8 @@ class NewTransactionViewModel extends ChangeNotifier {
     bool cashOrBank,
     int transactionTypeId,
   ) {
+    TransactionTypeService _transactionTypeService =
+        serviceLocator<TransactionTypeService>();
     // step1--get the id of debit side ledger
 
     // step 2- make ledger Transaction

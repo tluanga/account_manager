@@ -7,9 +7,11 @@ abstract class TransactionTypeService {
 
   void setCurrentDebitSideLedger(int ledgerMasterId);
   int getCurrentDebitSideLedger();
+  int getDebitSideLedger();
 
   void setCurrentCreditSideLedger(int ledgerMasterId);
   int getCurrentCreditSideLedger();
+  int getCreditSideLedger();
 
   void clearSelectedLedgers();
 }
