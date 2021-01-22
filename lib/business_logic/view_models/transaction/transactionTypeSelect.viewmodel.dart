@@ -1,30 +1,45 @@
-import 'package:account_manager/Data/transaction.data.dart';
-import 'package:account_manager/Data/transactionType.data.dart';
 import 'package:account_manager/business_logic/models/transactionType.models.dart';
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
 
 class TransactionTypeSelectViewModel extends ChangeNotifier {
-  List<TransactionType> transactionTypes = [];
+  List<TransactionType> transactionTypeList = [];
 
-  void loadData() {
-    transactionTypes = transactionTypesData;
+  TransactionTypeService _transactionTypeService =
+      serviceLocator<TransactionTypeService>();
+
+  void loadData() async {
+    final _list = await _transactionTypeService.getTransactionTypeList();
+
+    this.transactionTypeList = _list;
+    print(transactionTypeList.length.toString());
+    print('Load data called');
     notifyListeners();
   }
 
-  void setTransactionType(int id) {
-    selectedTransactionType = id;
-    notifyListeners();
+  void countTransactionTypeList() {
+    print('count');
+    print(transactionTypeList.length.toString());
   }
+  // void loadData() {
+  //   transactionTypes = transactionTypesData;
+  // }
 
-  void deSelectTransactionType(int id) {
-    selectedTransactionType = null;
-    notifyListeners();
-  }
+  // void setTransactionType(int id) {
+  //   selectedTransactionType = id;
+  //   notifyListeners();
+  // }
 
-  bool checkTransactionTypeForSelection(int transactionTypeId) {
-    if (selectedTransactionType == transactionTypeId) {
-      return true;
-    } else
-      return false;
-  }
+  // void deSelectTransactionType(int id) {
+  //   selectedTransactionType = null;
+  //   notifyListeners();
+  // }
+
+  // bool checkTransactionTypeForSelection(int transactionTypeId) {
+  //   if (selectedTransactionType == transactionTypeId) {
+  //     return true;
+  //   } else
+  //     return false;
+  // }
 }

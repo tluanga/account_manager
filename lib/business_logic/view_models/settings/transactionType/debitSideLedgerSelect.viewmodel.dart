@@ -5,7 +5,8 @@ import 'package:account_manager/services/transactionType/transactionType.service
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/foundation.dart';
 
-class LedgerSelectViewModel extends ChangeNotifier {
+class DebitSideLedgerSelectViewModel extends ChangeNotifier {
+  final int mode = DEBIT;
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
@@ -29,15 +30,6 @@ class LedgerSelectViewModel extends ChangeNotifier {
     _transactionTypeService.setCurrentDebitSideLedger(ledgerMasterId);
     notifyListeners();
     return 1; //Success
-  }
-
-  int setCreditSideLedger(int ledgerMasterId) {
-    if (_transactionTypeService.getCurrentDebitSideLedger() == ledgerMasterId) {
-      return 0; //failure- condition fail as duplication
-    }
-    _transactionTypeService.setCurrentCreditSideLedger(ledgerMasterId);
-    notifyListeners();
-    return 1; // success
   }
 
   int checkLedgerForSelect(int ledgerMasterId) {

@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/route.dart';
 
 import 'package:flutter/material.dart';
@@ -13,12 +14,23 @@ class LedgerMasterDashboard extends StatefulWidget {
 }
 
 class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
+  LedgerMasterDashboardViewModel _model =
+      serviceLocator<LedgerMasterDashboardViewModel>();
+
+  @override
+  void initState() {
+    _model.loadData();
+    print('init  state is called');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text('Ledger Master Dashboard'),
+        backgroundColor: Colors.grey.shade500,
       ),
       body: Consumer<LedgerMasterDashboardViewModel>(
           builder: (context, ledgerMaster, child) {

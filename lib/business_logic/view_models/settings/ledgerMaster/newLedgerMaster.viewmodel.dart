@@ -1,9 +1,14 @@
-import 'package:account_manager/Data/ledgerMaster.data.dart';
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/foundation.dart';
 
 class NewLedgerMasterViewModel extends ChangeNotifier {
-  void newLedgerMaster(LedgerMaster ledgerMaster) {
-    ledgerMasterDataList.add(ledgerMaster);
+  LedgerMasterService _ledgerMasterService =
+      serviceLocator<LedgerMasterService>();
+
+  void newLedgerMaster(LedgerMaster data) {
+    _ledgerMasterService.createNewLedgerMaster(data);
+    notifyListeners();
   }
 }

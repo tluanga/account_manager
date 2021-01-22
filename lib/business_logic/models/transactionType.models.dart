@@ -2,12 +2,27 @@ class TransactionType {
   int id;
   String name;
   String description;
-  List<int> ledger;
+  int type; // 0--for buy 1-- sell
+  int debitSideLedger;
+  int creditSideLedger;
 
   // 0 - when Incomplete and 1- when Complete
 
-  TransactionType({this.name, this.description, this.ledger});
-  TransactionType.widthId({this.id, this.name, this.description, this.ledger});
+  TransactionType({
+    this.name,
+    this.description,
+    this.type,
+    this.debitSideLedger,
+    this.creditSideLedger,
+  });
+  TransactionType.widthId({
+    this.id,
+    this.name,
+    this.description,
+    this.type,
+    this.debitSideLedger,
+    this.creditSideLedger,
+  });
 
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
