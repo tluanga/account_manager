@@ -36,35 +36,7 @@ class _LedgerSelectState extends State<LedgerSelect> {
                   ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate((context,int index){
-                      if (ledger.checkLedgerforSelection(ledger.ledgerList[index].id)){
-                      return GestureDetector(
-                        onTap: (){
-                          ledger.deSelectLedger(ledger.ledgerList[index].id);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.teal.shade300,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(ledger.ledgerList[index].name,
-                                style: TextStyle(color: Colors.white),),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                      }
-                      return GestureDetector(
-                        onTap: (){
-                          ledger.selectLedgers(ledger.ledgerList[index].id);
-                        },
-                        child: Padding(
+                      return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             height: 50,
@@ -81,8 +53,7 @@ class _LedgerSelectState extends State<LedgerSelect> {
                               ],
                             ),
                           ),
-                        ),
-                      );
+                        );
                     },
                     childCount: ledger.ledgerList.length,
                     )
@@ -114,6 +85,53 @@ class _LedgerSelectState extends State<LedgerSelect> {
     );
   }
 }
+// if (ledger.checkLedgerforSelection(ledger.ledgerList[index].id)){
+//                       return GestureDetector(
+//                         onTap: (){
+//                           ledger.deSelectLedger(ledger.ledgerList[index].id);
+//                         },
+//                         child: Padding(
+//                           padding: const EdgeInsets.all(8.0),
+//                           child: Container(
+//                             height: 50,
+//                             decoration: BoxDecoration(
+//                               color: Colors.teal.shade300,
+//                               borderRadius: BorderRadius.circular(20),
+//                             ),
+//                             child: Row(
+//                               mainAxisAlignment: MainAxisAlignment.center,
+//                               children: [
+//                                 Text(ledger.ledgerList[index].name,
+//                                 style: TextStyle(color: Colors.white),),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       );
+//                       }
+//                       return GestureDetector(
+//                         onTap: (){
+//                           ledger.selectLedgers(ledger.ledgerList[index].id);
+//                         },
+//                         child: Padding(
+//                           padding: const EdgeInsets.all(8.0),
+//                           child: Container(
+//                             height: 50,
+//                             decoration: BoxDecoration(
+//                               border: Border.all(
+//                                 color: Colors.teal.shade300,
+//                               ),
+//                               borderRadius: BorderRadius.circular(20),
+//                             ),
+//                             child: Row(
+//                               mainAxisAlignment: MainAxisAlignment.center,
+//                               children: [
+//                                 Text(ledger.ledgerList[index].name,),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       )
 
 // CustomScrollView(
 //                 slivers: [

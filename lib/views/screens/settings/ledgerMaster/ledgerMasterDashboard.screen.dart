@@ -1,6 +1,7 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -38,22 +39,23 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         return ListView.builder(
           itemCount: ledgerMaster.ledgerMasterList.length,
           itemBuilder: (BuildContext context, int index) {
-            return LedgerMasterListItem(
-              title: ledgerMaster.ledgerMasterList[index].name,
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> NewLedgerMaster()));
+              },
+              child: LedgerMasterListItem(
+                title: ledgerMaster.ledgerMasterList[index].name,
+              ),
             );
           },
         );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(
-          context,
-          rNewLedgerMaster,
-        ),
-        child: Text(
-          '+',
-          style: TextStyle(fontSize: 30),
-        ),
-      ),
+          onPressed: () => Navigator.pushNamed(
+                context,
+                rNewLedgerMaster,
+              ),
+          child: Icon(Icons.add)),
     );
   }
 }

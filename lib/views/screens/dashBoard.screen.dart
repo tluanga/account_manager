@@ -175,58 +175,59 @@ class _DashBoardState extends State<DashBoard> {
   }
 }
 
-class Categories extends StatefulWidget {
-  @override
-  _CategoriesState createState() => _CategoriesState();
-}
+// class Categories extends StatefulWidget {
+//   @override
+//   _CategoriesState createState() => _CategoriesState();
+// }
 
-class _CategoriesState extends State<Categories> {
-  List<String> categories = ["Ledgers", "Transactions", "Parties"];
-  // By default our first item will be selected
-  int selectedIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: SizedBox(
-        height: 50,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) => buildCategory(index),
-        ),
-      ),
-    );
-  }
+// class _CategoriesState extends State<Categories> {
+//   List<String> categories = ["Ledgers", "Transactions", "Parties"];
+//   // By default our first item will be selected
+//   int selectedIndex = 0;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(top: 10),
+//       child: ListView.builder(
+//           scrollDirection: Axis.horizontal,
+//           itemCount: categories.length,
+//           itemBuilder: (context, index) {
+//             return buildCategory(index);
+//         }
+//       ),
+//     );
+//   }
 
-  Widget buildCategory(int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
-        child: Container(
-          width: 115,
-          decoration: BoxDecoration(
-              color:
-                  selectedIndex == index ? Colors.teal[50] : Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                  color: selectedIndex == index ? Colors.teal : Colors.grey)),
-          child: Center(
-            child: Text(
-              categories[index],
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: selectedIndex == index ? Colors.teal : Colors.grey[600],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   Widget buildCategory(int index) {
+//     return GestureDetector(
+//       onTap: () {
+//         setState(() {
+//           selectedIndex = index;
+//         });
+//       },
+//       child: Padding(
+//         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
+//         child: Container(
+//           width: 115,
+//           decoration: BoxDecoration(
+//             color:
+//               selectedIndex == index ? Colors.teal[50] : Colors.transparent,
+//             borderRadius: BorderRadius.circular(20),
+//             border: Border.all(
+//               color: selectedIndex == index ? Colors.teal : Colors.grey
+//             )
+//           ),
+//           child: Center(
+//             child: Text(
+//               categories[index],
+//               style: TextStyle(
+//                 fontWeight: FontWeight.w500,
+//                 color: selectedIndex == index ? Colors.teal : Colors.red[600],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -59,7 +59,9 @@ class TransactionTypeListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        print('choose function for tapping on list tiles');
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Material(
