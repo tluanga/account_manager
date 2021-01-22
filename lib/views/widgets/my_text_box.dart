@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MyTextBox extends StatelessWidget {
+  final int maxLine;
   final String title;
   final String routeUrl;
 
-  MyTextBox({this.title, this.routeUrl});
+  MyTextBox({this.title, this.routeUrl, this.maxLine});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,11 @@ class MyTextBox extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal:20.0),
             child: TextFormField(
-                decoration: InputDecoration(                
-                labelText: title,
-                border: InputBorder.none
+              maxLengthEnforced: true,
+              maxLength: maxLine,
+              decoration: InputDecoration(                
+              labelText: title,
+              border: InputBorder.none
               ),
             ),
           ),

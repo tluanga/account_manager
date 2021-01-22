@@ -1,6 +1,5 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
-import 'package:account_manager/helper/db_helper.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:flutter/material.dart';
@@ -33,30 +32,28 @@ class _NewLedgerMasterState extends State<NewLedgerMaster> {
     }
   }
 
-  _delete() {
-    LedgerMasterDBHelper.instance.deleteLedgerMaster(widget.ledgerm.id);
-    widget.updateLedgerMaster();
-    Navigator.pop(context);
-  }
 
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+      LedgerMaster _data =
+          new LedgerMaster(id: 3, name: _name, description: _description);
+      _model.newLedgerMaster(_data);
       // print('$_title, $_date, $_priority');
 
-      LedgerMaster ledgerm = LedgerMaster(
-        name: _name,
-        description: _description,
-      );
-      if (widget.ledgerm == null) {
-        // Insert the ledgerm to our user's database
-        LedgerMasterDBHelper.instance.insertLedgerMaster(ledgerm);
-      } else {
-        // Update the ledgerm
-        ledgerm.id = widget.ledgerm.id;
-        LedgerMasterDBHelper.instance.updateLedgerMaster(ledgerm);
-      }
-      widget.updateLedgerMaster();
+      // LedgerMaster ledgerm = LedgerMaster(
+      //   name: _name,
+      //   description: _description,
+      // );
+      // if (widget.ledgerm == null) {
+      //   // Insert the ledgerm to our user's database
+      //   LedgerMasterDBHelper.instance.insertLedgerMaster(ledgerm);
+      // } else {
+      //   // Update the ledgerm
+      //   ledgerm.id = widget.ledgerm.id;
+      //   LedgerMasterDBHelper.instance.updateLedgerMaster(ledgerm);
+      // }
+      // widget.updateLedgerMaster();
       Navigator.pop(context);
     }
   }
@@ -93,26 +90,25 @@ class _NewLedgerMasterState extends State<NewLedgerMaster> {
                               3.0, // Move to bottom 10 Vertically
                             ),
                           )
-                        ],                // border: Border.all(color: Colors.teal),
+                        ], // border: Border.all(color: Colors.teal),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal:20.0),
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
-                          decoration: InputDecoration(                
-                          labelText: "Name",
-                          border: InputBorder.none
-                          ),
+                          decoration: InputDecoration(
+                              labelText: "Name", border: InputBorder.none),
                           validator: (input) => input.trim().isEmpty
-                          ? 'Please enter Ledger Name'
-                          : null,
-                            onSaved: (input) => _name = input,
-                            initialValue: _name,
+                              ? 'Please enter Ledger Name'
+                              : null,
+                          onSaved: (input) => _name = input,
+                          initialValue: _name,
                         ),
                       ),
                     ),
                   ),
                 ),
                 MyTextBox(
+                  maxLine: 40,
                   title: 'Description',
                 ),
                 SizedBox(

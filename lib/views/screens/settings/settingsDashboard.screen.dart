@@ -37,7 +37,7 @@ class SettingsDashboard extends StatelessWidget {
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
-              title: 'History',
+              title: 'Change Pin',
               routeUrl: rLedgerMasterDashboard,
               iconName: Icons.history,
             ),
@@ -46,6 +46,8 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rTransactionTypeDashboard,
               iconName: Icons.backup,
             ),
+             
+            
           ]),
         ],
       ),
