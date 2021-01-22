@@ -29,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'dashBoard.screen.dart';
+import 'settings/transactionType/ledgerSelect.screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
