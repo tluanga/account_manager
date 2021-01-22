@@ -89,37 +89,37 @@ class NewTransaction extends StatelessWidget {
                   ),
                 ),
               ),
-              Consumer<NewTransactionViewModel>(
-                builder: (context, transaction, child) {
-                  if (transaction.getSelectedTransactionType() != 0) {
-                    String name = transaction.getSelectedTransactionTypeName();
-                    print(name);
-                    return Container(
-                      height: 60,
-                      width: 400,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.green),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Selected Transaction Type:',
-                          ),
-                          Text(
-                            name,
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  } else
-                    return Text('');
-                },
-              ),
+              // Consumer<NewTransactionViewModel>(
+              //   builder: (context, transaction, child) {
+              //     if (transaction.getSelectedTransactionType() != 0) {
+              //       String name = transaction.getSelectedTransactionTypeName();
+              //       print(name);
+              //       return Container(
+              //         height: 60,
+              //         width: 400,
+              //         decoration: BoxDecoration(
+              //           border: Border.all(color: Colors.green),
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         child: Column(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               'Selected Transaction Type:',
+              //             ),
+              //             Text(
+              //               name,
+              //               style: TextStyle(
+              //                 fontSize: 20,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       );
+              //     } else
+              //       return Text('');
+              //   },
+              // ),
               SizedBox(
                 height: 10,
               ),

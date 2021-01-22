@@ -12,13 +12,36 @@ class TransactionTypeImpl implements TransactionTypeService {
       creditSideLedger: 2,
     )
   ];
+  int _currentDebitSideLedger = 0;
+  int _currentCreditSideLedger = 0;
 
   @override
   Future<List<TransactionType>> getTransactionTypeList() async {
     return _list;
   }
 
-  // Saving new Ledger Master
+  void setCurrentDebitSideLedger(int ledgerMasterId) {
+    _currentDebitSideLedger = ledgerMasterId;
+  }
+
+  int getCurrentDebitSideLedger() {
+    return _currentDebitSideLedger;
+  }
+
+  void setCurrentCreditSideLedger(int ledgerMasterId) {
+    _currentCreditSideLedger = ledgerMasterId;
+  }
+
+  int getCurrentCreditSideLedger() {
+    return _currentCreditSideLedger;
+  }
+
+  void clearSelectedLedgers() {
+    _currentCreditSideLedger = 0;
+    _currentDebitSideLedger = 0;
+  }
+
+  // Saving new Transaction Type
   @override
   Future<void> createNewTransactionType(TransactionType data) async {
     _list.add(data);

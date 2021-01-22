@@ -3,6 +3,7 @@
 
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
@@ -30,4 +31,6 @@ void setUpServiceLocator() {
   // ----------Transaction Type View Model------------
   serviceLocator.registerFactory<TransactionTypeDashboardViewModel>(
       () => TransactionTypeDashboardViewModel());
+  serviceLocator
+      .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());
 }

@@ -1,5 +1,7 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/settings/transactionType/argumentLedgerSelect.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +54,11 @@ class NewTransactionType extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, rLedgerSelect);
+                      Navigator.pushNamed(
+                        context,
+                        rLedgerSelect,
+                        arguments: LedgerSelectArgument(mode: DEBIT),
+                      );
                     },
                     child: Container(
                       height: 50,
@@ -75,7 +81,11 @@ class NewTransactionType extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, rLedgerSelect);
+                      Navigator.pushNamed(
+                        context,
+                        rLedgerSelect,
+                        arguments: CREDIT,
+                      );
                     },
                     child: Container(
                       height: 50,
