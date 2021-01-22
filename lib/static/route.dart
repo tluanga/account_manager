@@ -13,8 +13,7 @@ const String rCreditSideLedger = 'setting/newTransactionType/creditSideLedger';
 // -------------New Transaction-----------------
 const String rNewTransaction = 'newTransaction';
 const String rTransactionTypeSelect = '/transactionTypeSelect';
-const String rLei = '/lei';
-const String rHralh = '/hralh';
+const String rTransactionDashboard = '/transactionDashboard';
 
 // -------------Books
 

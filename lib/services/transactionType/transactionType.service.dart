@@ -5,13 +5,13 @@ abstract class TransactionTypeService {
 
   Future<void> createNewTransactionType(TransactionType data);
 
+  TransactionType getTransactionTypeObject(int transactionTypeId);
+
   void setCurrentDebitSideLedger(int ledgerMasterId);
   int getCurrentDebitSideLedger();
-  int getDebitSideLedger();
 
   void setCurrentCreditSideLedger(int ledgerMasterId);
   int getCurrentCreditSideLedger();
-  int getCreditSideLedger();
 
   void clearSelectedLedgers();
 }

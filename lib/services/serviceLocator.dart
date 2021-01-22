@@ -9,6 +9,8 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
+import 'package:account_manager/services/ledgerTransaction/ledgerMaster_Implementation.service.dart';
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transaction/transaction_implementation.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
@@ -27,6 +29,9 @@ void setUpServiceLocator() {
       () => TransactionTypeImpl());
   serviceLocator
       .registerLazySingleton<TransactionService>(() => TransactionImpl());
+  serviceLocator.registerLazySingleton<LedgerTransactionService>(
+    () => LedgerTransactionImpl(),
+  );
 
   //VIEW MODELS
   // View Models

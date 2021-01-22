@@ -21,6 +21,11 @@ class TransactionTypeImpl implements TransactionTypeService {
   }
 
   @override
+  TransactionType getTransactionTypeObject(int transactionTypeId) {
+    return _list.firstWhere((element) => element.id == transactionTypeId);
+  }
+
+  @override
   void setCurrentDebitSideLedger(int ledgerMasterId) {
     _currentDebitSideLedger = ledgerMasterId;
   }
@@ -30,8 +35,6 @@ class TransactionTypeImpl implements TransactionTypeService {
     return _currentDebitSideLedger;
   }
 
-  @override
-  void getDebitSideLedger() {}
   @override
   void setCurrentCreditSideLedger(int ledgerMasterId) {
     _currentCreditSideLedger = ledgerMasterId;

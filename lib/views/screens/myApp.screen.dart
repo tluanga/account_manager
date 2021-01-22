@@ -6,15 +6,16 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/transactionDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
+import 'package:account_manager/services/transaction/TransactionDashboard.screen.dart';
 
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
-import 'package:account_manager/views/screens/settings/books/booksDashboard.screen.dart';
-import 'package:account_manager/views/screens/settings/books/ledgers/ledger.screen.dart';
-import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/books/booksDashboard.screen.dart';
+
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
@@ -29,6 +30,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'books/books/ledgers/ledger.screen.dart';
+import 'books/books/ledgers/ledgerDashboard.screen.dart';
 import 'dashBoard.screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -65,6 +68,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => TransactionDashboardViewModel(),
+        ),
 
         // -------SETTINGS--------------
         ChangeNotifierProvider(
@@ -99,6 +105,7 @@ class MyApp extends StatelessWidget {
           // ------------Transaction---------------
           rNewTransaction: (context) => NewTransaction(),
           rTransactionTypeSelect: (context) => TransactionTypeSelect(),
+
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
           rLedger: (context) => Ledger(),
@@ -124,7 +131,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     //LedgerMasterDashboard(),
     DashBoard(),
     BooksDashboard(),
-    NewTransaction(),
+    TransactionDashboardScreen(),
     LedgerDashboard(),
     SettingsDashboard(),
   ];

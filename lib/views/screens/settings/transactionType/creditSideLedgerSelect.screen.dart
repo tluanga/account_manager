@@ -1,6 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/creditSideLedgerSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
