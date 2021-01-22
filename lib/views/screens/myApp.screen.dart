@@ -1,5 +1,6 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/creditSideLedgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/debitSideLedgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
@@ -29,7 +30,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'dashBoard.screen.dart';
-import 'settings/transactionType/ledgerSelect.screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -53,6 +53,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => DebitSideLedgerSelectViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CreditSideLedgerSelectViewModel(),
         ),
 
         // ---------NEW TRANSACTION----------------

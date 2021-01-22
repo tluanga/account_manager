@@ -11,7 +11,7 @@ class NewTransactionType extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<NewTransactionTypeViewModel>(
-        builder: (context, transactionType, child) {
+        builder: (context, model, child) {
           return SafeArea(
             child: Column(
               children: [
@@ -74,6 +74,9 @@ class NewTransactionType extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+                Container(
+                  child: Text(model.getCreditSideLedger()),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

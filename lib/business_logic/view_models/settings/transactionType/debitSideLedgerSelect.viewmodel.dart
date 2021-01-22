@@ -21,15 +21,18 @@ class DebitSideLedgerSelectViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setDebitSideLedger(int ledgerMasterId) {
+  int setDebitSideLedger(int ledgerMasterId) {
     // check ledgerId with creditSideLedgerId
     if (_transactionTypeService.getCurrentCreditSideLedger() ==
         ledgerMasterId) {
-      return; //failure- condition fail as duplication
+      return 0; //failure- condition fail as duplication
+    }
+    if (_transactionTypeService.getCurrentDebitSideLedger() == ledgerMasterId) {
+      _transactionTypeService.setCurrentDebitSideLedger(0);
     }
     _transactionTypeService.setCurrentDebitSideLedger(ledgerMasterId);
     notifyListeners();
-    return; //Success
+    return 1; //Success
   }
 
   Color setFillColorDependingOnSelection(int ledgerMasterId) {

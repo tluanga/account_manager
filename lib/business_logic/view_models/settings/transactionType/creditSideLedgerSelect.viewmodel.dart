@@ -27,6 +27,10 @@ class CreditSideLedgerSelectViewModel extends ChangeNotifier {
     if (_transactionTypeService.getCurrentDebitSideLedger() == ledgerMasterId) {
       return 0; //failure- condition fail as duplication
     }
+    if (_transactionTypeService.getCurrentCreditSideLedger() ==
+        ledgerMasterId) {
+      _transactionTypeService.setCurrentCreditSideLedger(0);
+    }
     _transactionTypeService.setCurrentCreditSideLedger(ledgerMasterId);
     notifyListeners();
     return 1; //Success
@@ -43,5 +47,13 @@ class CreditSideLedgerSelectViewModel extends ChangeNotifier {
       return credit; //credit side selected
     } else
       return unSelectd; //not selected
+  }
+
+  String getDebitSideLedger() {
+    return _transactionTypeService.getCurrentDebitSideLedger().toString();
+  }
+
+  String getCreditSideLedger() {
+    return _transactionTypeService.getCurrentCreditSideLedger().toString();
   }
 }
