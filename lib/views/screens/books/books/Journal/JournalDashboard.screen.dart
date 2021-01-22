@@ -2,8 +2,8 @@ import 'package:account_manager/business_logic/view_models/transaction/transacti
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TransactionDashboardScreen extends StatelessWidget {
-  const TransactionDashboardScreen({Key key}) : super(key: key);
+class GeneralJournalDashboardScreen extends StatelessWidget {
+  const GeneralJournalDashboardScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

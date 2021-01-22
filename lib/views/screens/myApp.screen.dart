@@ -9,7 +9,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newTransa
 import 'package:account_manager/business_logic/view_models/transaction/transactionDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
-import 'package:account_manager/services/transaction/TransactionDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/books/Journal/JournalDashboard.screen.dart';
 
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
@@ -109,6 +109,8 @@ class MyApp extends StatelessWidget {
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
           rLedger: (context) => Ledger(),
+          rGeneralJournalDashboard: (context) =>
+              GeneralJournalDashboardScreen(),
         },
         //  home: Dashboard(),
         home: ChangeNotifierProvider<BottomNavigationBarProvider>(
@@ -131,7 +133,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     //LedgerMasterDashboard(),
     DashBoard(),
     BooksDashboard(),
-    TransactionDashboardScreen(),
+    NewTransaction(),
     LedgerDashboard(),
     SettingsDashboard(),
   ];
