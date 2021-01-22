@@ -15,7 +15,7 @@ import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashb
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
-import 'package:account_manager/views/screens/settings/transactionType/ledgerSelect.screen.dart';
+// import 'package:account_manager/views/screens/settings/transactionType/ledgerSelect.screen.dart';
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
@@ -26,6 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'dashBoard.screen.dart';
+import 'settings/transactionType/ledgerSelect.screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);

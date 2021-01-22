@@ -1,9 +1,9 @@
-import 'dart:ui';
-import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
 import 'package:flutter/material.dart';
 
-class CreateLoginPin extends StatelessWidget {
-  const CreateLoginPin({Key key}) : super(key: key);
+import '../myApp.screen.dart';
+
+class ConfirmPin extends StatelessWidget {
+  const ConfirmPin({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +15,18 @@ class CreateLoginPin extends StatelessWidget {
           colors: [Colors.tealAccent, Colors.teal],
           begin: Alignment.topRight,
         )),
-        child: OtpScreen(),
+        child: OtpScreen2(),
       ),
     ));
   }
 }
 
-class OtpScreen extends StatefulWidget {
+class OtpScreen2 extends StatefulWidget {
   @override
-  _OtpScreenState createState() => _OtpScreenState();
+  _OtpScreen2State createState() => _OtpScreen2State();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
+class _OtpScreen2State extends State<OtpScreen2> {
   List<String> currentPin = ["", "", "", ""];
 
   TextEditingController pinOneController = TextEditingController();
@@ -44,7 +44,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   int pinIndex = 0;
 
-  String enterPin = 'Enter PIN';
+  String enterPin = 'Re Enter PIN';
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +221,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (pinIndex==4){
         Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => ConfirmPin()),
+    MaterialPageRoute(builder: (context) => MyApp()),
   );
     }
   }
@@ -363,29 +363,3 @@ class KeyboardNumber extends StatelessWidget {
     );
   }
 }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Column(children: [
-//         TextField(
-//           decoration: InputDecoration(
-//             contentPadding: EdgeInsets.all(10),
-//             labelText: 'Input 4 Digit pin',
-//           ),
-//         ),
-//         TextField(
-//           decoration: InputDecoration(
-//             labelText: 'Re Enter 4 Digit pin',
-//           ),
-//         ),
-//         Container(
-//           decoration: BoxDecoration(
-//             border: Border.all(color: Colors.blue),
-//           ),
-//           child: Text('Submit'),
-//         ),
-//       ]),
-//     );
-//   }
-// }
