@@ -1,5 +1,6 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/debitSideLedgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
@@ -16,7 +17,8 @@ import 'package:account_manager/views/screens/settings/books/ledgers/ledgerDashb
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
-import 'package:account_manager/views/screens/settings/transactionType/ledgerSelect.screen.dart';
+import 'package:account_manager/views/screens/settings/transactionType/creditSideLedgerSelect.screen.dart';
+import 'package:account_manager/views/screens/settings/transactionType/debitSideLedgerSelect.screen.dart';
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
@@ -41,12 +43,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewLedgerMasterViewModel(),
         ),
+        //------Transaction Type---------
         ChangeNotifierProvider(
           create: (context) => TransactionTypeDashboardViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => NewTransactionTypeViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => DebitSideLedgerSelectViewModel(),
+        ),
+
         // ---------NEW TRANSACTION----------------
         ChangeNotifierProvider(
           create: (context) => NewTransactionViewModel(),
@@ -83,7 +90,8 @@ class MyApp extends StatelessWidget {
 
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),
-          rLedgerSelect: (context) => LedgerSelect(),
+          rDebitSideLedger: (context) => DebitSideLedgerSelectScreen(),
+          rCreditSideLedger: (cpntext) => CreditSideLedgerSelectScreen(),
           // ------------Transaction---------------
           rNewTransaction: (context) => NewTransaction(),
           rTransactionTypeSelect: (context) => TransactionTypeSelect(),

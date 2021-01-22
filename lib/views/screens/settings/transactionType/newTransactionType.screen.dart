@@ -1,7 +1,6 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
-import 'package:account_manager/views/screens/settings/transactionType/argumentLedgerSelect.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,8 +55,7 @@ class NewTransactionType extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        rLedgerSelect,
-                        arguments: LedgerSelectArgument(mode: DEBIT),
+                        rDebitSideLedger,
                       );
                     },
                     child: Container(
@@ -83,7 +81,7 @@ class NewTransactionType extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        rLedgerSelect,
+                        rCreditSideLedger,
                         arguments: CREDIT,
                       );
                     },

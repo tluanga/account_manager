@@ -1,7 +1,5 @@
-import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class NewTransaction extends StatelessWidget {

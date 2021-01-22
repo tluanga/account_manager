@@ -1,9 +1,25 @@
 import 'package:account_manager/business_logic/models/transactionType.models.dart';
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
 
 class TransactionTypeSelectViewModel extends ChangeNotifier {
-  List<TransactionType> transactionTypes = [];
+  List<TransactionType> transactionTypeList = [];
 
+  TransactionTypeService _transactionTypeService =
+      serviceLocator<TransactionTypeService>();
+
+  void loadData() async {
+    final _list = await _transactionTypeService.getTransactionTypeList();
+    transactionTypeList = _list;
+    print(transactionTypeList.length.toString());
+    print(_list.length);
+    notifyListeners();
+  }
+
+  void countTransactionTypeList() {
+    print(transactionTypeList.length.toString());
+  }
   // void loadData() {
   //   transactionTypes = transactionTypesData;
   // }

@@ -1,10 +1,15 @@
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TransactionTypeSelect extends StatelessWidget {
-  const TransactionTypeSelect({Key key}) : super(key: key);
+  final TransactionTypeSelectViewModel _model =
+      serviceLocator<TransactionTypeSelectViewModel>();
+  TransactionTypeSelect() {
+    _model.loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +31,9 @@ class TransactionTypeSelect extends StatelessWidget {
             ),
             Expanded(
               child: Consumer<TransactionTypeSelectViewModel>(
-                builder: (context, transactionType, child) {
+                builder: (context, transactionTypeSelect, child) {
                   return ListView.builder(
-                    itemCount: transactionType.transactionTypes.length,
+                    itemCount: transactionTypeSelect.transactionTypeList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Text('test');
                       //   if (transactionType.checkTransactionTypeForSelection(

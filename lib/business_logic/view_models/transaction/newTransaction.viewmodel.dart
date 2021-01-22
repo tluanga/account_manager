@@ -1,4 +1,3 @@
-import 'package:account_manager/business_logic/models/transactionType.models.dart';
 import 'package:flutter/foundation.dart';
 
 class NewTransactionViewModel extends ChangeNotifier {

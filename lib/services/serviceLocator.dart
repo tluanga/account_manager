@@ -5,8 +5,10 @@ import 'package:account_manager/business_logic/view_models/settings/ledgerMaster
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:account_manager/services/transaction/transaction.service.dart';
+import 'package:account_manager/services/transaction/transaction_implementation.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:account_manager/services/transactionType/transactionType_implementation.service.dart';
 import 'package:get_it/get_it.dart';
@@ -16,12 +18,15 @@ import 'ledgerMaster/ledgerMaster_Implementation.service.dart';
 GetIt serviceLocator = GetIt.instance;
 
 void setUpServiceLocator() {
-  // Services
+  // SERVICES
   serviceLocator
       .registerLazySingleton<LedgerMasterService>(() => LedgerMasterImpl());
   serviceLocator.registerLazySingleton<TransactionTypeService>(
       () => TransactionTypeImpl());
+  serviceLocator
+      .registerLazySingleton<TransactionService>(() => TransactionImpl());
 
+  //VIEW MODELS
   // View Models
   serviceLocator.registerFactory<LedgerMasterDashboardViewModel>(
       () => LedgerMasterDashboardViewModel());
@@ -33,4 +38,7 @@ void setUpServiceLocator() {
       () => TransactionTypeDashboardViewModel());
   serviceLocator
       .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());
+
+  // ----------Transaction View Model -----------------
+  serviceLocator.registerFactory(() => TransactionTypeSelectViewModel());
 }

@@ -7,7 +7,8 @@ const String rNewLedgerMaster = 'settings/NewLedgerMaster';
 // ---------Setting---Transaction Type-------------------
 const String rTransactionTypeDashboard = 'settings/transactionTypeDashboard';
 const String rNewTransactionType = 'setting/newTransactionType';
-const String rLedgerSelect = 'setting/ledgerSelect';
+const String rDebitSideLedger = 'setting/newTransactionType/debitSideLedger';
+const String rCreditSideLedger = 'setting/newTransactionType/creditSideLedger';
 
 // -------------New Transaction-----------------
 const String rNewTransaction = 'newTransaction';
