@@ -4,17 +4,13 @@ import 'package:account_manager/services/transactionType/transactionType.service
 import 'package:flutter/foundation.dart';
 
 class TransactionTypeSelectViewModel extends ChangeNotifier {
-  List<TransactionType> transactionTypeList = [];
-
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
-
+  List<TransactionType> transactionTypeList = [];
   void loadData() async {
-    final _list = await _transactionTypeService.getTransactionTypeList();
-
-    this.transactionTypeList = _list;
-    print(transactionTypeList.length.toString());
-    print('Load data called');
+    final _transactionTypeList =
+        await _transactionTypeService.getTransactionTypeList();
+    transactionTypeList = _transactionTypeList;
     notifyListeners();
   }
 

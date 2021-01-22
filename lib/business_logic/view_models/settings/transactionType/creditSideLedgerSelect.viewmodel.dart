@@ -4,6 +4,7 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class CreditSideLedgerSelectViewModel extends ChangeNotifier {
   final int mode = DEBIT;
@@ -21,24 +22,26 @@ class CreditSideLedgerSelectViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int setDebitSideLedger(int ledgerMasterId) {
+  int setCreditSideLedger(int ledgerMasterId) {
     // check ledgerId with creditSideLedgerId
-    if (_transactionTypeService.getCurrentCreditSideLedger() ==
-        ledgerMasterId) {
+    if (_transactionTypeService.getCurrentDebitSideLedger() == ledgerMasterId) {
       return 0; //failure- condition fail as duplication
     }
-    _transactionTypeService.setCurrentDebitSideLedger(ledgerMasterId);
+    _transactionTypeService.setCurrentCreditSideLedger(ledgerMasterId);
     notifyListeners();
     return 1; //Success
   }
 
-  int checkLedgerForSelect(int ledgerMasterId) {
+  Color setFillColorDependingOnSelection(int ledgerMasterId) {
+    const debit = Color(0xFF7B74BD);
+    const credit = Color(0xFF51D378);
+    const unSelectd = Color(0xFFFAF5F9);
     if (_transactionTypeService.getCurrentDebitSideLedger() == ledgerMasterId) {
-      return DEBIT; //debit side selected
+      return debit; //debit side selected
     } else if (_transactionTypeService.getCurrentCreditSideLedger() ==
         ledgerMasterId) {
-      return CREDIT; //credit side selected
+      return credit; //credit side selected
     } else
-      return NONE; //not selected
+      return unSelectd; //not selected
   }
 }
