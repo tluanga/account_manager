@@ -32,6 +32,7 @@ class TransactionTypeSelect extends StatelessWidget {
             Expanded(
               child: Consumer<TransactionTypeSelectViewModel>(
                 builder: (context, transactionTypeSelect, child) {
+                  transactionTypeSelect.countTransactionTypeList();
                   return ListView.builder(
                     itemCount: transactionTypeSelect.transactionTypeList.length,
                     itemBuilder: (BuildContext context, int index) {
