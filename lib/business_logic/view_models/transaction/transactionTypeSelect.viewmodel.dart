@@ -10,13 +10,36 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
       serviceLocator<TransactionTypeService>();
 
   void loadData() async {
-    final _transactionTypeList =
-        await _transactionTypeService.getTransactionTypeList();
-    transactionTypeList = _transactionTypeList;
+    final _list = await _transactionTypeService.getTransactionTypeList();
+
+    this.transactionTypeList = _list;
+    print(transactionTypeList.length.toString());
+    print('Load data called');
     notifyListeners();
   }
 
   void countTransactionTypeList() {
     print('count');
+    print(transactionTypeList.length.toString());
+  }
+  // void loadData() {
+  //   transactionTypes = transactionTypesData;
+  // }
 
+  // void setTransactionType(int id) {
+  //   selectedTransactionType = id;
+  //   notifyListeners();
+  // }
+
+  // void deSelectTransactionType(int id) {
+  //   selectedTransactionType = null;
+  //   notifyListeners();
+  // }
+
+  // bool checkTransactionTypeForSelection(int transactionTypeId) {
+  //   if (selectedTransactionType == transactionTypeId) {
+  //     return true;
+  //   } else
+  //     return false;
+  // }
 }
