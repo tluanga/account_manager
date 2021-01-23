@@ -3,9 +3,17 @@ import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart';
 
-class NewTransactionType extends StatelessWidget {
-  const NewTransactionType({Key key}) : super(key: key);
+class NewTransactionType extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+List<String> localData = ['Purchase Account','Sales account', 'Machinery'];
+
+class _AppState extends State<NewTransactionType> {
+  Map<String, String> selectedValueMap = Map();
 
   @override
   Widget build(BuildContext context) {
@@ -49,31 +57,12 @@ class NewTransactionType extends StatelessWidget {
                     ),
                   )),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        rDebitSideLedger,
-                      );
-                    },
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.green.shade300,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Select Debit Side Ledger'),
-                        ],
-                      ),
-                    ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.green[300])
                   ),
+                  child:getSearchableDropdown(localData, "local"),
                 ),
                 Container(
                   child: Text(model.getCreditSideLedger()),
@@ -183,4 +172,37 @@ class NewTransactionType extends StatelessWidget {
       ),
     );
   }
+  Widget getSearchableDropdown(List<String> listData, mapKey) {
+    List<DropdownMenuItem> items = [];
+    for(int i=0; i < listData.length; i++) {
+      items.add(new DropdownMenuItem(
+          child: new Text(
+            listData[i],
+          ),
+          value: listData[i],
+        )
+      );
+    }
+    return new SearchableDropdown(
+      underline: Padding(padding: EdgeInsets.all(5)),
+      items: items,
+      value: selectedValueMap[mapKey],
+      isCaseSensitiveSearch: false,
+      hint: new Text(
+        'Select Debit side Ledger'
+      ),
+      searchHint: new Text(
+        'Select One',
+        style: new TextStyle(
+            fontSize: 20
+        ),
+      ),
+      onChanged: (value) {
+        setState(() {
+          selectedValueMap[mapKey] = value;
+        });
+      },
+    );
+  }
+
 }

@@ -19,7 +19,7 @@ class BooksDashboard extends StatelessWidget {
             ),
             UICard(
                 title: 'General ledger',
-                routeUrl: rTransactionTypeDashboard,
+                routeUrl: rLedgerDashboard,
                 iconName: Icons.account_balance_wallet_outlined),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
