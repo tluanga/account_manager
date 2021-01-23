@@ -19,21 +19,16 @@ class LedgerDashboard extends StatelessWidget {
               vertical: 5,
             ),
             decoration: BoxDecoration(
-              color: Colors.teal.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(20)
-            ),
+                color: Colors.teal.withOpacity(0.4),
+                borderRadius: BorderRadius.circular(20)),
             child: TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                icon: Icon(
-                  Icons.search
-                ),
-                hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.white)
-              )
-            ),
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    icon: Icon(Icons.search),
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.white))),
           )
         ],
       ),

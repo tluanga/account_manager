@@ -30,8 +30,11 @@ dependencies:
   provider:
   toggle_switch: ^0.1.8
   get_it: ^5.0.4
+  sqflite:
+  path_provider:
 
 dev_dependencies:
+  test:
   flutter_test:
     sdk: flutter
 

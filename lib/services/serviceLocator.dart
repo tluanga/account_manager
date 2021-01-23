@@ -17,7 +17,7 @@ import 'package:account_manager/services/transactionType/transactionType.service
 import 'package:account_manager/services/transactionType/transactionType_implementation.service.dart';
 import 'package:get_it/get_it.dart';
 
-import 'ledgerMaster/ledgerMaster_Implementation.service.dart';
+import 'ledgerMaster/ledgerMaster_impl.service.dart';
 
 GetIt serviceLocator = GetIt.instance;
 

@@ -8,7 +8,7 @@ class NewLedgerMasterViewModel extends ChangeNotifier {
       serviceLocator<LedgerMasterService>();
 
   void newLedgerMaster(LedgerMaster data) {
-    _ledgerMasterService.createNewLedgerMaster(data);
+    _ledgerMasterService.insert(data);
     notifyListeners();
   }
 }
