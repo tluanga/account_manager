@@ -8,8 +8,8 @@ class LedgerMasterImpl implements LedgerMasterService {
   Future<int> insert(LedgerMaster ledgerMaster) async {
     Database db = await DatabaseHelper.instance.db;
     print(db);
-    // final int result =
-    //     await db.insert(LedgerMasterTable.tableName, ledgerMaster.toMap());
-    return 1;
+    final int result =
+        await db.insert('masterLedger_table', ledgerMaster.toMap());
+    return result;
   }
 }

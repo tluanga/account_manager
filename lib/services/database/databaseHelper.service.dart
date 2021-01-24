@@ -11,7 +11,7 @@ class DatabaseHelper {
 
   String transactionTable = 'transaction_table';
   String transactionTypeTable = 'transactionType_table';
-  String masterLedgerTable = 'masterLedger_table';
+  static const String masterLedgerTable = 'masterLedger_table';
 
   //transactionTable
   String colId = 'id';
@@ -54,7 +54,9 @@ class DatabaseHelper {
   Future<Database> _initDb() async {
     print('inside initiDb');
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + 'account_manager.db';
+
+    String path = dir.path + '/account_manager.db';
+    print('path is $path');
     final accountManagerDb = await openDatabase(
       path,
       version: 1,
@@ -65,6 +67,7 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int version) async {
+    String dbName = LedgerMasterTable.tableName;
     print('Create Db is called');
     await db.execute(
       'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT)',
