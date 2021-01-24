@@ -12,6 +12,7 @@ class DatabaseHelper {
   static const String transactionTable = 'transaction_table';
   String transactionTypeTable = 'transactionType_table';
   static const String masterLedgerTable = 'masterLedger_table';
+  static const String companyProfileTable = 'companyProfile_table';
 
   //transactionTable
   String colId = 'id';
@@ -31,6 +32,17 @@ class DatabaseHelper {
   String mledgerId = 'id';
   String mledgerName = 'name';
   String mledgerDescription = 'description';
+
+  // CompanyProfileTable
+  String comId = 'id';
+  String comName = 'name';
+  String comAddress = 'address';
+  String comCity = 'city';
+  String comState = 'state';
+  String comCountry = 'Country';
+  String comEmail = 'email';
+  String comGsttin = 'gstTin';
+  String comPhoneNumber = 'phoneNumber';
 
   // Task Tables
   // Id | Title | Date | Priority | Status
