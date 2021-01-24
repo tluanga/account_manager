@@ -9,15 +9,22 @@ class NewLedgerMasterViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  CompanyProfileService _companyProfileService =
-      serviceLocator<CompanyProfileService>();
-
   void newLedgerMaster(LedgerMaster data) async {
+    print(data.name);
     var _data = await _ledgerMasterService.insert(data);
 
-    Company _temp = Company(name: 'test');
-    var _result = await _companyProfileService.insert(_temp);
-    print(_result.toString());
+    print(
+      _data.toString(),
+    );
+    notifyListeners();
+  }
+
+  void updateLedgerMaster(LedgerMaster data) async {
+    var _data = await _ledgerMasterService.update(data);
+
+    // Company _temp = Company(name: 'test');
+    // var _result = await _companyProfileService.insert(_temp);
+    // print(_result.toString());
     print(
       _data.toString(),
     );

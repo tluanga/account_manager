@@ -8,6 +8,7 @@ class EditCompanyProfileViewModel extends ChangeNotifier {
       serviceLocator<CompanyProfileService>();
 
   // enter a new company profile
+  
   Future<int> newCompanyProfile(Company company) async {
     Company _companyData = Company(name: 'test', address: '');
     var result = _companyProfile.insert(_companyData);
