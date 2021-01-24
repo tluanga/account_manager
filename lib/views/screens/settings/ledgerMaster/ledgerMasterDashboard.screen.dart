@@ -1,7 +1,6 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
+
 import 'package:account_manager/static/route.dart';
-import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -15,16 +14,6 @@ class LedgerMasterDashboard extends StatefulWidget {
 }
 
 class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
-  LedgerMasterDashboardViewModel _model =
-      serviceLocator<LedgerMasterDashboardViewModel>();
-
-  @override
-  void initState() {
-    _model.loadData();
-    print('init  state is called');
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,26 +22,43 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         title: Text('Ledger Master Dashboard'),
         backgroundColor: Colors.grey.shade500,
       ),
-      body: Text('123'),
-      // body: Consumer<LedgerMasterDashboardViewModel>(
-      //     builder: (context, ledgerMaster, child) {
-      //   ledgerMaster.loadData();
-      //   return ListView.builder(
-      //     itemCount: ledgerMaster.ledgerMasterList.length,
-      //     itemBuilder: (BuildContext context, int index) {
-      //       return GestureDetector(
-      //         onTap: () {
-      //           Navigator.push(context,
-      //               MaterialPageRoute(builder: (context) => NewLedgerMaster()));
-      //         },
-      //         child: LedgerMasterListItem(
-      //           title: ledgerMaster.ledgerMasterList[index].name,
-      //           description: ledgerMaster.ledgerMasterList[index].description,
-      //         ),
-      //       );
-      //     },
-      //   );
-      // }),
+      body: Consumer<LedgerMasterDashboardViewModel>(
+        builder: (context, model, child) {
+          model.loadData();
+          return ListView.builder(
+              itemCount: model.ledgerMasterList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 45,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Text(
+                              model.ledgerMasterList[index].name,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(model.ledgerMasterList[index].description),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              });
+        },
+      ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.pushNamed(
                 context,

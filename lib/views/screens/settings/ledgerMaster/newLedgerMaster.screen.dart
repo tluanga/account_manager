@@ -38,7 +38,7 @@ class _NewLedgerMasterState extends State<NewLedgerMaster> {
 
       LedgerMaster ledgerMaster =
           LedgerMaster(name: _name, description: _description);
-    //  print(ledger`)
+      //  print(ledger`)
       if (widget.ledgerMaster == null) {
         _model.newLedgerMaster(ledgerMaster);
       } else {
@@ -53,52 +53,52 @@ class _NewLedgerMasterState extends State<NewLedgerMaster> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-              child: SafeArea(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Ledger Name',
-                    ),
-                    onSaved: (input) => _name = input,
-                    initialValue:  _name,
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Ledger Name',
                   ),
+                  autofocus: false,
+                  onSaved: (input) => _name = input,
+                  initialValue: _name,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'description',
-                      hintMaxLines: 50,
-                    ),
-                    onSaved: (input) => _description = input,
-                    initialValue:  _description,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'description',
+                    hintMaxLines: 50,
                   ),
+                  onSaved: (input) => _description = input,
+                  initialValue: _description,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 20.0),
-                  height: 60.0,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.teal,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: FlatButton(
-                    onPressed: _submit, 
-                    child: Text(
-                      'Add',
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20.0),
+                height: 60.0,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.teal,
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: TextButton(
+                  onPressed: _submit,
+                  child: Text(
+                    'Add',
                     style: TextStyle(
                       color: Colors.white,
                     ),
-                    ),),
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
