@@ -69,9 +69,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => TransactionDashboardViewModel(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => TransactionDashboardViewModel(),
+        // ),
 
         // -------SETTINGS--------------
         ChangeNotifierProvider(
@@ -111,8 +111,8 @@ class MyApp extends StatelessWidget {
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
           rLedger: (context) => Ledger(),
-          rGeneralJournalDashboard: (context) =>
-              GeneralJournalDashboardScreen(),
+          // rGeneralJournalDashboard: (context) =>
+          //     GeneralJournalDashboardScreen(),
         },
         //  home: Dashboard(),
         home: ChangeNotifierProvider<BottomNavigationBarProvider>(

@@ -9,19 +9,18 @@ class DatabaseHelper {
 
   DatabaseHelper._instance();
 
-  String transactionTable = 'transaction_table';
+  static const String transactionTable = 'transaction_table';
   String transactionTypeTable = 'transactionType_table';
   static const String masterLedgerTable = 'masterLedger_table';
 
   //transactionTable
   String colId = 'id';
   String colAmount = 'amount';
-  String colDate = 'date';
+  //String colDate = 'date';
   String colParticulars = 'particulars';
-  String colInout = 'inout';
-  String colDeptpaid = 'deptpaid';
-  String colCashCheaque = 'cashcheaque';
-  String colStatus = 'status';
+  String colTransactionTypeId = 'transactionTypeId';
+  String colBaOrPektlak = 'baOrPektlak';
+  String colCashOrBank = 'cashOrBank';
 
   //typeTable
   String typeId = 'id';
@@ -73,9 +72,9 @@ class DatabaseHelper {
       'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT)',
     );
 
-    // await db.execute(
-    //   'CREATE TABLE $transactionTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colAmount TEXT, $colDate TEXT, $colParticulars TEXT, $colInout TEXT, $colDeptpaid TEXT, $colCashCheaque TEXT, $colStatus INTEGER)',
-    // );
+    await db.execute(
+      'CREATE TABLE $transactionTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colAmount TEXT, $colParticulars TEXT, $colTransactionTypeId INTEGER, $colBaOrPektlak INTEGER, $colCashOrBank INTEGER)',
+    );
 
     // await db.execute(
     //   'CREATE TABLE $transactionTypeTable($typeId INTEGER PRIMARY KEY AUTOINCREMENT, $typeName TEXT, $typeDescription TEXT)',
