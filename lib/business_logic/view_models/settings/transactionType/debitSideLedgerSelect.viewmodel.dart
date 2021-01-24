@@ -16,9 +16,9 @@ class DebitSideLedgerSelectViewModel extends ChangeNotifier {
 
   // Populate the list
   void loadData() async {
-    final _ledgerMasterList = await _ledgerMasterService.getLedgerMasterList();
-    ledgerMasterList = _ledgerMasterList;
-    notifyListeners();
+    // final _ledgerMasterList = await _ledgerMasterService.getLedgerMasterList();
+    // ledgerMasterList = _ledgerMasterList;
+    // notifyListeners();
   }
 
   int setDebitSideLedger(int ledgerMasterId) {

@@ -7,8 +7,11 @@ class NewLedgerMasterViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void newLedgerMaster(LedgerMaster data) {
-    _ledgerMasterService.insert(data);
+  void newLedgerMaster(LedgerMaster data) async {
+    var _data = await _ledgerMasterService.insert(data);
+    print(
+      _data.toString(),
+    );
     notifyListeners();
   }
 }

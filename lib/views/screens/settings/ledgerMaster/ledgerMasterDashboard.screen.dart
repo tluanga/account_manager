@@ -33,25 +33,26 @@ class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
         title: Text('Ledger Master Dashboard'),
         backgroundColor: Colors.grey.shade500,
       ),
-      body: Consumer<LedgerMasterDashboardViewModel>(
-          builder: (context, ledgerMaster, child) {
-        ledgerMaster.loadData();
-        return ListView.builder(
-          itemCount: ledgerMaster.ledgerMasterList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewLedgerMaster()));
-              },
-              child: LedgerMasterListItem(
-                title: ledgerMaster.ledgerMasterList[index].name,
-                description: ledgerMaster.ledgerMasterList[index].description,
-              ),
-            );
-          },
-        );
-      }),
+      body: Text('123'),
+      // body: Consumer<LedgerMasterDashboardViewModel>(
+      //     builder: (context, ledgerMaster, child) {
+      //   ledgerMaster.loadData();
+      //   return ListView.builder(
+      //     itemCount: ledgerMaster.ledgerMasterList.length,
+      //     itemBuilder: (BuildContext context, int index) {
+      //       return GestureDetector(
+      //         onTap: () {
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => NewLedgerMaster()));
+      //         },
+      //         child: LedgerMasterListItem(
+      //           title: ledgerMaster.ledgerMasterList[index].name,
+      //           description: ledgerMaster.ledgerMasterList[index].description,
+      //         ),
+      //       );
+      //     },
+      //   );
+      // }),
       floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.pushNamed(
                 context,
@@ -86,8 +87,17 @@ class LedgerMasterListItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,),), 
-                Text(description, style: TextStyle(color: Colors.grey[700]),)
+                Text(
+                  title,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  description,
+                  style: TextStyle(color: Colors.grey[700]),
+                )
               ],
             ),
           ),

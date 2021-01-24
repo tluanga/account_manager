@@ -15,8 +15,8 @@ class LedgerSelectViewModel extends ChangeNotifier {
   List<LedgerMaster> ledgerList = [];
 
   void loadData() async {
-    final _list = await _ledgerMasterService.getLedgerMasterList();
-    ledgerList = _list;
+    // final _list = await _ledgerMasterService.getLedgerMasterList();
+    // ledgerList = _list;
     notifyListeners();
   }
 
