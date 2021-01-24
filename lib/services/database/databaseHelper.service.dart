@@ -45,7 +45,6 @@ class DatabaseHelper {
   String comGsttin = 'gstTin';
   String comPhoneNumber = 'phoneNumber';
 
-
   // Task Tables
   // Id | Title | Date | Priority | Status
   // 0     ''      ''       ''       0or1
@@ -65,14 +64,16 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDb() async {
+    
     print('inside initiDb');
     Directory dir = await getApplicationDocumentsDirectory();
+    print('database location :' + dir.path);
 
     String path = dir.path + '/account_manager.db';
     print('path is $path');
     final accountManagerDb = await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _createDb,
       onConfigure: _onConfigure,
     );
