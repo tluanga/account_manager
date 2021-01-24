@@ -1,6 +1,6 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
-import 'package:account_manager/services/database/tables/ledgerMaster_table.dart';
+
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:sqflite/sqflite.dart';
 

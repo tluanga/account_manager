@@ -4,9 +4,6 @@
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/transactionType/creditSideLedgerSelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/transactionType/debitSideLedgerSelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/companyProfile/companyProfile.service.dart';
@@ -46,13 +43,13 @@ void setUpServiceLocator() {
   // ----------Transaction Type View Model------------
   serviceLocator.registerFactory<TransactionTypeDashboardViewModel>(
       () => TransactionTypeDashboardViewModel());
-  serviceLocator
-      .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());
-  serviceLocator.registerFactory<DebitSideLedgerSelectViewModel>(
-      () => DebitSideLedgerSelectViewModel());
-  serviceLocator.registerFactory<CreditSideLedgerSelectViewModel>(
-    () => CreditSideLedgerSelectViewModel(),
-  );
+  // serviceLocator
+  //     .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());
+  // serviceLocator.registerFactory<DebitSideLedgerSelectViewModel>(
+  //     () => DebitSideLedgerSelectViewModel());
+  // serviceLocator.registerFactory<CreditSideLedgerSelectViewModel>(
+  //   () => CreditSideLedgerSelectViewModel(),
+  // );
 
   // ----------Transaction View Model -----------------
   serviceLocator.registerFactory(() => TransactionTypeSelectViewModel());

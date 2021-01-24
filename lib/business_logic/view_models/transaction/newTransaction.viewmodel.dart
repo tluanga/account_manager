@@ -19,11 +19,11 @@ class NewTransactionViewModel extends ChangeNotifier {
 
     // 1. Get Transaction Type Object
     TransactionType transactionType;
-    transactionType =
-        _transactionTypeService.getTransactionTypeObject(transactionTypeId);
-    print(
-      transactionType.creditSideLedger,
-    );
+    // transactionType =
+    //     _transactionTypeService.getTransactionTypeObject(transactionTypeId);
+    // print(
+    //   transactionType.creditSideLedger,
+    // );
     // Create a ledgerTransaction Entry
     LedgerTransaction ledgerTransactionData =
         new LedgerTransaction(id: 12, amount: 1000);

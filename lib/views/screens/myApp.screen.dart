@@ -1,16 +1,11 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/transactionType/creditSideLedgerSelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/transactionType/debitSideLedgerSelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/transactionDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
-import 'package:account_manager/views/screens/books/books/Journal/JournalDashboard.screen.dart';
 
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
@@ -20,8 +15,6 @@ import 'package:account_manager/views/screens/books/books/booksDashboard.screen.
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
-import 'package:account_manager/views/screens/settings/transactionType/creditSideLedgerSelect.screen.dart';
-import 'package:account_manager/views/screens/settings/transactionType/debitSideLedgerSelect.screen.dart';
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
@@ -55,12 +48,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewTransactionTypeViewModel(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => DebitSideLedgerSelectViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CreditSideLedgerSelectViewModel(),
-        ),
 
         // ---------NEW TRANSACTION----------------
         ChangeNotifierProvider(
@@ -72,11 +59,6 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(
         //   create: (context) => TransactionDashboardViewModel(),
         // ),
-
-        // -------SETTINGS--------------
-        ChangeNotifierProvider(
-          create: (context) => LedgerSelectViewModel(),
-        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -102,8 +84,7 @@ class MyApp extends StatelessWidget {
 
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),
-          rDebitSideLedger: (context) => DebitSideLedgerSelectScreen(),
-          rCreditSideLedger: (cpntext) => CreditSideLedgerSelectScreen(),
+
           // ------------Transaction---------------
           rNewTransaction: (context) => NewTransaction(),
           rTransactionTypeSelect: (context) => TransactionTypeSelect(),

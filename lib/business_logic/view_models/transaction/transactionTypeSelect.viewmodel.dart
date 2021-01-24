@@ -8,8 +8,7 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
       serviceLocator<TransactionTypeService>();
   List<TransactionType> transactionTypeList = [];
   void loadData() async {
-    final _transactionTypeList =
-        await _transactionTypeService.getTransactionTypeList();
+    final _transactionTypeList = await _transactionTypeService.getList();
     transactionTypeList = _transactionTypeList;
     notifyListeners();
   }

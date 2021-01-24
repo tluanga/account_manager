@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
-import 'package:account_manager/static/constants.dart';
+
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +10,12 @@ class NewTransactionType extends StatefulWidget {
   _AppState createState() => _AppState();
 }
 
-List<String> localData = ['Purchase Account','Sales account', 'Machinery'];
+List<String> localData = ['Purchase Account', 'Sales account', 'Machinery'];
 
 class _AppState extends State<NewTransactionType> {
-  Map<String, String> selectedValueMap = Map();
+  Map<String, String> selectedDebitSideLedger = Map();
+  Map<String, String> selectedCreditSideLedger = Map();
+  String dropdownValue = 'Hralh';
 
   @override
   Widget build(BuildContext context) {
@@ -57,41 +59,47 @@ class _AppState extends State<NewTransactionType> {
                     ),
                   )),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.green[300])
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: Icon(Icons.arrow_downward),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
                   ),
-                  child:getSearchableDropdown(localData, "local"),
-                ),
-                Container(
-                  child: Text(model.getCreditSideLedger()),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                    });
+                  },
+                  items: <String>['Lei', 'Hralh', 'Lakluh', 'Pekchhuah']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        rCreditSideLedger,
-                        arguments: CREDIT,
-                      );
-                    },
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.green.shade300,
-                        ),
+                  child: Container(
+                    width: 400,
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Select Credit Side Ledger'),
-                        ],
-                      ),
-                    ),
+                        border: Border.all(color: Colors.green[300])),
+                    child: debitSideLedgerSelect(localData, "local"),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 400,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.green[300])),
+                    child: creditSideLedgerSelect(localData, "local"),
                   ),
                 ),
                 GestureDetector(
@@ -107,7 +115,10 @@ class _AppState extends State<NewTransactionType> {
                       height: 50,
                       width: 420,
                       decoration: BoxDecoration(
-                        color: Colors.green.shade200,
+                        color: Colors.green.shade400,
+                        border: Border.all(
+                          color: Colors.green,
+                        ),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Center(
@@ -125,84 +136,64 @@ class _AppState extends State<NewTransactionType> {
               ],
             ),
           );
-          // return Stack(
-          //   children: [
-          //     Text(
-          //       transactionType.getSelectedLedger().length.toString(),
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         Navigator.pushNamed(context, rLedgerSelect);
-          //       },
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(15.0),
-          //         child: Container(
-          //           padding: EdgeInsets.symmetric(horizontal: 20),
-          //           height: 50,
-          //           decoration: BoxDecoration(
-          //             border: Border.all(color: Colors.teal),
-          //             borderRadius: BorderRadius.circular(10),
-          //           ),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               Expanded(
-          //                 child: Center(
-          //                   child: Text(
-          //                     'Select Ledgers',
-          //                     style: TextStyle(
-          //                       fontSize: 16,
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 width: 20,
-          //               ),
-          //               Icon(Icons.arrow_forward_ios_outlined,
-          //                   color: Colors.teal)
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // );
         },
       ),
     );
   }
-  Widget getSearchableDropdown(List<String> listData, mapKey) {
+
+  Widget debitSideLedgerSelect(List<String> listData, mapKey) {
     List<DropdownMenuItem> items = [];
-    for(int i=0; i < listData.length; i++) {
+    for (int i = 0; i < listData.length; i++) {
       items.add(new DropdownMenuItem(
-          child: new Text(
-            listData[i],
-          ),
-          value: listData[i],
-        )
-      );
+        child: new Text(
+          listData[i],
+        ),
+        value: listData[i],
+      ));
     }
     return new SearchableDropdown(
       underline: Padding(padding: EdgeInsets.all(5)),
       items: items,
-      value: selectedValueMap[mapKey],
+      value: selectedDebitSideLedger[mapKey],
       isCaseSensitiveSearch: false,
-      hint: new Text(
-        'Select Debit side Ledger'
-      ),
+      hint: new Text('Select Debit side Ledger'),
       searchHint: new Text(
         'Select One',
-        style: new TextStyle(
-            fontSize: 20
-        ),
+        style: new TextStyle(fontSize: 20),
       ),
       onChanged: (value) {
         setState(() {
-          selectedValueMap[mapKey] = value;
+          selectedDebitSideLedger[mapKey] = value;
         });
       },
     );
   }
 
+  Widget creditSideLedgerSelect(List<String> listData, mapKey) {
+    List<DropdownMenuItem> items = [];
+    for (int i = 0; i < listData.length; i++) {
+      items.add(new DropdownMenuItem(
+        child: new Text(
+          listData[i],
+        ),
+        value: listData[i],
+      ));
+    }
+    return new SearchableDropdown(
+      underline: Padding(padding: EdgeInsets.all(5)),
+      items: items,
+      value: selectedCreditSideLedger[mapKey],
+      isCaseSensitiveSearch: false,
+      hint: new Text('Select Credit side Ledger'),
+      searchHint: new Text(
+        'Select One',
+        style: new TextStyle(fontSize: 20),
+      ),
+      onChanged: (value) {
+        setState(() {
+          selectedCreditSideLedger[mapKey] = value;
+        });
+      },
+    );
+  }
 }

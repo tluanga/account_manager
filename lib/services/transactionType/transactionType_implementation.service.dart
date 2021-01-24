@@ -1,58 +1,54 @@
 import 'package:account_manager/business_logic/models/transactionType.models.dart';
+import 'package:account_manager/services/database/databaseHelper.service.dart';
+
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import 'package:sqflite/sqflite.dart';
 
 class TransactionTypeImpl implements TransactionTypeService {
-  List<TransactionType> _list = [
-    TransactionType.widthId(
-      id: 1,
-      name: 'Purchase of Material',
-      description: 'Purchase of Material for reselling or Raw Material',
-      type: 0, //Buy
-      debitSideLedger: 1,
-      creditSideLedger: 2,
-    )
-  ];
-  int _currentDebitSideLedger = 0;
-  int _currentCreditSideLedger = 0;
-
-  @override
-  Future<List<TransactionType>> getTransactionTypeList() async {
-    return _list;
+  Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
+    Database db = await DatabaseHelper.instance.db;
+    final List<Map<String, dynamic>> result =
+        await db.query('masterLedger_table');
+    return result;
   }
 
-  @override
-  TransactionType getTransactionTypeObject(int transactionTypeId) {
-    return _list.firstWhere((element) => element.id == transactionTypeId);
+  Future<List<TransactionType>> getList() async {
+    final List<Map<String, dynamic>> ledgerMasterMapList =
+        await getLedgerMasterMapList();
+    final List<TransactionType> transactionTypeList = [];
+    ledgerMasterMapList.forEach((ledgerMasterMap) {
+      transactionTypeList.add(TransactionType.fromMap(ledgerMasterMap));
+    });
+    // taskList.sort((taskA, taskB) => taskA.date.compareTo(taskB.date));
+    return transactionTypeList;
   }
 
-  @override
-  void setCurrentDebitSideLedger(int ledgerMasterId) {
-    _currentDebitSideLedger = ledgerMasterId;
+  Future<int> insert(TransactionType transactionType) async {
+    Database db = await DatabaseHelper.instance.db;
+    print(db);
+    final int result =
+        await db.insert('transaction_table', transactionType.toMap());
+    return result;
   }
 
-  @override
-  int getCurrentDebitSideLedger() {
-    return _currentDebitSideLedger;
+  Future<int> update(TransactionType transactionType) async {
+    Database db = await DatabaseHelper.instance.db;
+    final int result = await db.update(
+      'masterLedger_table',
+      transactionType.toMap(),
+      where: 'id = ?',
+      whereArgs: [transactionType.id],
+    );
+    return result;
   }
 
-  @override
-  void setCurrentCreditSideLedger(int ledgerMasterId) {
-    _currentCreditSideLedger = ledgerMasterId;
-  }
-
-  @override
-  int getCurrentCreditSideLedger() {
-    return _currentCreditSideLedger;
-  }
-
-  void clearSelectedLedgers() {
-    _currentCreditSideLedger = 0;
-    _currentDebitSideLedger = 0;
-  }
-
-  // Saving new Transaction Type
-  @override
-  Future<void> createNewTransactionType(TransactionType data) async {
-    _list.add(data);
+  Future<int> delete(int id) async {
+    Database db = await DatabaseHelper.instance.db;
+    final int result = await db.delete(
+      'masterLedger_table',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result;
   }
 }

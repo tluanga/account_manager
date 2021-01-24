@@ -213,16 +213,17 @@ class _OtpScreen2State extends State<OtpScreen2> {
 
     setPin(pinIndex, text);
     currentPin[pinIndex - 1] = text;
+    // ignore: unused_local_variable
     String strPin = "";
     currentPin.forEach((e) {
       strPin += e;
     });
     // if (pinIndex == 4) print(strPin);
-    if (pinIndex==4){
-        Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => MyApp()),
-  );
+    if (pinIndex == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyApp()),
+      );
     }
   }
 

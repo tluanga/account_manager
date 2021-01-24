@@ -213,6 +213,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
     setPin(pinIndex, text);
     currentPin[pinIndex - 1] = text;
+    // ignore: unused_local_variable
     String strPin = "";
     currentPin.forEach((e) {
       strPin += e;

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:account_manager/services/database/tables/ledgerMaster_table.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -63,7 +62,6 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDb() async {
-    
     print('inside initiDb');
     Directory dir = await getApplicationDocumentsDirectory();
     print('database location :' + dir.path);
@@ -80,8 +78,6 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int version) async {
-    String dbName = LedgerMasterTable.tableName;
-    print('Create Db is called');
     await db.execute(
       'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT)',
     );
