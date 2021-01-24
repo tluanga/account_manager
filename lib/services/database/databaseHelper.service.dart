@@ -9,7 +9,7 @@ class DatabaseHelper {
 
   DatabaseHelper._instance();
 
-  String transactionTable = 'transaction_table';
+  static const String transactionTable = 'transaction_table';
   String transactionTypeTable = 'transactionType_table';
   static const String masterLedgerTable = 'masterLedger_table';
   static const String companyProfileTable = 'companyProfile_table';
@@ -17,12 +17,11 @@ class DatabaseHelper {
   //transactionTable
   String colId = 'id';
   String colAmount = 'amount';
-  String colDate = 'date';
+  //String colDate = 'date';
   String colParticulars = 'particulars';
-  String colInout = 'inout';
-  String colDeptpaid = 'deptpaid';
-  String colCashCheaque = 'cashcheaque';
-  String colStatus = 'status';
+  String colTransactionTypeId = 'transactionTypeId';
+  String colBaOrPektlak = 'baOrPektlak';
+  String colCashOrBank = 'cashOrBank';
 
   //typeTable
   String typeId = 'id';
@@ -88,7 +87,7 @@ class DatabaseHelper {
     );
 
     await db.execute(
-      'CREATE TABLE $companyProfileTable($comId INTEGER PRIMARY KEY AUTOINCREMENT, $comName TEXT, $comAddress TEXT, $comCity TEXT, $comState TEXT, $comCountry TEXT, $comEmail TEXT, $comGsttin Text, $comPhoneNumber INTEGER)',
+      'CREATE TABLE $transactionTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colAmount TEXT, $colParticulars TEXT, $colTransactionTypeId INTEGER, $colBaOrPektlak INTEGER, $colCashOrBank INTEGER)',
     );
 
     // await db.execute(

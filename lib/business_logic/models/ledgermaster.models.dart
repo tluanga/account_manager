@@ -5,12 +5,12 @@ class LedgerMaster {
 
   bool active;
   LedgerMaster({
-    this.id,
+    // this.id,
     this.name,
     this.description,
     this.active = true,
   });
-  LedgerMaster.withId({this.id, this.name, this.description,});
+  LedgerMaster.withId({this.id, this.name, this.description});
 
   setActive() {
     active = !active;
