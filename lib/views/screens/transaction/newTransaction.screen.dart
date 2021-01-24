@@ -21,13 +21,29 @@ class NewTransaction extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    child: Text(
-                      'New Transaction',
-                      style: TextStyle(
-                        fontSize: 20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // IconButton(
+                      //     icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
+                      Container(
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Enter Transaction',
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Amount'),

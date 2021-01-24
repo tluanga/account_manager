@@ -15,7 +15,6 @@ const String rNewTransaction = 'newTransaction';
 const String rTransactionTypeSelect = '/transactionTypeSelect';
 
 // -------------Books
-
 const String rLedgerDashboard = '/books/ledgerDashboard';
 const String rLedger = 'books/ledger';
 const String rGeneralJournalDashboard = '/generalJournalDashboard';
@@ -26,3 +25,6 @@ const String rDashBoard = '/dashboard';
 // -----------------Login Pin--------------
 const String rCreateLoginPin = '/createLoginPin';
 const String rEnterLoginPin = '/loginPin';
+
+// -----------------Analytics--------------
+const String rAnalyticsDashboard = '/analyticsDashboard';
