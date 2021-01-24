@@ -1,6 +1,7 @@
 // Using GetIt is a convenient way to provide services and view models
 // anywhere we need them in the app.
 
+import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/creditSideLedgerSelect.viewmodel.dart';
@@ -8,6 +9,8 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/settings/transactionType/ledgerSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/services/companyProfile/companyProfile.service.dart';
+import 'package:account_manager/services/companyProfile/companyProfile_impl.service.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerMaster_Implementation.service.dart';
@@ -53,4 +56,11 @@ void setUpServiceLocator() {
 
   // ----------Transaction View Model -----------------
   serviceLocator.registerFactory(() => TransactionTypeSelectViewModel());
+
+  // -------------Company Profile------------
+  serviceLocator
+      .registerFactory<CompanyProfileService>(() => CompanyProfileImpl());
+
+  serviceLocator.registerFactory<CompanyProfileViewModel>(
+      () => CompanyProfileViewModel());
 }

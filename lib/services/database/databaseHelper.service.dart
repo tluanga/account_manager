@@ -12,6 +12,7 @@ class DatabaseHelper {
   String transactionTable = 'transaction_table';
   String transactionTypeTable = 'transactionType_table';
   static const String masterLedgerTable = 'masterLedger_table';
+  static const String companyProfileTable = 'companyProfile_table';
 
   //transactionTable
   String colId = 'id';
@@ -32,6 +33,18 @@ class DatabaseHelper {
   String mledgerId = 'id';
   String mledgerName = 'name';
   String mledgerDescription = 'description';
+
+  // CompanyProfileTable
+  String comId = 'id';
+  String comName = 'name';
+  String comAddress = 'address';
+  String comCity = 'city';
+  String comState = 'state';
+  String comCountry = 'Country';
+  String comEmail = 'email';
+  String comGsttin = 'gstTin';
+  String comPhoneNumber = 'phoneNumber';
+
 
   // Task Tables
   // Id | Title | Date | Priority | Status
@@ -73,9 +86,9 @@ class DatabaseHelper {
       'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT)',
     );
 
-    // await db.execute(
-    //   'CREATE TABLE $transactionTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colAmount TEXT, $colDate TEXT, $colParticulars TEXT, $colInout TEXT, $colDeptpaid TEXT, $colCashCheaque TEXT, $colStatus INTEGER)',
-    // );
+    await db.execute(
+      'CREATE TABLE $companyProfileTable($comId INTEGER PRIMARY KEY AUTOINCREMENT, $comName TEXT, $comAddress TEXT, $comCity TEXT, $comState TEXT, $comCountry TEXT, $comEmail TEXT, $comGsttin Text, $comPhoneNumber INTEGER)',
+    );
 
     // await db.execute(
     //   'CREATE TABLE $transactionTypeTable($typeId INTEGER PRIMARY KEY AUTOINCREMENT, $typeName TEXT, $typeDescription TEXT)',
