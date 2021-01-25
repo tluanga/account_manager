@@ -1,10 +1,10 @@
 class Transaction {
   int id;
-  double amount;
+  int amount;
   String particular;
   // DateTime date;
   int transactionTypeId;
-  int baOrPektlak; // 0 for ba -1 for pektlak
+  int baOrBalo; // 0 for ba -1 for pektlak
   int cashOrBank; //0 for cash - 1 for bank-2 for credit
   Transaction(
       {
@@ -13,7 +13,7 @@ class Transaction {
       this.particular,
       // this.date,
       this.transactionTypeId,
-      this.baOrPektlak,
+      this.baOrBalo,
       this.cashOrBank});
   Transaction.withId(
       {this.id,
@@ -21,7 +21,7 @@ class Transaction {
       this.particular,
       //  this.date,
       this.transactionTypeId,
-      this.baOrPektlak,
+      this.baOrBalo,
       this.cashOrBank});
 
   Map<String, dynamic> toMap() {
@@ -33,7 +33,7 @@ class Transaction {
     map['particular'] = particular;
     // map['date'] = date.toIso8601String();
     map['transactionTypeId'] = transactionTypeId;
-    map['baOrPektlak'] = baOrPektlak;
+    map['baOrBalo'] = baOrBalo;
     map['cashOrBank'] = cashOrBank;
     return map;
   }
@@ -45,7 +45,7 @@ class Transaction {
       particular: map['particular'],
       // date: DateTime.parse(map['date']),
       transactionTypeId: map['transactionTypeId'],
-      baOrPektlak: map['baOrPektlak'],
+      baOrBalo: map['baOrBalo'],
       cashOrBank: map['cashOrBank'],
     );
   }
