@@ -46,17 +46,24 @@ class _AppState extends State<NewTransactionType> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 15,
+                      horizontal: 13,
+                    ),
                     child: TextField(
-                        decoration: InputDecoration(
-                      labelText: 'Name',
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(20),
-                      // ),
-                    )),
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(20),
+                        // ),
+                      ),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 13,
+                    ),
                     child: Container(
                       width: double.infinity,
                       child: TextField(
@@ -68,37 +75,43 @@ class _AppState extends State<NewTransactionType> {
                       )),
                     ),
                   ),
-                  Container(
-                    width: 370,
-                    child: DropdownButton<String>(
-                      value: dropdownValue,
-                      icon: Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: Colors.black),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.green,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 15,
+                      horizontal: 13,
+                    ),
+                    child: Container(
+                      width: 370,
+                      child: DropdownButton<String>(
+                        value: dropdownValue,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.black),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.green,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: <String>['Lei', 'Hralh', 'Lakluh', 'Pekchhuah']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          dropdownValue = newValue;
-                        });
-                      },
-                      items: <String>['Lei', 'Hralh', 'Lakluh', 'Pekchhuah']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 15,
+                      horizontal: 13,
+                    ),
                     child: Container(
                       width: 400,
                       decoration: BoxDecoration(
@@ -109,7 +122,7 @@ class _AppState extends State<NewTransactionType> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: 20,
+                      vertical: 15,
                       horizontal: 13,
                     ),
                     child: Container(
