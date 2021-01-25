@@ -12,8 +12,10 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
 
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
+
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
+
   void loadData() async {
     var _listData = await _ledgerMasterService.getList();
     _ledgerMasterList = _listData;

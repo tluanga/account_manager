@@ -4,9 +4,8 @@ import '../../business_logic/models/transactionType.models.dart';
 
 abstract class TransactionTypeService {
   //Future<List<TransactionType>> getLedgerMasterList(databaseProvider);
-  Future<List<TransactionType>> getList();
+  Future<List<TransactionType>> getList({int id = 0});
   Future<int> insert(TransactionType ledgerMaster);
   Future<int> update(TransactionType ledgerMaster);
   Future<int> delete(int id);
-  Future<TransactionType> find(int id);
 }
