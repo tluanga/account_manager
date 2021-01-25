@@ -117,8 +117,8 @@ class NewTransaction extends StatelessWidget {
                         model.newTransaction(
                           1000,
                           'Table Leina',
-                          true,
-                          true,
+                          1,
+                          1,
                           1,
                         );
                       },

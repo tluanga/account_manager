@@ -6,13 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TransactionTypeDashboard extends StatelessWidget {
-  final TransactionTypeDashboardViewModel _model =
-      serviceLocator<TransactionTypeDashboardViewModel>();
-
-  TransactionTypeDashboard() {
-    _model.loadData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +18,7 @@ class TransactionTypeDashboard extends StatelessWidget {
         child: Consumer<TransactionTypeDashboardViewModel>(
           builder: (context, transactiontype, child) {
             transactiontype.loadData();
+            print(transactiontype.transactionTypeList.length.toString());
             return ListView.builder(
               itemCount: transactiontype.transactionTypeList.length,
               itemBuilder: (BuildContext context, int index) {

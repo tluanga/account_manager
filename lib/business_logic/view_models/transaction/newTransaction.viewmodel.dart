@@ -1,35 +1,43 @@
-import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
-import 'package:account_manager/business_logic/models/transactionType.models.dart';
-import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
-
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
 
-class NewTransactionViewModel extends ChangeNotifier {
-  void newTransaction(
-    int amount,
-    String particulars,
-    bool baOrBalo,
-    bool cashOrBank,
-    int transactionTypeId,
-  ) {
-    TransactionTypeService _transactionTypeService =
-        serviceLocator<TransactionTypeService>();
+import '../../../services/transaction/transaction.service.dart';
+import '../../models/transaction.model.dart';
 
-    // 1. Get Transaction Type Object
-    TransactionType transactionType;
-    // transactionType =
-    //     _transactionTypeService.getTransactionTypeObject(transactionTypeId);
-    // print(
-    //   transactionType.creditSideLedger,
-    // );
-    // Create a ledgerTransaction Entry
-    LedgerTransaction ledgerTransactionData =
-        new LedgerTransaction(id: 12, amount: 1000);
-    LedgerTransactionService _ledgerTransactionService =
-        serviceLocator<LedgerTransactionService>();
-    _ledgerTransactionService.insert(ledgerTransactionData);
+class NewTransactionViewModel extends ChangeNotifier {
+  TransactionTypeService _transactionTypeService =
+      serviceLocator<TransactionTypeService>();
+  TransactionService _transactionService = serviceLocator<TransactionService>();
+
+  // ---For creating a new transaction
+  void newTransaction(
+    int _amount,
+    String _particulars,
+    int _baOrBalo,
+    int _cashOrBank,
+    int _transactionTypeId,
+  ) async {
+    // 1 -- save the transaction
+    var _result = await _transactionService.insert(Transaction(
+        amount: _amount,
+        particular: _particulars,
+        baOrBalo: _baOrBalo,
+        cashOrBank: _cashOrBank,
+        transactionTypeId: _transactionTypeId));
+    if (_result != null) {
+      print('New transaction Inserted-$_result');
+    }
+    // 2---Get Transaction type Object
+    var _ledgerTransactionResult =
+        await _transactionTypeService.getList(id: _transactionTypeId);
+    if (_ledgerTransactionResult == null) {
+      print('Transaction Type access fail');
+    } else
+      print(_ledgerTransactionResult.toString());
+
+    // 3- Create a ledgerTransaction entry
+    // LedgerTransaction _payload = LedgerTransaction();
 
     // Transaction type hnuaia debitLedger and creditLedger kan mamawh
     // we have the transaction id

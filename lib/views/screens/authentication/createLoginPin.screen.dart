@@ -12,7 +12,6 @@ class CreateLoginPin extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-          colors: [Colors.tealAccent, Colors.teal],
           begin: Alignment.topRight,
         )),
         child: OtpScreen(),

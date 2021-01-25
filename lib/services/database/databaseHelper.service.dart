@@ -42,9 +42,9 @@ class DatabaseHelper {
   String transactionId = 'id';
   String transactionAmount = 'amount';
   String transactionDate = 'date';
-  String transactionParticulars = 'particulars';
+  String transactionParticular = 'particular';
   String transactionTransactionTypeId = 'transactionTypeId';
-  String transactionBaOrPektlak = 'baOrPektlak';
+  String transactionBaOrBalo = 'baOrBalo';
   String transactionCashOrBank = 'cashOrBank';
 
   //------TABLE 6 LEDGER TRANSACTION TABLE---------
@@ -106,7 +106,7 @@ class DatabaseHelper {
     );
     // Table 5 - Transaction Table
     await db.execute(
-      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT, $transactionDate TEXT, $transactionParticulars TEXT, $transactionTransactionTypeId INTEGER, $transactionBaOrPektlak INTEGER,$transactionCashOrBank INTEGER)',
+      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT, $transactionDate TEXT, $transactionParticular TEXT, $transactionTransactionTypeId INTEGER, $transactionBaOrBalo INTEGER,$transactionCashOrBank INTEGER)',
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(

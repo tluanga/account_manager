@@ -2,24 +2,38 @@ import 'package:account_manager/business_logic/models/transactionType.models.dar
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+
 import 'package:sqflite/sqflite.dart';
 
+import '../../business_logic/models/transactionType.models.dart';
+
 class TransactionTypeImpl implements TransactionTypeService {
-  Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
+  Future<List<Map<String, dynamic>>> gettransactionTypeMapList(
+      {int id = 0}) async {
     Database db = await DatabaseHelper.instance.db;
-    final List<Map<String, dynamic>> result =
-        await db.query('masterLedger_table');
-    return result;
+    if (id != 0) {
+      final List<Map<String, dynamic>> result = await db.query(
+        'transactionType_table',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return result;
+    } else {
+      final List<Map<String, dynamic>> result = await db.query(
+        'transactionType_table',
+      );
+      return result;
+    }
   }
 
-  Future<List<TransactionType>> getList() async {
-    final List<Map<String, dynamic>> ledgerMasterMapList =
-        await getLedgerMasterMapList();
+  Future<List<TransactionType>> getList({int id = 0}) async {
+    final List<Map<String, dynamic>> transactionTypeMapList =
+        await gettransactionTypeMapList(id: id);
     final List<TransactionType> transactionTypeList = [];
-    ledgerMasterMapList.forEach((ledgerMasterMap) {
-      transactionTypeList.add(TransactionType.fromMap(ledgerMasterMap));
+    transactionTypeMapList.forEach((transactionTypeMapList) {
+      transactionTypeList.add(TransactionType.fromMap(transactionTypeMapList));
     });
-    // taskList.sort((taskA, taskB) => taskA.date.compareTo(taskB.date));
+
     return transactionTypeList;
   }
 
@@ -27,14 +41,14 @@ class TransactionTypeImpl implements TransactionTypeService {
     Database db = await DatabaseHelper.instance.db;
     print(db);
     final int result =
-        await db.insert('transaction_table', transactionType.toMap());
+        await db.insert('transactionType_table', transactionType.toMap());
     return result;
   }
 
   Future<int> update(TransactionType transactionType) async {
     Database db = await DatabaseHelper.instance.db;
     final int result = await db.update(
-      'masterLedger_table',
+      'transactionType_table',
       transactionType.toMap(),
       where: 'id = ?',
       whereArgs: [transactionType.id],
@@ -45,7 +59,7 @@ class TransactionTypeImpl implements TransactionTypeService {
   Future<int> delete(int id) async {
     Database db = await DatabaseHelper.instance.db;
     final int result = await db.delete(
-      'masterLedger_table',
+      'transactionType_table',
       where: 'id = ?',
       whereArgs: [id],
     );
