@@ -23,12 +23,17 @@ GetIt serviceLocator = GetIt.instance;
 
 void setUpServiceLocator() {
   // SERVICES
-  serviceLocator
-      .registerLazySingleton<LedgerMasterService>(() => LedgerMasterImpl());
+  serviceLocator.registerLazySingleton<LedgerMasterService>(
+    () => LedgerMasterImpl(),
+  );
+
   serviceLocator.registerLazySingleton<TransactionTypeService>(
       () => TransactionTypeImpl());
-  serviceLocator
-      .registerLazySingleton<TransactionService>(() => TransactionImpl());
+
+  serviceLocator.registerLazySingleton<TransactionService>(
+    () => TransactionImpl(),
+  );
+
   serviceLocator.registerLazySingleton<LedgerTransactionService>(
     () => LedgerTransactionImpl(),
   );
