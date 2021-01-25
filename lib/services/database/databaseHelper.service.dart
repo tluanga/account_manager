@@ -8,31 +8,8 @@ class DatabaseHelper {
 
   DatabaseHelper._instance();
 
-  static const String transactionTable = 'transaction_table';
-  String transactionTypeTable = 'transactionType_table';
-  static const String masterLedgerTable = 'masterLedger_table';
+  // ------TABLE -1-COMPANY PROFILE TABLE------------
   static const String companyProfileTable = 'companyProfile_table';
-
-  //transactionTable
-  String colId = 'id';
-  String colAmount = 'amount';
-  //String colDate = 'date';
-  String colParticulars = 'particulars';
-  String colTransactionTypeId = 'transactionTypeId';
-  String colBaOrPektlak = 'baOrPektlak';
-  String colCashOrBank = 'cashOrBank';
-
-  //typeTable
-  String typeId = 'id';
-  String typeName = 'name';
-  String typeDescription = 'description';
-
-  //MasterLedgeTable
-  String mledgerId = 'id';
-  String mledgerName = 'name';
-  String mledgerDescription = 'description';
-
-  // CompanyProfileTable
   String comId = 'id';
   String comName = 'name';
   String comAddress = 'address';
@@ -43,9 +20,44 @@ class DatabaseHelper {
   String comGsttin = 'gstTin';
   String comPhoneNumber = 'phoneNumber';
 
-  // Task Tables
-  // Id | Title | Date | Priority | Status
-  // 0     ''      ''       ''       0or1
+  // -----TABLE -2 ACCOUNTING YEAR TABLE----------
+
+  // -------TABLE -3 LEDGER MASTER TABLE----------
+  static const String masterLedgerTable = 'masterLedger_table';
+  String mledgerId = 'id';
+  String mledgerName = 'name';
+  String mledgerDescription = 'description';
+
+  // -----TABLE 4-TRANSACTION TYPE TABLE-----------
+  String transactionTypeTable = 'transactionType_table';
+  String transactionTypeId = 'id';
+  String transactionTypeName = 'name';
+  String transactionTypeDescription = 'description';
+  String transactionTypeType = 'type';
+  String transactionTypedebitSideLedger = 'debitSideLedger';
+  String transactionTypecreditSideLedger = 'creditSideLedger';
+
+  //------TABLE 5 TRANSACTION TABLE ---------------
+  String transactionTable = 'transaction_table';
+  String transactionId = 'id';
+  String transactionAmount = 'amount';
+  String transactionDate = 'date';
+  String transactionParticulars = 'particulars';
+  String transactionTransactionTypeId = 'transactionTypeId';
+  String transactionBaOrPektlak = 'baOrPektlak';
+  String transactionCashOrBank = 'cashOrBank';
+
+  //------TABLE 6 LEDGER TRANSACTION TABLE---------
+  String ledgerTransactionTable = 'ledgerTranction_table';
+  String ledgerTransactionId = 'id';
+  String ledgerTransactionLedgerId = 'ledgerId';
+  String ledgerTransactionDate = 'date';
+  String ledgerTransactionAmount = 'amount';
+  String ledgerTransactionParticular = 'particular';
+  String ledgerTransactionDebitOrCredit = 'debitOrCredit';
+  String ledgerTransactionCashOrBank = 'cashOrBank';
+
+  //------TABLE 7 AUTHENTICATION PIN
 
   Future<Database> get db async {
     if (_db == null) {
@@ -78,16 +90,29 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int version) async {
+    // Table 1- Company Profile
+    await db.execute(
+      'CREATE TABLE $companyProfileTable($comId INTEGER PRIMARY KEY AUTOINCREMENT, $comName TEXT, $mledgerDescription TEXT)',
+    );
+    // Table 2- Accounting Year
+
+    // Table 3 - LedgerMaster Table
     await db.execute(
       'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT)',
     );
-
+    // Table 4 - TransactionType Table
     await db.execute(
-      'CREATE TABLE $transactionTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colAmount TEXT, $colParticulars TEXT, $colTransactionTypeId INTEGER, $colBaOrPektlak INTEGER, $colCashOrBank INTEGER)',
+      'CREATE TABLE $transactionTypeTable($transactionTypeId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionTypeName TEXT, $transactionTypeDescription TEXT, $transactionTypeType INT,$transactionTypedebitSideLedger INT,$transactionTypecreditSideLedger INT)',
+    );
+    // Table 5 - Transaction Table
+    await db.execute(
+      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT, $transactionDate TEXT, $transactionParticulars TEXT, $transactionTransactionTypeId INTEGER, $transactionBaOrPektlak INTEGER,$transactionCashOrBank INTEGER)',
+    );
+    // Table 6 - Ledger Transaction Table
+    await db.execute(
+      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate TEXT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER)',
     );
 
-    // await db.execute(
-    //   'CREATE TABLE $transactionTypeTable($typeId INTEGER PRIMARY KEY AUTOINCREMENT, $typeName TEXT, $typeDescription TEXT)',
-    // );
+    // Table 7 - Authenticaion PIN
   }
 }
