@@ -6,20 +6,23 @@ import 'package:account_manager/business_logic/view_models/transaction/newTransa
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
+import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
 
+// -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/books/books/booksDashboard.screen.dart';
-
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
-
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+
+// ------SCREENS-----BOOKS---------------
+import 'package:account_manager/views/screens/books/books/Journal/JournalDashboard.screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +62,11 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(
         //   create: (context) => TransactionDashboardViewModel(),
         // ),
+
+        // ------------BOOKS-------------
+        ChangeNotifierProvider(
+          create: (context) => GeneralJournalViewModel(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -92,8 +100,8 @@ class MyApp extends StatelessWidget {
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
           rLedger: (context) => Ledger(),
-          // rGeneralJournalDashboard: (context) =>
-          //     GeneralJournalDashboardScreen(),
+          rGeneralJournalDashboard: (context) =>
+              GeneralJournalDashboardScreen(),
         },
         //  home: Dashboard(),
         home: ChangeNotifierProvider<BottomNavigationBarProvider>(
