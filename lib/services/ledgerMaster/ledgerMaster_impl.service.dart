@@ -5,6 +5,7 @@ import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LedgerMasterImpl implements LedgerMasterService {
+
   Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
     Database db = await DatabaseHelper.instance.db;
     final List<Map<String, dynamic>> result =
@@ -27,7 +28,7 @@ class LedgerMasterImpl implements LedgerMasterService {
     Database db = await DatabaseHelper.instance.db;
     print(db);
     final int result =
-        await db.insert('masterLedger_table', ledgerMaster.toMap());
+        await db.insert(DatabaseHelper.masterLedgerTable, ledgerMaster.toMap());
     return result;
   }
 

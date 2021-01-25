@@ -13,7 +13,7 @@ import 'package:account_manager/views/screens/authentication/createLoginPin.scre
 import 'package:account_manager/views/screens/books/books/booksDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
-import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.copy.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';

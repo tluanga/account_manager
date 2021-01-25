@@ -1,6 +1,10 @@
+import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,100 +18,93 @@ class LedgerMasterDashboard extends StatefulWidget {
 }
 
 class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
+  final NewLedgerMasterViewModel _model =
+      serviceLocator<NewLedgerMasterViewModel>();
+  Future<List<LedgerMaster>> _ledgerMasterList;
+
+  @override
+  @override
+  void initState() {
+    super.initState();
+    _updateLedgerMaster();
+  }
+
+  _updateLedgerMaster() {
+    setState(() {
+      _ledgerMasterList = _model.getLedgerMaster();
+    });
+  }
+
+  Widget _buildLedgerMaster(LedgerMaster ledgerMaster) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25.0),
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              ledgerMaster.name,
+            ),
+            subtitle: Text(
+              ledgerMaster.description,
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => NewLedgerMaster(
+                            updateLedgerMaster: _updateLedgerMaster,
+                          )));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Ledger Master Dashboard'),
-        backgroundColor: Colors.grey.shade500,
-      ),
-      body: Consumer<LedgerMasterDashboardViewModel>(
-        builder: (context, model, child) {
-          model.loadData();
-          return ListView.builder(
-              itemCount: model.ledgerMasterList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 45,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Row(
-                          children: [
-                            Text(
-                              model.ledgerMasterList[index].name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(model.ledgerMasterList[index].description),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              });
-        },
-      ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.pushNamed(
                 context,
                 rNewLedgerMaster,
               ),
           child: Icon(Icons.add)),
-    );
-  }
-}
-
-class LedgerMasterListItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String targetRoute;
-
-  LedgerMasterListItem({this.title, this.targetRoute = '', this.description});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.green.shade300,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+      body: FutureBuilder(
+        future: _ledgerMasterList,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            itemCount: 1 + snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Ledger Master'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        '${snapshot.data.length}',
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  description,
-                  style: TextStyle(color: Colors.grey[700]),
-                )
-              ],
-            ),
-          ),
-        ),
+                );
+              }
+              
+            return  _buildLedgerMaster(snapshot.data[index-1]);
+            },
+          );
+        },
       ),
     );
   }
