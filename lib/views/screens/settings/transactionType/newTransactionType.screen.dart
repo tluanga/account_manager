@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
-
+import 'package:account_manager/business_logic/models/transactionType.models.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -135,10 +135,19 @@ class _AppState extends State<NewTransactionType> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        rTransactionTypeDashboard,
+                      var _payload = TransactionType(
+                        name: 'Purchase of Material',
+                        description:
+                            'Purchase of Material for Resell or Raw Material',
+                        type: 1,
+                        debitSideLedger: 1,
+                        creditSideLedger: 1,
                       );
+                      model.newTransactionType(_payload);
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   rTransactionTypeDashboard,
+                      // );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

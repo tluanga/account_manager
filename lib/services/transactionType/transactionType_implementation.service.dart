@@ -21,7 +21,6 @@ class TransactionTypeImpl implements TransactionTypeService {
     } else {
       final List<Map<String, dynamic>> result = await db.query(
         'transactionType_table',
-        whereArgs: [id],
       );
       return result;
     }
@@ -31,8 +30,8 @@ class TransactionTypeImpl implements TransactionTypeService {
     final List<Map<String, dynamic>> transactionTypeMapList =
         await gettransactionTypeMapList(id: id);
     final List<TransactionType> transactionTypeList = [];
-    transactionTypeMapList.forEach((transactionTypeMapL) {
-      transactionTypeList.add(TransactionType.fromMap(transactionTypeMapL));
+    transactionTypeMapList.forEach((transactionTypeMapList) {
+      transactionTypeList.add(TransactionType.fromMap(transactionTypeMapList));
     });
 
     return transactionTypeList;
