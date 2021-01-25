@@ -47,8 +47,7 @@ class NewTransactionViewModel extends ChangeNotifier {
       print('New transaction Inserted-$_result');
     }
     // 2---Get Transaction type Object
-    var _transactionTypeResult =
-        await _transactionTypeService.getList(id: transactionTypeId);
+    var _transactionTypeResult = await _transactionTypeService.getList(id: 1);
     if (_transactionTypeResult == null) {
       print('Transaction Type access fail');
     } else

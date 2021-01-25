@@ -138,5 +138,15 @@ class DatabaseHelper {
     await db.insert(masterLedgerTable,
         {'name': 'Wages', 'description': 'Wages of Employee'});
     // 7)
+
+    //--------Special Transaction Type--------------
+    // 1---Purchase of Material for Resell or for Production
+    await db.insert('transactionType_table', {
+      'name': 'Purchase of Material',
+      'description': 'Purchase of Material for Resell or for Production',
+      'type': 1,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2
+    });
   }
 }

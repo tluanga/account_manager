@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -115,12 +116,11 @@ class NewTransaction extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         model.newTransaction(
-                          1000,
-                          'Table Leina',
-                          1,
-                          1,
-                          1,
-                        );
+                            amount: 5000,
+                            particulars: 'Thuthleng leina',
+                            date: DateTime.now(),
+                            baOrBalo: BALO,
+                            cashOrBank: CASH);
                       },
                       child: Container(
                         height: 50,
