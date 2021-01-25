@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
 import 'package:sqflite/sqflite.dart';
@@ -7,36 +7,37 @@ class LedgerTransactionImpl implements LedgerTransactionService {
   Future<List<Map<String, dynamic>>> getLedgerTransactionMapList() async {
     Database db = await DatabaseHelper.instance.db;
     final List<Map<String, dynamic>> result =
-        await db.query('masterLedger_table');
+        await db.query('ledgerTranction_table');
     return result;
   }
 
-  Future<List<LedgerMaster>> getList() async {
-    final List<Map<String, dynamic>> ledgerMasterMapList =
-        await getLedgerMasterMapList();
-    final List<LedgerMaster> ledgerMasterList = [];
-    ledgerMasterMapList.forEach((ledgerMasterMap) {
-      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+  Future<List<LedgerTransaction>> getList() async {
+    final List<Map<String, dynamic>> ledgerTransactionMapList =
+        await getLedgerTransactionMapList();
+    final List<LedgerTransaction> ledgerTransactionList = [];
+    ledgerTransactionMapList.forEach((ledgerTransactionMap) {
+      ledgerTransactionList
+          .add(LedgerTransaction.fromMap(ledgerTransactionMap));
     });
     // taskList.sort((taskA, taskB) => taskA.date.compareTo(taskB.date));
-    return ledgerMasterList;
+    return ledgerTransactionList;
   }
 
-  Future<int> insert(LedgerMaster ledgerMaster) async {
+  Future<int> insert(LedgerTransaction ledgerTransaction) async {
     Database db = await DatabaseHelper.instance.db;
     print(db);
     final int result =
-        await db.insert('masterLedger_table', ledgerMaster.toMap());
+        await db.insert('ledgerTranction_table', ledgerTransaction.toMap());
     return result;
   }
 
-  Future<int> update(LedgerMaster ledgerMaster) async {
+  Future<int> update(LedgerTransaction ledgerTransaction) async {
     Database db = await DatabaseHelper.instance.db;
     final int result = await db.update(
-      'masterLedger_table',
-      ledgerMaster.toMap(),
+      'ledgerTranction_table',
+      ledgerTransaction.toMap(),
       where: 'id = ?',
-      whereArgs: [ledgerMaster.id],
+      whereArgs: [ledgerTransaction.id],
     );
     return result;
   }
@@ -44,7 +45,7 @@ class LedgerTransactionImpl implements LedgerTransactionService {
   Future<int> delete(int id) async {
     Database db = await DatabaseHelper.instance.db;
     final int result = await db.delete(
-      'masterLedger_table',
+      'ledgerTranction_table',
       where: 'id = ?',
       whereArgs: [id],
     );
