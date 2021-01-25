@@ -15,6 +15,11 @@ class GeneralJournalDashboardScreen extends StatelessWidget {
             return Column(
               children: [
                 Text('Transaction List'),
+                Row(
+                  children: [
+                    Text('Month'),
+                  ],
+                ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: model.transactionList.length,

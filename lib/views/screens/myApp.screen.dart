@@ -8,11 +8,13 @@ import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBa
 import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
 
+import 'package:account_manager/business_logic/view_models/books/ledger/ledgerDashboard.viewmodel.dart';
+
 // -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
-import 'package:account_manager/views/screens/books/books/booksDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.copy.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
@@ -22,13 +24,13 @@ import 'package:account_manager/views/screens/transaction/newTransaction.screen.
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 
 // ------SCREENS-----BOOKS---------------
-import 'package:account_manager/views/screens/books/books/Journal/JournalDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/Journal/JournalDashboard.screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'books/books/ledgers/ledger.screen.dart';
-import 'books/books/ledgers/ledgerDashboard.screen.dart';
+import 'books/ledgers/ledger.screen.dart';
+import 'books/ledgers/ledgerDashboard.screen.dart';
 import 'dashBoard.screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -66,6 +68,9 @@ class MyApp extends StatelessWidget {
         // ------------BOOKS-------------
         ChangeNotifierProvider(
           create: (context) => GeneralJournalViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LedgerDashboardViewmodel(),
         ),
       ],
       child: MaterialApp(

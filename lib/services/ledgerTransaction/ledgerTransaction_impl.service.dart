@@ -1,6 +1,6 @@
 import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
-import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
+import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LedgerTransactionImpl implements LedgerTransactionService {
