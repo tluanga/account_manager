@@ -9,8 +9,8 @@ import 'package:account_manager/business_logic/view_models/transaction/transacti
 import 'package:account_manager/services/companyProfile/companyProfile.service.dart';
 import 'package:account_manager/services/companyProfile/companyProfile_impl.service.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
-import 'package:account_manager/services/ledgerTransaction/ledgeMaster.service.dart';
-import 'package:account_manager/services/ledgerTransaction/ledgerMaster_impl.service.dart';
+import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
+import 'package:account_manager/services/ledgerTransaction/ledgerTransaction_impl.service.dart';
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transaction/transaction_implementation.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';

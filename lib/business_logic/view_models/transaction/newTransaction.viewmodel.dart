@@ -1,14 +1,21 @@
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import '../../models/transactionType.models.dart';
 
 import '../../../services/transaction/transaction.service.dart';
 import '../../models/transaction.model.dart';
+
+import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
+import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 
 class NewTransactionViewModel extends ChangeNotifier {
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
   TransactionService _transactionService = serviceLocator<TransactionService>();
+  LedgerTransactionService _ledgerTransactionService =
+      serviceLocator<LedgerTransactionService>();
 
   // ---For creating a new transaction
   void newTransaction(
@@ -29,26 +36,29 @@ class NewTransactionViewModel extends ChangeNotifier {
       print('New transaction Inserted-$_result');
     }
     // 2---Get Transaction type Object
-    var _ledgerTransactionResult =
+    var _transactionTypeResult =
         await _transactionTypeService.getList(id: _transactionTypeId);
-    if (_ledgerTransactionResult == null) {
+    if (_transactionTypeResult == null) {
       print('Transaction Type access fail');
     } else
-      print(_ledgerTransactionResult.toString());
+      print(_transactionTypeResult.toString());
 
-    // 3- Create a ledgerTransaction entry
-    // LedgerTransaction _payload = LedgerTransaction();
+    // 3- Create a ledgerTransaction entry for debitSideLedger
+    TransactionType _transationType = _transactionTypeResult[0];
+    LedgerTransaction _ledgerTransactionPayload = LedgerTransaction(
+      ledgerId: _transationType.id,
+      amount: _amount,
+      particular: _particulars,
+      debitOrCredit: 0,
+      cashOrBank: 0,
+    );
 
-    // Transaction type hnuaia debitLedger and creditLedger kan mamawh
-    // we have the transaction id
-
-    // step1--get the id of debit side ledger
-
-    // step 2- make ledger Transaction
-    // step 3- get the id of the credit side ledger
-    // step 4- make the ledger Transaction
-    // Calculation
-    // create a ledger transaction
+    var _ledgerTransactionInserResult =
+        _ledgerTransactionService.insert(_ledgerTransactionPayload);
+    if (_ledgerTransactionInserResult != null) {
+      print('New  Ledger transaction Inserted-$_result');
+    } else
+      print('error');
   }
 
   // int getSelectedTransactionType() {
