@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +19,8 @@ class NewTransactionViewModel extends ChangeNotifier {
   TransactionService _transactionService = serviceLocator<TransactionService>();
   LedgerTransactionService _ledgerTransactionService =
       serviceLocator<LedgerTransactionService>();
-
+  LedgerMasterService _ledgerMasterService =
+      serviceLocator<LedgerMasterService>();
   // ---For creating a new transaction
   void newTransaction({
     int amount,
@@ -66,7 +68,7 @@ class NewTransactionViewModel extends ChangeNotifier {
         date: date,
       );
       _ledgerTransactionService.insert(_ledgerTransactionCreditPayload);
-    } else {
+    } else if (cashOrBank == CASH) {
       LedgerTransaction _ledgerTransactionCreditPayload = LedgerTransaction(
         ledgerId: _transationType.creditSideLedger,
         amount: amount,
@@ -97,5 +99,11 @@ class NewTransactionViewModel extends ChangeNotifier {
       );
       _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
     }
+  }
+
+  Future<int> createPartyLedger({name, description}) async {
+    var payload = LedgerMaster(name: name, description: description);
+    var result = await _ledgerMasterService.insert(payload);
+    return result;
   }
 }
