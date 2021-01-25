@@ -2,8 +2,10 @@ import 'package:account_manager/business_logic/models/transactionType.models.dar
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../business_logic/models/transaction.model.dart';
 import '../../business_logic/models/transactionType.models.dart';
 
 class TransactionTypeImpl implements TransactionTypeService {
@@ -51,16 +53,16 @@ class TransactionTypeImpl implements TransactionTypeService {
       where: 'id = ?',
       whereArgs: [id],
     );
-    return result;
+    return result;showCupertinoModalPopup(context: null, builder: null)
   }
 
   Future<TransactionType> find(int id) async {
     Database db = await DatabaseHelper.instance.db;
-    var _transactionType = db.query(
+    var map = db.query(
       'transactionType_table',
       where: 'id==?',
       whereArgs: [id],
     );
-    return _transactionType
+    return TransactionType.fromMap(map) ;
   }
 }
