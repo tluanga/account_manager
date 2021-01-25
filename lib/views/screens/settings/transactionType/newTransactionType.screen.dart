@@ -193,11 +193,12 @@ class _AppState extends State<NewTransactionType> {
       ));
     }
     return new SearchableDropdown(
+      isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: items,
       value: selectedDebitSideLedger[mapKey],
       isCaseSensitiveSearch: false,
-      hint: new Text('Select Debit side Ledger'),
+      hint: new Text('Select Debit side Ledger',),
       searchHint: new Text(
         'Select One',
         style: new TextStyle(fontSize: 20),
@@ -221,6 +222,7 @@ class _AppState extends State<NewTransactionType> {
       ));
     }
     return new SearchableDropdown(
+      isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: items,
       value: selectedCreditSideLedger[mapKey],

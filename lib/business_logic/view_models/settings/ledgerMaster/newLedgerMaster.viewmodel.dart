@@ -28,4 +28,16 @@ class NewLedgerMasterViewModel extends ChangeNotifier {
     );
     notifyListeners();
   }
+
+  getLedgerMaster() async {
+    var _data = await _ledgerMasterService.getList();
+
+    // Company _temp = Company(name: 'test');
+    // var _result = await _companyProfileService.insert(_temp);
+    // print(_result.toString());
+    print(
+      _data.toString(),
+    );
+    notifyListeners();
+  }
 }
