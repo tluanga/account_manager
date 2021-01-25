@@ -5,6 +5,7 @@ class TransactionType {
   int type; // 0--for buy 1-- sell
   int debitSideLedger;
   int creditSideLedger;
+  int bankLedger;
 
   // 0 - when Incomplete and 1- when Complete
 

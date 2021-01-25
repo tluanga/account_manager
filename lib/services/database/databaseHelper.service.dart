@@ -114,5 +114,29 @@ class DatabaseHelper {
     );
 
     // Table 7 - Authenticaion PIN
+
+    // --------Special Ledger------------
+    // 1) Bank Ledger
+    await db.insert(masterLedgerTable,
+        {'name': 'Bank', 'description': 'All Transaction Involving Bank'});
+    //2) Cash Account
+    await db.insert(masterLedgerTable,
+        {'name': 'Cash A/c', 'description': 'All Transaction Involving Cash'});
+    //3) Purchase Account
+    await db.insert(masterLedgerTable, {
+      'name': 'Purchase',
+      'description':
+          'All Transaction Involving Purchase of Item for resell or raw materia'
+    });
+    // 4) Discount Account
+    await db.insert(masterLedgerTable,
+        {'name': 'Discount', 'description': 'All Transaction with Discount'});
+    // 5) Goods Account
+    await db.insert(
+        masterLedgerTable, {'name': 'Goods', 'description': 'Goods Account'});
+    // 6) Wages
+    await db.insert(masterLedgerTable,
+        {'name': 'Wages', 'description': 'Wages of Employee'});
+    // 7)
   }
 }

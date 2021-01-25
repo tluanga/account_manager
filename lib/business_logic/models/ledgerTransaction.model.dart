@@ -11,7 +11,7 @@ class LedgerTransaction {
 
   int id;
   int ledgerId;
-  String date;
+  DateTime date;
   int amount;
   String particular;
   int debitOrCredit;

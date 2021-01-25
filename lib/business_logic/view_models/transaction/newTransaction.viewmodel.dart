@@ -1,4 +1,6 @@
+import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
@@ -18,59 +20,82 @@ class NewTransactionViewModel extends ChangeNotifier {
       serviceLocator<LedgerTransactionService>();
 
   // ---For creating a new transaction
-  void newTransaction(
-    int _amount,
-    String _particulars,
-    int _baOrBalo,
-    int _cashOrBank,
-    int _transactionTypeId,
-  ) async {
+  void newTransaction({
+    int amount,
+    String particulars,
+    DateTime date,
+    int baOrBalo,
+    int cashOrBank,
+    int transactionTypeId,
+    int partyAccount = 0,
+  } //Ba a thil lei a nih in party ledger account id a ngai
+      ) async {
     // 1 -- save the transaction
-    var _result = await _transactionService.insert(Transaction(
-        amount: _amount,
-        particular: _particulars,
-        baOrBalo: _baOrBalo,
-        cashOrBank: _cashOrBank,
-        transactionTypeId: _transactionTypeId));
+    var _result = await _transactionService.insert(
+      Transaction(
+        amount: amount,
+        date: date,
+        particular: particulars,
+        baOrBalo: baOrBalo,
+        cashOrBank: cashOrBank,
+        transactionTypeId: transactionTypeId,
+      ),
+    );
     if (_result != null) {
       print('New transaction Inserted-$_result');
     }
     // 2---Get Transaction type Object
     var _transactionTypeResult =
-        await _transactionTypeService.getList(id: _transactionTypeId);
+        await _transactionTypeService.getList(id: transactionTypeId);
     if (_transactionTypeResult == null) {
       print('Transaction Type access fail');
     } else
       print(_transactionTypeResult.toString());
 
-    // 3- Create a ledgerTransaction entry for debitSideLedger
+    // 3----CREDIT SIDE LEDGER
+    // --------Check for Cash or Bank
+    // -------Get Bank Ledger ID--------
     TransactionType _transationType = _transactionTypeResult[0];
-    LedgerTransaction _ledgerTransactionPayload = LedgerTransaction(
-      ledgerId: _transationType.id,
-      amount: _amount,
-      particular: _particulars,
-      debitOrCredit: 0,
-      cashOrBank: 0,
-    );
 
-    var _ledgerTransactionInserResult =
-        _ledgerTransactionService.insert(_ledgerTransactionPayload);
-    if (_ledgerTransactionInserResult != null) {
-      print('New  Ledger transaction Inserted-$_result');
-    } else
-      print('error');
+    if (cashOrBank == BANK) {
+      LedgerTransaction _ledgerTransactionCreditPayload = LedgerTransaction(
+        ledgerId: 1, //Ledger ID of Bank Ledger is 1
+        amount: amount,
+        particular: particulars,
+        debitOrCredit: CREDIT,
+        date: date,
+      );
+      _ledgerTransactionService.insert(_ledgerTransactionCreditPayload);
+    } else {
+      LedgerTransaction _ledgerTransactionCreditPayload = LedgerTransaction(
+        ledgerId: _transationType.creditSideLedger,
+        amount: amount,
+        particular: particulars,
+        debitOrCredit: CREDIT,
+        date: date,
+      );
+      _ledgerTransactionService.insert(_ledgerTransactionCreditPayload);
+    }
+
+    // 4- Create a ledgerTransaction entry for debitSideLedger
+    if (baOrBalo == BALO) {
+      LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
+        ledgerId: _transationType.debitSideLedger,
+        amount: amount,
+        particular: particulars,
+        debitOrCredit: DEBIT,
+        date: date,
+      );
+      _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
+    } else if (baOrBalo == BA) {
+      LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
+        ledgerId: partyAccount,
+        amount: amount,
+        particular: particulars,
+        debitOrCredit: DEBIT,
+        date: date,
+      );
+      _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
+    }
   }
-
-  // int getSelectedTransactionType() {
-  //   return selectedTransactionType;
-  // }
-
-  // String getSelectedTransactionTypeName() {
-  //   int id = selectedTransactionType;
-  //   print(id);
-  //   TransactionType temp = searchTransactionType(id);
-
-  //   return temp.name;
-  //   // -----Get the name of the transaction Type
-  // }
 }
