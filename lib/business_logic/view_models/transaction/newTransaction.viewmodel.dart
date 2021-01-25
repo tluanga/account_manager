@@ -36,7 +36,7 @@ class NewTransactionViewModel extends ChangeNotifier {
     var _result = await _transactionService.insert(
       Transaction(
         amount: amount,
-        date: date,
+        date: DateTime.now(),
         particular: particulars,
         baOrBalo: baOrBalo,
         cashOrBank: cashOrBank,

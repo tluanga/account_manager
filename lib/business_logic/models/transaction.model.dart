@@ -35,6 +35,9 @@ class Transaction {
     map['transactionTypeId'] = transactionTypeId;
     map['baOrBalo'] = baOrBalo;
     map['cashOrBank'] = cashOrBank;
+    print('date value is');
+    print(map['date']);
+    print(map['date'].runtimeType);
     return map;
   }
 
