@@ -81,6 +81,8 @@ class LedgerDashboard extends StatelessWidget {
 
 class CustomWidget extends StatelessWidget {
   final String ledgerName;
+  final int totalDebit = 100;
+  final int totalCredit = 300;
 
   CustomWidget(
     this._index,
@@ -98,19 +100,47 @@ class CustomWidget extends StatelessWidget {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Ledger()));
       },
-      child: Container(
-        height: 70,
-        color: (_index % 2 != 0) ? Colors.white : Colors.white,
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                '$ledgerName',
-                style: TextStyle(fontSize: 25),
-              ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+            color: (_index % 2 != 0) ? Colors.white : Colors.grey.shade200,
+            border: Border.all(
+              color: Colors.amberAccent,
             ),
-            Divider()
-          ],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '$ledgerName',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Debit:$totalDebit',
+                      style: TextStyle(fontSize: 18, color: Colors.green),
+                    ),
+                    Text(
+                      'Debit:$totalCredit',
+                      style: TextStyle(fontSize: 18, color: Colors.red),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -9,6 +9,8 @@ class LedgerDashboardViewmodel extends ChangeNotifier {
       serviceLocator<LedgerMasterService>();
 
   List<LedgerMaster> ledgerMasterList = [];
+  int totalDebit = 0;
+  int totalCredit = 0;
 
   // Populate the list
   void loadData() async {
