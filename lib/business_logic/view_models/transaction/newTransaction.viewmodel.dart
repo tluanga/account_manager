@@ -29,7 +29,7 @@ class NewTransactionViewModel extends ChangeNotifier {
         new LedgerTransaction(id: 12, amount: 1000);
     LedgerTransactionService _ledgerTransactionService =
         serviceLocator<LedgerTransactionService>();
-    _ledgerTransactionService.createNewLedgerTransaction(ledgerTransactionData);
+    _ledgerTransactionService.insert(ledgerTransactionData);
 
     // Transaction type hnuaia debitLedger and creditLedger kan mamawh
     // we have the transaction id
