@@ -14,12 +14,12 @@ class SettingsDashboard extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
               title: 'Company Profile',
-              routeUrl: rLedgerMasterDashboard,
+              routeUrl: rCompanyProfile,
               iconName: Icons.work,
             ),
             UICard(
               title: 'Accounting Year',
-              routeUrl: rTransactionTypeDashboard,
+              routeUrl: rAccountingYear,
               iconName: Icons.today,
             ),
           ]),
@@ -46,8 +46,6 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rTransactionTypeDashboard,
               iconName: Icons.backup,
             ),
-             
-            
           ]),
         ],
       ),

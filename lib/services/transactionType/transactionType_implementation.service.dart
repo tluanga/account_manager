@@ -17,6 +17,7 @@ class TransactionTypeImpl implements TransactionTypeService {
         where: 'id = ?',
         whereArgs: [id],
       );
+      print('search result is $result');
       return result;
     } else {
       final List<Map<String, dynamic>> result = await db.query(

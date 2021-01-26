@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 class NewTransactionTypeViewModel extends ChangeNotifier {
   int currentDebitSideLeger = 0;
   int currentCreditSideLedger = 0;
-  List<LedgerMaster> _ledgerMasterList = <LedgerMaster>[];
+  List<LedgerMaster> ledgerMasterList = <LedgerMaster>[];
 
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
@@ -18,7 +18,7 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
 
   void loadData() async {
     var _listData = await _ledgerMasterService.getList();
-    _ledgerMasterList = _listData;
+    ledgerMasterList = _listData;
   }
 
   void newTransactionType(TransactionType data) async {

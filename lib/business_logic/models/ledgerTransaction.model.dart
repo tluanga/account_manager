@@ -11,7 +11,7 @@ class LedgerTransaction {
 
   int id;
   int ledgerId;
-  String date;
+  DateTime date;
   int amount;
   String particular;
   int debitOrCredit;
@@ -31,7 +31,7 @@ class LedgerTransaction {
   Map<String, dynamic> toMap() => {
         "id": id,
         "ledgerId": ledgerId,
-        "date": date,
+        "date": date.toIso8601String(),
         "amount": amount,
         "particular": particular,
         "debitOrCredit": debitOrCredit,

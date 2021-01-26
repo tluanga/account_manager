@@ -3,12 +3,13 @@ const String rBooksDashboard = '/booksDashboard';
 const String rSettingsDashboard = '/settingsDashboard';
 const String rLedgerMasterDashboard = '/settings/ledgerMasterDashboard';
 const String rNewLedgerMaster = 'settings/NewLedgerMaster';
-
+const String rCompanyProfile = 'settings/CompanyProfile';
 // ---------Setting---Transaction Type-------------------
 const String rTransactionTypeDashboard = 'settings/transactionTypeDashboard';
 const String rNewTransactionType = 'setting/newTransactionType';
 const String rDebitSideLedger = 'setting/newTransactionType/debitSideLedger';
 const String rCreditSideLedger = 'setting/newTransactionType/creditSideLedger';
+const String rAccountingYear = 'settings/accountinYear';
 
 // -------------New Transaction-----------------
 const String rNewTransaction = 'newTransaction';

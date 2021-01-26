@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
@@ -15,6 +16,8 @@ import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
+import 'package:account_manager/views/screens/settings/companyProfile/companyProfile.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.copy.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
@@ -53,7 +56,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewTransactionTypeViewModel(),
         ),
-
+        ChangeNotifierProvider(create: (context) => CompanyProfileViewModel()),
         // ---------NEW TRANSACTION----------------
         ChangeNotifierProvider(
           create: (context) => NewTransactionViewModel(),
@@ -91,6 +94,11 @@ class MyApp extends StatelessWidget {
           rAnalyticsDashboard: (context) => AnalyticsDashboard(),
           rBooksDashboard: (context) => BooksDashboard(),
           rSettingsDashboard: (context) => SettingsDashboard(),
+          //-------Settings Company ProfilerCompanyProfile
+          rCompanyProfile: (context) => BooksDashboard(),
+
+          // -------Settings Accounting Year-----
+          rAccountingYear: (context) => AccountingYearDashboard(),
 
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),
           rNewLedgerMaster: (context) => NewLedgerMaster(),
