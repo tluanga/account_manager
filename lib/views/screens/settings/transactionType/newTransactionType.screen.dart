@@ -1,6 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/models/transactionType.models.dart';
-import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
@@ -200,7 +199,9 @@ class _AppState extends State<NewTransactionType> {
       items: items,
       value: selectedDebitSideLedger[mapKey],
       isCaseSensitiveSearch: false,
-      hint: new Text('Select Debit side Ledger',),
+      hint: new Text(
+        'Select Debit side Ledger',
+      ),
       searchHint: new Text(
         'Select One',
         style: new TextStyle(fontSize: 20),

@@ -14,6 +14,8 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 
 class NewTransactionViewModel extends ChangeNotifier {
+  int baOrBalo;
+
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
   TransactionService _transactionService = serviceLocator<TransactionService>();
@@ -21,6 +23,12 @@ class NewTransactionViewModel extends ChangeNotifier {
       serviceLocator<LedgerTransactionService>();
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
+
+  void setBaOrBalo(int data) {
+    baOrBalo = data;
+    notifyListeners();
+  }
+
   // ---For creating a new transaction
   void newTransaction({
     int amount,
