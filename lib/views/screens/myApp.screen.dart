@@ -1,5 +1,6 @@
 import 'package:account_manager/business_logic/view_models/settings/changePin/changePin.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
@@ -50,6 +51,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NewLedgerMasterViewModel(),
+        ),
+
+        ChangeNotifierProvider(
+          create: (context) => EditLedgerMasterViewModel(),
         ),
         //------Transaction Type---------
         ChangeNotifierProvider(

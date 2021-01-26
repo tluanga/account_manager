@@ -1,4 +1,6 @@
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/editLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,15 +19,23 @@ class LedgerMasterDashboard extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Consumer<LedgerMasterDashboardViewModel>(
-                  builder: (context, model, child) {
-                model.loadData();
+              child: Consumer2<LedgerMasterDashboardViewModel,
+                      EditLedgerMasterViewModel>(
+                  builder: (context, ledgerMaster, editLedgerMaster, child) {
+                ledgerMaster.loadData();
                 return ListView.builder(
-                  itemCount: model.ledgerMasterList.length,
+                  itemCount: ledgerMaster.ledgerMasterList.length,
                   itemBuilder: (BuildContext contex, int index) {
                     return GestureDetector(
                       onTap: () {
-                        // Navigate to edit the ledger master
+                        editLedgerMaster.ledgerMasterForUpdate =
+                            ledgerMaster.ledgerMasterList[index];
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditLedgerMasterScreen(),
+                          ),
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -43,7 +53,8 @@ class LedgerMasterDashboard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  model.ledgerMasterList[index].name ?? 'null',
+                                  ledgerMaster.ledgerMasterList[index].name ??
+                                      'null',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -53,7 +64,8 @@ class LedgerMasterDashboard extends StatelessWidget {
                                   width: 10,
                                 ),
                                 Expanded(
-                                    child: Text(model.ledgerMasterList[index]
+                                    child: Text(ledgerMaster
+                                            .ledgerMasterList[index]
                                             .description ??
                                         'null')),
                               ],
