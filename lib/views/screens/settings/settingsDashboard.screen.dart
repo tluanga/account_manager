@@ -19,7 +19,7 @@ class SettingsDashboard extends StatelessWidget {
             ),
             UICard(
               title: 'Accounting Year',
-              routeUrl: rTransactionTypeDashboard,
+              routeUrl: rAccountingYear,
               iconName: Icons.today,
             ),
           ]),

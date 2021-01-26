@@ -16,6 +16,7 @@ import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
 import 'package:account_manager/views/screens/settings/companyProfile/companyProfile.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.copy.dart';
@@ -94,7 +95,10 @@ class MyApp extends StatelessWidget {
           rBooksDashboard: (context) => BooksDashboard(),
           rSettingsDashboard: (context) => SettingsDashboard(),
           //-------Settings Company ProfilerCompanyProfile
-          rCompanyProfile: (context) => CompanyProfileScreen(),
+          rCompanyProfile: (context) => BooksDashboard(),
+
+          // -------Settings Accounting Year-----
+          rAccountingYear: (context) => AccountingYearDashboard(),
 
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),
           rNewLedgerMaster: (context) => NewLedgerMaster(),
