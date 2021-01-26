@@ -7,10 +7,12 @@ class GeneralJournalDashboardScreen extends StatefulWidget {
   const GeneralJournalDashboardScreen({Key key}) : super(key: key);
 
   @override
-  _GeneralJournalDashboardScreenState createState() => _GeneralJournalDashboardScreenState();
+  _GeneralJournalDashboardScreenState createState() =>
+      _GeneralJournalDashboardScreenState();
 }
 
-class _GeneralJournalDashboardScreenState extends State<GeneralJournalDashboardScreen> {
+class _GeneralJournalDashboardScreenState
+    extends State<GeneralJournalDashboardScreen> {
   final String ledgerName = 'Ledger Detail';
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
@@ -26,84 +28,95 @@ class _GeneralJournalDashboardScreenState extends State<GeneralJournalDashboardS
             model.loadData();
             return Column(
               children: [
-                Text('Transaction List', style: TextStyle(fontSize: 20),),
+                Text(
+                  'Transaction List',
+                  style: TextStyle(fontSize: 20),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     DropdownButton(
-                  value: valueSelected,
-                  items: [
-                    DropdownMenuItem(
-                      child: Text('Today'),
-                      value: 1,
+                      value: valueSelected,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text('Today'),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('This Week'),
+                          value: 2,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('This Month'),
+                          value: 3,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('This Quarter'),
+                          value: 4,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('This Financial Year'),
+                          value: 5,
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          valueSelected = value;
+                          if (value == 1) {
+                            startDate = DateTime.now();
+                          }
+                          if (value == 2) {
+                            startDate = endDate.subtract(
+                              new Duration(days: endDate.weekday),
+                            );
+                          }
+                          if (value == 3) {
+                            startDate = endDate.subtract(
+                              new Duration(
+                                days: endDate.month,
+                              ),
+                            );
+                          }
+                        });
+                      },
                     ),
-                    DropdownMenuItem(
-                      child: Text('This Week'),
-                      value: 2,
+                    Icon(Icons.calendar_today_outlined),
+                    Text(
+                      DateFormat('dd-MM-yyyy').format(startDate),
                     ),
-                    DropdownMenuItem(
-                      child: Text('This Month'),
-                      value: 3,
+                    Text('to'),
+                    Text(
+                      DateFormat('dd-MM-yyyy').format(endDate),
                     ),
-                    DropdownMenuItem(
-                      child: Text('This Quarter'),
-                      value: 4,
-                    ),
-                    DropdownMenuItem(
-                      child: Text('This Financial Year'),
-                      value: 5,
-                    ),
+                    Icon(Icons.picture_as_pdf),
                   ],
-                  onChanged: (value) {
-                    setState(() {
-                      valueSelected = value;
-                      if (value == 1) {
-                        startDate = DateTime.now();
-                      }
-                      if (value == 2) {
-                        startDate = endDate.subtract(
-                          new Duration(days: endDate.weekday),
-                        );
-                      }
-                      if (value == 3) {
-                        startDate = endDate.subtract(
-                          new Duration(
-                            days: endDate.month,
-                          ),
-                        );
-                      }
-                    });
-                  },
-                ),
-                Icon(Icons.calendar_today_outlined),
-                Text(
-                  DateFormat('dd-MM-yyyy').format(startDate),
-                ),
-                Text('to'),
-                Text(
-                  DateFormat('dd-MM-yyyy').format(endDate),
-                ),
-                Icon(Icons.picture_as_pdf),
-                ],
                 ),
                 Row(
                   children: [
-                    Expanded(child: Container(
-                      padding: EdgeInsets.all(5),
-                      color: Colors.grey,
-                      child: Text('Particulars', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),))),
-                    VerticalDivider(width: 3,),
-                    Expanded(child: Container(
-                      padding: EdgeInsets.all(5),
-                      color: Colors.grey,
-                      child: Text(
-                        'Amount',
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.right,
-                        
-                      ))), 
+                    Expanded(
+                        child: Container(
+                            padding: EdgeInsets.all(5),
+                            color: Colors.grey,
+                            child: Text(
+                              'Particulars',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            ))),
+                    VerticalDivider(
+                      width: 3,
+                    ),
+                    Expanded(
+                        child: Container(
+                            padding: EdgeInsets.all(5),
+                            color: Colors.grey,
+                            child: Text(
+                              'Amount',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.right,
+                            ))),
                   ],
-                ),  
+                ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: model.transactionList.length,
@@ -125,6 +138,8 @@ class _GeneralJournalDashboardScreenState extends State<GeneralJournalDashboardS
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(model.transactionList[index].particular),
+                                  Text(model.transactionList[index].date
+                                      .toIso8601String()),
                                   Text(
                                     model.transactionList[index].amount
                                         .toString(),

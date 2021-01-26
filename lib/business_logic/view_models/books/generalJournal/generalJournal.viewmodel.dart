@@ -10,4 +10,9 @@ class GeneralJournalViewModel extends ChangeNotifier {
     transactionList = await _transactionService.getList();
     notifyListeners();
   }
+
+  String formatDate(var date) {
+    print(date);
+    return date;
+  }
 }
