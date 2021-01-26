@@ -4,11 +4,12 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/foundation.dart';
 
 class EditLedgerMasterViewModel extends ChangeNotifier {
-  LedgerMaster ledgerMasterForUpdate;
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void editLedgerMaster() async {
-    var result = await _ledgerMasterService.update(ledgerMasterForUpdate);
+  void updateLedgerMaster(LedgerMaster payload) async {
+    var result = await _ledgerMasterService.update(payload);
+    print(payload.name);
+    print(payload.description);
   }
 }

@@ -28,8 +28,6 @@ class LedgerMasterDashboard extends StatelessWidget {
                   itemBuilder: (BuildContext contex, int index) {
                     return GestureDetector(
                       onTap: () {
-                        editLedgerMaster.ledgerMasterForUpdate =
-                            ledgerMaster.ledgerMasterList[index];
                         Navigator.push(
                           context,
                           MaterialPageRoute(
