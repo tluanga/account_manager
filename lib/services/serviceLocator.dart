@@ -48,6 +48,7 @@ void setUpServiceLocator() {
   // ----------Transaction Type View Model------------
   serviceLocator.registerFactory<TransactionTypeDashboardViewModel>(
       () => TransactionTypeDashboardViewModel());
+
   // serviceLocator
   //     .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());
   // serviceLocator.registerFactory<DebitSideLedgerSelectViewModel>(

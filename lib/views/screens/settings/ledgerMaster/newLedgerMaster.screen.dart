@@ -1,5 +1,6 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
 
@@ -16,23 +17,26 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
-    LedgerMasterViewModel _ledgerMasterViewModel =
-        serviceLocator<LedgerMasterViewModel>();
-    _ledgerMasterViewModel.newLedgerMaster(
-      LedgerMaster(
-        name: _name,
-        description: _description,
-      ),
-    );
-    if (_formKey.currentState.validate()) {
-      // If the form is valid, display a snackbar. In the real world,
-      // you'd often call a server or save the information in a database.
-
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Processing Data'),
+    print('the value of name is $_name');
+    if (_name != null && _description != null) {
+      NewLedgerMasterViewModel _ledgerMasterViewModel =
+          serviceLocator<NewLedgerMasterViewModel>();
+      _ledgerMasterViewModel.newLedgerMaster(
+        LedgerMaster(
+          name: _name,
+          description: _description,
         ),
       );
+      if (_formKey.currentState.validate()) {
+        // If the form is valid, display a snackbar. In the real world,
+        // you'd often call a server or save the information in a database.
+
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Processing Data'),
+          ),
+        );
+      }
     }
   }
 
@@ -60,6 +64,9 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
                       }
                       return null;
                     },
+                    onChanged: (value) {
+                      _name = value;
+                    },
                   ),
                 ),
                 Padding(
@@ -71,6 +78,9 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
                         return 'Please enter description';
                       }
                       return null;
+                    },
+                    onChanged: (value) {
+                      _description = value;
                     },
                   ),
                 ),

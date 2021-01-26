@@ -43,7 +43,7 @@ class LedgerMasterDashboard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  model.ledgerMasterList[index].name,
+                                  model.ledgerMasterList[index].name ?? 'null',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -53,8 +53,9 @@ class LedgerMasterDashboard extends StatelessWidget {
                                   width: 10,
                                 ),
                                 Expanded(
-                                    child: Text(model
-                                        .ledgerMasterList[index].description)),
+                                    child: Text(model.ledgerMasterList[index]
+                                            .description ??
+                                        'null')),
                               ],
                             ),
                           ),
