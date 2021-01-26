@@ -4,14 +4,16 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:sqflite/sqflite.dart';
 
 class LedgerTransactionImpl implements LedgerTransactionService {
-  Future<List<Map<String, dynamic>>> getLedgerTransactionMapList() async {
+  Future<List<Map<String, dynamic>>> getLedgerTransactionMapList(
+      {int id = 0, DateTime startDate, DateTime endDate}) async {
     Database db = await DatabaseHelper.instance.db;
-    final List<Map<String, dynamic>> result =
-        await db.query('ledgerTranction_table');
+    final List<Map<String, dynamic>> result = await db
+        .query('ledgerTranction_table', where: 'id=? & date', whereArgs: [id]);
     return result;
   }
 
-  Future<List<LedgerTransaction>> getList() async {
+  Future<List<LedgerTransaction>> getList(
+      {int id = 0, DateTime startDate, DateTime endDate}) async {
     final List<Map<String, dynamic>> ledgerTransactionMapList =
         await getLedgerTransactionMapList();
     final List<LedgerTransaction> ledgerTransactionList = [];

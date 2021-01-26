@@ -34,30 +34,6 @@ class _NewTransactionState extends State<NewTransaction> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // IconButton(
-                        //     icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
-                        Container(
-                          height: 50,
-                          width: 200,
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Enter Transaction',
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: 'Amount'),
@@ -86,6 +62,9 @@ class _NewTransactionState extends State<NewTransaction> {
                           particular = text;
                         });
                       },
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Select Date'),
                     ),
                     ToggleSwitch(
                       minWidth: 120.0,
