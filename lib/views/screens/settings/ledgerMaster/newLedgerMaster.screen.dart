@@ -1,5 +1,4 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
-import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
-    print('the value of name is $_name');
     if (_name != null && _description != null) {
       NewLedgerMasterViewModel _ledgerMasterViewModel =
           serviceLocator<NewLedgerMasterViewModel>();
@@ -27,17 +25,20 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
           description: _description,
         ),
       );
-      if (_formKey.currentState.validate()) {
-        // If the form is valid, display a snackbar. In the real world,
-        // you'd often call a server or save the information in a database.
 
-        Scaffold.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Processing Data'),
-          ),
-        );
-      }
+      Navigator.pop(context);
     }
+    if (_formKey.currentState.validate()) {
+      // If the form is valid, display a snackbar. In the real world,
+      // you'd often call a server or save the information in a database.
+
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Processing Data'),
+        ),
+      );
+    }
+    Navigator.pop(context);
   }
 
   @override
