@@ -5,6 +5,7 @@ import 'package:account_manager/business_logic/view_models/settings/companyProfi
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/companyProfile/companyProfile.service.dart';
@@ -51,6 +52,8 @@ void setUpServiceLocator() {
   // ----------Transaction Type View Model------------
   serviceLocator.registerFactory<TransactionTypeDashboardViewModel>(
       () => TransactionTypeDashboardViewModel());
+  serviceLocator.registerFactory<NewTransactionTypeViewModel>(
+      () => NewTransactionTypeViewModel());
 
   // serviceLocator
   //     .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());

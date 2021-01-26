@@ -1,5 +1,9 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/models/transactionType.models.dart';
+import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
@@ -12,9 +16,17 @@ class NewTransactionType extends StatefulWidget {
 List<String> localData = ['Purchase Account', 'Sales account', 'Machinery'];
 
 class _AppState extends State<NewTransactionType> {
+  NewTransactionTypeViewModel _transactionTypeViewModel =
+      serviceLocator<NewTransactionTypeViewModel>();
   Map<String, String> selectedDebitSideLedger = Map();
   Map<String, String> selectedCreditSideLedger = Map();
   String dropdownValue = 'Hralh';
+
+  @override
+  void initState() {
+    _transactionTypeViewModel.loadData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +34,7 @@ class _AppState extends State<NewTransactionType> {
       body: SingleChildScrollView(
         child: Consumer<NewTransactionTypeViewModel>(
           builder: (context, model, child) {
+            print(model.ledgerMasterList.length.toString());
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
