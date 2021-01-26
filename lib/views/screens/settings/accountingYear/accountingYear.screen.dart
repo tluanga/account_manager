@@ -1,3 +1,4 @@
+import 'package:account_manager/views/screens/settings/accountingYear/editAccountingYear.screen.dart';
 import 'package:flutter/material.dart';
 
 class AccountingYearDashboard extends StatefulWidget {
@@ -11,7 +12,7 @@ class _AccountingYearDashboardState extends State<AccountingYearDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.blueGrey,
         title: Text('Accounting Year'),
       ),
       body: Container(
@@ -75,6 +76,12 @@ class _AccountingYearDashboardState extends State<AccountingYearDashboard> {
               ),
             ),
             GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditAccountingYear()),
+                );
+              },
               child: Container(
                 width: 400,
                 height: 50,

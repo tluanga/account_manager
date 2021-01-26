@@ -32,6 +32,7 @@ dependencies:
   get_it: ^5.0.4
   sqflite:
   path_provider:
+  numberpicker:
 
 dev_dependencies:
   test:
