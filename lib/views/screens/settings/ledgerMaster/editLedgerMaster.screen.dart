@@ -4,7 +4,8 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
 
 class EditLedgerMasterScreen extends StatefulWidget {
-  const EditLedgerMasterScreen({Key key}) : super(key: key);
+  final LedgerMaster ledgerMaster;
+  const EditLedgerMasterScreen({Key key, this.ledgerMaster}) : super(key: key);
 
   @override
   _EditLedgerMasterScreenState createState() => _EditLedgerMasterScreenState();
@@ -58,7 +59,8 @@ class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: 'Name'),
+                    decoration: InputDecoration(
+                        labelText: widget.ledgerMaster.name ?? ''),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter name';
@@ -73,7 +75,8 @@ class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: 'Description'),
+                    decoration: InputDecoration(
+                        labelText: widget.ledgerMaster.description ?? ''),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter description';

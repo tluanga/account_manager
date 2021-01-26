@@ -33,7 +33,9 @@ class LedgerMasterDashboard extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EditLedgerMasterScreen(),
+                            builder: (context) => EditLedgerMasterScreen(
+                                ledgerMaster:
+                                    ledgerMaster.ledgerMasterList[index]),
                           ),
                         );
                       },
