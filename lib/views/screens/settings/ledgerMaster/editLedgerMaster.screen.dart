@@ -21,7 +21,8 @@ class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
     EditLedgerMasterViewModel _ledgerMasterViewModel =
         serviceLocator<EditLedgerMasterViewModel>();
     _ledgerMasterViewModel.updateLedgerMaster(
-      LedgerMaster(name: _name, description: _description),
+      LedgerMaster.withId(
+          id: widget.ledgerMaster.id, name: _name, description: _description),
     );
 
     Navigator.pop(context);
