@@ -7,12 +7,12 @@ class CompanyProfileViewModel extends ChangeNotifier {
   CompanyProfileService _companyProfileService =
       serviceLocator<CompanyProfileService>();
 
-  Company _companyData;
+  Company companyData;
 
   // enter a new company profile
   void loadData() async {
     var temp = await _companyProfileService.getCompanyList();
-    _companyData = temp.first;
+    companyData = temp.first;
     notifyListeners();
   }
 

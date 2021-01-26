@@ -14,7 +14,7 @@ class SettingsDashboard extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
               title: 'Company Profile',
-              routeUrl: rLedgerMasterDashboard,
+              routeUrl: rCompanyProfile,
               iconName: Icons.work,
             ),
             UICard(
@@ -46,8 +46,6 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rTransactionTypeDashboard,
               iconName: Icons.backup,
             ),
-             
-            
           ]),
         ],
       ),
