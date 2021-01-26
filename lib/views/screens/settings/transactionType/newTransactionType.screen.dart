@@ -66,6 +66,7 @@ class _AppState extends State<NewTransactionType> {
                       child: TextField(
                         decoration: InputDecoration(
                           labelText: 'Name',
+                          labelStyle: TextStyle(fontSize: 16),
                           // border: OutlineInputBorder(
                           //   borderRadius: BorderRadius.circular(20),
                           // ),
@@ -82,6 +83,7 @@ class _AppState extends State<NewTransactionType> {
                         child: TextField(
                             decoration: InputDecoration(
                           labelText: 'Description',
+                          labelStyle: TextStyle(fontSize: 16),
                           // border: OutlineInputBorder(
                           //   borderRadius: BorderRadius.circular(20),
                           // ),
@@ -95,16 +97,13 @@ class _AppState extends State<NewTransactionType> {
                       ),
                       child: Container(
                         width: 370,
-                        child: DropdownButton<String>(
+                        child: DropdownButtonFormField<String>(
                           value: dropdownValue,
                           icon: Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
                           style: TextStyle(color: Colors.black),
-                          underline: Container(
-                            height: 2,
-                            color: Colors.green,
-                          ),
+
                           onChanged: (String newValue) {
                             setState(() {
                               dropdownValue = newValue;
@@ -117,51 +116,59 @@ class _AppState extends State<NewTransactionType> {
                               child: Text(value),
                             );
                           }).toList(),
+                      
+                          decoration: InputDecoration(
+                            labelText: 'Sum Chetna',
+                            labelStyle: TextStyle(fontSize: 16.0),
+                            // border: OutlineInputBorder(
+                            //   borderRadius: BorderRadius.circular(10.0),
+                            // ),
+                          ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 15,
+                        vertical: 35,
                         horizontal: 13,
                       ),
                       child: Container(
                         width: 400,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.green[300])),
+                        // decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(20),
+                        //     border: Border.all(color: Colors.green[300])),
                         child: debitSideLedgerSelect(localData, "local"),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 15,
+                        vertical: 35,
                         horizontal: 13,
                       ),
                       child: Container(
                         width: 400,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.green[300])),
+                        // decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(20),
+                        //     border: Border.all(color: Colors.green[300])),
                         child: creditSideLedgerSelect(localData, "local"),
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        var _payload = TransactionType(
-                          name: 'Purchase of Material',
-                          description:
-                              'Purchase of Material for Resell or Raw Material',
-                          type: 1,
-                          debitSideLedger: 1,
-                          creditSideLedger: 1,
-                        );
-                        model.newTransactionType(_payload);
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   rTransactionTypeDashboard,
-                        // );
-                      },
+                      // onTap: () {
+                      //   var _payload = TransactionType(
+                      //     name: 'Purchase of Material',
+                      //     description:
+                      //         'Purchase of Material for Resell or Raw Material',
+                      //     type: 1,
+                      //     debitSideLedger: 1,
+                      //     creditSideLedger: 1,
+                      //   );
+                      //   model.newTransactionType(_payload);
+                      //   // Navigator.pushNamed(
+                      //   //   context,
+                      //   //   rTransactionTypeDashboard,
+                      //   // );
+                      // },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
