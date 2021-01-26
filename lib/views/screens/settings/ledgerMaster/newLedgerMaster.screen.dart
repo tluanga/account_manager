@@ -1,102 +1,109 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
-import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
 
-class NewLedgerMaster extends StatefulWidget {
-  final Function updateLedgerMaster;
-  final LedgerMaster ledgerMaster;
-
-  NewLedgerMaster({this.updateLedgerMaster, this.ledgerMaster});
+class NewLedgerMasterScreen extends StatefulWidget {
+  const NewLedgerMasterScreen({Key key}) : super(key: key);
 
   @override
-  _NewLedgerMasterState createState() => _NewLedgerMasterState();
+  _NewLedgerMasterScreenState createState() => _NewLedgerMasterScreenState();
 }
 
-class _NewLedgerMasterState extends State<NewLedgerMaster> {
+class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
+  String _name;
+  String _description;
   final _formKey = GlobalKey<FormState>();
-  final NewLedgerMasterViewModel _model =
-      serviceLocator<NewLedgerMasterViewModel>();
-  String _name = '';
-  String _description = '';
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.ledgerMaster != null) {
-      _name = widget.ledgerMaster.name;
-      _description = widget.ledgerMaster.description;
-    }
-  }
-
-  _submit() {
+  void _onSubmit() {
+    LedgerMasterViewModel _ledgerMasterViewModel =
+        serviceLocator<LedgerMasterViewModel>();
+    _ledgerMasterViewModel.newLedgerMaster(
+      LedgerMaster(
+        name: _name,
+        description: _description,
+      ),
+    );
     if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      print('$_name, $_description');
+      // If the form is valid, display a snackbar. In the real world,
+      // you'd often call a server or save the information in a database.
 
-      LedgerMaster ledgerMaster =
-          LedgerMaster(name: _name, description: _description);
-      //  print(ledger`)
-      if (widget.ledgerMaster == null) {
-        _model.newLedgerMaster(ledgerMaster);
-      } else {
-        ledgerMaster.id = widget.ledgerMaster.id;
-        _model.updateLedgerMaster(ledgerMaster);
-      }
-      widget.updateLedgerMaster();
-      Navigator.pop(context);
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Processing Data'),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Ledger Name',
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: Text('New Ledger Master'),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Center(
+          child: Container(
+            width: 350,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: 'Name'),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter name';
+                      }
+                      return null;
+                    },
                   ),
-                  autofocus: false,
-                  onSaved: (input) => _name = input,
-                  initialValue: _name,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'description',
-                    hintMaxLines: 50,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: 'Description'),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter description';
+                      }
+                      return null;
+                    },
                   ),
-                  onSaved: (input) => _description = input,
-                  initialValue: _description,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 20.0),
-                height: 60.0,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: TextButton(
-                  onPressed: _submit,
-                  child: Text(
-                    'Add',
-                    style: TextStyle(
-                      color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    _onSubmit();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 400,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade300,
+                        border: Border.all(
+                          color: Colors.blue,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

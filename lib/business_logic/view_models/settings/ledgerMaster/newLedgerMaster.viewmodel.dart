@@ -20,9 +20,6 @@ class NewLedgerMasterViewModel extends ChangeNotifier {
   void updateLedgerMaster(LedgerMaster data) async {
     var _data = await _ledgerMasterService.update(data);
 
-    // Company _temp = Company(name: 'test');
-    // var _result = await _companyProfileService.insert(_temp);
-    // print(_result.toString());
     print(
       _data.toString(),
     );
