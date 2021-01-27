@@ -134,8 +134,8 @@ class _NewTransactionState extends State<NewTransaction> {
                               amount: 5000,
                               particulars: 'Thuthleng leina',
                               date: DateTime.now(),
-                              baOrBalo: BALO,
-                              cashOrBank: CASH);
+                              baOrBalo: 1,
+                              cashOrBank: 1);
                         },
                         child: Container(
                           height: 50,

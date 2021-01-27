@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
           rSettingsDashboard: (context) => SettingsDashboard(),
           //-------Settings Company ProfilerCompanyProfile
           rCompanyProfile: (context) => BooksDashboard(),
-          rChangeAuthenticationPin: (context) => ChangeAuthenticalPinScreen(),
+
 
           // -------Settings Accounting Year-----
           rAccountingYear: (context) => AccountingYearDashboard(),
