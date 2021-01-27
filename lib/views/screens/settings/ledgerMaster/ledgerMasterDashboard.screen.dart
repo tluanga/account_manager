@@ -42,10 +42,15 @@ class LedgerMasterDashboard extends StatelessWidget {
                         child: Container(
                           height: 50,
                           decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.blue,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
+                          color: Color(0xFFFFF9F6).withOpacity(1),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                              color: Colors.blueGrey[100],
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -61,13 +66,14 @@ class LedgerMasterDashboard extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: 50,
                                 ),
                                 Expanded(
-                                    child: Text(ledgerMaster
-                                            .ledgerMasterList[index]
-                                            .description ??
-                                        'null')),
+                                  child: Text(
+                                    ledgerMaster.ledgerMasterList[index].description ?? 'null',
+                                    textAlign: TextAlign.right,
+                                  )
+                                ),
                               ],
                             ),
                           ),

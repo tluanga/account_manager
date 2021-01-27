@@ -16,29 +16,30 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
-    if (_name != null && _description != null) {
-      NewLedgerMasterViewModel _ledgerMasterViewModel =
-          serviceLocator<NewLedgerMasterViewModel>();
-      _ledgerMasterViewModel.newLedgerMaster(
-        LedgerMaster(
-          name: _name,
-          description: _description,
-        ),
-      );
+    if (_formKey.currentState.validate()) {
+      if (_name != null && _description != null) {
+        NewLedgerMasterViewModel _ledgerMasterViewModel =
+            serviceLocator<NewLedgerMasterViewModel>();
+        _ledgerMasterViewModel.newLedgerMaster(
+          LedgerMaster(
+            name: _name,
+            description: _description,
+          ),
+        );
+        Navigator.pop(context);
+      }
+      if (_formKey.currentState.validate()) {
+        // If the form is valid, display a snackbar. In the real world,
+        // you'd often call a server or save the information in a database.
 
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Processing Data'),
+          ),
+        );
+      }
       Navigator.pop(context);
     }
-    if (_formKey.currentState.validate()) {
-      // If the form is valid, display a snackbar. In the real world,
-      // you'd often call a server or save the information in a database.
-
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Processing Data'),
-        ),
-      );
-    }
-    Navigator.pop(context);
   }
 
   @override
@@ -58,31 +59,25 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: 'Name'),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter name';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      _name = value;
-                    },
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                    ),
+                    validator: (input) => input.trim().isEmpty
+                        ? 'Please enter Ledger Name'
+                        : null,
+                    onSaved: (input) => _name = input,
+                    initialValue: _name,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     decoration: InputDecoration(labelText: 'Description'),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter description';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      _description = value;
-                    },
+                    validator: (input) => input.trim().isEmpty
+                        ? 'Please enter description'
+                        : null,
+                    onSaved: (input) => _name = input,
+                    initialValue: _name,
                   ),
                 ),
                 GestureDetector(
