@@ -1,3 +1,4 @@
+import 'package:account_manager/views/screens/settings/accountingYear/editAccountingYear.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
@@ -9,8 +10,8 @@ class GeneralJournalDashboardScreen extends StatefulWidget {
       _GeneralJournalDashboardScreenState();
 }
 
-class _GeneralJournalDashboardScreenState
-    extends State<GeneralJournalDashboardScreen> {
+class _GeneralJournalDashboardScreenState extends State<GeneralJournalDashboardScreen> {
+  EditAccountingYear accountingYear;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
 
@@ -64,7 +65,7 @@ class _GeneralJournalDashboardScreenState
                             new DateTime(endDate.year, endDate.month, 1);
                       }
                       if (value == 4) {
-                        startDate = DateTime(2020, 01, 01);
+                        startDate = DateTime(startDate.year, 01, 01);
                       }
                     });
                   },
