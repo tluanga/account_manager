@@ -29,7 +29,7 @@ class TransactionDashboardWidget extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 10,
-                        vertical: 2,
+                        vertical: 10,
                       ),
                       child: Container(
                         height: 50,
@@ -40,18 +40,28 @@ class TransactionDashboardWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 3,
+                          ),
                           child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(model
-                                      .lastTenTransactions[index].particular),
+                                  Text(
+                                    model.lastTenTransactions[index].particular,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
                                   Text(
                                     model.lastTenTransactions[index].amount
                                         .toString(),
+                                    style: TextStyle(
+                                      fontSize: 9,
+                                    ),
                                   )
                                 ],
                               ),
@@ -61,10 +71,15 @@ class TransactionDashboardWidget extends StatelessWidget {
                                 children: [
                                   Text(dateString),
                                   Container(
+                                    height: 20,
+                                    width: 50,
                                     decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
                                       color: Colors.green.shade200,
                                     ),
-                                    child: Text('Debit'),
+                                    child: Center(
+                                      child: Text('Debit'),
+                                    ),
                                   ),
                                 ],
                               )
