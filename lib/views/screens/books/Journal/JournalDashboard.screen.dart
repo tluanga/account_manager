@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/models/transaction.model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
@@ -66,7 +67,8 @@ class _GeneralJournalDashboardScreenState
                             startDate = DateTime.now();
                           }
                           if (value == 2) {
-                            startDate =DateTime.now().subtract(Duration(days: DateTime.now().weekday));
+                            startDate = DateTime.now().subtract(
+                                Duration(days: DateTime.now().weekday));
                           }
                           if (value == 3) {
                             startDate =
@@ -126,12 +128,15 @@ class _GeneralJournalDashboardScreenState
                             ))),
                   ],
                 ),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 new SizedBox(
                   height: 10.0,
                   child: new Center(
                     child: new Container(
-                      margin: new EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
+                      margin:
+                          new EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
                       height: 1,
                       color: Colors.grey,
                     ),
@@ -141,50 +146,74 @@ class _GeneralJournalDashboardScreenState
                   child: ListView.builder(
                     itemCount: model.transactionList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal:12, vertical: 8),
-                        child: Container(
-                        padding: EdgeInsets.symmetric(vertical:10, horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFFF9F6).withOpacity(1),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 2,
-                              color: Colors.blueGrey[100],
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                      for (model.transactionList[index].date.isAfter(DateTime(2021, 12, 1));
+                          model.transactionList[index].date
+                              .isBefore(DateTime(2021, 12, 23));) {
+                        return Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFFFF9F6).withOpacity(1),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 10,
+                                  spreadRadius: 2,
+                                  color: Colors.blueGrey[100],
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
                               children: [
-                                Text(
-                                  model.transactionList[index].particular,
-                                  style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.8, fontSize: 17),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      model.transactionList[index].particular,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: 0.8,
+                                          fontSize: 17),
+                                    ),
+                                    Text(
+                                      model.transactionList[index].amount
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 17),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  model.transactionList[index].amount.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.w500,fontSize: 17),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'test',
+                                      // model.transactionList[index].date
+                                      //     .toIso8601String(),
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 15),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                    ),
+                                    Text(
+                                      model.transactionList[index].date
+                                          .toString(),
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 15),
+                                    ),
+                                  ],
                                 )
                               ],
                             ),
-                            Row(
-                              children: [
-                                Text('test',
-                                    // model.transactionList[index].date
-                                    //     .toIso8601String(),
-                                    style: TextStyle(color: Colors.grey, fontSize: 15),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
                           ),
-                      );
+                        );
+                      }
                     },
                   ),
                 ),

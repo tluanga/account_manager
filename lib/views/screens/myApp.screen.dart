@@ -6,7 +6,6 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
-import 'package:account_manager/services/changePin/changePin.screen.dart';
 import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
 
@@ -97,7 +96,7 @@ class MyApp extends StatelessWidget {
           rSettingsDashboard: (context) => SettingsDashboard(),
           //-------Settings Company ProfilerCompanyProfile
           rCompanyProfile: (context) => BooksDashboard(),
-          rChangeAuthenticationPin: (context) => ChangeAuthenticalPinScreen(),
+
 
           // -------Settings Accounting Year-----
           rAccountingYear: (context) => AccountingYearDashboard(),
