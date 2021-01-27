@@ -25,18 +25,16 @@ class Transaction {
       this.transactionTypeId,
       this.baOrBalo,
       this.cashOrBank});
-  var format = new DateFormat("yMd");
+
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
     if (id != null) {
       map['id'] = id;
     }
-    var _date = date;
-    var __date = format.format(date);
+
     map['amount'] = amount;
     map['particular'] = particular;
-    map['date'] = date;
-    // map['date'] = date.microsecondsSinceEpoch;
+    map['date'] = date.microsecondsSinceEpoch;
     map['transactionTypeId'] = transactionTypeId;
     map['baOrBalo'] = baOrBalo;
     map['cashOrBank'] = cashOrBank;
@@ -46,8 +44,6 @@ class Transaction {
     return map;
   }
 
-  // var format = new DateFormat("yMd");
-  // var dateString = format.format(date);
   factory Transaction.fromMap(Map<String, dynamic> map) {
     return Transaction.withId(
       id: map['id'],
