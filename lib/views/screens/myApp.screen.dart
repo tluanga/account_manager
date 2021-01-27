@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/view_models/books/ledger/ledger.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/changePin/changePin.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -86,6 +87,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => LedgerDashboardViewmodel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LedgerViewModel(),
         ),
       ],
       child: MaterialApp(

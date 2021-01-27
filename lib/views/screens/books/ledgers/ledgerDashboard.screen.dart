@@ -87,9 +87,7 @@ class CustomWidget extends StatelessWidget {
   CustomWidget(
     this._index,
     this.ledgerName,
-  ) {
-    debugPrint('initialize: $_index');
-  }
+  );
 
   final int _index;
 

@@ -61,7 +61,7 @@ class DatabaseHelper {
 
   Future<Database> get db async {
     if (_db == null) {
-      print('null');
+      // print('null');
       _db = await _initDb();
     }
 
@@ -108,7 +108,7 @@ class DatabaseHelper {
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(
-      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate TEXT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER)',
+      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER)',
     );
 
     // Table 7 - Authenticaion PIN
@@ -135,11 +135,28 @@ class DatabaseHelper {
     // 6) Wages
     await db.insert(masterLedgerTable,
         {'name': 'Wages', 'description': 'Wages of Employee'});
-    // 7)
+    // -----------Mock Data----------
+    // 7)LedgerTransaction
+    await db.insert(ledgerTransactionTable, {
+      'ledgerId': 1,
+      'date': 1611744439,
+      'amount': 1000,
+      'particular': 'Purchase of Raw Material',
+      'debitOrCredit': 1,
+      'cashOrBank': 1,
+    });
+    await db.insert(ledgerTransactionTable, {
+      'ledgerId': 1,
+      'date': 1611744450,
+      'amount': 3000,
+      'particular': 'Purchase of Raw Material',
+      'debitOrCredit': 1,
+      'cashOrBank': 1,
+    });
 
     //--------Special Transaction Type--------------
     // 1---Purchase of Material for Resell or for Production
-    await db.insert('transactionType_table', {
+    await db.insert(transactionTypeTable, {
       'name': 'Purchase of Material',
       'description': 'Purchase of Material for Resell or for Production',
       'sumChetVelDanType': 1,
