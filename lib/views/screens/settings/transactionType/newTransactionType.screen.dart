@@ -171,21 +171,11 @@ class _AppState extends State<NewTransactionType> {
                         ),
                       ),
                       GestureDetector(
-                        // onTap: () {
-                        //   var _payload = TransactionType(
-                        //     name: 'Purchase of Material',
-                        //     description:
-                        //         'Purchase of Material for Resell or Raw Material',
-                        //     type: 1,
-                        //     debitSideLedger: 1,
-                        //     creditSideLedger: 1,
-                        //   );
-                        //   model.newTransactionType(_payload);
-                        //   // Navigator.pushNamed(
-                        //   //   context,
-                        //   //   rTransactionTypeDashboard,
-                        //   // );
-                        // },
+                        onTap: () {
+                          print(
+                            _sumChetVelDanType.toString(),
+                          );
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -248,7 +238,7 @@ class _AppState extends State<NewTransactionType> {
       ),
       onChanged: (value) {
         setState(() {
-          selectedDebitSideLedgerId = value;
+          _selectedDebitSideLedgerId = value;
           selectedDebitSideLedger[mapKey] = value;
         });
       },
