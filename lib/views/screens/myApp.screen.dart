@@ -131,8 +131,8 @@ class MyApp extends StatelessWidget {
           rNewTransactionType: (context) => NewTransactionType(),
 
           // ------------Transaction---------------
-          rNewTransaction: (context) => NewTransaction(),
-          rTransactionTypeSelect: (context) => TransactionTypeSelect(),
+          rNewTransaction: (context) => NewTransactionScreen(),
+          rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
@@ -161,7 +161,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     //LedgerMasterDashboard(),
     DashBoard(),
     BooksDashboard(),
-    NewTransaction(),
+    NewTransactionScreen(),
     //  LedgerDashboard(),
     AnalyticsDashboard(),
     SettingsDashboard(),

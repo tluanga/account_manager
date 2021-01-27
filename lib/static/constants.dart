@@ -8,6 +8,7 @@ const int CASH = 2;
 const int BA = 1;
 const int BALO = 2;
 
+//---Sum Chet Vel dan
 const int Lei = 0;
 const int Hralh = 1;
 const int Lakluh = 2;

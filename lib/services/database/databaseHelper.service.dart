@@ -163,5 +163,13 @@ class DatabaseHelper {
       'debitSideLedger': 3,
       'creditSideLedger': 2
     });
+    await db.insert(transactionTypeTable, {
+      'name': 'Purchase of Assets',
+      'description':
+          'Purchase of Material for Business, not for Resell or Raw Material',
+      'sumChetVelDanType': 1,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2
+    });
   }
 }
