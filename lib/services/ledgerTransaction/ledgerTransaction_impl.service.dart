@@ -7,9 +7,20 @@ class LedgerTransactionImpl implements LedgerTransactionService {
   Future<List<Map<String, dynamic>>> getLedgerTransactionMapList(
       {int id = 0, DateTime startDate, DateTime endDate}) async {
     Database db = await DatabaseHelper.instance.db;
-    final List<Map<String, dynamic>> result = await db
-        .query('ledgerTranction_table', where: 'id=? & date', whereArgs: [id]);
-    return result;
+    if (id > 0) {
+      final List<Map<String, dynamic>> result = await db.rawQuery('''
+      SELECT * FROM ledgerTranction_table
+      WHERE id=$id AND
+      transactionDate>$startDate AND transactionDate<$endDate      
+      ''');
+      return result;
+    } else {
+      final List<Map<String, dynamic>> result = await db.query(
+          'ledgerTranction_table',
+          where: 'id=? & date',
+          whereArgs: [id]);
+      return result;
+    }
   }
 
   Future<List<LedgerTransaction>> getList(
