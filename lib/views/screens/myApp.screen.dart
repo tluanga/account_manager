@@ -97,6 +97,7 @@ class MyApp extends StatelessWidget {
 
         // ----------------------Route Table------------------------
         routes: {
+          rMyApp: (context) => MyApp(),
           rDashBoard: (context) => DashBoard(),
           //-------------Login Pin----------------
           rCreateLoginPin: (context) => CreateLoginPin(),
@@ -108,7 +109,6 @@ class MyApp extends StatelessWidget {
           rSettingsDashboard: (context) => SettingsDashboard(),
           //-------Settings Company ProfilerCompanyProfile
           rCompanyProfile: (context) => BooksDashboard(),
-
 
           // -------Settings Accounting Year-----
           rAccountingYear: (context) => AccountingYearDashboard(),

@@ -140,11 +140,13 @@ class _NewTransactionState extends State<NewTransaction> {
                         child: GestureDetector(
                           onTap: () {
                             model.newTransaction(
-                                amount: 5000,
-                                particulars: 'Thuthleng leina',
-                                date: DateTime.now(),
-                                baOrBalo: 1,
-                                cashOrBank: 1);
+                              amount: 5000,
+                              particulars: 'Thuthleng leina',
+                              date: DateTime.now(),
+                              baOrBalo: 1,
+                              cashOrBank: 1,
+                            );
+                            Navigator.pushNamed(context, rMyApp);
                           },
                           child: Container(
                             height: 50,

@@ -97,7 +97,7 @@ class TransactionTypeSelect extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, rNewTransaction);
+                  Navigator.pop(context);
                 },
                 child: Container(
                   height: 50,

@@ -1,3 +1,5 @@
+// ---------------MyApp----------------
+const String rMyApp = 'myapp';
 // -----------------Settings Route--------------
 const String rBooksDashboard = '/booksDashboard';
 const String rSettingsDashboard = '/settingsDashboard';
