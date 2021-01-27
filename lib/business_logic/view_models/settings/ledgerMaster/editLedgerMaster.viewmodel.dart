@@ -11,5 +11,6 @@ class EditLedgerMasterViewModel extends ChangeNotifier {
     var result = await _ledgerMasterService.update(payload);
     print(payload.name);
     print(payload.description);
+    notifyListeners();
   }
 }
