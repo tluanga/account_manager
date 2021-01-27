@@ -49,33 +49,6 @@ class TransactionTypeSelect extends StatelessWidget {
                       //     child: Text(
                       //       'hi',
                       //     ),
-<<<<<<< Updated upstream
-                      //   );
-                    },
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: 50,
-                  width: 420,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-=======
                       //   ),
                       // ),
                       // SliverList(
@@ -146,7 +119,6 @@ class TransactionTypeSelect extends StatelessWidget {
                         },
                         childCount: transactionTypeSelect.transactionTypeList.length
                         )
->>>>>>> Stashed changes
                       ),
                     ],
                   ),
