@@ -2,8 +2,10 @@
 // anywhere we need them in the app.
 
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/companyProfile/companyProfile.service.dart';
@@ -39,15 +41,20 @@ void setUpServiceLocator() {
   );
 
   //VIEW MODELS
-  // View Models
+  // -----LedgerMaster
   serviceLocator.registerFactory<LedgerMasterDashboardViewModel>(
       () => LedgerMasterDashboardViewModel());
   serviceLocator.registerFactory<NewLedgerMasterViewModel>(
       () => NewLedgerMasterViewModel());
+  serviceLocator.registerFactory<EditLedgerMasterViewModel>(
+      () => EditLedgerMasterViewModel());
 
   // ----------Transaction Type View Model------------
   serviceLocator.registerFactory<TransactionTypeDashboardViewModel>(
       () => TransactionTypeDashboardViewModel());
+  serviceLocator.registerFactory<NewTransactionTypeViewModel>(
+      () => NewTransactionTypeViewModel());
+
   // serviceLocator
   //     .registerFactory<LedgerSelectViewModel>(() => LedgerSelectViewModel());
   // serviceLocator.registerFactory<DebitSideLedgerSelectViewModel>(

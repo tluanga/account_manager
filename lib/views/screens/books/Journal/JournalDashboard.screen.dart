@@ -81,6 +81,7 @@ class _GeneralJournalDashboardScreenState
                               ),
                             );
                           }
+
                           if (value == 5) {
                             startDate = DateTime(2020, 04, 01);
                           }
@@ -88,7 +89,6 @@ class _GeneralJournalDashboardScreenState
                       },
                     ),
                     Icon(
-                      Icons.calendar_today_outlined,
                     ),
                     Text(
                       DateFormat('dd/MM/yyyy').format(startDate),
@@ -99,53 +99,15 @@ class _GeneralJournalDashboardScreenState
                     ),
                     Icon(
                       Icons.picture_as_pdf,
+                        });
+                      },
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: Container(
+                    Icon(Icons.calendar_today_outlined),
+                    Text(
+                      DateFormat('dd-MM-yyyy').format(startDate),
+                    ),
                             padding: EdgeInsets.all(5),
-                            color: Colors.grey[400],
-                            child: Text(
-                              'Particulars',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ))),
-                    VerticalDivider(
-                      width: 3,
-                    ),
-                    Expanded(
-                        child: Container(
-                            padding: EdgeInsets.all(5),
-                            color: Colors.grey[400],
-                            child: Text(
-                              'Amount',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                              textAlign: TextAlign.right,
-                            ))),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                new SizedBox(
-                  height: 10.0,
-                  child: new Center(
-                    child: new Container(
-                      margin:
-                          new EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: model.transactionList.length,
-                    itemBuilder: (BuildContext context, int index) {
                       for (model.transactionList[index].date.isAfter(DateTime(2021, 12, 1));
                           model.transactionList[index].date
                               .isBefore(DateTime(2021, 12, 23));) {
@@ -166,8 +128,6 @@ class _GeneralJournalDashboardScreenState
                               ],
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Column(
-                              children: [
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -193,35 +153,4 @@ class _GeneralJournalDashboardScreenState
                                     Text(
                                       'test',
                                       // model.transactionList[index].date
-                                      //     .toIso8601String(),
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 15),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 6,
-                                    ),
-                                    Text(
-                                      model.transactionList[index].date
-                                          .toString(),
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 15),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }
-                    },
                   ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-}

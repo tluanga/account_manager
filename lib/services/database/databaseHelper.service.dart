@@ -33,7 +33,7 @@ class DatabaseHelper {
   String transactionTypeId = 'id';
   String transactionTypeName = 'name';
   String transactionTypeDescription = 'description';
-  String transactionTypeType = 'type';
+  String transactionTypesumChetVelDanType = 'sumChetVelDanType';
   String transactionTypedebitSideLedger = 'debitSideLedger';
   String transactionTypecreditSideLedger = 'creditSideLedger';
 
@@ -102,11 +102,11 @@ class DatabaseHelper {
     );
     // Table 4 - TransactionType Table
     await db.execute(
-      'CREATE TABLE $transactionTypeTable($transactionTypeId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionTypeName TEXT, $transactionTypeDescription TEXT, $transactionTypeType INT,$transactionTypedebitSideLedger INT,$transactionTypecreditSideLedger INT)',
+      'CREATE TABLE $transactionTypeTable($transactionTypeId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionTypeName TEXT, $transactionTypeDescription TEXT, $transactionTypesumChetVelDanType INT,$transactionTypedebitSideLedger INT,$transactionTypecreditSideLedger INT)',
     );
     // Table 5 - Transaction Table
     await db.execute(
-      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT, $transactionDate TEXT, $transactionParticular TEXT, $transactionTransactionTypeId INTEGER, $transactionBaOrBalo INTEGER,$transactionCashOrBank INTEGER)',
+      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT, $transactionDate INT, $transactionParticular TEXT, $transactionTransactionTypeId INTEGER, $transactionBaOrBalo INTEGER,$transactionCashOrBank INTEGER)',
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(
@@ -144,7 +144,7 @@ class DatabaseHelper {
     await db.insert('transactionType_table', {
       'name': 'Purchase of Material',
       'description': 'Purchase of Material for Resell or for Production',
-      'type': 1,
+      'sumChetVelDanType': 1,
       'debitSideLedger': 3,
       'creditSideLedger': 2
     });

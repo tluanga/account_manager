@@ -1,4 +1,6 @@
+import 'package:account_manager/business_logic/view_models/settings/changePin/changePin.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
@@ -17,9 +19,10 @@ import 'package:account_manager/views/screens/authentication/LoginPin.screen.dar
 import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
-import 'package:account_manager/views/screens/settings/companyProfile/companyProfile.screen.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
+
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
-import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.copy.dart';
+
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
@@ -48,6 +51,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NewLedgerMasterViewModel(),
+        ),
+
+        ChangeNotifierProvider(
+          create: (context) => EditLedgerMasterViewModel(),
         ),
         //------Transaction Type---------
         ChangeNotifierProvider(
@@ -102,7 +109,7 @@ class MyApp extends StatelessWidget {
           rAccountingYear: (context) => AccountingYearDashboard(),
 
           rLedgerMasterDashboard: (context) => LedgerMasterDashboard(),
-          rNewLedgerMaster: (context) => NewLedgerMaster(),
+          rNewLedgerMaster: (context) => NewLedgerMasterScreen(),
 
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),

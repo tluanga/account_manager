@@ -1,43 +1,30 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
 
-class NewLedgerMasterScreen extends StatefulWidget {
-  const NewLedgerMasterScreen({Key key}) : super(key: key);
+class EditLedgerMasterScreen extends StatefulWidget {
+  final LedgerMaster ledgerMaster;
+  const EditLedgerMasterScreen({Key key, this.ledgerMaster}) : super(key: key);
 
   @override
-  _NewLedgerMasterScreenState createState() => _NewLedgerMasterScreenState();
+  _EditLedgerMasterScreenState createState() => _EditLedgerMasterScreenState();
 }
 
-class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
+class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
   String _name;
   String _description;
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
-    if (_name != null && _description != null) {
-      NewLedgerMasterViewModel _ledgerMasterViewModel =
-          serviceLocator<NewLedgerMasterViewModel>();
-      _ledgerMasterViewModel.newLedgerMaster(
-        LedgerMaster(
-          name: _name,
-          description: _description,
-        ),
-      );
+    EditLedgerMasterViewModel _ledgerMasterViewModel =
+        serviceLocator<EditLedgerMasterViewModel>();
+    _ledgerMasterViewModel.updateLedgerMaster(
+      LedgerMaster.withId(
+          id: widget.ledgerMaster.id, name: _name, description: _description),
+    );
 
-      Navigator.pop(context);
-    }
-    if (_formKey.currentState.validate()) {
-      // If the form is valid, display a snackbar. In the real world,
-      // you'd often call a server or save the information in a database.
-
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Processing Data'),
-        ),
-      );
-    }
     Navigator.pop(context);
   }
 
@@ -46,7 +33,7 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
-        title: Text('New Ledger Master'),
+        title: Text('Edit Ledger Master'),
       ),
       body: Form(
         key: _formKey,
@@ -58,7 +45,9 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: 'Name'),
+                    initialValue: widget.ledgerMaster.name,
+                    decoration: InputDecoration(
+                        labelText: widget.ledgerMaster.name ?? ''),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter name';
@@ -73,7 +62,9 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: 'Description'),
+                    initialValue: widget.ledgerMaster.description,
+                    decoration: InputDecoration(
+                        labelText: widget.ledgerMaster.description ?? ''),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter description';
