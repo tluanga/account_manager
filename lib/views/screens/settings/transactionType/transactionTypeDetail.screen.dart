@@ -30,6 +30,7 @@ class _TransactionTypeDetailScreenState
     return Scaffold(
       body: SafeArea(child: Consumer<TransactionTypeDetailViewModel>(
           builder: (context, model, child) {
+        model.loadData();
         return Container(
           padding: EdgeInsets.only(
             left: 20,
