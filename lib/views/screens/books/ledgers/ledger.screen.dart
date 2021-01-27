@@ -25,7 +25,37 @@ class _LedgerState extends State<Ledger> {
         return SafeArea(
           child: Scaffold(
             body: Container(
-              child: Text('Ledger'),
+              child: ListView.builder(
+                  itemCount: model.ledgerTransactionList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(model
+                                  .ledgerTransactionList[index].particular),
+                              Text(
+                                model.ledgerTransactionList[index].amount
+                                    .toString(),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(model.ledgerTransactionList[index].cashOrBank
+                                  .toString())
+                            ],
+                          ),
+                          Divider(
+                            thickness: 5,
+                            color: Colors.grey.shade200,
+                          )
+                        ],
+                      ),
+                    );
+                  }),
             ),
           ),
         );

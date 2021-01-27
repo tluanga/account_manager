@@ -16,5 +16,6 @@ class LedgerDashboardViewmodel extends ChangeNotifier {
   void loadData() async {
     final _ledgerMasterList = await _ledgerMasterService.getList();
     ledgerMasterList = _ledgerMasterList;
+    notifyListeners();
   }
 }
