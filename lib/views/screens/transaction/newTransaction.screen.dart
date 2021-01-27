@@ -1,5 +1,4 @@
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
-import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +13,10 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final _formKey = GlobalKey<FormState>();
-  int amount;
-  String particular;
-  int baOrBalo;
-  int bankOrCash;
+  int _amount;
+  String _particular;
+  int _baOrBalo;
+  int _bankOrCash;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -51,7 +50,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         },
                         onChanged: (text) {
                           setState(() {
-                            amount = int.parse(text);
+                            _amount = int.parse(text);
                           });
                         },
                       ),
@@ -65,7 +64,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         },
                         onChanged: (text) {
                           setState(() {
-                            particular = text;
+                            _particular = text;
                           });
                         },
                       ),
@@ -81,8 +80,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           initialLabelIndex: 1,
                           labels: ['Ba', 'Balo'],
                           onToggle: (index) {
-                            print('switched to: $index');
-                            //model.setBaOrBalo(index);
+                            _baOrBalo = index;
                           },
                         ),
                       ),
@@ -92,7 +90,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         initialLabelIndex: 0,
                         labels: ['Cash', 'Bank'],
                         onToggle: (index) {
-                          print('switched to: $index');
+                          _bankOrCash = index;
                         },
                       ),
                       GestureDetector(
@@ -140,7 +138,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         child: GestureDetector(
                           onTap: () {
                             model.newTransaction(
-                              amount: 5000,
+                              amount: _amount,
                               particulars: 'Thuthleng leina',
                               date: DateTime.now(),
                               baOrBalo: 1,

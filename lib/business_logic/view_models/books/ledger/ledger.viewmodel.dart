@@ -12,6 +12,11 @@ class LedgerViewModel extends ChangeNotifier {
   void getData({int id, DateTime startDate, DateTime endDate}) async {
     int _startDate = startDate.microsecondsSinceEpoch;
     int _endDate = endDate.microsecondsSinceEpoch;
-    ledgerTransactionList = await _ledgerTransactionService.getList();
+    ledgerTransactionList = await _ledgerTransactionService.getList(
+      id: id,
+      startDate: _startDate,
+      endDate: _endDate,
+    );
+    notifyListeners();
   }
 }
