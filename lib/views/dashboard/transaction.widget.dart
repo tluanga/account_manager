@@ -16,9 +16,22 @@ class TransactionDashboardWidget extends StatelessWidget {
         );
 
         return Container(
+          padding: EdgeInsets.only(
+            top: 20,
+            bottom: 10,
+            left: 10,
+            right: 10,
+          ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Last 10 Transactions'),
+              Text(
+                'Recent Transactions',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: model.lastTenTransactions.length,
@@ -33,12 +46,6 @@ class TransactionDashboardWidget extends StatelessWidget {
                       ),
                       child: Container(
                         height: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue.shade400,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 10,
@@ -53,7 +60,8 @@ class TransactionDashboardWidget extends StatelessWidget {
                                   Text(
                                     model.lastTenTransactions[index].particular,
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
@@ -69,7 +77,12 @@ class TransactionDashboardWidget extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(dateString),
+                                  Text(
+                                    dateString,
+                                    style: TextStyle(
+                                      color: Colors.grey.shade500,
+                                    ),
+                                  ),
                                   Container(
                                     height: 20,
                                     width: 50,
