@@ -1,9 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
-import 'package:account_manager/business_logic/models/transactionType.models.dart';
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transactionType.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';

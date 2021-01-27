@@ -64,7 +64,7 @@ class DatabaseHelper {
       print('null');
       _db = await _initDb();
     }
-    print(_db.toString());
+
     return _db;
   }
 
@@ -74,12 +74,10 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDb() async {
-    print('inside initiDb');
     Directory dir = await getApplicationDocumentsDirectory();
-    print('database location :' + dir.path);
 
     String path = dir.path + '/account_manager.db';
-    print('path is $path');
+
     final accountManagerDb = await openDatabase(
       path,
       version: 2,
