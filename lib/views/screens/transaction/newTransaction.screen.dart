@@ -139,7 +139,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           onTap: () {
                             model.newTransaction(
                               amount: _amount,
-                              particulars: 'Thuthleng leina',
+                              particulars: _particular,
                               date: DateTime.now(),
                               baOrBalo: 1,
                               cashOrBank: 1,

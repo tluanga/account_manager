@@ -14,8 +14,8 @@ class _DashBoardState extends State<DashBoard> {
   int theriGroupVakue = 0;
 
   final Map<int, Widget> logoWidgets = const <int, Widget>{
-    0: Text("Ledgers"),
-    1: Text("Transactions"),
+    0: Text("Transactions"),
+    1: Text("Ledgers"),
     2: Text("Parties")
   };
 

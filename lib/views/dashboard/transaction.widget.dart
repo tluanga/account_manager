@@ -39,64 +39,72 @@ class TransactionDashboardWidget extends StatelessWidget {
                     var format = new DateFormat("yMMMMd");
                     var dateString =
                         format.format(model.lastTenTransactions[index].date);
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 10,
-                      ),
-                      child: Container(
-                        height: 50,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 3,
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    model.lastTenTransactions[index].particular,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
+                    return SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 10,
+                        ),
+                        child: Container(
+                          height: 50,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 3,
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      model.lastTenTransactions[index]
+                                          .particular,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    model.lastTenTransactions[index].amount
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 9,
+                                    Text(
+                                      model.lastTenTransactions[index].amount
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontSize: 9,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      dateString,
+                                      style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    dateString,
-                                    style: TextStyle(
-                                      color: Colors.grey.shade500,
+                                    Container(
+                                      height: 20,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.green.shade200,
+                                      ),
+                                      child: Center(
+                                        child: Text('Debit'),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    height: 20,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.green.shade200,
-                                    ),
-                                    child: Center(
-                                      child: Text('Debit'),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                  ],
+                                ),
+                                // Divider(
+                                //   height: 1,
+                                //   thickness: 1,
+                                //   color: Colors.grey.shade400,
+                                // ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
