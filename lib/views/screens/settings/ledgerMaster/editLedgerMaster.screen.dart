@@ -45,6 +45,7 @@ class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    initialValue: widget.ledgerMaster.name,
                     decoration: InputDecoration(
                         labelText: widget.ledgerMaster.name ?? ''),
                     validator: (value) {
@@ -61,6 +62,7 @@ class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    initialValue: widget.ledgerMaster.description,
                     decoration: InputDecoration(
                         labelText: widget.ledgerMaster.description ?? ''),
                     validator: (value) {
