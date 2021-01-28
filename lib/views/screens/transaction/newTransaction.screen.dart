@@ -30,159 +30,162 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
         if (transactionTypeSelect.selectedTransactionType != null) {
           labelText = transactionTypeSelect.selectedTransactionType.name;
         }
-        return SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 30,
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: 24,),
-                Text(
-                  'New Transaction',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: HexColor(
-                        TEXTCOLOR,
-                      )),
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                    focusColor: HexColor(TEXTCOLOR),
-                    hoverColor: HexColor(TEXTCOLOR),
+        return GestureDetector(
+           onTap: () => FocusScope.of(context).unfocus(),
+                  child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 30,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 24,),
+                  Text(
+                    'New Transaction',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: HexColor(
+                          TEXTCOLOR,
+                        )),
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Enter Amount';
-                    }
-                    return null;
-                  },
-                  onChanged: (text) {
-                    setState(() {
-                      _amount = int.parse(text);
-                    });
-                  },
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Particulars'),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Enter Particular';
-                    }
-                    return null;
-                  },
-                  onChanged: (text) {
-                    setState(() {
-                      _particular = text;
-                    });
-                  },
-                ),
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ToggleSwitch(
-                    minWidth: 120.0,
-                    minHeight: 40.0,
-                    fontSize: 16.0,
-                    activeBgColor: HexColor(PRIMARYCOLOR),
-                    inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                    activeFgColor: HexColor(TEXTCOLOR),
-                    initialLabelIndex: 1,
-                    labels: ['Ba', 'Balo'],
-                    onToggle: (index) {
-                      _baOrBalo = index;
-                      if (index == BA) {
-                        _modalBottomSheet(context);
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Amount',
+                      focusColor: HexColor(TEXTCOLOR),
+                      hoverColor: HexColor(TEXTCOLOR),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please Enter Amount';
                       }
+                      return null;
+                    },
+                    onChanged: (text) {
+                      setState(() {
+                        _amount = int.parse(text);
+                      });
                     },
                   ),
-                ),
-                ToggleSwitch(
-                  minWidth: 120.0,
-                  minHeight: 40.0,
-                  activeBgColor: cprimaryColor,
-                  inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                  activeFgColor: HexColor(TEXTCOLOR),
-                  initialLabelIndex: 0,
-                  labels: ['Cash', 'Bank'],
-                  onToggle: (index) {
-                    _bankOrCash = index;
-                  },
-                ),
-                SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TransactionTypeSelectScreen(),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Particulars'),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please Enter Particular';
+                      }
+                      return null;
+                    },
+                    onChanged: (text) {
+                      setState(() {
+                        _particular = text;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ToggleSwitch(
+                      minWidth: 120.0,
+                      minHeight: 40.0,
+                      fontSize: 16.0,
+                      activeBgColor: HexColor(PRIMARYCOLOR),
+                      inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                      activeFgColor: HexColor(TEXTCOLOR),
+                      initialLabelIndex: 1,
+                      labels: ['Ba', 'Balo'],
+                      onToggle: (index) {
+                        _baOrBalo = index;
+                        if (index == BA) {
+                          _modalBottomSheet(context);
+                        }
+                      },
+                    ),
+                  ),
+                  ToggleSwitch(
+                    minWidth: 120.0,
+                    minHeight: 40.0,
+                    activeBgColor: cprimaryColor,
+                    inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                    activeFgColor: HexColor(TEXTCOLOR),
+                    initialLabelIndex: 0,
+                    labels: ['Cash', 'Bank'],
+                    onToggle: (index) {
+                      _bankOrCash = index;
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TransactionTypeSelectScreen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: HexColor(PRIMARYCOLOR),
+                        ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
+                      child: Center(
+                        child: Text(
+                          labelText,
+                          style: TextStyle(
+                            color: HexColor(TEXTCOLOR),
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      newTransaction.newTransaction(
+                        amount: _amount,
+                        particulars: _particular,
+                        baOrBalo: _baOrBalo,
+                        cashOrBank: _bankOrCash,
+                        transactionTypeId:
+                            transactionTypeSelect.selectedTransactionType.id,
+                      );
+
+                      //------Reset Part
+                      transactionTypeSelect.deSelectTransactionType(
+                          transactionTypeSelect.selectedTransactionType.id);
+                      Navigator.pushNamed(context, rMyApp);
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
                         color: HexColor(PRIMARYCOLOR),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        labelText,
-                        style: TextStyle(
-                          color: HexColor(TEXTCOLOR),
-                          fontSize: 15,
+                      child: Center(
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: HexColor(TEXTCOLOR),
+                            fontSize: 19,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    newTransaction.newTransaction(
-                      amount: _amount,
-                      particulars: _particular,
-                      baOrBalo: _baOrBalo,
-                      cashOrBank: _bankOrCash,
-                      transactionTypeId:
-                          transactionTypeSelect.selectedTransactionType.id,
-                    );
-
-                    //------Reset Part
-                    transactionTypeSelect.deSelectTransactionType(
-                        transactionTypeSelect.selectedTransactionType.id);
-                    Navigator.pushNamed(context, rMyApp);
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: HexColor(PRIMARYCOLOR),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          color: HexColor(TEXTCOLOR),
-                          fontSize: 19,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
@@ -194,97 +197,104 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * .60,
-            width: 300,
-            child: Column(
-              children: [
-                Text(
-                  'Select Party',
-                  style: TextStyle(
-                      color: HexColor(TEXTCOLOR),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    height: 40,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search by Name...',
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5,),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: partyList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        padding: EdgeInsets.all(10),
-                        width: MediaQuery.of(context).size.width,
-                        child: Text(
-                          partyList[index].name,
-                          style: TextStyle(
-                            fontSize: 16
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+                      child: SingleChildScrollView(
+                        child: Container(
+                height: MediaQuery.of(context).size.height * .60,
+                width: 300,
+                child: Column(
                   children: [
-                    Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: HexColor(TEXTCOLOR),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Select',
-                          style: TextStyle(
-                            color: HexColor(SECONDARYGREYCOLOR),
-                            fontSize: 20,
+                    Text(
+                      'Select Party',
+                      style: TextStyle(
+                          color: HexColor(TEXTCOLOR),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        height: 40,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextFormField(
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search by Name...',
                           ),
                         ),
                       ),
                     ),
-                    Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: HexColor(TEXTCOLOR),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Add New',
-                          style: TextStyle(
-                            color: HexColor(SECONDARYGREYCOLOR),
-                            fontSize: 20,
-                          ),
-                        ),
+                    SizedBox(height: 5,),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: partyList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding: EdgeInsets.all(10),
+                            width: MediaQuery.of(context).size.width,
+                            child: Text(
+                              partyList[index].name,
+                              style: TextStyle(
+                                fontSize: 16
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
+                    Expanded(
+                                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              color: HexColor(TEXTCOLOR),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Select',
+                                style: TextStyle(
+                                  color: HexColor(SECONDARYGREYCOLOR),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 40,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              color: HexColor(TEXTCOLOR),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Add New',
+                                style: TextStyle(
+                                  color: HexColor(SECONDARYGREYCOLOR),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           );
         });

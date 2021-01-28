@@ -33,7 +33,7 @@ class _AppState extends State<NewTransactionType> {
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      print('$_name, $_description, $_sumChetVelDanType');
+     // print('$_name, $_description, $_sumChetVelDanType, $_selectedDebitSideLedgerId');
 
     }
   }
@@ -252,9 +252,17 @@ class _AppState extends State<NewTransactionType> {
     //     value: listData[i],
     //   ));
     // }
+    
     var length = listData.length.toString();
     print('Length of the data is:$length');
     return new SearchableDropdown(
+                              //       onChanged: (String newValue) {
+                              //   setState(() {
+                              //     dropdownValue = newValue;
+                              //     _sumChetVelDanType =
+                              //         model.formatSumChetdanType(newValue);
+                              //   });
+                              // },
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: listData,
