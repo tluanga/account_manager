@@ -1,3 +1,5 @@
+import 'package:account_manager/business_logic/view_models/books/ledger/ledger.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/changePin/changePin.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -39,7 +41,7 @@ import 'package:provider/provider.dart';
 
 import 'books/ledgers/ledger.screen.dart';
 import 'books/ledgers/ledgerDashboard.screen.dart';
-import 'dashBoard.screen.dart';
+import '../dashboard/dashBoard.screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -48,6 +50,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        //--------Dashboard
+        ChangeNotifierProvider(
+          create: (context) => DashboardViewModel(),
+        ),
+
         ChangeNotifierProvider(
           create: (context) => LedgerMasterDashboardViewModel(),
         ),
@@ -88,6 +95,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LedgerDashboardViewmodel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => LedgerViewModel(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -121,8 +131,8 @@ class MyApp extends StatelessWidget {
           rNewTransactionType: (context) => NewTransactionType(),
 
           // ------------Transaction---------------
-          rNewTransaction: (context) => NewTransaction(),
-          rTransactionTypeSelect: (context) => TransactionTypeSelect(),
+          rNewTransaction: (context) => NewTransactionScreen(),
+          rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
@@ -151,7 +161,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     //LedgerMasterDashboard(),
     DashBoard(),
     BooksDashboard(),
-    NewTransaction(),
+    NewTransactionScreen(),
     //  LedgerDashboard(),
     AnalyticsDashboard(),
     SettingsDashboard(),
@@ -170,7 +180,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
-            label: 'Home',
+            label: ,
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.menu_book),

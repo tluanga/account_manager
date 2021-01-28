@@ -2,185 +2,185 @@ import 'package:account_manager/business_logic/view_models/transaction/newTransa
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/widgets/toggle.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class NewTransaction extends StatefulWidget {
-  const NewTransaction({Key key}) : super(key: key);
+class NewTransactionScreen extends StatefulWidget {
+  const NewTransactionScreen({Key key}) : super(key: key);
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionScreenState createState() => _NewTransactionScreenState();
 }
 
-class _NewTransactionState extends State<NewTransaction> {
-  final _formKey = GlobalKey<FormState>();
-  int amount;
-  String particular;
-  int baOrBalo;
-  int bankOrCash;
+class _NewTransactionScreenState extends State<NewTransactionScreen> {
+  int _amount;
+  String _particular;
+  int _baOrBalo;
+  int _bankOrCash;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Consumer2<NewTransactionViewModel, TransactionTypeSelectViewModel>(
-        builder: (context, model, transactionTypeSelect, child) {
-          String _label='Please Select Transaction Type';
-         if(transactionTypeSelect.selectedTransactionType!=null){
-           _label=transactionTypeSelect.selectedTransactionType.name;
-         }
-          return Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
+    return Consumer2<NewTransactionViewModel, TransactionTypeSelectViewModel>(
+      builder: (context, newTransaction, transactionTypeSelect, child) {
+        String labelText = 'Please Select Transaction Type';
+        if (transactionTypeSelect.selectedTransactionType != null) {
+          labelText = transactionTypeSelect.selectedTransactionType.name;
+        }
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'New Transaction',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: HexColor(
+                        TEXTCOLOR,
+                      )),
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Amount',
+                    focusColor: HexColor(TEXTCOLOR),
+                    hoverColor: HexColor(TEXTCOLOR),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'New Transaction',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text('New Transaction'),
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(labelText: 'Amount'),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please Enter Amount';
-                          }
-                          return null;
-                        },
-                        onChanged: (text) {
-                          setState(() {
-                            amount = int.parse(text);
-                          });
-                        },
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(labelText: 'Particulars'),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please Enter Particular';
-                          }
-                          return null;
-                        },
-                        onChanged: (text) {
-                          setState(() {
-                            particular = text;
-                          });
-                        },
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(labelText: 'Select Date'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ToggleSwitch(
-                          minWidth: 120.0,
-                          minHeight: 40.0,
-                          fontSize: 16.0,
-                          initialLabelIndex: 1,
-                          labels: ['Ba', 'Balo'],
-                          onToggle: (index) {
-                            print('switched to: $index');
-                            //model.setBaOrBalo(index);
-                          },
-                        ),
-                      ),
-                      ToggleSwitch(
-                        minWidth: 120.0,
-                        minHeight: 40.0,
-                        initialLabelIndex: 0,
-                        labels: ['Cash', 'Bank'],
-                        onToggle: (index) {
-                          print('switched to: $index');
-                        },
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, rTransactionTypeSelect);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            height: 50,
-                            width: 400,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.teal),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Center(
-                                    child: Text(
-                                      _label,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Icon(Icons.arrow_forward_ios_outlined,
-                                    color: Colors.teal)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            model.newTransaction(
-                              amount: 5000,
-                              particulars: 'Thuthleng leina',
-                              date: DateTime.now(),
-                              baOrBalo: 1,
-                              cashOrBank: 1,
-                            );
-                            Navigator.pushNamed(context, rMyApp);
-                          },
-                          child: Container(
-                            height: 50,
-                            width: 420,
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Amount';
+                    }
+                    return null;
+                  },
+                  onChanged: (text) {
+                    setState(() {
+                      _amount = int.parse(text);
+                    });
+                  },
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Particulars'),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Particular';
+                    }
+                    return null;
+                  },
+                  onChanged: (text) {
+                    setState(() {
+                      _particular = text;
+                    });
+                  },
+                ),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ToggleSwitch(
+                    minWidth: 120.0,
+                    minHeight: 40.0,
+                    fontSize: 16.0,
+                    activeBgColor: HexColor(PRIMARYCOLOR),
+                    inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                    activeFgColor: HexColor(TEXTCOLOR),
+                    initialLabelIndex: 1,
+                    labels: ['Ba', 'Balo'],
+                    onToggle: (index) {
+                      _baOrBalo = index;
+                    },
                   ),
                 ),
-              ),
+                ToggleSwitch(
+                  minWidth: 120.0,
+                  minHeight: 40.0,
+                  activeBgColor: HexColor(PRIMARYCOLOR),
+                  inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                  activeFgColor: HexColor(TEXTCOLOR),
+                  initialLabelIndex: 0,
+                  labels: ['Cash', 'Bank'],
+                  onToggle: (index) {
+                    _bankOrCash = index;
+                  },
+                ),
+                SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TransactionTypeSelectScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: HexColor(PRIMARYCOLOR),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        labelText,
+                        style: TextStyle(
+                          color: HexColor(TEXTCOLOR),
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    newTransaction.newTransaction(
+                      amount: _amount,
+                      particulars: _particular,
+                      baOrBalo: _baOrBalo,
+                      cashOrBank: _bankOrCash,
+                      transactionTypeId:
+                          transactionTypeSelect.selectedTransactionType.id,
+                    );
+                    //------Reset Part
+                    transactionTypeSelect.deSelectTransactionType(
+                        transactionTypeSelect.selectedTransactionType.id);
+                    Navigator.pushNamed(context, rMyApp);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: HexColor(PRIMARYCOLOR),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: HexColor(TEXTCOLOR),
+                          fontSize: 19,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

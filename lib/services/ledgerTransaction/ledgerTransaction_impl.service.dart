@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 
 class LedgerTransactionImpl implements LedgerTransactionService {
   Future<List<Map<String, dynamic>>> getLedgerTransactionMapList(
-      {int id = 0, DateTime startDate, DateTime endDate}) async {
+      {int id = 0, int startDate = 0, int endDate = 0}) async {
     Database db = await DatabaseHelper.instance.db;
     if (id > 0) {
       final List<Map<String, dynamic>> result = await db.rawQuery('''
@@ -15,18 +15,19 @@ class LedgerTransactionImpl implements LedgerTransactionService {
       ''');
       return result;
     } else {
-      final List<Map<String, dynamic>> result = await db.query(
-          'ledgerTranction_table',
-          where: 'id=? & date',
-          whereArgs: [id]);
+      print('trying to get Ledger transaction List without parameter');
+      final List<Map<String, dynamic>> result =
+          await db.query('ledgerTranction_table');
+
       return result;
     }
   }
 
   Future<List<LedgerTransaction>> getList(
-      {int id = 0, DateTime startDate, DateTime endDate}) async {
+      {int id = 0, int startDate, int endDate}) async {
     final List<Map<String, dynamic>> ledgerTransactionMapList =
         await getLedgerTransactionMapList();
+    print(ledgerTransactionMapList.length.toString());
     final List<LedgerTransaction> ledgerTransactionList = [];
     ledgerTransactionMapList.forEach((ledgerTransactionMap) {
       ledgerTransactionList
@@ -38,7 +39,7 @@ class LedgerTransactionImpl implements LedgerTransactionService {
 
   Future<int> insert(LedgerTransaction ledgerTransaction) async {
     Database db = await DatabaseHelper.instance.db;
-    print(db);
+
     final int result =
         await db.insert('ledgerTranction_table', ledgerTransaction.toMap());
     return result;

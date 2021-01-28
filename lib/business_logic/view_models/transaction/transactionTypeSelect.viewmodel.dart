@@ -23,7 +23,8 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   // }
 
   void setTransactionType(int id) {
-    selectedTransactionType.id = id;
+    selectedTransactionType =
+        transactionTypeList.firstWhere((element) => element.id == id);
     notifyListeners();
   }
 

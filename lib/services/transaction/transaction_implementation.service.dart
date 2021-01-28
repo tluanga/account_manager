@@ -15,6 +15,9 @@ class TransactionImpl implements TransactionService {
   Future<List<trans.Transaction>> getList() async {
     final List<Map<String, dynamic>> transactionMapList =
         await getTransactionMapList();
+    print(
+      transactionMapList.length.toString(),
+    );
     final List<trans.Transaction> transactionList = [];
     transactionMapList.forEach((transactionMap) {
       transactionList.add(trans.Transaction.fromMap(transactionMap));

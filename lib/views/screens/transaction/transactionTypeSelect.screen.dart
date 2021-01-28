@@ -1,206 +1,160 @@
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/static/route.dart';
-
-import 'package:account_manager/views/widgets/search_bar.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
-class TransactionTypeSelect extends StatelessWidget {
-  final TransactionTypeSelectViewModel _model =
-      serviceLocator<TransactionTypeSelectViewModel>();
-  TransactionTypeSelect() {
-    _model.loadData();
-  }
+class TransactionTypeSelectScreen extends StatefulWidget {
+  const TransactionTypeSelectScreen({Key key}) : super(key: key);
 
+  @override
+  _TransactionTypeSelectScreenState createState() =>
+      _TransactionTypeSelectScreenState();
+}
+
+class _TransactionTypeSelectScreenState
+    extends State<TransactionTypeSelectScreen> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        body: Consumer<TransactionTypeSelectViewModel>(
-          builder: (context, transactionTypeSelect, child) {
-            transactionTypeSelect.loadData();
-            transactionTypeSelect.countTransactionTypeList();
-            return SafeArea(
-              child: CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    floating: false,
-                    pinned: false,
-                    toolbarHeight: 40,
-                    // expandedHeight: ,
-                    backgroundColor: Colors.white,
-                    flexibleSpace: FlexibleSpaceBar(
-                      title: Text(
-                        transactionTypeSelect.selectedTransactionType.toString(),
-                        textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.black, fontSize: 15),
-                      ),
-                    ),
+    return Scaffold(
+      body: Consumer<TransactionTypeSelectViewModel>(
+        builder: (context, model, child) {
+          model.loadData();
+          return Column(
+            children: [
+              Container(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: HexColor('#FBAF02'),
                   ),
-                  SliverFilip(
-                    child: Container(
-                      height: 40,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.grey[400],
-                          borderRadius: BorderRadius.circular(10)),
-                      child: TextFormField(
-                          cursorColor: Colors.white,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              icon: Icon(
-                                Icons.search,
-                                color: Colors.white,
-                              ),
-                              hintText: 'Search',
-                              hintStyle: TextStyle(color: Colors.white))),
-                    ),
-                  ),
-                  // dummy list
-                  // SliverList(
-                  //   delegate: SliverChildBuilderDelegate(
-                  //     (context, index) {
-                  //       return Container(
-                  //         height: 50,
-                  //         alignment: Alignment.center,
-                  //         color: Colors.orange[100 * (index % 9)],
-                  //         child: Text('orange $index'),
-                  //       );
-                  //     },
-                  //     childCount: 30,
-                  //   ),
-                  // ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                      if (transactionTypeSelect.checkTransactionTypeForSelection(
-                          transactionTypeSelect.transactionTypeList[index].id)) {
-                        print(transactionTypeSelect.transactionTypeList.length
-                            .toString());
-                        return GestureDetector(
-                          onTap: () {
-                            transactionTypeSelect.deSelectTransactionType(
-                                transactionTypeSelect
-                                    .transactionTypeList[index].id);
-                            Navigator.pushNamed(context,rNewTransaction);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade300,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(transactionTypeSelect
-                                      .transactionTypeList[index].name),
-                                ],
-                              ),
-                            ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Please select Transaction Type',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: HexColor(TEXTCOLOR),
                           ),
-                        );
-                        } else
-                        return GestureDetector(
-                          onTap: () {
-                            transactionTypeSelect.setTransactionType(
-                                transactionTypeSelect
-                                    .transactionTypeList[index].id);
-                            Navigator.pushNamed(context,rNewTransaction);
-                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40),
+                          ),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.green.shade300,
+                            padding: const EdgeInsets.only(left: 20),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Search...',
+                                labelStyle: TextStyle(
+                                  color: HexColor(
+                                    TEXTCOLOR,
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(transactionTypeSelect
-                                      .transactionTypeList[index].name),
-                                ],
+                                border: InputBorder.none,
                               ),
                             ),
                           ),
-                        );
-                      },
-                    childCount: transactionTypeSelect.transactionTypeList.length
-                    )
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            );
-          },
-        ),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: model.transactionTypeList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Color _labelColor;
+                    String _labelText;
+                    if (model.transactionTypeList[index].sumChetVelDanType ==
+                        cHRALH) {
+                      _labelColor = Colors.blue.shade400;
+                      _labelText = 'Pekchhuah';
+                    }
+                    return Padding(
+                      padding: EdgeInsets.all(6),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (model.selectedTransactionType == null) {
+                            model.selectedTransactionType =
+                                model.transactionTypeList[index];
+                            Navigator.pop(context);
+                          } else {
+                            model.selectedTransactionType =
+                                model.transactionTypeList[index];
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 80,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: _labelColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        _labelText,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        model.transactionTypeList[index].name,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        model.transactionTypeList[index]
+                                            .description,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.grey.shade700,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
-  }
-}
-
-class SliverFilip extends SingleChildRenderObjectWidget {
-  SliverFilip({Widget child, Key key}) : super(child: child, key: key);
-
-  @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderSliverFilip();
-  }
-}
-
-class RenderSliverFilip extends RenderSliverSingleBoxAdapter {
-  RenderSliverFilip({
-    RenderBox child,
-  }) : super(child: child);
-
-  @override
-  void performLayout() {
-    if (child == null) {
-      geometry = SliverGeometry.zero;
-      return;
-    }
-    child.layout(constraints.asBoxConstraints(), parentUsesSize: true);
-    double childExtent;
-    switch (constraints.axis) {
-      case Axis.horizontal:
-        childExtent = child.size.width;
-        break;
-      case Axis.vertical:
-        childExtent = child.size.height;
-        break;
-    }
-    assert(childExtent != null);
-    // final double paintedChildSize =
-    //     calculatePaintOffset(constraints, from: 0.0, to: childExtent);
-    // final double cacheExtent =
-    //     calculateCacheOffset(constraints, from: 0.0, to: childExtent);
-
-    // assert(paintedChildSize.isFinite);
-    // assert(paintedChildSize >= 0.0);
-    geometry = SliverGeometry(
-      // scrollExtent: 50,
-      paintExtent: 50,
-      paintOrigin: constraints.scrollOffset,
-      // cacheExtent: cacheExtent,
-      maxPaintExtent: 50,
-      // hitTestExtent: paintedChildSize,
-      // hasVisualOverflow: childExtent > constraints.remainingPaintExtent ||
-      //     constraints.scrollOffset > 0.0,
-    );
-    setChildParentData(child, constraints, geometry);
   }
 }
