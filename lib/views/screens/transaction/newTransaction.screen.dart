@@ -131,6 +131,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                       transactionTypeId:
                           transactionTypeSelect.selectedTransactionType.id,
                     );
+                    //------Reset Part
+                    transactionTypeSelect.deSelectTransactionType(
+                        transactionTypeSelect.selectedTransactionType.id);
                     Navigator.pushNamed(context, rMyApp);
                   },
                   child: Container(

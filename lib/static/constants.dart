@@ -9,7 +9,12 @@ const int BA = 1;
 const int BALO = 2;
 
 //---Sum Chet Vel dan
-const int Lei = 0;
-const int Hralh = 1;
-const int Lakluh = 2;
-const int Pekchhuah = 3;
+const int cLEI = 0;
+const int cHRALH = 1;
+const int cLAKLUH = 2;
+const int cPEKCHHUAH = 3;
+
+const String PRIMARYCOLOR = '#FBAF02';
+const String TEXTCOLOR = '#080040';
+const String GREYCOLOR = '#6A6A6A';
+const String SECONDARYGREYCOLOR = '#B8BBC6';
