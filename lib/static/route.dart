@@ -22,6 +22,7 @@ const String rTransactionTypeSelect = '/transactionTypeSelect';
 const String rLedgerDashboard = '/books/ledgerDashboard';
 const String rLedger = 'books/ledger';
 const String rGeneralJournalDashboard = '/generalJournalDashboard';
+const String rTrialBalance = 'books/trialBalance';
 
 // -----------------Dashboard route----------
 const String rDashBoard = '/dashboard';
