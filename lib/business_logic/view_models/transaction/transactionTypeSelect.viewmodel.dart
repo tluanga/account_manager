@@ -29,7 +29,7 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   }
 
   void deSelectTransactionType(int id) {
-    selectedTransactionType = null;
+    selectedTransactionType.id = null;
     notifyListeners();
   }
 
