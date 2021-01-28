@@ -49,7 +49,7 @@ class _TransactionTypeSelectScreenState
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.only(left: 20),
                             child: TextFormField(
                               decoration: InputDecoration(
                                 hintText: 'Search...',

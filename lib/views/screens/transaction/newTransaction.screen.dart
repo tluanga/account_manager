@@ -1,9 +1,11 @@
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/widgets/toggle.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -37,12 +39,18 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 Text(
                   'New Transaction',
                   style: TextStyle(
-                    fontSize: 20,
-                  ),
+                      fontSize: 20,
+                      color: HexColor(
+                        TEXTCOLOR,
+                      )),
                 ),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Amount'),
+                  decoration: InputDecoration(
+                    labelText: 'Amount',
+                    focusColor: HexColor(TEXTCOLOR),
+                    hoverColor: HexColor(TEXTCOLOR),
+                  ),
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please Enter Amount';
@@ -77,6 +85,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     minWidth: 120.0,
                     minHeight: 40.0,
                     fontSize: 16.0,
+                    activeBgColor: HexColor(PRIMARYCOLOR),
+                    inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                    activeFgColor: HexColor(TEXTCOLOR),
                     initialLabelIndex: 1,
                     labels: ['Ba', 'Balo'],
                     onToggle: (index) {
@@ -87,6 +98,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 ToggleSwitch(
                   minWidth: 120.0,
                   minHeight: 40.0,
+                  activeBgColor: HexColor(PRIMARYCOLOR),
+                  inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                  activeFgColor: HexColor(TEXTCOLOR),
                   initialLabelIndex: 0,
                   labels: ['Cash', 'Bank'],
                   onToggle: (index) {
@@ -108,10 +122,18 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.blue),
+                      border: Border.all(
+                        color: HexColor(PRIMARYCOLOR),
+                      ),
                     ),
                     child: Center(
-                      child: Text(labelText),
+                      child: Text(
+                        labelText,
+                        style: TextStyle(
+                          color: HexColor(TEXTCOLOR),
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -141,11 +163,16 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.blue),
-                      color: Colors.purple.shade500,
+                      color: HexColor(PRIMARYCOLOR),
                     ),
                     child: Center(
-                      child: Text('Submit'),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: HexColor(TEXTCOLOR),
+                          fontSize: 19,
+                        ),
+                      ),
                     ),
                   ),
                 ),
