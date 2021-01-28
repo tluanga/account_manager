@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/models/party.model.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
@@ -92,6 +93,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     labels: ['Ba', 'Balo'],
                     onToggle: (index) {
                       _baOrBalo = index;
+                      if (index == BA) {
+                        _modalBottomSheet(context);
+                      }
                     },
                   ),
                 ),
@@ -153,6 +157,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                       transactionTypeId:
                           transactionTypeSelect.selectedTransactionType.id,
                     );
+
                     //------Reset Part
                     transactionTypeSelect.deSelectTransactionType(
                         transactionTypeSelect.selectedTransactionType.id);
@@ -183,4 +188,107 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
       },
     );
   }
+
+  void _modalBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * .60,
+            width: 300,
+            child: Column(
+              children: [
+                Text(
+                  'Select Party',
+                  style: TextStyle(
+                      color: HexColor(TEXTCOLOR),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  height: 40,
+                  width: 400,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: HexColor(PRIMARYCOLOR),
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Search by Name...',
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: partyList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: EdgeInsets.all(10),
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: HexColor(PRIMARYCOLOR),
+                          ),
+                        ),
+                        child: Text(partyList[index].name),
+                      );
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: HexColor(TEXTCOLOR),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Select',
+                          style: TextStyle(
+                            color: HexColor(SECONDARYGREYCOLOR),
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 40,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: HexColor(TEXTCOLOR),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Add New',
+                          style: TextStyle(
+                            color: HexColor(SECONDARYGREYCOLOR),
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+  }
 }
+
+List<Party> partyList = [
+  Party(name: 'Lallianthanga', description: 'Khawl Zuar'),
+  Party(name: 'Mohana', description: 'Cement Zuar'),
+];

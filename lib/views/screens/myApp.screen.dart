@@ -180,7 +180,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
-            label: ,
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.menu_book),
