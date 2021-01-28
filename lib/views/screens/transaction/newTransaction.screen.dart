@@ -37,6 +37,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
             ),
             child: Column(
               children: [
+                SizedBox(height: 24,),
                 Text(
                   'New Transaction',
                   style: TextStyle(
@@ -202,42 +203,44 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   'Select Party',
                   style: TextStyle(
                       color: HexColor(TEXTCOLOR),
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  height: 40,
-                  width: 400,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: HexColor(PRIMARYCOLOR),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Search by Name...',
+                    height: 40,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Search by Name...',
+                      ),
                     ),
                   ),
                 ),
+                SizedBox(height: 5,),
                 Expanded(
                   child: ListView.builder(
                     itemCount: partyList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         padding: EdgeInsets.all(10),
-                        height: 50,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: HexColor(PRIMARYCOLOR),
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          partyList[index].name,
+                          style: TextStyle(
+                            fontSize: 16
                           ),
                         ),
-                        child: Text(partyList[index].name),
                       );
                     },
                   ),

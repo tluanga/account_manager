@@ -13,78 +13,15 @@ class BooksDashboard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.red[100],
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            height: 100,
-                            width: 100,
-                            image: AssetImage('assets/images/aJornal.jpg'),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20,),
-                      Column(
-                        children: [
-                          Text(
-                            'General Journal',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 28),
-                          Text('This a a journal\n rating : 5*'),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+              UICard(
+                title: 'General Journal',
+                routeUrl: rGeneralJournalDashboard,
+                iconName: Icons.book_outlined,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
-                child: Container(
-                  padding: EdgeInsets.all(40),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.9),
-                        blurRadius: 5
-                      )
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.account_balance_wallet_outlined,
-                        size: 50,
-                      ),
-                      SizedBox(width: 20,),
-                      Column(
-                        children: [
-                          Text(
-                            'General Ledger',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text('This a Ledger\n rating : 5*'),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+              UICard(
+                title: 'General Ledger',
+                routeUrl: rLedgerDashboard,
+                iconName: Icons.account_balance_wallet_outlined,
               ),
               UICard(
                 title: 'Cash receipt journal',
@@ -105,6 +42,11 @@ class BooksDashboard extends StatelessWidget {
                 title: 'Purchase journal',
                 routeUrl: rTransactionTypeDashboard,
                 iconName: Icons.assignment_ind_outlined,
+              ),
+              UICard(
+                title: 'Trial Balance',
+                routeUrl: rTrialBalance,
+                iconName: Icons.library_books,
               ),
             ],
           ),
