@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CreateLoginPin extends StatelessWidget {
   const CreateLoginPin({Key key}) : super(key: key);
@@ -8,12 +10,9 @@ class CreateLoginPin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
+      child: Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topRight,
-        )),
+        color: Colors.white,
         child: OtpScreen(),
       ),
     ));
@@ -38,7 +37,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   var outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.0),
-    borderSide: BorderSide(color: Colors.transparent),
+    borderSide: BorderSide(color: Colors.black),
   );
 
   int pinIndex = 0;
@@ -53,10 +52,9 @@ class _OtpScreenState extends State<OtpScreen> {
           buildExitButton(),
           Expanded(
             child: Container(
-              alignment: Alignment(0, 0.5),
+              alignment: Alignment(0 ,0.5),
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   buildSecurityText(),
                   SizedBox(
@@ -178,7 +176,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       },
                       child: Icon(
                         Icons.clear,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -271,7 +269,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return Text(
       enterPin,
       style: TextStyle(
-        color: Colors.white70,
+        color: HexColor(TEXTCOLOR),
         fontSize: 21.0,
         fontWeight: FontWeight.bold,
       ),
@@ -320,11 +318,11 @@ class PINNumber extends StatelessWidget {
             contentPadding: EdgeInsets.all(16.0),
             border: outlineInputBorder,
             filled: true,
-            fillColor: Colors.white30),
+        ),
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 21.0,
-          color: Colors.white,
+          color: HexColor(TEXTCOLOR),
         ),
       ),
     );
@@ -342,7 +340,7 @@ class KeyboardNumber extends StatelessWidget {
       height: 60.0,
       width: 60.0,
       decoration: BoxDecoration(
-          shape: BoxShape.circle, color: Colors.purpleAccent.withOpacity(0.1)),
+          shape: BoxShape.circle, color: Colors.blue[700]),
       alignment: Alignment.center,
       child: MaterialButton(
         padding: EdgeInsets.all(8.0),

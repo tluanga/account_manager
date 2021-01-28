@@ -144,6 +144,7 @@ class _DashBoardState extends State<DashBoard> {
                         height: 15.0,
                       ),
                       CupertinoSegmentedControl(
+                        unselectedColor: Colors.white,
                         //  borderColor: Colors.red,
                         groupValue: theriGroupVakue,
                         onValueChanged: (changeFromGroupValue) {

@@ -8,10 +8,10 @@ class SettingsDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
             UICard(
               title: 'Company Profile',
               routeUrl: rCompanyProfile,
@@ -22,8 +22,6 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rAccountingYear,
               iconName: Icons.today,
             ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
               title: 'Ledger Master',
               routeUrl: rLedgerMasterDashboard,
@@ -34,8 +32,6 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rTransactionTypeDashboard,
               iconName: Icons.sync_alt,
             ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             UICard(
               title: 'Change Authentication \n Pin',
               routeUrl: rChangeAuthenticationPin,
@@ -46,8 +42,8 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rTransactionTypeDashboard,
               iconName: Icons.backup,
             ),
-          ]),
-        ],
+          ],
+        ),
       ),
     );
   }

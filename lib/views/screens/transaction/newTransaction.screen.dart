@@ -98,7 +98,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 ToggleSwitch(
                   minWidth: 120.0,
                   minHeight: 40.0,
-                  activeBgColor: HexColor(PRIMARYCOLOR),
+                  activeBgColor: cprimaryColor,
                   inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
                   activeFgColor: HexColor(TEXTCOLOR),
                   initialLabelIndex: 0,

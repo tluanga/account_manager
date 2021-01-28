@@ -11,6 +11,7 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
 
@@ -102,7 +103,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.teal,
+          primarySwatch: cprimaryColor,
         ),
         title: 'Accounting Manager',
 
@@ -180,7 +181,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
-            label: ,
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.menu_book),

@@ -41,8 +41,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  google_fonts: ^1.1.1
-
   searchable_dropdown: ^1.1.3
 
 # For information on the generic Dart part of this file, see the
@@ -56,8 +54,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/clear_icon.png
+  assets:
+    - assets/images/aJournal.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
