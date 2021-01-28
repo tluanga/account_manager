@@ -8,46 +8,51 @@ class BooksDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            UICard(
-              title: 'General journal',
-              routeUrl: rGeneralJournalDashboard,
-              iconName: Icons.book_outlined,
-            ),
-            UICard(
-                title: 'General ledger',
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              UICard(
+                title: 'General Journal',
+                routeUrl: rGeneralJournalDashboard,
+                iconName: Icons.book_outlined,
+              ),
+              UICard(
+                title: 'General Ledger',
                 routeUrl: rLedgerDashboard,
-                iconName: Icons.account_balance_wallet_outlined),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            UICard(
-              title: 'Cash receipt journal',
-              routeUrl: rLedgerMasterDashboard,
-              iconName: Icons.article_outlined,
-            ),
-            UICard(
-              title: 'Cash disbursement journal',
-              routeUrl: rTransactionTypeDashboard,
-              iconName: Icons.assignment_outlined,
-            ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            UICard(
-              title: 'Sales journal',
-              routeUrl: rLedgerMasterDashboard,
-              iconName: Icons.money,
-            ),
-            UICard(
-              title: 'Purchase journal',
-              routeUrl: rTransactionTypeDashboard,
-              iconName: Icons.assignment_ind_outlined,
-            ),
-          ]),
-        ],
+                iconName: Icons.account_balance_wallet_outlined,
+              ),
+              UICard(
+                title: 'Cash receipt journal',
+                routeUrl: rLedgerMasterDashboard,
+                iconName: Icons.article_outlined,
+              ),
+              UICard(
+                title: 'Cash disbursement journal',
+                routeUrl: rTransactionTypeDashboard,
+                iconName: Icons.assignment_outlined,
+              ),
+              UICard(
+                title: 'Sales journal',
+                routeUrl: rLedgerMasterDashboard,
+                iconName: Icons.money,
+              ),
+              UICard(
+                title: 'Purchase journal',
+                routeUrl: rTransactionTypeDashboard,
+                iconName: Icons.assignment_ind_outlined,
+              ),
+              UICard(
+                title: 'Trial Balance',
+                routeUrl: rTrialBalance,
+                iconName: Icons.library_books,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+

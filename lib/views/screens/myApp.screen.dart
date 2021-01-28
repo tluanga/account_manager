@@ -11,6 +11,7 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
 
@@ -18,9 +19,8 @@ import 'package:account_manager/business_logic/view_models/books/ledger/ledgerDa
 
 // -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
-import 'package:account_manager/views/screens/authentication/LoginPin.screen.dart';
-import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/trialBalance/trialBalance.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
 import 'package:account_manager/views/screens/settings/companyProfile/companyProfile.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
@@ -39,6 +39,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'authentication/createLoginPin.screen.dart';
 import 'books/ledgers/ledger.screen.dart';
 import 'books/ledgers/ledgerDashboard.screen.dart';
 import '../dashboard/dashBoard.screen.dart';
@@ -102,7 +103,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.teal,
+          primarySwatch: cprimaryColor,
         ),
         title: 'Accounting Manager',
 
@@ -112,7 +113,6 @@ class MyApp extends StatelessWidget {
           rDashBoard: (context) => DashBoard(),
           //-------------Login Pin----------------
           rCreateLoginPin: (context) => CreateLoginPin(),
-          rEnterLoginPin: (context) => LoginPin(),
 
           // ------Settings-------------
           rAnalyticsDashboard: (context) => AnalyticsDashboard(),
@@ -139,6 +139,7 @@ class MyApp extends StatelessWidget {
           rLedger: (context) => Ledger(),
           rGeneralJournalDashboard: (context) =>
               GeneralJournalDashboardScreen(),
+          rTrialBalance: (context) => TrialBalanceScreen(),
         },
         //  home: Dashboard(),
         home: ChangeNotifierProvider<BottomNavigationBarProvider>(

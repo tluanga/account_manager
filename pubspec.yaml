@@ -35,13 +35,12 @@ dependencies:
   numberpicker:
   intl: ^0.16.1
   hexcolor: ^1.0.6
+  pin_code_fields:
 
 dev_dependencies:
   test:
   flutter_test:
     sdk: flutter
-
-  google_fonts: ^1.1.1
 
   searchable_dropdown: ^1.1.3
 
@@ -56,8 +55,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/clear_icon.png
+  assets:
+    - assets/images/aJournal.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
