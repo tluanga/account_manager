@@ -35,6 +35,10 @@ class TransactionTypeSelectScreen extends StatelessWidget {
                       },
                       child: Container(
                         height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green.shade200),
+                        ),
                         child: Column(
                           children: [
                             Text(
