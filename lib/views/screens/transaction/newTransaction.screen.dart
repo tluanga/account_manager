@@ -149,6 +149,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    _modalBottomSheet(context);
                     newTransaction.newTransaction(
                       amount: _amount,
                       particulars: _particular,
@@ -159,9 +160,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     );
 
                     //------Reset Part
-                    transactionTypeSelect.deSelectTransactionType(
-                        transactionTypeSelect.selectedTransactionType.id);
-                    Navigator.pushNamed(context, rMyApp);
+                    // transactionTypeSelect.deSelectTransactionType(
+                    //     transactionTypeSelect.selectedTransactionType.id);
+                    // Navigator.pushNamed(context, rMyApp);
                   },
                   child: Container(
                     width: double.infinity,
@@ -292,3 +293,68 @@ List<Party> partyList = [
   Party(name: 'Lallianthanga', description: 'Khawl Zuar'),
   Party(name: 'Mohana', description: 'Cement Zuar'),
 ];
+
+void _journalConfirmBottomSheet(context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext contex) {
+        return Container(
+          height: MediaQuery.of(context).size.height * .80,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text('Amount:'),
+                  Text('5000'),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('Particular:'),
+                  Text('Chhangleina'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: HexColor(TEXTCOLOR),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Select',
+                        style: TextStyle(
+                          color: HexColor(SECONDARYGREYCOLOR),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 40,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: HexColor(TEXTCOLOR),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Add New',
+                        style: TextStyle(
+                          color: HexColor(SECONDARYGREYCOLOR),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      });
+}
