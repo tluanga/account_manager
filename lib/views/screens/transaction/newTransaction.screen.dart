@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,12 @@ class _NewTransactionState extends State<NewTransaction> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Consumer<NewTransactionViewModel>(
-        builder: (context, model, child) {
+      child: Consumer2<NewTransactionViewModel, TransactionTypeSelectViewModel>(
+        builder: (context, model, transactionTypeSelect, child) {
+          String _label='Please Select Transaction Type';
+         if(transactionTypeSelect.selectedTransactionType!=null){
+           _label=transactionTypeSelect.selectedTransactionType.name;
+         }
           return Scaffold(
             body: SafeArea(
               child: SingleChildScrollView(
@@ -40,6 +45,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           fontSize: 20,
                         ),
                       ),
+                      Text('New Transaction'),
                       TextFormField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(labelText: 'Amount'),
@@ -115,7 +121,7 @@ class _NewTransactionState extends State<NewTransaction> {
                                 Expanded(
                                   child: Center(
                                     child: Text(
-                                      'Select TransationType',
+                                      _label,
                                       style: TextStyle(
                                         fontSize: 16,
                                       ),
