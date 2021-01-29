@@ -7,12 +7,17 @@ class LedgerTransactionImpl implements LedgerTransactionService {
   Future<List<Map<String, dynamic>>> getLedgerTransactionMapList(
       {int id = 0, int startDate = 0, int endDate = 0}) async {
     Database db = await DatabaseHelper.instance.db;
-    if (id > 0) {
+    if (id > 0 && startDate != 0) {
       final List<Map<String, dynamic>> result = await db.rawQuery('''
       SELECT * FROM ledgerTranction_table
       WHERE id=$id AND
       transactionDate>$startDate AND transactionDate<$endDate      
       ''');
+      return result;
+    } else if (id > 0) {
+      final List<Map<String, dynamic>> result = await db.rawQuery('''
+      SELECT * FROM ledgerTranction_table
+      WHERE id=$id''');
       return result;
     } else {
       print('trying to get Ledger transaction List without parameter');
@@ -64,5 +69,32 @@ class LedgerTransactionImpl implements LedgerTransactionService {
       whereArgs: [id],
     );
     return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getIds() async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _allData = await db.rawQuery('''
+     SELECT * FROM ledgerTranction_table
+      ''');
+    print('all data');
+    print(_allData);
+    List<Map<String, dynamic>> _data = await db.rawQuery('''
+     SELECT DISTINCT  ledgerID FROM ledgerTranction_table
+      ''');
+
+// '''
+//
+//       ''');
+
+    _data.forEach((element) {
+      var one = element;
+      print('looping $one');
+    });
+
+    // List<int> _ids = [];
+    // for (int i = 0; i < _data.length; i++) {
+    //   _ids.add(_data[i]);
+    // }
+    return _data;
   }
 }

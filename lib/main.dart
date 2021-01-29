@@ -1,4 +1,5 @@
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
         primarySwatch: cprimaryColor,
       ),
       debugShowCheckedModeBanner: false,
-      home: CreateLoginPin(),
+      home: MyApp(),
     );
   }
 }
