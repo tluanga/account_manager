@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/books/ledger/ledger.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -19,7 +20,8 @@ import 'package:account_manager/business_logic/view_models/books/ledger/ledgerDa
 
 // -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
-import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
+import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
+import 'package:account_manager/views/screens/books/balanceSheet/balanceSheet.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
 import 'package:account_manager/views/screens/books/trialBalance/trialBalance.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
@@ -29,7 +31,7 @@ import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMaster
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/party/partyDashboard.screen.dart';
 
-import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/settingsDashboard.screen1.dart';
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
@@ -104,6 +106,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LedgerViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => TrialBalanceViewModel(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -118,9 +123,10 @@ class MyApp extends StatelessWidget {
           rDashBoard: (context) => DashBoard(),
           //-------------Login Pin----------------
           rCreateLoginPin: (context) => CreateLoginPin(),
+          rChangeAuthenticationPin: (context) => ConfirmPIN(),
 
           // ------Settings-------------
-          rAnalyticsDashboard: (context) => AnalyticsDashboardScreen(),
+          rAnalyticsDashboard: (context) => SettingsDashboard(),
           rBooksDashboard: (context) => BooksDashboard(),
           rSettingsDashboard: (context) => SettingsDashboard(),
           //-------Settings Company ProfilerCompanyProfile
@@ -148,6 +154,7 @@ class MyApp extends StatelessWidget {
           rGeneralJournalDashboard: (context) =>
               GeneralJournalDashboardScreen(),
           rTrialBalance: (context) => TrialBalanceScreen(),
+          rBalanceSheet: (context) => BalanceSheetScreen(),
         },
         //  home: Dashboard(),
         home: ChangeNotifierProvider<BottomNavigationBarProvider>(
@@ -172,7 +179,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     BooksDashboard(),
     NewTransactionScreen(),
     //  LedgerDashboard(),
-    AnalyticsDashboardScreen(),
+    SettingsDashboard(),
     SettingsDashboard(),
   ];
 
