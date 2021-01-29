@@ -23,6 +23,7 @@ const String rLedgerDashboard = '/books/ledgerDashboard';
 const String rLedger = 'books/ledger';
 const String rGeneralJournalDashboard = '/generalJournalDashboard';
 const String rTrialBalance = 'books/trialBalance';
+const String rBalanceSheet = 'books/balanceSheet';
 
 // -----------------Dashboard route----------
 const String rDashBoard = '/dashboard';

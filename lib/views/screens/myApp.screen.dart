@@ -19,6 +19,8 @@ import 'package:account_manager/business_logic/view_models/books/ledger/ledgerDa
 
 // -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
+import 'package:account_manager/views/screens/books/balanceSheet/balanceSheet.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
 import 'package:account_manager/views/screens/books/trialBalance/trialBalance.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
@@ -113,6 +115,7 @@ class MyApp extends StatelessWidget {
           rDashBoard: (context) => DashBoard(),
           //-------------Login Pin----------------
           rCreateLoginPin: (context) => CreateLoginPin(),
+          rChangeAuthenticationPin : (context) => ConfirmPIN(),
 
           // ------Settings-------------
           rAnalyticsDashboard: (context) => AnalyticsDashboard(),
@@ -140,6 +143,7 @@ class MyApp extends StatelessWidget {
           rGeneralJournalDashboard: (context) =>
               GeneralJournalDashboardScreen(),
           rTrialBalance: (context) => TrialBalanceScreen(),
+          rBalanceSheet: (context) => BalanceSheetScreen(),
         },
         //  home: Dashboard(),
         home: ChangeNotifierProvider<BottomNavigationBarProvider>(

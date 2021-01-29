@@ -1,5 +1,4 @@
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -7,7 +6,7 @@ import 'static/constants.dart';
 import 'views/screens/authentication/createLoginPin.screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
   setUpServiceLocator();
 }
 
