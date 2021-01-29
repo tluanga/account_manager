@@ -1,30 +1,20 @@
-import 'package:account_manager/static/route.dart';
-import 'package:account_manager/views/widgets/uiCard.widget.dart';
 import 'package:flutter/material.dart';
 
-class AnalyticsDashboard extends StatelessWidget {
-  const AnalyticsDashboard({Key key}) : super(key: key);
+class AnalyticsDashboardScreen extends StatefulWidget {
+  AnalyticsDashboardScreen({Key key}) : super(key: key);
 
   @override
+  _AnalyticsDashboardScreenState createState() =>
+      _AnalyticsDashboardScreenState();
+}
+
+class _AnalyticsDashboardScreenState extends State<AnalyticsDashboardScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Container(
+      child: Column(
         children: [
-          UICard(
-            title: 'Descriptive',
-            routeUrl: rGeneralJournalDashboard,
-            iconName: Icons.analytics_outlined,
-          ),
-          UICard(
-              title: 'Predictive',
-              routeUrl: rLedgerDashboard,
-              iconName: Icons.account_balance_wallet_outlined),
-          UICard(
-            title: 'Prescriptive',
-            routeUrl: rLedgerMasterDashboard,
-            iconName: Icons.analytics,
-          ),
+          Text('Analytics Screen'),
         ],
       ),
     );

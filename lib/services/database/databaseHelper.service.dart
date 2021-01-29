@@ -21,12 +21,18 @@ class DatabaseHelper {
   String comPhoneNumber = 'phoneNumber';
 
   // -----TABLE -2 ACCOUNTING YEAR TABLE----------
+  static const String accountingYearTable = 'accountingYear_table';
+  String accountingYearId = 'id';
+  String accountingYearStartDate = 'startDate';
+  String accountingYearEndDate = 'endDate';
 
   // -------TABLE -3 LEDGER MASTER TABLE----------
   static const String masterLedgerTable = 'masterLedger_table';
   String mledgerId = 'id';
   String mledgerName = 'name';
   String mledgerDescription = 'description';
+  String mledgerDirectOrIndirect = 'directOrIndirect';
+  String mledgerParty = 'party';
 
   // -----TABLE 4-TRANSACTION TYPE TABLE-----------
   String transactionTypeTable = 'transactionType_table';
@@ -57,7 +63,13 @@ class DatabaseHelper {
   String ledgerTransactionDebitOrCredit = 'debitOrCredit';
   String ledgerTransactionCashOrBank = 'cashOrBank';
 
-  //------TABLE 7 AUTHENTICATION PIN
+  //------TABLE 7 PARTY TABLE
+  String partyTable = 'party_table';
+  String partyId = 'id';
+  String partyName = 'name';
+  String partyDescription = 'description';
+
+  //------TABLE 8 AUTHENTICATION PIN
 
   Future<Database> get db async {
     if (_db == null) {
@@ -93,10 +105,12 @@ class DatabaseHelper {
       'CREATE TABLE $companyProfileTable($comId INTEGER PRIMARY KEY AUTOINCREMENT, $comName TEXT, $mledgerDescription TEXT)',
     );
     // Table 2- Accounting Year
-
+    await db.execute(
+      'CREATE TABLE $accountingYearTable($accountingYearId INTEGER PRIMARY KEY AUTOINCREMENT, $accountingYearStartDate INT, $accountingYearEndDate INT)',
+    );
     // Table 3 - LedgerMaster Table
     await db.execute(
-      'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT)',
+      'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT,$mledgerDirectOrIndirect INT,$mledgerParty INT )',
     );
     // Table 4 - TransactionType Table
     await db.execute(
@@ -112,29 +126,50 @@ class DatabaseHelper {
     );
 
     // Table 7 - Authenticaion PIN
+    await db.execute(
+      'CREATE TABLE $partyTable($partyId INTEGER PRIMARY KEY AUTOINCREMENT, $partyName TEXT, $partyDescription STRING)',
+    );
 
     // --------Special Ledger------------
     // 1) Bank Ledger
     await db.insert(masterLedgerTable,
         {'name': 'Bank', 'description': 'All Transaction Involving Bank'});
     //2) Cash Account
-    await db.insert(masterLedgerTable,
-        {'name': 'Cash A/c', 'description': 'All Transaction Involving Cash'});
+    await db.insert(masterLedgerTable, {
+      'name': 'Cash A/c',
+      'description': 'All Transaction Involving Cash',
+      'directOrIndirect': 0,
+      'party': 0
+    });
     //3) Purchase Account
     await db.insert(masterLedgerTable, {
       'name': 'Purchase',
       'description':
-          'All Transaction Involving Purchase of Item for resell or raw materia'
+          'All Transaction Involving Purchase of Item for resell or raw materia',
+      'directOrIndirect': 0,
+      'party': 0,
     });
     // 4) Discount Account
-    await db.insert(masterLedgerTable,
-        {'name': 'Discount', 'description': 'All Transaction with Discount'});
+    await db.insert(masterLedgerTable, {
+      'name': 'Discount',
+      'description': 'All Transaction with Discount',
+      'directOrIndirect': 0,
+      'party': 0,
+    });
     // 5) Goods Account
-    await db.insert(
-        masterLedgerTable, {'name': 'Goods', 'description': 'Goods Account'});
+    await db.insert(masterLedgerTable, {
+      'name': 'Goods',
+      'description': 'Goods Account',
+      'directOrIntdirect': 0,
+      'party': 0
+    });
     // 6) Wages
-    await db.insert(masterLedgerTable,
-        {'name': 'Wages', 'description': 'Wages of Employee'});
+    await db.insert(masterLedgerTable, {
+      'name': 'Wages',
+      'description': 'Wages of Employee',
+      'directOrIndirect': 0,
+      'party': 0
+    });
     // -----------Mock Data----------
     // 7)LedgerTransaction
     await db.insert(ledgerTransactionTable, {

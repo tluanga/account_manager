@@ -1,4 +1,6 @@
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class UICard extends StatelessWidget {
   final String title;
@@ -25,6 +27,7 @@ class UICard extends StatelessWidget {
               Icon(
                 iconName,
                 size: 50,
+                color: HexColor(TEXTCOLOR),
               ),
               SizedBox(
                 width: 20,
@@ -33,9 +36,12 @@ class UICard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: HexColor(TEXTCOLOR),
+                    ),
                   ),
-                  Text('This a Ledger\n rating : 5*'),
+                  // Text('This a Ledger\n'),
                 ],
               )
             ],

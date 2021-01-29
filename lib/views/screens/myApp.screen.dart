@@ -1,10 +1,10 @@
 import 'package:account_manager/business_logic/view_models/books/ledger/ledger.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/changePin/changePin.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partyDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
@@ -12,13 +12,14 @@ import 'package:account_manager/business_logic/view_models/transaction/newTransa
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
+
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
 
 import 'package:account_manager/business_logic/view_models/books/ledger/ledgerDashboard.viewmodel.dart';
 
 // -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
 import 'package:account_manager/views/screens/books/trialBalance/trialBalance.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
@@ -26,6 +27,7 @@ import 'package:account_manager/views/screens/settings/companyProfile/companyPro
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
+import 'package:account_manager/views/screens/settings/party/partyDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
@@ -56,12 +58,15 @@ class MyApp extends StatelessWidget {
           create: (context) => DashboardViewModel(),
         ),
 
+        //----------Settings------------
         ChangeNotifierProvider(
           create: (context) => LedgerMasterDashboardViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => NewLedgerMasterViewModel(),
         ),
+        //----Settings--Party----------
+        ChangeNotifierProvider(create: (context) => PartyDashboardViewModel()),
 
         ChangeNotifierProvider(
           create: (context) => EditLedgerMasterViewModel(),
@@ -115,7 +120,7 @@ class MyApp extends StatelessWidget {
           rCreateLoginPin: (context) => CreateLoginPin(),
 
           // ------Settings-------------
-          rAnalyticsDashboard: (context) => AnalyticsDashboard(),
+          rAnalyticsDashboard: (context) => AnalyticsDashboardScreen(),
           rBooksDashboard: (context) => BooksDashboard(),
           rSettingsDashboard: (context) => SettingsDashboard(),
           //-------Settings Company ProfilerCompanyProfile
@@ -129,6 +134,9 @@ class MyApp extends StatelessWidget {
 
           rTransactionTypeDashboard: (context) => TransactionTypeDashboard(),
           rNewTransactionType: (context) => NewTransactionType(),
+
+          // -------Settings - People----------
+          rParty: (context) => PartyDashboardScreen(),
 
           // ------------Transaction---------------
           rNewTransaction: (context) => NewTransactionScreen(),
@@ -164,7 +172,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     BooksDashboard(),
     NewTransactionScreen(),
     //  LedgerDashboard(),
-    AnalyticsDashboard(),
+    AnalyticsDashboardScreen(),
     SettingsDashboard(),
   ];
 

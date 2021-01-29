@@ -2,15 +2,24 @@ class LedgerMaster {
   int id;
   String name;
   String description;
+  int directOrIndirect; // 0 -- for direct and 1-- for indirect
+  int party; //0--for party and 1 non party
 
   bool active;
-  LedgerMaster({
-    // this.id,
-    this.name,
-    this.description,
-    this.active = true,
-  });
-  LedgerMaster.withId({this.id, this.name, this.description});
+  LedgerMaster(
+      {
+      // this.id,
+      this.name,
+      this.description,
+      this.active = true,
+      this.directOrIndirect,
+      this.party});
+  LedgerMaster.withId(
+      {this.id,
+      this.name,
+      this.description,
+      this.directOrIndirect,
+      this.party});
 
   setActive() {
     active = !active;
@@ -23,6 +32,9 @@ class LedgerMaster {
     }
     map['name'] = name;
     map['description'] = description;
+    map['directOrIndirect'] = directOrIndirect;
+    map['party'] = party;
+
     return map;
   }
 
@@ -31,6 +43,8 @@ class LedgerMaster {
       id: map['id'],
       name: map['name'],
       description: map['description'],
+      directOrIndirect: map['directOrIndirect'],
+      party: map['party'],
     );
   }
 }

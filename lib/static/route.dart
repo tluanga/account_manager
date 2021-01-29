@@ -13,6 +13,7 @@ const String rDebitSideLedger = 'setting/newTransactionType/debitSideLedger';
 const String rCreditSideLedger = 'setting/newTransactionType/creditSideLedger';
 const String rAccountingYear = 'settings/accountinYear';
 const String rChangeAuthenticationPin = 'settings/changeAuthenticationPin';
+const String rParty = 'settings/party';
 
 // -------------New Transaction-----------------
 const String rNewTransaction = 'newTransaction';

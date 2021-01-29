@@ -12,7 +12,7 @@ class CompanyProfileViewModel extends ChangeNotifier {
   // enter a new company profile
   void loadData() async {
     var temp = await _companyProfileService.getCompanyList();
-    companyData = temp.first;
+    companyData = temp.last;
     notifyListeners();
   }
 

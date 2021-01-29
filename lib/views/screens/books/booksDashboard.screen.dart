@@ -24,27 +24,22 @@ class BooksDashboard extends StatelessWidget {
                 iconName: Icons.account_balance_wallet_outlined,
               ),
               UICard(
-                title: 'Cash receipt journal',
-                routeUrl: rLedgerMasterDashboard,
-                iconName: Icons.article_outlined,
-              ),
-              UICard(
-                title: 'Cash disbursement journal',
-                routeUrl: rTransactionTypeDashboard,
-                iconName: Icons.assignment_outlined,
-              ),
-              UICard(
-                title: 'Sales journal',
-                routeUrl: rLedgerMasterDashboard,
-                iconName: Icons.money,
-              ),
-              UICard(
-                title: 'Purchase journal',
-                routeUrl: rTransactionTypeDashboard,
-                iconName: Icons.assignment_ind_outlined,
-              ),
-              UICard(
                 title: 'Trial Balance',
+                routeUrl: rTrialBalance,
+                iconName: Icons.library_books,
+              ),
+              UICard(
+                title: 'Trading Account',
+                routeUrl: rTrialBalance,
+                iconName: Icons.library_books,
+              ),
+              UICard(
+                title: 'Profit and Loss',
+                routeUrl: rTrialBalance,
+                iconName: Icons.library_books,
+              ),
+              UICard(
+                title: 'Balance Sheet',
                 routeUrl: rTrialBalance,
                 iconName: Icons.library_books,
               ),
@@ -55,4 +50,3 @@ class BooksDashboard extends StatelessWidget {
     );
   }
 }
-

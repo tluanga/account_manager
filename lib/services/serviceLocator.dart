@@ -16,6 +16,8 @@ import 'package:account_manager/services/companyProfile/companyProfile_impl.serv
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction_impl.service.dart';
+import 'package:account_manager/services/party%20copy/ledgerMaster_impl.service.dart';
+import 'package:account_manager/services/party/party.service.dart';
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transaction/transaction_implementation.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
@@ -42,6 +44,8 @@ void setUpServiceLocator() {
   serviceLocator.registerLazySingleton<LedgerTransactionService>(
     () => LedgerTransactionImpl(),
   );
+
+  serviceLocator.registerLazySingleton<PartyService>(() => PartyImpl());
 
   //VIEW MODELS
   // -----LedgerMaster

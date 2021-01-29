@@ -33,6 +33,11 @@ class SettingsDashboard extends StatelessWidget {
               iconName: Icons.sync_alt,
             ),
             UICard(
+              title: 'Party',
+              routeUrl: rParty,
+              iconName: Icons.sync_alt,
+            ),
+            UICard(
               title: 'Change Authentication \n Pin',
               routeUrl: rChangeAuthenticationPin,
               iconName: Icons.history,
