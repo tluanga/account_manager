@@ -21,7 +21,8 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
     return SafeArea(
       child: Consumer<TrialBalanceViewModel>(
         builder: (context, model, child) {
-          model.calculateCash();
+          model.loadData();
+
           return Scaffold(
             body: Column(
               children: [
@@ -193,7 +194,19 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                       )
                     ],
                   ),
-                )
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: model.trialBalanceElements.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        child: Text(
+                          model.trialBalanceElements[index].amount.toString(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           );
