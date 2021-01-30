@@ -106,7 +106,14 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(child: FirstCard(label: 'Particular',),
+                      Expanded(
+                          child: Container(
+                              padding: EdgeInsets.all(15),
+                              color: Colors.cyan[50],
+                              child: Text(
+                                'Particulars',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ))),
                       VerticalDivider(
                         width: 2,
                       ),
@@ -170,11 +177,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                   ),
                   Container(
                     child: Row(
-                      children: [
-                        Text('Total'),
-                        Text('10000'),
-                        Text('2000'),
-                      ],
+                      children: [Text('Total'), Text('10000'), Text('2000')],
                     ),
                   )
                 ],
@@ -184,21 +187,5 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
         },
       ),
     );
-  }
-}
-
-class FirstCard extends StatelessWidget {
-  final String label;
-  const FirstCard({Key key, this.label}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(15),
-        color: Colors.cyan[50],
-        child: Text(
-          label,
-          style: TextStyle(fontWeight: FontWeight.w500),
-        ));
   }
 }
