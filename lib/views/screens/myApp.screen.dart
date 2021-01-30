@@ -20,6 +20,7 @@ import 'package:account_manager/business_logic/view_models/books/ledger/ledgerDa
 
 // -------SCREENS-------------
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/analytics/analyticsDashboard.screen.dart';
 import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
 import 'package:account_manager/views/screens/books/balanceSheet/balanceSheet.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
@@ -30,6 +31,7 @@ import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMaster
 
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/party/partyDashboard.screen.dart';
+import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen1.dart';
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
@@ -179,7 +181,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     BooksDashboard(),
     NewTransactionScreen(),
     //  LedgerDashboard(),
-    SettingsDashboard(),
+    AnalyticsDashboardScreen(),
     SettingsDashboard(),
   ];
 
