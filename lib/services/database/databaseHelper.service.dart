@@ -153,16 +153,17 @@ class DatabaseHelper {
     await db.insert(masterLedgerTable, {
       'name': 'Discount',
       'description': 'All Transaction with Discount',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0,
     });
     // 5) Goods Account
     await db.insert(masterLedgerTable, {
       'name': 'Goods',
       'description': 'Goods Account',
-      'directOrIntdirect': 0,
+      'directOrIntdirect': 1,
       'party': 0
     });
+    // --------------Direct expenses----------------------------------------
     // 6) Wages
     await db.insert(masterLedgerTable, {
       'name': 'Wages',
@@ -170,242 +171,315 @@ class DatabaseHelper {
       'directOrIndirect': 0,
       'party': 0
     });
-    // 7) Salaries
+    // 7) payment
+    await db.insert(masterLedgerTable, {
+      'name': 'Payment',
+      'description': 'payment account',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 8) Receipt
+    await db.insert(masterLedgerTable, {
+      'name': 'Receipt',
+      'description': 'receipt account',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 9) Carriage
+    await db.insert(masterLedgerTable, {
+      'name': 'Carriage expenses',
+      'description': 'Carriage expenses',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 10) custom duty
+    await db.insert(masterLedgerTable, {
+      'name': 'Custom duty',
+      'description': 'custom duty',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 11) water bill
+    await db.insert(masterLedgerTable, {
+      'name': 'Water Bill',
+      'description': 'water bill',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 12) fuel
+    await db.insert(masterLedgerTable, {
+      'name': 'Fuel',
+      'description': 'fuel',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 13) electric bill
+    await db.insert(masterLedgerTable, {
+      'name': 'Electric bill',
+      'description': 'Electric bill',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 14) Consumable
+    await db.insert(masterLedgerTable, {
+      'name': 'Consumable',
+      'description': 'consumable',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 15) packing
+    await db.insert(masterLedgerTable, {
+      'name': 'Packing',
+      'description': 'packing account',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+    // 16) royalty
+    await db.insert(masterLedgerTable, {
+      'name': 'Royalty',
+      'description': 'royalty account',
+      'directOrIndirect': 0,
+      'party': 0
+    });
+
+    //------------------Indirect Expenses----------------------------
+
+    // 17) Salaries
     await db.insert(masterLedgerTable, {
       'name': 'Salaries',
       'description': 'Salaries of Employee',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 8) Rent
+    // 18) Rent
     await db.insert(masterLedgerTable, {
       'name': 'Rent',
       'description': 'Rent paid',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 9) Furniture
+    // 19) Furniture
     await db.insert(masterLedgerTable, {
       'name': 'Furniture',
       'description': 'Transactions made for the purchase of Furnitures',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 10) Water Bill
+    // 20) Water Bill
     await db.insert(masterLedgerTable, {
       'name': 'Water Bill',
       'description': 'Payment of Water bill',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 11) Tax
+    // 21) Tax
     await db.insert(masterLedgerTable, {
       'name': 'Tax',
       'description': 'Payment of Tax',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 12) Office Expenses
+    // 22) Office Expenses
     await db.insert(masterLedgerTable, {
       'name': 'Office Expenses',
       'description': 'Office Expenses',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 13) Sundry
+    // 23) Sundry
     await db.insert(masterLedgerTable, {
       'name': 'Sundry Expenses',
       'description': 'Sundry Expenses',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 14) Printing & Stiationery
+    // 24) Printing & Stiationery
     await db.insert(masterLedgerTable, {
       'name': 'Printing & Stationery',
       'description': 'printing and Stationery',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 15) Telephone Charges
+    // 25) Telephone Charges
     await db.insert(masterLedgerTable, {
       'name': 'Telephone Charges',
       'description': 'Telephone bills and charges',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 16) Staff welfare expenses
+    // 26) Staff welfare expenses
     await db.insert(masterLedgerTable, {
       'name': 'Staff welfare expenses',
       'description': 'staff welfare expenses',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 17) Establishment
+    // 27) Establishment
     await db.insert(masterLedgerTable, {
       'name': 'Establishment Expenses',
       'description': 'Establishment Expenses',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 18) Internet bill
+    // 28) Internet bill
     await db.insert(masterLedgerTable, {
       'name': 'Internet Bill',
       'description': 'internet bill',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 19) courier charge
+    // 29) courier charge
     await db.insert(masterLedgerTable, {
       'name': 'Courier Charge',
       'description': 'courier charges',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 20) Distribution expenses
+    // 30) Distribution expenses
     await db.insert(masterLedgerTable, {
       'name': 'Distribution Expenses',
       'description': 'distribution expenses account',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 21) Travelling
+    // 31) Travelling
     await db.insert(masterLedgerTable, {
       'name': 'Travelling Expenses',
       'description': 'transactions involving travelling',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 22) Freight outward
+    // 32) Freight outward
     await db.insert(masterLedgerTable, {
       'name': 'Freight Outward',
       'description': 'Freight outward account',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 23) Audit fee
+    // 33) Audit fee
     await db.insert(masterLedgerTable, {
       'name': 'Audit Fee',
       'description': 'fees for auditing',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 24) Bad debts
+    // 34) Bad debts
     await db.insert(masterLedgerTable, {
       'name': 'Bad Debts',
       'description': 'Debts which are estimated to be uncollectible',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 25) Provision for bad debts
+    // 35) Provision for bad debts
     await db.insert(masterLedgerTable, {
       'name': 'Provision for bad debts',
       'description': 'acoount to make solution for bad debts',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 26) Advertisement
+    // 36) Advertisement
     await db.insert(masterLedgerTable, {
       'name': 'Advertisement',
       'description': 'money use for advertisement',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 27) Charity/Donation
+    // 37) Charity/Donation
     await db.insert(masterLedgerTable, {
       'name': 'Charity/Donation',
       'description': 'Transactions made for Charity and/or Donations',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 28) Depreciation
+    // 38) Depreciation
     await db.insert(masterLedgerTable, {
       'name': 'Depreciation',
       'description': 'depreciation account',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 29) Bank charges
+    // 39) Bank charges
     await db.insert(masterLedgerTable, {
       'name': 'Bank Charges',
       'description': 'charges made by the bank to us',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 30) Administrative Expenses
+    // 40) Administrative Expenses
     await db.insert(masterLedgerTable, {
       'name': 'Administrative Expenses',
       'description': 'expenses for the cause of administrations',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 31) Commission
+    // 41) Commission
     await db.insert(masterLedgerTable, {
       'name': 'Commission',
       'description': 'commission account',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 32) Sample
+    // 42) Sample
     await db.insert(masterLedgerTable, {
       'name': 'Sample Expenses',
       'description': 'Sample Expenses',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 33) Liscense fee
+    // 43) Liscense fee
     await db.insert(masterLedgerTable, {
       'name': 'Liscense Fee',
       'description': 'fees paid for liscense',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 34) Delivery Charges
+    // 44) Delivery Charges
     await db.insert(masterLedgerTable, {
       'name': 'Delivery Charges',
       'description': 'delivery charges',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 35) Sales tax paid
+    // 45) Sales tax paid
     await db.insert(masterLedgerTable, {
       'name': 'Sales tax paid',
       'description': 'Sales tax paid',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 36) Loss on sale of assets
+    // 46) Loss on sale of assets
     await db.insert(masterLedgerTable, {
       'name': 'Loss on sale of assets',
       'description': 'loss on sale of assets',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 37) Loss by fire/theft
+    // 47) Loss by fire/theft
     await db.insert(masterLedgerTable, {
       'name': 'Loss by fire/theft',
       'description': 'loss by fire/theft',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 38) repairs/ renewal/ maintenance
+    // 48) repairs/ renewal/ maintenance
     await db.insert(masterLedgerTable, {
       'name': 'Repair/Renewal/Maintenance A/c',
       'description': 'account for repair, renewal and maintenance',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 39) Legal charges
+    // 49) Legal charges
     await db.insert(masterLedgerTable, {
       'name': 'Legal Charges',
       'description': 'legal charges',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
-    // 40) insurance
+    // 50) insurance
     await db.insert(masterLedgerTable, {
       'name': 'Insurance',
       'description': 'insurance account',
-      'directOrIndirect': 0,
+      'directOrIndirect': 1,
       'party': 0
     });
 
