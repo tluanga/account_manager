@@ -2,6 +2,7 @@ import 'package:account_manager/business_logic/models/trialBalance.model.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/foundation.dart';
 
 class TrialBalanceViewModel extends ChangeNotifier {
@@ -21,6 +22,8 @@ class TrialBalanceViewModel extends ChangeNotifier {
     List<TrialBalance> ledgerTransactions = [];
     for (int i = 0; i < ledgerIds.length; i++) {
       int sumValue = 0;
+      int creditAmount = 0;
+      int debitAmount = 0;
       String ledgerName = '';
       final list = await _ledgerTransactionService.getList(id: ledgerIds[i]);
       var ledgerMaster =
@@ -29,16 +32,36 @@ class TrialBalanceViewModel extends ChangeNotifier {
 
       for (int j = 0; j < list.length; j++) {
         print(list[j].amount);
+        if (list[j].debitOrCredit == CREDIT) {
+          creditAmount = creditAmount + list[j].amount;
+        } else if (list[j].debitOrCredit == DEBIT) {
+          debitAmount = debitAmount + list[j].amount;
+        }
         sumValue = sumValue + list[j].amount;
       }
-
-      ledgerTransactions.add(TrialBalance(
-          ledgerId: ledgerIds[i], ledgerName: ledgerName, amount: sumValue));
+      if (creditAmount >= debitAmount) {
+        ledgerTransactions.add(
+          TrialBalance(
+              ledgerId: ledgerIds[i],
+              ledgerName: ledgerName,
+              amount: creditAmount - debitAmount,
+              debitOrCredit: CREDIT),
+        );
+      } else {
+        ledgerTransactions.add(
+          TrialBalance(
+              ledgerId: ledgerIds[i],
+              ledgerName: ledgerName,
+              amount: debitAmount - creditAmount,
+              debitOrCredit: DEBIT),
+        );
+      }
     }
     //--Printing Trial Balance Element
     for (int i = 0; i < ledgerTransactions.length; i++) {
       int id = ledgerTransactions[i].ledgerId;
       String name = ledgerTransactions[i].ledgerName;
+
       print('Ledger id:$id');
       int amount = ledgerTransactions[i].amount;
       print(ledgerTransactions[i].amount.toString());
