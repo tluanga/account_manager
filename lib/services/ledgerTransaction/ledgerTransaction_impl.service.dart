@@ -1,6 +1,7 @@
 import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LedgerTransactionImpl implements LedgerTransactionService {
@@ -71,7 +72,7 @@ class LedgerTransactionImpl implements LedgerTransactionService {
     return result;
   }
 
-  Future<List<Map<String, dynamic>>> getIds() async {
+  Future<List<int>> getIds() async {
     Database db = await DatabaseHelper.instance.db;
     List<Map<String, dynamic>> _allData = await db.rawQuery('''
      SELECT * FROM ledgerTranction_table
@@ -82,19 +83,19 @@ class LedgerTransactionImpl implements LedgerTransactionService {
      SELECT DISTINCT  ledgerID FROM ledgerTranction_table
       ''');
 
-// '''
-//
-//       ''');
+    int convertToIntFromMap(Map<String, dynamic> map) {
+      return map['ledgerId'];
+    }
 
+    final List<int> list = [];
     _data.forEach((element) {
-      var one = element;
-      print('looping $one');
+      list.add(convertToIntFromMap(element));
     });
 
     // List<int> _ids = [];
     // for (int i = 0; i < _data.length; i++) {
     //   _ids.add(_data[i]);
     // }
-    return _data;
+    return list;
   }
 }
