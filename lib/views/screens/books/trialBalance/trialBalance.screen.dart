@@ -200,8 +200,16 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                     itemCount: model.trialBalanceElements.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        child: Text(
-                          model.trialBalanceElements[index].amount.toString(),
+                        child: Column(
+                          children: [
+                            Text(
+                              model.trialBalanceElements[index].ledgerName,
+                            ),
+                            Text(
+                              model.trialBalanceElements[index].amount
+                                  .toString(),
+                            ),
+                          ],
                         ),
                       );
                     },

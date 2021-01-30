@@ -160,7 +160,7 @@ class DatabaseHelper {
     await db.insert(masterLedgerTable, {
       'name': 'Goods',
       'description': 'Goods Account',
-      'directOrIntdirect': 0,
+      'directOrIndirect': 0,
       'party': 0
     });
     // 6) Wages
