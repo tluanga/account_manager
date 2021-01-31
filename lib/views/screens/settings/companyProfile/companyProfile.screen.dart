@@ -1,6 +1,10 @@
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+
+import 'editCompanyProfile.screen.dart';
 
 class CompanyProfileScreen extends StatelessWidget {
   const CompanyProfileScreen({Key key}) : super(key: key);
@@ -15,6 +19,9 @@ class CompanyProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Consumer<CompanyProfileViewModel>(
           builder: (context, model, child) {
+            model.loadData();
+            var companyProfile = model.companyData;
+
             return Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
@@ -27,13 +34,15 @@ class CompanyProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Firm Name',
+                        'Name',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(':'),
-                      Text('Mizoram Food'),
+                      Text(
+                        companyProfile != null ? companyProfile.name : '',
+                      ),
                     ],
                   ),
                   Row(
@@ -44,7 +53,9 @@ class CompanyProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('C-87, Ramhlun North'),
+                      Text(
+                        companyProfile != null ? companyProfile.address : '',
+                      ),
                     ],
                   ),
                   Row(
@@ -55,7 +66,9 @@ class CompanyProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('Aizawl'),
+                      Text(
+                        companyProfile != null ? companyProfile.city : '',
+                      ),
                     ],
                   ),
                   Row(
@@ -66,7 +79,9 @@ class CompanyProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('Mizoram'),
+                      Text(
+                        companyProfile != null ? companyProfile.state : '',
+                      ),
                     ],
                   ),
                   Row(
@@ -77,7 +92,9 @@ class CompanyProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('India'),
+                      Text(
+                        companyProfile != null ? companyProfile.country : '',
+                      ),
                     ],
                   ),
                   Row(
@@ -88,7 +105,9 @@ class CompanyProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('MizoramFoods@gmail.com'),
+                      Text(
+                          // companyProfile != null ? companyProfile.email : '',
+                          ''),
                     ],
                   ),
                   Row(
@@ -99,8 +118,37 @@ class CompanyProfileScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('AHEPH1111'),
+                      Text(
+                          // companyProfile != null ? companyProfile.gstTin : '',
+                          ''),
                     ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditCompanyProfileScreen()),
+                      );
+                    },
+                    child: Container(
+                      width: 400,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: HexColor(PRIMARYCOLOR),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          companyProfile != null ? 'EDIT' : 'NEW',
+                          style: TextStyle(
+                            color: HexColor(TEXTCOLOR),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),

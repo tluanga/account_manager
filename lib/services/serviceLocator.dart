@@ -3,6 +3,7 @@
 
 import 'package:account_manager/business_logic/models/transaction.model.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
@@ -90,4 +91,6 @@ void setUpServiceLocator() {
 
   serviceLocator.registerFactory<CompanyProfileViewModel>(
       () => CompanyProfileViewModel());
+  serviceLocator.registerFactory<EditCompanyProfileViewModel>(
+      () => EditCompanyProfileViewModel());
 }

@@ -17,6 +17,12 @@ const int cLEI = 0;
 const int cHRALH = 1;
 const int cLAKLUH = 2;
 const int cPEKCHHUAH = 3;
+//---------PARTY OR NOT PARTY
+const int cPartyAc = 0;
+const int cNotPartyAc = 1;
+
+const int cDirectAc = 0;
+const int cIndirectAc = 1;
 
 const String PRIMARYCOLOR = '#FBAF02';
 const String TEXTCOLOR = '#080040';

@@ -1,8 +1,10 @@
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/editLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class LedgerMasterDashboard extends StatelessWidget {
@@ -13,9 +15,10 @@ class LedgerMasterDashboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ledger Master Dashboard'),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: HexColor(PRIMARYCOLOR),
       ),
       body: Container(
+        decoration: BoxDecoration(color: HexColor(SECONDARYGREYCOLOR)),
         child: Column(
           children: [
             Expanded(
@@ -42,15 +45,15 @@ class LedgerMasterDashboard extends StatelessWidget {
                         child: Container(
                           height: 50,
                           decoration: BoxDecoration(
-                          color: Color(0xFFFFF9F6).withOpacity(1),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 2,
-                              color: Colors.blueGrey[100],
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10),
+                            color: Color(0xFFFFF9F6).withOpacity(1),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 10,
+                                spreadRadius: 2,
+                                color: Colors.blueGrey[100],
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -62,7 +65,7 @@ class LedgerMasterDashboard extends StatelessWidget {
                                       'null',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                    fontSize: 15,
                                   ),
                                 ),
                                 SizedBox(
@@ -70,9 +73,26 @@ class LedgerMasterDashboard extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    ledgerMaster.ledgerMasterList[index].description ?? 'null',
+                                    ledgerMaster.ledgerMasterList[index]
+                                                .party ==
+                                            cPartyAc
+                                        ? 'Party Account'
+                                        : 'Not a Party Account',
                                     textAlign: TextAlign.right,
-                                  )
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    ledgerMaster.ledgerMasterList[index]
+                                                .directOrIndirect ==
+                                            cDirectAc
+                                        ? 'Direct Account'
+                                        : 'Indirect Account',
+                                    textAlign: TextAlign.right,
+                                  ),
                                 ),
                               ],
                             ),

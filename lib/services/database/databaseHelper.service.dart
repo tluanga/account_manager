@@ -15,7 +15,7 @@ class DatabaseHelper {
   String comAddress = 'address';
   String comCity = 'city';
   String comState = 'state';
-  String comCountry = 'Country';
+  String comCountry = 'country';
   String comEmail = 'email';
   String comGsttin = 'gstTin';
   String comPhoneNumber = 'phoneNumber';
@@ -102,7 +102,7 @@ class DatabaseHelper {
   void _createDb(Database db, int version) async {
     // Table 1- Company Profile
     await db.execute(
-      'CREATE TABLE $companyProfileTable($comId INTEGER PRIMARY KEY AUTOINCREMENT, $comName TEXT, $mledgerDescription TEXT)',
+      'CREATE TABLE $companyProfileTable($comId INTEGER PRIMARY KEY AUTOINCREMENT, $comName TEXT, $comAddress TEXT, $comCity TEXT, $comState TEXT, $comCountry TEXT,$comEmail TEXT,$comGsttin TEXT, $comPhoneNumber INT )',
     );
     // Table 2- Accounting Year
     await db.execute(

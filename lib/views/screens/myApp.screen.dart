@@ -3,6 +3,7 @@ import 'package:account_manager/business_logic/view_models/books/tradingAccount/
 import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
@@ -70,6 +71,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewLedgerMasterViewModel(),
         ),
+        //----Settings--CompanyProfile----------
+        ChangeNotifierProvider(
+            create: (context) => EditCompanyProfileViewModel()),
+
         //----Settings--Party----------
         ChangeNotifierProvider(create: (context) => PartyDashboardViewModel()),
 
