@@ -106,7 +106,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(child: FirstCard(label: 'Particular',),
+                      Expanded(child: FirstCard(label: 'Particular',)),
                       VerticalDivider(
                         width: 2,
                       ),

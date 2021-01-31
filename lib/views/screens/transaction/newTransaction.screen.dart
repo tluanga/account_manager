@@ -7,6 +7,7 @@ import 'package:account_manager/views/screens/transaction/transactionTypeSelect.
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -18,6 +19,7 @@ class NewTransactionScreen extends StatefulWidget {
 }
 
 class _NewTransactionScreenState extends State<NewTransactionScreen> {
+  DateTime _dateTime = DateTime.now();
   int _amount;
   String _particular;
   int _baOrBalo;
@@ -42,13 +44,37 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   SizedBox(
                     height: 24,
                   ),
-                  Text(
-                    'New Transaction',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: HexColor(
-                          TEXTCOLOR,
-                        )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                      'New Transaction',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: HexColor(
+                            TEXTCOLOR,
+                          )),
+                      ),
+                      RaisedButton(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        onPressed: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2010),
+                            lastDate: DateTime(2030),
+                          ).then((date) {
+                            setState(() {
+                              _dateTime = date;
+                            });
+                          });
+                        },
+                        child: Text(
+                          DateFormat('dd/MM/yyyy').format(_dateTime),
+                        ),
+                      ),
+                    ]
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
@@ -181,11 +207,14 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                         color: HexColor(PRIMARYCOLOR),
                       ),
                       child: Center(
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: HexColor(TEXTCOLOR),
-                            fontSize: 19,
+                        child: FlatButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: HexColor(TEXTCOLOR),
+                              fontSize: 19,
+                            ),
                           ),
                         ),
                       ),
@@ -220,14 +249,14 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     ToggleSwitch(
-                    minWidth: 120.0,
-                    minHeight: 40.0,
-                    activeBgColor: cprimaryColor,
-                    inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                    activeFgColor: HexColor(TEXTCOLOR),
-                    initialLabelIndex: 0,
-                    labels: ['Partial', 'Full'],
-                    onToggle: (print),
+                      minWidth: 120.0,
+                      minHeight: 40.0,
+                      activeBgColor: cprimaryColor,
+                      inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                      activeFgColor: HexColor(TEXTCOLOR),
+                      initialLabelIndex: 0,
+                      labels: ['Partial', 'Full'],
+                      onToggle: (print),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
