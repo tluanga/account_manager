@@ -52,4 +52,19 @@ class LedgerMasterImpl implements LedgerMasterService {
     );
     return result;
   }
+
+  Future<List<LedgerMaster>> getPartyList() async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE party=0
+      ''');
+    print('all data');
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+
+    return ledgerMasterList;
+  }
 }

@@ -38,7 +38,7 @@ import 'package:account_manager/views/screens/settings/settingsDashboard.screen.
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
-import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/purchaseNewTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 
@@ -158,7 +158,7 @@ class MyApp extends StatelessWidget {
 
           // ------------Transaction---------------
           rTransactionDashboard: (context) => TransactionDashboardScreen(),
-          rNewTransaction: (context) => NewTransactionScreen(),
+          rNewTransaction: (context) => PurchaseNewTransactionScreen(),
           rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
           //-------------Book------------------------

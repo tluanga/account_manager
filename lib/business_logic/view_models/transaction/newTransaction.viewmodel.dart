@@ -15,6 +15,7 @@ import 'package:account_manager/business_logic/models/ledgerTransaction.model.da
 
 class NewTransactionViewModel extends ChangeNotifier {
   int baOrBalo;
+  List<LedgerMaster> partyList = [];
 
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
@@ -112,5 +113,11 @@ class NewTransactionViewModel extends ChangeNotifier {
     var payload = LedgerMaster(name: name, description: description);
     var result = await _ledgerMasterService.insert(payload);
     return result;
+  }
+
+  void loadParty() async {
+    final _partyList = await _ledgerMasterService.getPartyList();
+
+    partyList = _partyList;
   }
 }

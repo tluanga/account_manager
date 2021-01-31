@@ -2,7 +2,7 @@ import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'newTransaction.screen.dart';
+import 'purchaseNewTransaction.screen.dart';
 
 class TransactionDashboardScreen extends StatelessWidget {
   const TransactionDashboardScreen({Key key}) : super(key: key);
@@ -31,7 +31,8 @@ class TransactionDashboardScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NewTransactionScreen()),
+                MaterialPageRoute(
+                    builder: (context) => PurchaseNewTransactionScreen()),
               );
             },
             child: Padding(
