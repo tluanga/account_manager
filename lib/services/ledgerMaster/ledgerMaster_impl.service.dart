@@ -5,15 +5,15 @@ import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LedgerMasterImpl implements LedgerMasterService {
-
   Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
     Database db = await DatabaseHelper.instance.db;
+
     final List<Map<String, dynamic>> result =
         await db.query('masterLedger_table');
     return result;
   }
 
-  Future<List<LedgerMaster>> getList() async {
+  Future<List<LedgerMaster>> getList({int id = 0}) async {
     final List<Map<String, dynamic>> ledgerMasterMapList =
         await getLedgerMasterMapList();
     final List<LedgerMaster> ledgerMasterList = [];

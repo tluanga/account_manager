@@ -6,13 +6,17 @@ import 'package:sqflite/sqflite.dart';
 class LedgerTransactionImpl implements LedgerTransactionService {
   Future<List<Map<String, dynamic>>> getLedgerTransactionMapList(
       {int id = 0, int startDate = 0, int endDate = 0}) async {
+    print('id:$id--startDate:$startDate,------endate:$endDate');
     Database db = await DatabaseHelper.instance.db;
     if (id > 0 && startDate != 0) {
       final List<Map<String, dynamic>> result = await db.rawQuery('''
       SELECT * FROM ledgerTranction_table
-      WHERE id=$id AND
-      transactionDate>$startDate AND transactionDate<$endDate      
+      WHERE id=$id    
       ''');
+      // AND
+      // date>$startDate AND date<$endDate
+      print('inside the query');
+      print(result.length.toString());
       return result;
     } else if (id > 0) {
       final List<Map<String, dynamic>> result = await db.rawQuery('''
@@ -31,7 +35,11 @@ class LedgerTransactionImpl implements LedgerTransactionService {
   Future<List<LedgerTransaction>> getList(
       {int id = 0, int startDate, int endDate}) async {
     final List<Map<String, dynamic>> ledgerTransactionMapList =
-        await getLedgerTransactionMapList();
+        await getLedgerTransactionMapList(
+      id: id,
+      startDate: startDate,
+      endDate: endDate,
+    );
     print(ledgerTransactionMapList.length.toString());
     final List<LedgerTransaction> ledgerTransactionList = [];
     ledgerTransactionMapList.forEach((ledgerTransactionMap) {

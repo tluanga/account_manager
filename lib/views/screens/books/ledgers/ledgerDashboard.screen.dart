@@ -38,7 +38,12 @@ class LedgerDashboard extends StatelessWidget {
                     List.generate(
                       model.ledgerMasterList.length,
                       (index) => CustomWidget(
-                          index, model.ledgerMasterList[index].name),
+                        index: index,
+                        ledgerName: model.ledgerMasterList[index].name,
+                        ledgerId: model.ledgerMasterList[index].id,
+                        totalCredit: 0,
+                        totalDebit: 0,
+                      ),
                     ).toList(),
                   ),
                 ),
@@ -80,32 +85,41 @@ class LedgerDashboard extends StatelessWidget {
 }
 
 class CustomWidget extends StatelessWidget {
+  final int index;
+  final int ledgerId;
   final String ledgerName;
-  final int totalDebit = 100;
-  final int totalCredit = 300;
+  final int totalDebit;
+  final int totalCredit;
 
-  CustomWidget(
-    this._index,
+  CustomWidget({
+    this.index,
+    this.ledgerId,
     this.ledgerName,
-  );
-
-  final int _index;
+    this.totalDebit,
+    this.totalCredit,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Ledger()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => Ledger(
+              ledgerId: ledgerId,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           height: 50,
           decoration: BoxDecoration(
-            color: (_index % 2 != 0) ? Colors.white : Colors.grey.shade200,
+            color: (index % 2 != 0) ? Colors.white : Colors.grey.shade200,
             border: Border.all(
-              color: Colors.amberAccent,
+              color: Colors.grey.shade400,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -115,7 +129,7 @@ class CustomWidget extends StatelessWidget {
               Text(
                 '$ledgerName',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -128,11 +142,11 @@ class CustomWidget extends StatelessWidget {
                   children: [
                     Text(
                       'Debit:$totalDebit',
-                      style: TextStyle(fontSize: 18, color: Colors.green),
+                      style: TextStyle(fontSize: 14, color: Colors.green),
                     ),
                     Text(
                       'Debit:$totalCredit',
-                      style: TextStyle(fontSize: 18, color: Colors.red),
+                      style: TextStyle(fontSize: 14, color: Colors.red),
                     ),
                   ],
                 ),
