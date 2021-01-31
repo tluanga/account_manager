@@ -1,15 +1,13 @@
-// import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/views/screens/authentication/createLoginPin.screen.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
+import 'static/constants.dart';
 import 'views/screens/authentication/createLoginPin.screen.dart';
-// import 'views/screens/authentication/LoginPin.screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
   setUpServiceLocator();
 }
 
@@ -18,9 +16,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)),
+      theme: ThemeData(
+        primaryColor: HexColor(PRIMARYCOLOR),
+        primarySwatch: cprimaryColor,
+      ),
       debugShowCheckedModeBanner: false,
-      home: CreateLoginPin(),
+      home: MyApp(),
     );
   }
 }

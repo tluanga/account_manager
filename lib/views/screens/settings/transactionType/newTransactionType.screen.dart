@@ -1,6 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
-import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/static/route.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
@@ -10,199 +9,308 @@ class NewTransactionType extends StatefulWidget {
   _AppState createState() => _AppState();
 }
 
-List<String> localData = ['Purchase Account','Sales account', 'Machinery'];
+List<String> localData = ['Purchase Account', 'Sales account', 'Machinery'];
 
 class _AppState extends State<NewTransactionType> {
-  Map<String, String> selectedValueMap = Map();
+  NewTransactionTypeViewModel _transactionTypeViewModel =
+      serviceLocator<NewTransactionTypeViewModel>();
+  Map<String, String> selectedDebitSideLedger = Map();
+  Map<String, String> selectedCreditSideLedger = Map();
+  String _name;
+  String _description;
+  int _sumChetVelDanType;
+  int _selectedDebitSideLedgerId;
+  int _selectedCreditSideLedgerId;
+
+  String dropdownValue = 'Hralh';
+  final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    _transactionTypeViewModel.loadData();
+    super.initState();
+  }
+
+  _submit() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+     // print('$_name, $_description, $_sumChetVelDanType, $_selectedDebitSideLedgerId');
+
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<NewTransactionTypeViewModel>(
-        builder: (context, model, child) {
-          return SafeArea(
-            child: Column(
-              children: [
-                Container(
-                  height: 50,
-                  decoration: BoxDecoration(color: Colors.grey.shade200),
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        'New Transaction Type',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+              child: SingleChildScrollView(
+          child: Consumer<NewTransactionTypeViewModel>(
+            builder: (context, model, child) {
+              print(model.ledgerMasterList.length.toString());
+              model.loadData();
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 20,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                      decoration: InputDecoration(
-                    labelText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                      decoration: InputDecoration(
-                    labelText: 'Description',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  )),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.green[300])
-                  ),
-                  child:getSearchableDropdown(localData, "local"),
-                ),
-                Container(
-                  child: Text(model.getCreditSideLedger()),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        rCreditSideLedger,
-                        arguments: CREDIT,
-                      );
-                    },
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.green.shade300,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Select Credit Side Ledger'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      rTransactionTypeDashboard,
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50,
-                      width: 420,
-                      decoration: BoxDecoration(
-                        color: Colors.green.shade200,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: double.infinity,
+                          decoration: BoxDecoration(color: Colors.grey.shade200),
+                          child: Container(
+                            child: Center(
+                              child: Text(
+                                'New Transaction Type',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 13,
+                          ),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Name',
+                              labelStyle: TextStyle(fontSize: 16),
+                            ),
+                            // onChanged: (value) {
+                            //   _name = value;
+                            // },
+                            validator: (input) => input.trim().isEmpty
+                                ? 'Please enter Name'
+                                : null,
+                            onSaved: (input) => _name = input,
+                            initialValue: _name,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 13,
+                          ),
+                          child: Container(
+                            width: double.infinity,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Description',
+                                labelStyle: TextStyle(fontSize: 16),
+                              ),
+                              // onChanged: (value) {
+                              //   setState(() {
+                              //     _description = value;
+                              //   });
+                              // },
+                               validator: (input) => input.trim().isEmpty
+                              ? 'Please enter Description'
+                              : null,
+                            onSaved: (input) => _description = input,
+                            initialValue: _description,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 13,
+                          ),
+                          child: Container(
+                            width: 370,
+                            child: DropdownButtonFormField<String>(
+                              value: dropdownValue,
+                              icon: Icon(Icons.arrow_downward),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(color: Colors.black),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                  _sumChetVelDanType =
+                                      model.formatSumChetdanType(newValue);
+                                });
+                              },
+                              items: <String>[
+                                'Lei',
+                                'Hralh',
+                                'Lakluh',
+                                'Pekchhuah'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              decoration: InputDecoration(
+                                labelText: 'Sum Chetna',
+                                labelStyle: TextStyle(fontSize: 16.0),
+                                // border: OutlineInputBorder(
+                                //   borderRadius: BorderRadius.circular(10.0),
+                                // ),
+                              ),
+                            //                             onSaved: (input) => _sumChetVelDanType = input,
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _sumChetVelDanType = value;
+                            //   });
+                            // },
+                            // value: _sumChetVelDanType, 
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 35,
+                            horizontal: 13,
+                          ),
+                          child: Container(
+                            width: 400,
+                            // decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(20),
+                            //     border: Border.all(color: Colors.green[300])),
+                            child: debitSideLedgerSelect(
+                                model.getLedgerMasterListForSearchableDropdown(),
+                                "local"),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 35,
+                            horizontal: 13,
+                          ),
+                          child: Container(
+                            width: 400,
+                            // decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(20),
+                            //     border: Border.all(color: Colors.green[300])),
+                            child: creditSideLedgerSelect(localData, "local"),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print(
+                              _sumChetVelDanType.toString(),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 50,
+                              width: 420,
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade400,
+                                border: Border.all(
+                                  color: Colors.green,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: FlatButton(
+                                  onPressed: _submit,
+                                   child: Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
-          );
-          // return Stack(
-          //   children: [
-          //     Text(
-          //       transactionType.getSelectedLedger().length.toString(),
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         Navigator.pushNamed(context, rLedgerSelect);
-          //       },
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(15.0),
-          //         child: Container(
-          //           padding: EdgeInsets.symmetric(horizontal: 20),
-          //           height: 50,
-          //           decoration: BoxDecoration(
-          //             border: Border.all(color: Colors.teal),
-          //             borderRadius: BorderRadius.circular(10),
-          //           ),
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               Expanded(
-          //                 child: Center(
-          //                   child: Text(
-          //                     'Select Ledgers',
-          //                     style: TextStyle(
-          //                       fontSize: 16,
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 width: 20,
-          //               ),
-          //               Icon(Icons.arrow_forward_ios_outlined,
-          //                   color: Colors.teal)
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // );
-        },
+              );
+            },
+          ),
+        ),
       ),
     );
   }
-  Widget getSearchableDropdown(List<String> listData, mapKey) {
-    List<DropdownMenuItem> items = [];
-    for(int i=0; i < listData.length; i++) {
-      items.add(new DropdownMenuItem(
-          child: new Text(
-            listData[i],
-          ),
-          value: listData[i],
-        )
-      );
-    }
+
+  Widget debitSideLedgerSelect(List<DropdownMenuItem> listData, mapKey) {
+    // List<DropdownMenuItem> items = [];
+    // for (int i = 0; i < listData.length; i++) {
+    //   items.add(new DropdownMenuItem(
+    //     child: new Text(
+    //       listData[i],
+    //     ),
+    //     value: listData[i],
+    //   ));
+    // }
+    
+    var length = listData.length.toString();
+    print('Length of the data is:$length');
     return new SearchableDropdown(
+                              //       onChanged: (String newValue) {
+                              //   setState(() {
+                              //     dropdownValue = newValue;
+                              //     _sumChetVelDanType =
+                              //         model.formatSumChetdanType(newValue);
+                              //   });
+                              // },
+      isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
-      items: items,
-      value: selectedValueMap[mapKey],
+      items: listData,
+      value: selectedDebitSideLedger[mapKey],
       isCaseSensitiveSearch: false,
       hint: new Text(
-        'Select Debit side Ledger'
+        'Select Debit side Ledger',
       ),
       searchHint: new Text(
         'Select One',
-        style: new TextStyle(
-            fontSize: 20
-        ),
+        style: new TextStyle(fontSize: 20),
       ),
       onChanged: (value) {
         setState(() {
-          selectedValueMap[mapKey] = value;
+          _selectedDebitSideLedgerId = value;
+          selectedDebitSideLedger[mapKey] = value;
         });
       },
     );
   }
 
+  Widget creditSideLedgerSelect(List<String> listData, mapKey) {
+    List<DropdownMenuItem> items = [];
+    for (int i = 0; i < listData.length; i++) {
+      items.add(new DropdownMenuItem(
+        child: new Text(
+          listData[i],
+        ),
+        value: listData[i],
+      ));
+    }
+    return new SearchableDropdown(
+      isExpanded: true,
+      underline: Padding(padding: EdgeInsets.all(5)),
+      items: items,
+      value: selectedCreditSideLedger[mapKey],
+      isCaseSensitiveSearch: false,
+      hint: new Text('Select Credit side Ledger'),
+      searchHint: new Text(
+        'Select One',
+        style: new TextStyle(fontSize: 20),
+      ),
+      onChanged: (value) {
+        setState(() {
+          _selectedCreditSideLedgerId = value;
+          selectedCreditSideLedger[mapKey] = value;
+        });
+      },
+    );
+  }
 }

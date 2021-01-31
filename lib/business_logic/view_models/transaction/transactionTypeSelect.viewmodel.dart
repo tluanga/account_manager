@@ -7,9 +7,9 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
   List<TransactionType> transactionTypeList = [];
+  TransactionType selectedTransactionType;
   void loadData() async {
-    final _transactionTypeList =
-        await _transactionTypeService.getTransactionTypeList();
+    final _transactionTypeList = await _transactionTypeService.getList();
     transactionTypeList = _transactionTypeList;
     notifyListeners();
   }
@@ -22,20 +22,21 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   //   transactionTypes = transactionTypesData;
   // }
 
-  // void setTransactionType(int id) {
-  //   selectedTransactionType = id;
-  //   notifyListeners();
-  // }
+  void setTransactionType(int id) {
+    selectedTransactionType =
+        transactionTypeList.firstWhere((element) => element.id == id);
+    notifyListeners();
+  }
 
-  // void deSelectTransactionType(int id) {
-  //   selectedTransactionType = null;
-  //   notifyListeners();
-  // }
+  void deSelectTransactionType(int id) {
+    selectedTransactionType.id = null;
+    notifyListeners();
+  }
 
-  // bool checkTransactionTypeForSelection(int transactionTypeId) {
-  //   if (selectedTransactionType == transactionTypeId) {
-  //     return true;
-  //   } else
-  //     return false;
-  // }
+  bool checkTransactionTypeForSelection(int transactionTypeId) {
+    if (selectedTransactionType.id == transactionTypeId) {
+      return true;
+    } else
+      return false;
+  }
 }

@@ -2,16 +2,17 @@ class TransactionType {
   int id;
   String name;
   String description;
-  int type; // 0--for buy 1-- sell
+  int sumChetVelDanType; // 0--for buy 1-- sell
   int debitSideLedger;
   int creditSideLedger;
+  int bankLedger;
 
   // 0 - when Incomplete and 1- when Complete
 
   TransactionType({
     this.name,
     this.description,
-    this.type,
+    this.sumChetVelDanType,
     this.debitSideLedger,
     this.creditSideLedger,
   });
@@ -19,7 +20,7 @@ class TransactionType {
     this.id,
     this.name,
     this.description,
-    this.type,
+    this.sumChetVelDanType,
     this.debitSideLedger,
     this.creditSideLedger,
   });
@@ -32,6 +33,9 @@ class TransactionType {
     }
     map['name'] = name;
     map['description'] = description;
+    map['sumChetVelDanType'] = sumChetVelDanType;
+    map['debitSideLedger'] = debitSideLedger;
+    map['creditSideLedger'] = creditSideLedger;
 
     return map;
   }
@@ -41,6 +45,9 @@ class TransactionType {
       id: map['id'],
       name: map['name'],
       description: map['description'],
+      sumChetVelDanType: map['sumChetVelDanType'],
+      debitSideLedger: map['debitSideLedger'],
+      creditSideLedger: map['creditSideLedger'],
     );
   }
 }

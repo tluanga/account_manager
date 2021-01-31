@@ -1,125 +1,159 @@
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/static/route.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
-class TransactionTypeSelect extends StatelessWidget {
-  final TransactionTypeSelectViewModel _model =
-      serviceLocator<TransactionTypeSelectViewModel>();
-  TransactionTypeSelect() {
-    _model.loadData();
-  }
+class TransactionTypeSelectScreen extends StatefulWidget {
+  const TransactionTypeSelectScreen({Key key}) : super(key: key);
 
+  @override
+  _TransactionTypeSelectScreenState createState() =>
+      _TransactionTypeSelectScreenState();
+}
+
+class _TransactionTypeSelectScreenState
+    extends State<TransactionTypeSelectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Please Select Transaction Type',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Consumer<TransactionTypeSelectViewModel>(
-                builder: (context, transactionTypeSelect, child) {
-                  transactionTypeSelect.countTransactionTypeList();
-                  return ListView.builder(
-                    itemCount: transactionTypeSelect.transactionTypeList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Text('test');
-                      //   if (transactionType.checkTransactionTypeForSelection(
-                      //       transactionType.transactionTypes[index].id)) {
-                      //     return GestureDetector(
-                      //       onTap: () {
-                      //         transactionType.deSelectTransactionType(
-                      //             transactionType.transactionTypes[index].id);
-                      //       },
-                      //       child: Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: Container(
-                      //           height: 50,
-                      //           decoration: BoxDecoration(
-                      //             color: Colors.green.shade300,
-                      //             borderRadius: BorderRadius.circular(10),
-                      //           ),
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.center,
-                      //             children: [
-                      //               Text(transactionType
-                      //                   .transactionTypes[index].name),
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     );
-                      //   }
-                      //   return GestureDetector(
-                      //     onTap: () {
-                      //       transactionType.setTransactionType(
-                      //           transactionType.transactionTypes[index].id);
-                      //     },
-                      //     child: Padding(
-                      //       padding: const EdgeInsets.all(8.0),
-                      //       child: Container(
-                      //         height: 50,
-                      //         decoration: BoxDecoration(
-                      //           border: Border.all(
-                      //             color: Colors.green.shade300,
-                      //           ),
-                      //           borderRadius: BorderRadius.circular(10),
-                      //         ),
-                      //         child: Row(
-                      //           mainAxisAlignment: MainAxisAlignment.center,
-                      //           children: [
-                      //             Text(transactionType
-                      //                 .transactionTypes[index].name),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   );
-                    },
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, rNewTransaction);
-                },
+      body: Consumer<TransactionTypeSelectViewModel>(
+        builder: (context, model, child) {
+          model.loadData();
+          return Column(
+            children: [
+              Container(
                 child: Container(
-                  height: 50,
-                  width: 420,
                   decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(20),
+                    color: HexColor('#FBAF02'),
                   ),
-                  child: Center(
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Please select Transaction Type',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: HexColor(TEXTCOLOR),
+                          ),
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Search...',
+                                labelStyle: TextStyle(
+                                  color: HexColor(
+                                    TEXTCOLOR,
+                                  ),
+                                ),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: model.transactionTypeList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Color _labelColor;
+                    String _labelText;
+                    if (model.transactionTypeList[index].sumChetVelDanType ==
+                        cHRALH) {
+                      _labelColor = Colors.blue.shade400;
+                      _labelText = 'Pekchhuah';
+                    }
+                    return Padding(
+                      padding: EdgeInsets.all(6),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (model.selectedTransactionType == null) {
+                            model.selectedTransactionType =
+                                model.transactionTypeList[index];
+                            Navigator.pop(context);
+                          } else {
+                            model.selectedTransactionType =
+                                model.transactionTypeList[index];
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 80,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: _labelColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        _labelText,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        model.transactionTypeList[index].name,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        model.transactionTypeList[index]
+                                            .description,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.grey.shade700,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }
