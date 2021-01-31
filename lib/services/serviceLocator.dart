@@ -18,6 +18,8 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction_impl.service.dart';
 import 'package:account_manager/services/party%20copy/ledgerMaster_impl.service.dart';
 import 'package:account_manager/services/party/party.service.dart';
+import 'package:account_manager/services/tradingAccount/tradingAccount.service.dart';
+import 'package:account_manager/services/tradingAccount/tradingAccount_impl.service.dart';
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transaction/transaction_implementation.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
@@ -46,6 +48,10 @@ void setUpServiceLocator() {
   );
 
   serviceLocator.registerLazySingleton<PartyService>(() => PartyImpl());
+
+  // ---Service Registration for trading account
+  serviceLocator.registerLazySingleton<TradingAccountService>(
+      () => TradingAccountImplementation());
 
   //VIEW MODELS
   // -----LedgerMaster

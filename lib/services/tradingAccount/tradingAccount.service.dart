@@ -1,5 +1,5 @@
-import 'package:account_manager/business_logic/view_models/books/tradingAccount/tradingAccount.viewmodel.dart';
+import 'package:account_manager/business_logic/models/tradingAccount.models.dart';
 
 abstract class TradingAccountService {
-  Future<List<TradingAccount>> getDirectExpense();
+  Future<List<DirectExpense>> getDirectExpense();
 }

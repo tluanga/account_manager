@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/books/ledger/ledger.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/books/tradingAccount/tradingAccount.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
@@ -24,6 +25,7 @@ import 'package:account_manager/views/screens/analytics/analyticsDashboard.scree
 import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
 import 'package:account_manager/views/screens/books/balanceSheet/balanceSheet.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/tradingAccount/tradingAccount.screen.dart';
 import 'package:account_manager/views/screens/books/trialBalance/trialBalance.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
 import 'package:account_manager/views/screens/settings/companyProfile/companyProfile.screen.dart';
@@ -33,7 +35,6 @@ import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMas
 import 'package:account_manager/views/screens/settings/party/partyDashboard.screen.dart';
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 
-import 'package:account_manager/views/screens/settings/settingsDashboard.screen1.dart';
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
@@ -110,7 +111,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TrialBalanceViewModel(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TradingAccountViewModel(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -156,6 +160,7 @@ class MyApp extends StatelessWidget {
           rGeneralJournalDashboard: (context) =>
               GeneralJournalDashboardScreen(),
           rTrialBalance: (context) => TrialBalanceScreen(),
+          rTradingAccount: (context) => TradingAccountScreen(),
           rBalanceSheet: (context) => BalanceSheetScreen(),
         },
         //  home: Dashboard(),

@@ -30,7 +30,7 @@ class BooksDashboard extends StatelessWidget {
               ),
               UICard(
                 title: 'Trading Account',
-                routeUrl: rTrialBalance,
+                routeUrl: rTradingAccount,
                 iconName: Icons.library_books,
               ),
               UICard(
