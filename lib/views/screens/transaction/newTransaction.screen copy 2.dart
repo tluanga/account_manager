@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/models/party.model.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
@@ -28,7 +28,8 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer2<NewTransactionViewModel, TransactionTypeSelectViewModel>(
+      body: Consumer2<NewPurchaseTransactionViewModel,
+          TransactionTypeSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, child) {
           String labelText = 'Please Select Transaction Type';
           if (transactionTypeSelect.selectedTransactionType != null) {

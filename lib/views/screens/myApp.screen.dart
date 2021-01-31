@@ -11,7 +11,7 @@ import 'package:account_manager/business_logic/view_models/settings/party/partyD
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
@@ -38,7 +38,7 @@ import 'package:account_manager/views/screens/settings/settingsDashboard.screen.
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
-import 'package:account_manager/views/screens/transaction/purchaseNewTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 
@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CompanyProfileViewModel()),
         // ---------NEW TRANSACTION----------------
         ChangeNotifierProvider(
-          create: (context) => NewTransactionViewModel(),
+          create: (context) => NewPurchaseTransactionViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
@@ -158,7 +158,7 @@ class MyApp extends StatelessWidget {
 
           // ------------Transaction---------------
           rTransactionDashboard: (context) => TransactionDashboardScreen(),
-          rNewTransaction: (context) => PurchaseNewTransactionScreen(),
+          rNewTransaction: (context) => NewPurchaseTransactionScreen(),
           rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
           //-------------Book------------------------

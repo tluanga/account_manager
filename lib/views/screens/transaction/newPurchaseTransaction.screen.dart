@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/models/party.model.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
@@ -12,14 +12,16 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class PurchaseNewTransactionScreen extends StatefulWidget {
-  const PurchaseNewTransactionScreen({Key key}) : super(key: key);
+class NewPurchaseTransactionScreen extends StatefulWidget {
+  const NewPurchaseTransactionScreen({Key key}) : super(key: key);
 
   @override
-  _NewTransactionScreenState createState() => _NewTransactionScreenState();
+  _NewPurchaseTransactionScreenState createState() =>
+      _NewPurchaseTransactionScreenState();
 }
 
-class _NewTransactionScreenState extends State<PurchaseNewTransactionScreen> {
+class _NewPurchaseTransactionScreenState
+    extends State<NewPurchaseTransactionScreen> {
   DateTime _dateTime = DateTime.now();
   int _amount;
   String _particular;
@@ -28,7 +30,8 @@ class _NewTransactionScreenState extends State<PurchaseNewTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer2<NewTransactionViewModel, TransactionTypeSelectViewModel>(
+      body: Consumer2<NewPurchaseTransactionViewModel,
+          TransactionTypeSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, child) {
           String labelText = 'Please Select Transaction Type';
           if (transactionTypeSelect.selectedTransactionType != null) {
@@ -267,7 +270,7 @@ class _NewTransactionScreenState extends State<PurchaseNewTransactionScreen> {
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Consumer<NewTransactionViewModel>(
+              child: Consumer<NewPurchaseTransactionViewModel>(
                 builder: (context, model, child) {
                   return Container(
                     height: MediaQuery.of(context).size.height * .60,

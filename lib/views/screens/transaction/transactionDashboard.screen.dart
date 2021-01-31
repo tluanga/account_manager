@@ -2,7 +2,7 @@ import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'purchaseNewTransaction.screen.dart';
+import 'newPurchaseTransaction.screen.dart';
 
 class TransactionDashboardScreen extends StatelessWidget {
   const TransactionDashboardScreen({Key key}) : super(key: key);
@@ -32,7 +32,7 @@ class TransactionDashboardScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PurchaseNewTransactionScreen()),
+                    builder: (context) => NewPurchaseTransactionScreen()),
               );
             },
             child: Padding(
