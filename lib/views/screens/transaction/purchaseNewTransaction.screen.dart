@@ -530,8 +530,3 @@ class _NewTransactionScreenState extends State<PurchaseNewTransactionScreen> {
         });
   }
 }
-
-List<Party> partyList = [
-  Party(name: 'Lallianthanga', description: 'Khawl Zuar'),
-  Party(name: 'Mohana', description: 'Cement Zuar'),
-];
