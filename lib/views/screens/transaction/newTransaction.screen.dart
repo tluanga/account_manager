@@ -7,6 +7,7 @@ import 'package:account_manager/views/screens/transaction/transactionTypeSelect.
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -18,6 +19,7 @@ class NewTransactionScreen extends StatefulWidget {
 }
 
 class _NewTransactionScreenState extends State<NewTransactionScreen> {
+  DateTime _dateTime = DateTime.now();
   int _amount;
   String _particular;
   int _baOrBalo;
@@ -43,21 +45,12 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     height: 24,
                   ),
                   Text(
-<<<<<<< Updated upstream
-                    'New Transaction',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: HexColor(
-                          TEXTCOLOR,
-                        )),
-=======
                   'New Transaction',
                   style: TextStyle(
                       fontSize: 20,
                       color: HexColor(
                         TEXTCOLOR,
                       )),
->>>>>>> Stashed changes
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
@@ -149,6 +142,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                                 _dateTime = date;
                               });
                             });
+                            
                           },
                           child: Text(
                             DateFormat('dd/MM/yyyy').format(_dateTime),
@@ -218,13 +212,6 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                         color: HexColor(PRIMARYCOLOR),
                       ),
                       child: Center(
-<<<<<<< Updated upstream
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: HexColor(TEXTCOLOR),
-                            fontSize: 19,
-=======
                         child: FlatButton(
                           onPressed: (){
                             _journalConfirmBottomSheet(context);
@@ -235,7 +222,6 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                               color: HexColor(TEXTCOLOR),
                               fontSize: 19,
                             ),
->>>>>>> Stashed changes
                           ),
                         ),
                       ),
@@ -268,6 +254,16 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                           color: HexColor(TEXTCOLOR),
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
+                    ),
+                    ToggleSwitch(
+                      minWidth: 120.0,
+                      minHeight: 40.0,
+                      activeBgColor: cprimaryColor,
+                      inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                      activeFgColor: HexColor(TEXTCOLOR),
+                      initialLabelIndex: 0,
+                      labels: ['Partial', 'Full'],
+                      onToggle: (print),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -423,7 +419,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   Column(
                     children: [
                       Text(
-                        // credit amount for second ledger
+                        // credit amount for first ledger
                         '0',
                         textAlign: TextAlign.center
                       ),
