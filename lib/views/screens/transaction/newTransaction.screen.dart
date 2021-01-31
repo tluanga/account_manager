@@ -7,6 +7,7 @@ import 'package:account_manager/views/screens/transaction/transactionTypeSelect.
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -43,21 +44,12 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     height: 24,
                   ),
                   Text(
-<<<<<<< Updated upstream
                     'New Transaction',
                     style: TextStyle(
                         fontSize: 20,
                         color: HexColor(
                           TEXTCOLOR,
                         )),
-=======
-                  'New Transaction',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: HexColor(
-                        TEXTCOLOR,
-                      )),
->>>>>>> Stashed changes
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
@@ -128,34 +120,32 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: cprimaryColor)
-                    ),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: cprimaryColor)),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Date :'),
-                        RaisedButton(
-                          elevation: 0,
-                          color: Colors.transparent,
-                          onPressed: () {
-                            showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2010),
-                              lastDate: DateTime(2030),
-                            ).then((date) {
-                              setState(() {
-                                _dateTime = date;
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Date :'),
+                          RaisedButton(
+                            elevation: 0,
+                            color: Colors.transparent,
+                            onPressed: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2010),
+                                lastDate: DateTime(2030),
+                              ).then((date) {
+                                setState(() {
+                                  _dateTime = date;
+                                });
                               });
-                            });
-                          },
-                          child: Text(
-                            DateFormat('dd/MM/yyyy').format(_dateTime),
+                            },
+                            child: Text(
+                              DateFormat('dd/MM/yyyy').format(_dateTime),
+                            ),
                           ),
-                        ),
-                      ]
-                    ),
+                        ]),
                   ),
                   SizedBox(height: 10),
                   GestureDetector(
@@ -193,7 +183,6 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  
                   GestureDetector(
                     onTap: () {
                       newTransaction.newTransaction(
@@ -218,15 +207,8 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                         color: HexColor(PRIMARYCOLOR),
                       ),
                       child: Center(
-<<<<<<< Updated upstream
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: HexColor(TEXTCOLOR),
-                            fontSize: 19,
-=======
                         child: FlatButton(
-                          onPressed: (){
+                          onPressed: () {
                             _journalConfirmBottomSheet(context);
                           },
                           child: Text(
@@ -235,7 +217,6 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                               color: HexColor(TEXTCOLOR),
                               fontSize: 19,
                             ),
->>>>>>> Stashed changes
                           ),
                         ),
                       ),
@@ -356,169 +337,147 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
           );
         });
   }
+
   void _journalConfirmBottomSheet(context) {
-  showModalBottomSheet(
-    isScrollControlled: false,
-    context: context,
-    builder: (BuildContext contex) {
-      return Container(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Date : 31/01/2021'),
-                )
-              ],
-            ),
-            Table(
-              columnWidths: {
-                0: FlexColumnWidth(6),
-                1: FlexColumnWidth(3),
-                2: FlexColumnWidth(3),
-              },
-              border: TableBorder.all(  
-                color: Colors.black,  
-                style: BorderStyle.solid,  
-                width: 1), 
-              
-              children: [
-                TableRow(children: [
-                  Text('Particulars',textAlign: TextAlign.center),
-                  Text('Credit', textAlign: TextAlign.center,),
-                  Text('Debit',textAlign: TextAlign.center)
-                ]),
-                TableRow(children: [
-                  Column(
-                    children: [
-                      Text(
-                        // particulars of transaction
-                        'Purchase Account Dr.',
-                        textAlign: TextAlign.left
-                      ),
-                      SizedBox(height: 5,),
-                      Text(
-                        'To Sales Account',
-                        textAlign: TextAlign.center
-                      ),  
-                    ]
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        //debit amount for first ledger
-                        '5000',
-                        textAlign: TextAlign.center
-                      ),
-                      Text(
-                        //debit amount fro second ledger
-                        '0',
-                        textAlign: TextAlign.center
-                      ),  
-                    ]
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        // credit amount for second ledger
-                        '0',
-                        textAlign: TextAlign.center
-                      ),
-                      Text(
-                        // credit amount for second ledger
-                        '5000',
-                        textAlign: TextAlign.center
-                      ),  
-                    ]
-                  ),
-                ]),
-                
-              ],
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal:8.0),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text('Particulars'),
-            //       SizedBox(),
-            //       Text('debit'),
-            //       Text('credit'),
-            //     ],
-            //   ),
-            // ),
-            // Divider(color: Colors.black,),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 8,),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Container(
-            //         width: MediaQuery.of(context).size.width*0.35,
-            //         child: Text('This is an example to demostrate if the particulars contain a large number of words ')
-            //       ),
-            //       Text(_amount.toString()),
-            //       Text('null'),
-            //     ],
-            //   ),
-            // ),
-            SizedBox(height: MediaQuery.of(context).size.height*0.2,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    showModalBottomSheet(
+        isScrollControlled: false,
+        context: context,
+        builder: (BuildContext contex) {
+          return Container(
+            child: Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width*0.35,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.blue[800],
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Confirm',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width*0.35,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.red[700],
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Decline',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14
-                        ),
-                      ),
-                    ),
-                  ),
+                  SizedBox(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Date : 31/01/2021'),
+                  )
                 ],
               ),
-            )
-          ]
-        ),
-      );
-    }
-  );
-}
+              Table(
+                columnWidths: {
+                  0: FlexColumnWidth(6),
+                  1: FlexColumnWidth(3),
+                  2: FlexColumnWidth(3),
+                },
+                border: TableBorder.all(
+                    color: Colors.black, style: BorderStyle.solid, width: 1),
+                children: [
+                  TableRow(children: [
+                    Text('Particulars', textAlign: TextAlign.center),
+                    Text(
+                      'Credit',
+                      textAlign: TextAlign.center,
+                    ),
+                    Text('Debit', textAlign: TextAlign.center)
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text(
+                          // particulars of transaction
+                          'Purchase Account Dr.',
+                          textAlign: TextAlign.left),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text('To Sales Account', textAlign: TextAlign.center),
+                    ]),
+                    Column(children: [
+                      Text(
+                          //debit amount for first ledger
+                          '5000',
+                          textAlign: TextAlign.center),
+                      Text(
+                          //debit amount fro second ledger
+                          '0',
+                          textAlign: TextAlign.center),
+                    ]),
+                    Column(children: [
+                      Text(
+                          // credit amount for second ledger
+                          '0',
+                          textAlign: TextAlign.center),
+                      Text(
+                          // credit amount for second ledger
+                          '5000',
+                          textAlign: TextAlign.center),
+                    ]),
+                  ]),
+                ],
+              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal:8.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text('Particulars'),
+              //       SizedBox(),
+              //       Text('debit'),
+              //       Text('credit'),
+              //     ],
+              //   ),
+              // ),
+              // Divider(color: Colors.black,),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 8,),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Container(
+              //         width: MediaQuery.of(context).size.width*0.35,
+              //         child: Text('This is an example to demostrate if the particulars contain a large number of words ')
+              //       ),
+              //       Text(_amount.toString()),
+              //       Text('null'),
+              //     ],
+              //   ),
+              // ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.2,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.blue[800],
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.red[700],
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                        child: Text(
+                          'Decline',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ]),
+          );
+        });
+  }
 }
 
 List<Party> partyList = [
   Party(name: 'Lallianthanga', description: 'Khawl Zuar'),
   Party(name: 'Mohana', description: 'Cement Zuar'),
 ];
-
-
