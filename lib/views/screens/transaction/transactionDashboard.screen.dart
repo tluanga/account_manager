@@ -1,5 +1,4 @@
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -14,6 +13,20 @@ class TransactionDashboardScreen extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.grey.shade100),
       child: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            child: Text(
+              'Transaction Dashboard',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -94,3 +107,5 @@ class TransactionDashboardScreen extends StatelessWidget {
     );
   }
 }
+
+class HexCode {}
