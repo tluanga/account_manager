@@ -17,9 +17,6 @@ class TradingAccountViewModel extends ChangeNotifier {
 
   void loadData() async {
     _directExpenseList = await _tradingAccountService.getDirectExpense();
-    print(
-      _directExpenseList.length.toString(),
-    );
   }
 
   // ---Get all direct income

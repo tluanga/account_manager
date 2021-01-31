@@ -33,10 +33,11 @@ class TradingAccountImplementation implements TradingAccountService {
       ledgerTranction_table.amount,
       ledgerTranction_table.particular,
       ledgerTranction_table.debitOrCredit,
-      masterLedger_table.party
-      
+      masterLedger_table.party,
+      masterLedger_table.directOrIndirect      
       FROM ledgerTranction_table      
       INNER JOIN masterLedger_table ON masterLedger_table.id=ledgerTranction_table.ledgerId
+      WHERE masterLedger_table.directOrIndirect=0
       ''');
 
     print(ledgerTransactionMapList.length.toString());
@@ -44,7 +45,9 @@ class TradingAccountImplementation implements TradingAccountService {
     ledgerTransactionMapList.forEach((ledgerTransactionMap) {
       ledgerTransactionList.add(DirectExpense.fromMap(ledgerTransactionMap));
     });
-    print(ledgerTransactionList[0].name);
+    print(ledgerTransactionList[1].particular);
+    print(ledgerTransactionList[1].name);
+    print(ledgerTransactionList[1].directOrIndirect);
     // taskList.sort((taskA, taskB) => taskA.date.compareTo(taskB.date));
     return ledgerTransactionList;
   }

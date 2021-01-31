@@ -132,8 +132,12 @@ class DatabaseHelper {
 
     // --------Special Ledger------------
     // 1) Bank Ledger
-    await db.insert(masterLedgerTable,
-        {'name': 'Bank', 'description': 'All Transaction Involving Bank'});
+    await db.insert(masterLedgerTable, {
+      'name': 'Bank',
+      'description': 'All Transaction Involving Bank',
+      'directOrIndirect': 0,
+      'party': 0
+    });
     //2) Cash Account
     await db.insert(masterLedgerTable, {
       'name': 'Cash A/c',
