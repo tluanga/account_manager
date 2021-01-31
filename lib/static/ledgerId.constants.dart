@@ -1,6 +1,6 @@
 class LedgerID {
-  static const bank = 1;
-  static const cashAc = 2;
-  static const purchase = 3;
-  static const discount = 1;
+  static const BANK = 1;
+  static const CASHAC = 2;
+  static const PURCHASEAC = 3;
+  static const DISCOUNTAC = 1;
 }

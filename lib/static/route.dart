@@ -16,6 +16,7 @@ const String rChangeAuthenticationPin = 'settings/changeAuthenticationPin';
 const String rParty = 'settings/party';
 
 // -------------New Transaction-----------------
+const String rTransactionDashboard = 'transactionDashboard';
 const String rNewTransaction = 'newTransaction';
 const String rTransactionTypeSelect = '/transactionTypeSelect';
 

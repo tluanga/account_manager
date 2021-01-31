@@ -39,6 +39,7 @@ import 'package:account_manager/views/screens/settings/settingsDashboard.screen.
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 
 // ------SCREENS-----BOOKS---------------
@@ -156,6 +157,7 @@ class MyApp extends StatelessWidget {
           rParty: (context) => PartyDashboardScreen(),
 
           // ------------Transaction---------------
+          rTransactionDashboard: (context) => TransactionDashboardScreen(),
           rNewTransaction: (context) => NewTransactionScreen(),
           rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
@@ -189,7 +191,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     //LedgerMasterDashboard(),
     DashBoard(),
     BooksDashboard(),
-    NewTransactionScreen(),
+    TransactionDashboardScreen(),
     //  LedgerDashboard(),
     AnalyticsDashboardScreen(),
     SettingsDashboard(),
