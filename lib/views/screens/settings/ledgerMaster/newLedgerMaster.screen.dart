@@ -1,139 +1,108 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/views/widgets/my_text_box.dart';
 import 'package:flutter/material.dart';
 
-class NewLedgerMaster extends StatefulWidget {
-  final Function updateLedgerMaster;
-  final LedgerMaster ledgerm;
-
-  NewLedgerMaster({this.updateLedgerMaster, this.ledgerm});
+class NewLedgerMasterScreen extends StatefulWidget {
+  const NewLedgerMasterScreen({Key key}) : super(key: key);
 
   @override
-  _NewLedgerMasterState createState() => _NewLedgerMasterState();
+  _NewLedgerMasterScreenState createState() => _NewLedgerMasterScreenState();
 }
 
-class _NewLedgerMasterState extends State<NewLedgerMaster> {
-  final NewLedgerMasterViewModel _model =
-      serviceLocator<NewLedgerMasterViewModel>();
-
+class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
+  String _name;
+  String _description;
   final _formKey = GlobalKey<FormState>();
-  String _name = '';
-  String _description = '';
 
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.ledgerm != null) {
-      _name = widget.ledgerm.name;
-      _description = widget.ledgerm.description;
-    }
-  }
-
-
-  _submit() {
+  void _onSubmit() {
     if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      LedgerMaster _data =
-          new LedgerMaster(id: 3, name: _name, description: _description);
-      _model.newLedgerMaster(_data);
-      // print('$_title, $_date, $_priority');
+      if (_name != null && _description != null) {
+        NewLedgerMasterViewModel _ledgerMasterViewModel =
+            serviceLocator<NewLedgerMasterViewModel>();
+        _ledgerMasterViewModel.newLedgerMaster(
+          LedgerMaster(
+            name: _name,
+            description: _description,
+          ),
+        );
+        Navigator.pop(context);
+      }
+      if (_formKey.currentState.validate()) {
+        // If the form is valid, display a snackbar. In the real world,
+        // you'd often call a server or save the information in a database.
 
-      // LedgerMaster ledgerm = LedgerMaster(
-      //   name: _name,
-      //   description: _description,
-      // );
-      // if (widget.ledgerm == null) {
-      //   // Insert the ledgerm to our user's database
-      //   LedgerMasterDBHelper.instance.insertLedgerMaster(ledgerm);
-      // } else {
-      //   // Update the ledgerm
-      //   ledgerm.id = widget.ledgerm.id;
-      //   LedgerMasterDBHelper.instance.updateLedgerMaster(ledgerm);
-      // }
-      // widget.updateLedgerMaster();
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Processing Data'),
+          ),
+        );
+      }
       Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text('Add Ledger Master'),
-            backgroundColor: Colors.grey.shade300,
-          ),
-          body: Form(
-            key: _formKey,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: Text('New Ledger Master'),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Center(
+          child: Container(
+            width: 350,
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(25),
-                    elevation: 20,
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                    ),
+                    validator: (input) => input.trim().isEmpty
+                        ? 'Please enter Ledger Name'
+                        : null,
+                    onSaved: (input) => _name = input,
+                    initialValue: _name,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: 'Description'),
+                    validator: (input) => input.trim().isEmpty
+                        ? 'Please enter description'
+                        : null,
+                    onSaved: (input) => _name = input,
+                    initialValue: _name,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _onSubmit();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
+                      width: 400,
+                      height: 40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.teal.shade100,
-                            blurRadius: 1.0, // soften the shadow
-                            // spreadRadius: 2.0, //extend the shadow
-                            offset: Offset(
-                              3.0, // Move to right 10  horizontally
-                              3.0, // Move to bottom 10 Vertically
-                            ),
-                          )
-                        ], // border: Border.all(color: Colors.teal),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Name", border: InputBorder.none),
-                          validator: (input) => input.trim().isEmpty
-                              ? 'Please enter Ledger Name'
-                              : null,
-                          onSaved: (input) => _name = input,
-                          initialValue: _name,
+                        color: Colors.blue.shade300,
+                        border: Border.all(
+                          color: Colors.blue,
                         ),
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    ),
-                  ),
-                ),
-                MyTextBox(
-                  maxLine: 40,
-                  title: 'Description',
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: 400,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade200,
-                    border: Border.all(
-                      color: Colors.green.shade600,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: FlatButton(
-                      onPressed: () {
-                        _submit();
-                      },
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                      child: Center(
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
@@ -141,7 +110,9 @@ class _NewLedgerMasterState extends State<NewLedgerMaster> {
                 ),
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,18 +1,12 @@
+import 'package:account_manager/business_logic/models/transactionType.models.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
 
 import 'package:account_manager/static/route.dart';
+import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDetail.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TransactionTypeDashboard extends StatelessWidget {
-  final TransactionTypeDashboardViewModel _model =
-      serviceLocator<TransactionTypeDashboardViewModel>();
-
-  TransactionTypeDashboard() {
-    _model.loadData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +19,12 @@ class TransactionTypeDashboard extends StatelessWidget {
         child: Consumer<TransactionTypeDashboardViewModel>(
           builder: (context, transactiontype, child) {
             transactiontype.loadData();
+            print(transactiontype.transactionTypeList.length.toString());
             return ListView.builder(
               itemCount: transactiontype.transactionTypeList.length,
               itemBuilder: (BuildContext context, int index) {
                 return TransactionTypeListItem(
-                  name: transactiontype.transactionTypeList[index].name,
+                  transactionType: transactiontype.transactionTypeList[index],
                 );
               },
             );
@@ -53,14 +48,22 @@ class TransactionTypeDashboard extends StatelessWidget {
 }
 
 class TransactionTypeListItem extends StatelessWidget {
-  final String name;
-  TransactionTypeListItem({this.name});
+  final TransactionType transactionType;
+
+  TransactionTypeListItem({this.transactionType});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('choose function for tapping on list tiles');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TransactionTypeDetailScreen(
+              transactionType: this.transactionType,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -76,7 +79,7 @@ class TransactionTypeListItem extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                this.name,
+                this.transactionType.name,
                 style: TextStyle(fontSize: 20, color: Color(0xFF757575)),
               ),
             ),

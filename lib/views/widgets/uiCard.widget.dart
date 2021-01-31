@@ -1,4 +1,6 @@
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class UICard extends StatelessWidget {
   final String title;
@@ -10,55 +12,40 @@ class UICard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, routeUrl);
         },
-        child: Material(
-          borderRadius: BorderRadius.circular(25),
-          elevation: 20,
-          child: Container(
-              height: 130,
-              width: 130,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.teal.shade100,
-                    blurRadius: 1.0, // soften the shadow
-                    // spreadRadius: 2.0, //extend the shadow
-                    offset: Offset(
-                      3.0, // Move to right 10  horizontally
-                      3.0, // Move to bottom 10 Vertically
-                    ),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(25),
-                // border: Border.all(color: Colors.teal),
+        child: Container(
+          padding: EdgeInsets.all(40),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(color: Colors.grey.withOpacity(0.9), blurRadius: 5)
+          ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          child: Row(
+            children: [
+              Icon(
+                iconName,
+                size: 50,
+                color: HexColor(TEXTCOLOR),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              SizedBox(
+                width: 20,
+              ),
+              Column(
                 children: [
-                  Icon(
-                    iconName,
-                    size: 50,
-                    color: Colors.teal.shade300,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     title,
-                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color(0xff4F665E),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
+                      color: HexColor(TEXTCOLOR),
                     ),
                   ),
+                  // Text('This a Ledger\n'),
                 ],
-              )),
+              )
+            ],
+          ),
         ),
       ),
     );

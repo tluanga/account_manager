@@ -1,48 +1,55 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
-import 'package:account_manager/services/database/databaseProvider.service.dart';
-import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:account_manager/services/database/databaseHelper.service.dart';
 
-import 'ledgerMaster_dao.dart';
+import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:sqflite/sqflite.dart';
 
 class LedgerMasterImpl implements LedgerMasterService {
-  final dao = LedgerMasterDao();
+  Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
+    Database db = await DatabaseHelper.instance.db;
 
-  @override
-  DatabaseProvider databaseProvider;
-
-  @override
-  Future<LedgerMaster> insert(LedgerMaster ledgerMaster) async {
-    final db = await databaseProvider.db();
-    ledgerMaster.id = await db.insert(dao.tableName, dao.toMap(ledgerMaster));
-    return ledgerMaster;
+    final List<Map<String, dynamic>> result =
+        await db.query('masterLedger_table');
+    return result;
   }
 
-  @override
-  Future<LedgerMaster> update(LedgerMaster ledgerMaster) async {
-    final db = await databaseProvider.db();
-    await db.update(dao.tableName, dao.toMap(ledgerMaster),
-        where: dao.columnId + "=?", whereArgs: [ledgerMaster.id]);
-    return ledgerMaster;
+  Future<List<LedgerMaster>> getList({int id = 0}) async {
+    final List<Map<String, dynamic>> ledgerMasterMapList =
+        await getLedgerMasterMapList();
+    final List<LedgerMaster> ledgerMasterList = [];
+    ledgerMasterMapList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+    // taskList.sort((taskA, taskB) => taskA.date.compareTo(taskB.date));
+    return ledgerMasterList;
   }
 
-  @override
-  Future<LedgerMaster> delete(LedgerMaster ledgerMaster) async {
-    final db = await databaseProvider.db();
-    await db.delete(
-      dao.tableName,
-      where: dao.columnId + "=",
+  Future<int> insert(LedgerMaster ledgerMaster) async {
+    Database db = await DatabaseHelper.instance.db;
+    print(db);
+    final int result =
+        await db.insert(DatabaseHelper.masterLedgerTable, ledgerMaster.toMap());
+    return result;
+  }
+
+  Future<int> update(LedgerMaster ledgerMaster) async {
+    Database db = await DatabaseHelper.instance.db;
+    final int result = await db.update(
+      'masterLedger_table',
+      ledgerMaster.toMap(),
+      where: 'id = ?',
       whereArgs: [ledgerMaster.id],
     );
-    return ledgerMaster;
+    return result;
   }
 
-  @override
-  Future<List<LedgerMaster>> getLedgerMasterList() async {
-    print('inside getLedgerMasterlist');
-    final db = await databaseProvider.db();
-    print(db.toString());
-    List<Map> maps = await db.query(dao.tableName);
-    // print(dao.fromList(maps).length.toString());
-    return dao.fromList(maps);
+  Future<int> delete(int id) async {
+    Database db = await DatabaseHelper.instance.db;
+    final int result = await db.delete(
+      'masterLedger_table',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result;
   }
 }

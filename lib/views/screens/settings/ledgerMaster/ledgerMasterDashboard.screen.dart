@@ -1,95 +1,123 @@
+import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/static/route.dart';
+import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/views/screens/settings/ledgerMaster/editLedgerMaster.screen.dart';
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
-class LedgerMasterDashboard extends StatefulWidget {
+class LedgerMasterDashboard extends StatelessWidget {
   const LedgerMasterDashboard({Key key}) : super(key: key);
-
-  @override
-  _LedgerMasterDashboardState createState() => _LedgerMasterDashboardState();
-}
-
-class _LedgerMasterDashboardState extends State<LedgerMasterDashboard> {
-  LedgerMasterDashboardViewModel _model =
-      serviceLocator<LedgerMasterDashboardViewModel>();
-
-  @override
-  void initState() {
-    _model.loadData();
-    print('init  state is called');
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text('Ledger Master Dashboard'),
-        backgroundColor: Colors.grey.shade500,
+        backgroundColor: HexColor(PRIMARYCOLOR),
       ),
-      body: Consumer<LedgerMasterDashboardViewModel>(
-          builder: (context, ledgerMaster, child) {
-        ledgerMaster.loadData();
-        return ListView.builder(
-          itemCount: ledgerMaster.ledgerMasterList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewLedgerMaster()));
-              },
-              child: LedgerMasterListItem(
-                title: ledgerMaster.ledgerMasterList[index].name,
-                description: ledgerMaster.ledgerMasterList[index].description,
-              ),
-            );
-          },
-        );
-      }),
+      body: Container(
+        decoration: BoxDecoration(color: HexColor(SECONDARYGREYCOLOR)),
+        child: Column(
+          children: [
+            Expanded(
+              child: Consumer2<LedgerMasterDashboardViewModel,
+                      EditLedgerMasterViewModel>(
+                  builder: (context, ledgerMaster, editLedgerMaster, child) {
+                ledgerMaster.loadData();
+                return ListView.builder(
+                  itemCount: ledgerMaster.ledgerMasterList.length,
+                  itemBuilder: (BuildContext contex, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditLedgerMasterScreen(
+                                ledgerMaster:
+                                    ledgerMaster.ledgerMasterList[index]),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFF9F6).withOpacity(1),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 10,
+                                spreadRadius: 2,
+                                color: Colors.blueGrey[100],
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  ledgerMaster.ledgerMasterList[index].name ??
+                                      'null',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    ledgerMaster.ledgerMasterList[index]
+                                                .party ==
+                                            cPartyAc
+                                        ? 'Party Account'
+                                        : 'Not a Party Account',
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    ledgerMaster.ledgerMasterList[index]
+                                                .directOrIndirect ==
+                                            cDirectAc
+                                        ? 'Direct Account'
+                                        : 'Indirect Account',
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }),
+            )
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.pushNamed(
-                context,
-                rNewLedgerMaster,
-              ),
-          child: Icon(Icons.add)),
-    );
-  }
-}
-
-class LedgerMasterListItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String targetRoute;
-
-  LedgerMasterListItem({this.title, this.targetRoute = '', this.description});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.green.shade300,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(title, textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,),), 
-                Text(description, style: TextStyle(color: Colors.grey[700]),)
-              ],
-            ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NewLedgerMasterScreen()),
+          );
+        },
+        child: Text(
+          '+',
+          style: TextStyle(
+            fontSize: 18,
           ),
         ),
       ),
