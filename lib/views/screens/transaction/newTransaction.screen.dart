@@ -219,6 +219,16 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
                     ),
+                    ToggleSwitch(
+                    minWidth: 120.0,
+                    minHeight: 40.0,
+                    activeBgColor: cprimaryColor,
+                    inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                    activeFgColor: HexColor(TEXTCOLOR),
+                    initialLabelIndex: 0,
+                    labels: ['Partial', 'Full'],
+                    onToggle: (print),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Container(
