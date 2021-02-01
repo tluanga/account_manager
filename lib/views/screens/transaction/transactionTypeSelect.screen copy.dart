@@ -1,13 +1,10 @@
-import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class TransactionTypeSelectScreen extends StatefulWidget {
   const TransactionTypeSelectScreen({Key key}) : super(key: key);

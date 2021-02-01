@@ -1,7 +1,6 @@
 // Using GetIt is a convenient way to provide services and view models
 // anywhere we need them in the app.
 
-import 'package:account_manager/business_logic/models/transaction.model.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';

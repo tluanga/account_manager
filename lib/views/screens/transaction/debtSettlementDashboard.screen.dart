@@ -1,4 +1,3 @@
-import 'package:account_manager/main.dart';
 import 'package:flutter/material.dart';
 
 class CustomerDebtSettlementDashboard extends StatelessWidget {

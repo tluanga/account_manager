@@ -1,5 +1,7 @@
+import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
@@ -22,15 +24,15 @@ class NewPurchaseTransactionScreen extends StatefulWidget {
 class _NewPurchaseTransactionScreenState
     extends State<NewPurchaseTransactionScreen> {
   DateTime _dateTime = DateTime.now();
-  int _amount;
-  String _particular;
-  int _baOrBalo;
-  int _bankOrCash;
+  NewPurchaseTransactionViewModel _newPurchaseTransactionViewModel =
+      serviceLocator<NewPurchaseTransactionViewModel>();
+
   final _formKey = GlobalKey<FormState>();
 
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+
       _journalConfirmBottomSheet(context);
     }
   }
@@ -83,7 +85,7 @@ class _NewPurchaseTransactionScreenState
                         },
                         onChanged: (value) {
                           setState(() {
-                            _amount = int.parse(value);
+                            newTransaction.setAmount(int.parse(value));
                           });
                         },
                       ),
@@ -97,9 +99,7 @@ class _NewPurchaseTransactionScreenState
                           return null;
                         },
                         onChanged: (value) {
-                          setState(() {
-                            _particular = value;
-                          });
+                          newTransaction.setParticular(value);
                         },
                       ),
                       SizedBox(height: 10),
@@ -115,7 +115,7 @@ class _NewPurchaseTransactionScreenState
                           initialLabelIndex: 1,
                           labels: ['Ba', 'Balo'],
                           onToggle: (index) {
-                            _baOrBalo = index;
+                            newTransaction.setBaOrBalo(index);
                             if (index == cBA) {
                               _modalBottomSheet(context);
                             }
@@ -131,7 +131,7 @@ class _NewPurchaseTransactionScreenState
                         initialLabelIndex: 0,
                         labels: ['Cash', 'Bank'],
                         onToggle: (index) {
-                          _bankOrCash = index;
+                          newTransaction.setCashOrBank(index);
                         },
                       ),
                       SizedBox(height: 10),
@@ -153,9 +153,7 @@ class _NewPurchaseTransactionScreenState
                                     firstDate: DateTime(2010),
                                     lastDate: DateTime(2030),
                                   ).then((date) {
-                                    setState(() {
-                                      _dateTime = date;
-                                    });
+                                    newTransaction.setDate(date);
                                   });
                                 },
                                 child: Text(
@@ -203,15 +201,6 @@ class _NewPurchaseTransactionScreenState
                       ),
                       GestureDetector(
                         onTap: () {
-                          newTransaction.newTransaction(
-                            amount: _amount,
-                            particulars: _particular,
-                            baOrBalo: _baOrBalo,
-                            cashOrBank: _bankOrCash,
-                            transactionTypeId: transactionTypeSelect
-                                .selectedTransactionType.id,
-                          );
-
                           //------Reset Part
                           transactionTypeSelect.deSelectTransactionType(
                               transactionTypeSelect.selectedTransactionType.id);
@@ -227,6 +216,7 @@ class _NewPurchaseTransactionScreenState
                           child: Center(
                             child: FlatButton(
                               onPressed: () {
+                                newTransaction.setData();
                                 _submit();
                               },
                               child: Text(
@@ -306,7 +296,7 @@ class _NewPurchaseTransactionScreenState
                           initialLabelIndex: 1,
                           labels: ['Partial', 'Full'],
                           onToggle: (index) {
-                            model.setBAType(index);
+                            model.setBaType(index);
                           },
                         ),
                         Padding(
@@ -420,150 +410,137 @@ class _NewPurchaseTransactionScreenState
 
   void _journalConfirmBottomSheet(context) {
     showModalBottomSheet(
-        isScrollControlled: false,
-        context: context,
-        builder: (BuildContext contex) {
-          return Container(
-            child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Date : 31/01/2021'),
-                  )
-                ],
-              ),
-              Table(
-                columnWidths: {
-                  0: FlexColumnWidth(6),
-                  1: FlexColumnWidth(3),
-                  2: FlexColumnWidth(3),
-                },
-                border: TableBorder.all(
-                    color: Colors.black, style: BorderStyle.solid, width: 1),
-                children: [
-                  TableRow(children: [
-                    Text('Particulars', textAlign: TextAlign.center),
-                    Text(
-                      'Credit',
-                      textAlign: TextAlign.center,
-                    ),
-                    Text('Debit', textAlign: TextAlign.center)
-                  ]),
-                  TableRow(children: [
-                    Column(children: [
-                      Text(
-                          // particulars of transaction
-                          'Purchase Account Dr.',
-                          textAlign: TextAlign.left),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text('To Sales Account', textAlign: TextAlign.center),
-                    ]),
-                    Column(children: [
-                      Text(
-                          //debit amount for first ledger
-                          '5000',
-                          textAlign: TextAlign.center),
-                      Text(
-                          //debit amount fro second ledger
-                          '0',
-                          textAlign: TextAlign.center),
-                    ]),
-                    Column(children: [
-                      Text(
-                          // credit amount for first ledger
-                          '0',
-                          textAlign: TextAlign.center),
-                      Text(
-                          // credit amount for second ledger
-                          '5000',
-                          textAlign: TextAlign.center),
-                    ]),
-                  ]),
-                ],
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal:8.0),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Text('Particulars'),
-              //       SizedBox(),
-              //       Text('debit'),
-              //       Text('credit'),
-              //     ],
-              //   ),
-              // ),
-              // Divider(color: Colors.black,),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 8,),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Container(
-              //         width: MediaQuery.of(context).size.width*0.35,
-              //         child: Text('This is an example to demostrate if the particulars contain a large number of words ')
-              //       ),
-              //       Text(_amount.toString()),
-              //       Text('null'),
-              //     ],
-              //   ),
-              // ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      isScrollControlled: false,
+      context: context,
+      builder: (BuildContext contex) {
+        return Consumer<NewPurchaseTransactionViewModel>(
+          builder: (context, model, child) {
+            String _debitLedgerName = model.getDebitSideLedgerName();
+            String _creditSideLedgerName = model.getCreditSideLedgerName();
+            String _partyName = model.getPartyName();
+            String _assetLedgerName = model.getAssetLedgerName();
+            int _amount = model.getAmount();
+
+            return Container(
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MyApp()),
-                        );
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Colors.blue[800],
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Center(
-                          child: Text(
-                            'Confirm',
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => {Navigator.pop(context)},
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Colors.red[700],
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Center(
-                          child: Text(
-                            'Decline',
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                        ),
-                      ),
-                    ),
+                    SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(model.getDate().toIso8601String()),
+                    )
                   ],
                 ),
-              )
-            ]),
-          );
-        });
+                Table(
+                  columnWidths: {
+                    0: FlexColumnWidth(6),
+                    1: FlexColumnWidth(3),
+                    2: FlexColumnWidth(3),
+                  },
+                  border: TableBorder.all(
+                      color: Colors.black, style: BorderStyle.solid, width: 1),
+                  children: [
+                    TableRow(children: [
+                      Text('Particulars', textAlign: TextAlign.center),
+                      Text(
+                        'Credit',
+                        textAlign: TextAlign.center,
+                      ),
+                      Text('Debit', textAlign: TextAlign.center)
+                    ]),
+                    TableRow(children: [
+                      Column(children: [
+                        Text(
+                            // particulars of transaction
+                            '$_debitLedgerName Dr.',
+                            textAlign: TextAlign.left),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text('To $_creditSideLedgerName',
+                            textAlign: TextAlign.center),
+                      ]),
+                      Column(children: [
+                        Text(
+                            //debit amount for first ledger
+                            '$_amount',
+                            textAlign: TextAlign.center),
+                        Text(
+                            //debit amount fro second ledger
+                            '0',
+                            textAlign: TextAlign.center),
+                      ]),
+                      Column(children: [
+                        Text(
+                            // credit amount for first ledger
+                            '0',
+                            textAlign: TextAlign.center),
+                        Text(
+                            // credit amount for second ledger
+                            '$_amount',
+                            textAlign: TextAlign.center),
+                      ]),
+                    ]),
+                  ],
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyApp()),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.blue[800],
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Center(
+                            child: Text(
+                              'Confirm',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => {Navigator.pop(context)},
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.red[700],
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Center(
+                            child: Text(
+                              'Decline',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ]),
+            );
+          },
+        );
+      },
+    );
   }
 }

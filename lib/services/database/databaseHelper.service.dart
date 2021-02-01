@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -573,8 +574,8 @@ class DatabaseHelper {
       'name': 'Purchase of Material',
       'description': 'Purchase of Material for Resell or for Production',
       'sumChetVelDanType': 0,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.PURCHASEAC,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //2
@@ -590,8 +591,7 @@ class DatabaseHelper {
     //3
     await db.insert(transactionTypeTable, {
       'name': 'Sale of Goods',
-      'description':
-          'Sales of Goods which are not manufactured',
+      'description': 'Sales of Goods which are not manufactured',
       'sumChetVelDanType': 1,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -600,8 +600,7 @@ class DatabaseHelper {
     //4
     await db.insert(transactionTypeTable, {
       'name': 'Wages',
-      'description':
-          'Hnathawkte hlawh',
+      'description': 'Hnathawkte hlawh',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -610,8 +609,7 @@ class DatabaseHelper {
     //5
     await db.insert(transactionTypeTable, {
       'name': 'Carriage expenses',
-      'description':
-          'Bungraw phur kualnaa sum hman',
+      'description': 'Bungraw phur kualnaa sum hman',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -620,8 +618,7 @@ class DatabaseHelper {
     //6
     await db.insert(transactionTypeTable, {
       'name': 'Manufacturing expenses',
-      'description':
-          'bungraw lakkhawmna',
+      'description': 'bungraw lakkhawmna',
       'sumChetVelDanType': 0,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -630,8 +627,7 @@ class DatabaseHelper {
     //7
     await db.insert(transactionTypeTable, {
       'name': 'Packing expenses',
-      'description':
-          'bungraw pack na',
+      'description': 'bungraw pack na',
       'sumChetVelDanType': 0,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -640,8 +636,7 @@ class DatabaseHelper {
     //8
     await db.insert(transactionTypeTable, {
       'name': 'Salaries ',
-      'description':
-          'hnathawkate thla tin hlawh',
+      'description': 'hnathawkate thla tin hlawh',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -650,8 +645,7 @@ class DatabaseHelper {
     //9
     await db.insert(transactionTypeTable, {
       'name': 'Office rent',
-      'description':
-          'office luahna man',
+      'description': 'office luahna man',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -660,8 +654,7 @@ class DatabaseHelper {
     //10
     await db.insert(transactionTypeTable, {
       'name': 'Printing & Stationery',
-      'description':
-          'Lehkha print na,etc. leh Stationary a sum hman te',
+      'description': 'Lehkha print na,etc. leh Stationary a sum hman te',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -670,8 +663,7 @@ class DatabaseHelper {
     //11
     await db.insert(transactionTypeTable, {
       'name': 'Telephone Charges',
-      'description':
-          'bungraw pack na',
+      'description': 'bungraw pack na',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -680,8 +672,7 @@ class DatabaseHelper {
     //12
     await db.insert(transactionTypeTable, {
       'name': 'Postage and telegram',
-      'description':
-          'postage and telegram',
+      'description': 'postage and telegram',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -690,8 +681,7 @@ class DatabaseHelper {
     //13
     await db.insert(transactionTypeTable, {
       'name': 'Insurance',
-      'description':
-          'Insurance',
+      'description': 'Insurance',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -700,8 +690,7 @@ class DatabaseHelper {
     //14
     await db.insert(transactionTypeTable, {
       'name': 'Audit fees',
-      'description':
-          'audit fee',
+      'description': 'audit fee',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -710,8 +699,7 @@ class DatabaseHelper {
     //15
     await db.insert(transactionTypeTable, {
       'name': 'Electricity',
-      'description':
-          'Electric bill leh electric lama sum hmanna te',
+      'description': 'Electric bill leh electric lama sum hmanna te',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -720,8 +708,7 @@ class DatabaseHelper {
     //16
     await db.insert(transactionTypeTable, {
       'name': 'Repairs and renewal',
-      'description':
-          'Thil siam thatnaa sum hman te',
+      'description': 'Thil siam thatnaa sum hman te',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -730,8 +717,7 @@ class DatabaseHelper {
     //17
     await db.insert(transactionTypeTable, {
       'name': 'Advertisement',
-      'description':
-          'advertisement',
+      'description': 'advertisement',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -740,8 +726,7 @@ class DatabaseHelper {
     //18
     await db.insert(transactionTypeTable, {
       'name': 'Discount',
-      'description':
-          'Discount kan pek na',
+      'description': 'Discount kan pek na',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -750,8 +735,7 @@ class DatabaseHelper {
     //19
     await db.insert(transactionTypeTable, {
       'name': 'Depreciation',
-      'description':
-          'Thil man a ai tlawma kan pekna zat',
+      'description': 'Thil man a ai tlawma kan pekna zat',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -760,8 +744,7 @@ class DatabaseHelper {
     //20
     await db.insert(transactionTypeTable, {
       'name': 'Carriage outward',
-      'description':
-          'Carriage outward',
+      'description': 'Carriage outward',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -770,8 +753,7 @@ class DatabaseHelper {
     //21
     await db.insert(transactionTypeTable, {
       'name': 'Bad debts',
-      'description':
-          'Ba min pek tawh loh tur te',
+      'description': 'Ba min pek tawh loh tur te',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -780,8 +762,7 @@ class DatabaseHelper {
     //22
     await db.insert(transactionTypeTable, {
       'name': 'Provision for bad debts',
-      'description':
-          'bat ral te phuhrukna tur',
+      'description': 'bat ral te phuhrukna tur',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -790,8 +771,7 @@ class DatabaseHelper {
     //23
     await db.insert(transactionTypeTable, {
       'name': 'Selling commission',
-      'description':
-          'Selling commission',
+      'description': 'Selling commission',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -800,8 +780,7 @@ class DatabaseHelper {
     //24
     await db.insert(transactionTypeTable, {
       'name': 'Bank charges',
-      'description':
-          'bank charges',
+      'description': 'bank charges',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -810,8 +789,7 @@ class DatabaseHelper {
     //25
     await db.insert(transactionTypeTable, {
       'name': 'Loss on sale of asset',
-      'description':
-          'bungraw hralhchhawnna a pawisa hloh na',
+      'description': 'bungraw hralhchhawnna a pawisa hloh na',
       'sumChetVelDanType': 3,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -819,12 +797,11 @@ class DatabaseHelper {
     });
 
     ///////////////////////////////////////////////////////////////////
-    
+
     //26
     await db.insert(transactionTypeTable, {
       'name': 'Discount Recieved',
-      'description':
-          'thil leina a discount kan dawn zat',
+      'description': 'thil leina a discount kan dawn zat',
       'sumChetVelDanType': 2,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -833,8 +810,7 @@ class DatabaseHelper {
     //27
     await db.insert(transactionTypeTable, {
       'name': 'Commission recieved',
-      'description':
-          'commission na a hmuh zat',
+      'description': 'commission na a hmuh zat',
       'sumChetVelDanType': 2,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -843,8 +819,7 @@ class DatabaseHelper {
     //28
     await db.insert(transactionTypeTable, {
       'name': 'Bank interest',
-      'description':
-          'bank interest dawn zat',
+      'description': 'bank interest dawn zat',
       'sumChetVelDanType': 2,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -853,8 +828,7 @@ class DatabaseHelper {
     //29
     await db.insert(transactionTypeTable, {
       'name': 'Rent recieved',
-      'description':
-          'Kan in/dawr luahman atanga sum dawn',
+      'description': 'Kan in/dawr luahman atanga sum dawn',
       'sumChetVelDanType': 2,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -863,8 +837,7 @@ class DatabaseHelper {
     //30
     await db.insert(transactionTypeTable, {
       'name': 'Profit on sale of asset',
-      'description':
-          'Bungraw hralhchhawnna atanga hlawkna',
+      'description': 'Bungraw hralhchhawnna atanga hlawkna',
       'sumChetVelDanType': 2,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
@@ -872,4 +845,3 @@ class DatabaseHelper {
     });
   }
 }
-

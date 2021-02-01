@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'static/constants.dart';
-import 'views/screens/authentication/createLoginPin.screen.dart';
 
 void main() {
   runApp(App());

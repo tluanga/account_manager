@@ -25,6 +25,17 @@ class LedgerMasterImpl implements LedgerMasterService {
     return ledgerMasterList;
   }
 
+  Future<LedgerMaster> getLedgerMaster(int id) async {
+    Database db = await DatabaseHelper.instance.db;
+
+    List<Map<String, dynamic>> _data = await db.rawQuery('''
+     SELECT * FROM masterLedger_table where id=$id
+      ''');
+    LedgerMaster _ledgerMaster;
+    _ledgerMaster = LedgerMaster.fromMap(_data[0]);
+    return _ledgerMaster;
+  }
+
   Future<int> insert(LedgerMaster ledgerMaster) async {
     Database db = await DatabaseHelper.instance.db;
     print(db);

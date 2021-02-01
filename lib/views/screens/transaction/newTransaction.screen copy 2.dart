@@ -189,15 +189,6 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        newTransaction.newTransaction(
-                          amount: _amount,
-                          particulars: _particular,
-                          baOrBalo: _baOrBalo,
-                          cashOrBank: _bankOrCash,
-                          transactionTypeId:
-                              transactionTypeSelect.selectedTransactionType.id,
-                        );
-
                         //------Reset Part
                         transactionTypeSelect.deSelectTransactionType(
                             transactionTypeSelect.selectedTransactionType.id);
