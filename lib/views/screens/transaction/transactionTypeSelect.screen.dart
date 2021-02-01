@@ -1,3 +1,5 @@
+import 'package:account_manager/business_logic/view_models/ledgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
@@ -261,7 +263,7 @@ void _modalBottomSheet(context) {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Container(
-                              height: 20,
+                              height: 40,
                               width: 150,
                               decoration: BoxDecoration(
                                 color: HexColor(TEXTCOLOR),
@@ -269,7 +271,7 @@ void _modalBottomSheet(context) {
                               ),
                               child: Center(
                                 child: Text(
-                                  'Select',
+                                  'Cancel',
                                   style: TextStyle(
                                     color: HexColor(SECONDARYGREYCOLOR),
                                     fontSize: 20,
@@ -314,39 +316,55 @@ void _modalBottomSheet(context) {
 
 void _newAssetLedgermodalBottomSheet(context) {
   showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
-            child: Consumer<TransactionTypeSelectViewModel>(
+            child: Consumer<NewAssetLedgerCreationViewModel>(
               builder: (context, model, child) {
                 return Container(
                   padding: EdgeInsets.all(15),
                   child: Column(
                     children: [
                       // --All asset are of direct expense
-                      Text('New Asset Ledger Creation'),
+                      Text(
+                        'New Asset Ledger Creation',
+                        style: TextStyle(
+                          color: HexColor(TEXTCOLOR),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       SizedBox(
                         height: 15,
                       ),
                       TextFormField(
+                        onChanged: (value) {
+                          model.setName(value);
+                        },
                         decoration: InputDecoration(labelText: 'Name of Asset'),
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       TextFormField(
+                        onChanged: (value) {
+                          model.setDescription(value);
+                        },
                         decoration: InputDecoration(labelText: 'Description'),
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 25,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              int result = await model.newAssetLedger();
+
                               Navigator.pop(context);
                             },
                             child: Container(
@@ -368,9 +386,7 @@ void _newAssetLedgermodalBottomSheet(context) {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              _newAssetLedgermodalBottomSheet(context);
-                            },
+                            onTap: () {},
                             child: Container(
                               height: 40,
                               width: 150,
