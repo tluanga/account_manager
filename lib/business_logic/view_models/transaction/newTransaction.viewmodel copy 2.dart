@@ -88,7 +88,7 @@ class NewTransactionViewModel extends ChangeNotifier {
     }
 
     // 4- Create a ledgerTransaction entry for debitSideLedger
-    if (baOrBalo == BALO) {
+    if (baOrBalo == cBALO) {
       LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
         ledgerId: _transationType.debitSideLedger,
         amount: amount,
@@ -97,7 +97,7 @@ class NewTransactionViewModel extends ChangeNotifier {
         date: date,
       );
       _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
-    } else if (baOrBalo == BA) {
+    } else if (baOrBalo == cBA) {
       LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
         ledgerId: partyAccount,
         amount: amount,

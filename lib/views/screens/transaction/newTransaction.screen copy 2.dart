@@ -103,7 +103,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                         labels: ['Ba', 'Balo'],
                         onToggle: (index) {
                           _baOrBalo = index;
-                          if (index == BA) {
+                          if (index == cBA) {
                             _modalBottomSheet(context);
                           }
                         },

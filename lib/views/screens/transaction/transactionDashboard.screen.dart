@@ -1,4 +1,5 @@
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/views/screens/transaction/debtSettlementDashboard.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -70,20 +71,29 @@ class TransactionDashboardScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 400,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: HexColor(SECONDARYGREYCOLOR),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CustomerDebtSettlementDashboard()),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 400,
+                height: 100,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: HexColor(SECONDARYGREYCOLOR),
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                'Customer Debt Settlement',
-                style: TextStyle(fontSize: 18),
+                child: Text(
+                  'Customer Debt Settlement',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
           ),

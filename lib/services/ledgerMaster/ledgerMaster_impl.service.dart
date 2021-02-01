@@ -2,6 +2,7 @@ import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LedgerMasterImpl implements LedgerMasterService {
@@ -58,6 +59,37 @@ class LedgerMasterImpl implements LedgerMasterService {
     List<Map<String, dynamic>> _partyList = await db.rawQuery('''
      SELECT * FROM masterLedger_table
      WHERE party=0
+      ''');
+    print('all data');
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+
+    return ledgerMasterList;
+  }
+
+  //------Search Party
+  Future<List<LedgerMaster>> searchPartyList(String _searchString) async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE party=$cPartyAc
+      ''');
+    print('all data');
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+
+    return ledgerMasterList;
+  }
+
+  Future<List<LedgerMaster>> getAssetLedgerList() async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE asset=$cASSET
       ''');
     print('all data');
     final List<LedgerMaster> ledgerMasterList = [];

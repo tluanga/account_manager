@@ -37,6 +37,7 @@ class _NewPurchaseTransactionScreenState
           if (transactionTypeSelect.selectedTransactionType != null) {
             labelText = transactionTypeSelect.selectedTransactionType.name;
           }
+          newTransaction.loadParty();
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
@@ -105,7 +106,7 @@ class _NewPurchaseTransactionScreenState
                         labels: ['Ba', 'Balo'],
                         onToggle: (index) {
                           _baOrBalo = index;
-                          if (index == BA) {
+                          if (index == cBA) {
                             _modalBottomSheet(context);
                           }
                         },
@@ -290,9 +291,11 @@ class _NewPurchaseTransactionScreenState
                           activeBgColor: cprimaryColor,
                           inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
                           activeFgColor: HexColor(TEXTCOLOR),
-                          initialLabelIndex: 0,
+                          initialLabelIndex: 1,
                           labels: ['Partial', 'Full'],
-                          onToggle: (print),
+                          onToggle: (index) {
+                            model.setBAType(index);
+                          },
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -312,6 +315,7 @@ class _NewPurchaseTransactionScreenState
                                 border: InputBorder.none,
                                 hintText: 'Search by Name...',
                               ),
+                              onChanged: (value) {},
                             ),
                           ),
                         ),
@@ -323,11 +327,29 @@ class _NewPurchaseTransactionScreenState
                             itemCount: model.partyList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(5),
                                 width: MediaQuery.of(context).size.width,
-                                child: Text(
-                                  model.partyList[index].name,
-                                  style: TextStyle(fontSize: 16),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    model.setParty(model.partyList[index].id);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    width: 400,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: HexColor(TEXTCOLOR),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        model.partyList[index].name,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               );
                             },
@@ -338,7 +360,7 @@ class _NewPurchaseTransactionScreenState
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Container(
-                                height: 40,
+                                height: 20,
                                 width: 150,
                                 decoration: BoxDecoration(
                                   color: HexColor(TEXTCOLOR),

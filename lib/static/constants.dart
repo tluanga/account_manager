@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 const int NONE = 0;
 const int DEBIT = 1;
@@ -9,8 +8,8 @@ const int CREDIT = 2;
 const int BANK = 1;
 const int CASH = 2;
 
-const int BA = 0;
-const int BALO = 1;
+const int cBA = 0;
+const int cBALO = 1;
 
 //---Sum Chet Vel dan
 const int cLEI = 0;
@@ -23,6 +22,13 @@ const int cNotPartyAc = 1;
 
 const int cDirectAc = 0;
 const int cIndirectAc = 1;
+
+const int cPartialBA = 0;
+const int cFullBA = 0;
+
+//---------ASSET or NON ASSET-------
+const int cASSET = 0;
+const int cNonASSET = 1;
 
 const String PRIMARYCOLOR = '#FBAF02';
 const String TEXTCOLOR = '#080040';

@@ -2,6 +2,7 @@ import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
@@ -14,7 +15,17 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 
 class NewPurchaseTransactionViewModel extends ChangeNotifier {
-  int baOrBalo;
+  int _amount;
+  int _baOrBalo;
+  int _cashOrBank;
+  DateTime _date;
+  int _debitSideLedgerId;
+  String _debitSideLedgerName;
+  int _creditSideLedgerId;
+  String _creditSideLedgerName;
+  int _baType; //BA partial or Full
+  int _party;
+  int _assetLedger;
   List<LedgerMaster> partyList = [];
 
   TransactionTypeService _transactionTypeService =
@@ -25,10 +36,51 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void setBaOrBalo(int data) {
-    baOrBalo = data;
-    notifyListeners();
+  void setData({
+    int amount,
+    int baOrBalo,
+    int cashOrBank,
+    DateTime date,
+    int transactionTypeId,
+    int partyAccount = 0,
+  }) async {
+    //---1--get the transaction type object
+    var _transactionTypeResult =
+        await _transactionTypeService.getList(id: transactionTypeId);
+    if (_transactionTypeResult == null) {
+      print('Transaction Type access fail');
+    } else
+      print(_transactionTypeResult.toString());
+    TransactionType _transactionType = _transactionTypeResult[0];
+    //----2--Get the debitSide Ledger
+    _debitSideLedgerId = _transactionType.debitSideLedger;
+    // ---3--check the Ba or Balo
+    if (_baOrBalo == cBALO)
+      //if balo set the credit side
+      _creditSideLedgerId = _transactionType.creditSideLedger;
+    //---Step 4-------
+    else if (_baOrBalo == cBA) {
+      // check for ba Type
+      if (_baType == cFullBA) {
+        _debitSideLedgerId = _party;
+        _creditSideLedgerId = _transactionType.creditSideLedger;
+        // ---Make an entry into the BA Log
+      }
+    }
   }
+
+  // BA full
+  void baFullTransaction(TransactionType _transactionType) {
+    // Mi hnena company in a bat in
+    _debitSideLedgerId = _party;
+    // Bungrua purchase Asset a nih leh nih loh check tur a ni
+    if (_transactionType.id == TransactionTypeConstant.cPURCHASEOFASSET) {
+      // --Asset Purchase a nih chuan Asset Id angai Debit Side ah
+      //
+    }
+  }
+
+  bool checkTransactionForAssetType(TransactionType _transactionType) {}
 
   // ---For creating a new transaction
   void newTransaction({
@@ -88,7 +140,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     }
 
     // 4- Create a ledgerTransaction entry for debitSideLedger
-    if (baOrBalo == BALO) {
+    if (baOrBalo == cBALO) {
       LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
         ledgerId: _transationType.debitSideLedger,
         amount: amount,
@@ -97,7 +149,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         date: date,
       );
       _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
-    } else if (baOrBalo == BA) {
+    } else if (baOrBalo == cBA) {
       LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
         ledgerId: partyAccount,
         amount: amount,
@@ -119,5 +171,23 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     final _partyList = await _ledgerMasterService.getPartyList();
 
     partyList = _partyList;
+  }
+
+  void setParty(int id) {
+    _party = id;
+  }
+
+  void setBAType(int baType) {
+    _baType = baType;
+  }
+
+  void setBaOrBalo(int data) {
+    _baOrBalo = data;
+    notifyListeners();
+  }
+
+  void setAssetLedger(int ledgerId) {
+    _assetLedger = ledgerId;
+    notifyListeners();
   }
 }

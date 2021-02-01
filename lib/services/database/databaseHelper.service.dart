@@ -32,6 +32,7 @@ class DatabaseHelper {
   String mledgerId = 'id';
   String mledgerName = 'name';
   String mledgerDescription = 'description';
+  String mledgerAsset = 'asset';
   String mledgerDirectOrIndirect = 'directOrIndirect';
   String mledgerParty = 'party';
 
@@ -43,6 +44,15 @@ class DatabaseHelper {
   String transactionTypesumChetVelDanType = 'sumChetVelDanType';
   String transactionTypedebitSideLedger = 'debitSideLedger';
   String transactionTypecreditSideLedger = 'creditSideLedger';
+  String transactionTypePartyLedger = 'partyLedger';
+  // //-------TABLE 5-PURCHASE TRANSACTIONTYPE TABLE----------
+  // String purchaseTransactionTypeTable = 'transactionType_table';
+  // String purchaseTransactionTypeId = 'id';
+  // String purchaseTransactionTypeName = 'name';
+  // String purchaseTransactionDescription = 'description';
+  // String purchaseTransactionAssetOrLiabilities = 'assetOrLiabilities';
+  // String purchaseTransactiondebitSideLedger = 'debitSideLedger';
+  // String purchaseTransactioncreditSideLedger = 'creditSideLedger';
 
   //------TABLE 5 TRANSACTION TABLE ---------------
   String transactionTable = 'transaction_table';
@@ -111,11 +121,11 @@ class DatabaseHelper {
     );
     // Table 3 - LedgerMaster Table
     await db.execute(
-      'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT,$mledgerDirectOrIndirect INT,$mledgerParty INT )',
+      'CREATE TABLE $masterLedgerTable($mledgerId INTEGER PRIMARY KEY AUTOINCREMENT, $mledgerName TEXT, $mledgerDescription TEXT,$mledgerDirectOrIndirect INT,$mledgerParty INT,$mledgerAsset INT  )',
     );
     // Table 4 - TransactionType Table
     await db.execute(
-      'CREATE TABLE $transactionTypeTable($transactionTypeId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionTypeName TEXT, $transactionTypeDescription TEXT, $transactionTypesumChetVelDanType INT,$transactionTypedebitSideLedger INT,$transactionTypecreditSideLedger INT)',
+      'CREATE TABLE $transactionTypeTable($transactionTypeId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionTypeName TEXT, $transactionTypeDescription TEXT, $transactionTypesumChetVelDanType INT,$transactionTypedebitSideLedger INT,$transactionTypecreditSideLedger INT,$transactionTypePartyLedger INT)',
     );
     // Table 5 - Transaction Table
     await db.execute(
@@ -137,14 +147,16 @@ class DatabaseHelper {
       'name': 'Bank',
       'description': 'All Transaction Involving Bank',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     //2) Cash Account
     await db.insert(masterLedgerTable, {
       'name': 'Cash A/c',
       'description': 'All Transaction Involving Cash',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     //3) Purchase Account
     await db.insert(masterLedgerTable, {
@@ -152,21 +164,24 @@ class DatabaseHelper {
       'description':
           'All Transaction Involving Purchase of Item for resell or raw materia',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 4) Discount Account
     await db.insert(masterLedgerTable, {
       'name': 'Discount',
       'description': 'All Transaction with Discount',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 5) Goods Account
     await db.insert(masterLedgerTable, {
       'name': 'Goods',
       'description': 'Goods Account',
       'directOrIndirect': 1,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // --------------Direct expenses----------------------------------------
     // 6) Wages
@@ -174,77 +189,88 @@ class DatabaseHelper {
       'name': 'Wages',
       'description': 'Wages of Employee',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 7) payment
     await db.insert(masterLedgerTable, {
       'name': 'Payment',
       'description': 'payment account',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 8) Receipt
     await db.insert(masterLedgerTable, {
       'name': 'Receipt',
       'description': 'receipt account',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 9) Carriage
     await db.insert(masterLedgerTable, {
       'name': 'Carriage expenses',
       'description': 'Carriage expenses',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 10) custom duty
     await db.insert(masterLedgerTable, {
       'name': 'Custom duty',
       'description': 'custom duty',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 11) water bill
     await db.insert(masterLedgerTable, {
       'name': 'Water Bill',
       'description': 'water bill',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 12) fuel
     await db.insert(masterLedgerTable, {
       'name': 'Fuel',
       'description': 'fuel',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 13) electric bill
     await db.insert(masterLedgerTable, {
       'name': 'Electric bill',
       'description': 'Electric bill',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 14) Consumable
     await db.insert(masterLedgerTable, {
       'name': 'Consumable',
       'description': 'consumable',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 15) packing
     await db.insert(masterLedgerTable, {
       'name': 'Packing',
       'description': 'packing account',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 16) royalty
     await db.insert(masterLedgerTable, {
       'name': 'Royalty',
       'description': 'royalty account',
       'directOrIndirect': cDirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
 
     //------------------Indirect Expenses----------------------------
@@ -254,238 +280,272 @@ class DatabaseHelper {
       'name': 'Salaries',
       'description': 'Salaries of Employee',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 18) Rent
     await db.insert(masterLedgerTable, {
       'name': 'Rent',
       'description': 'Rent paid',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 19) Furniture
     await db.insert(masterLedgerTable, {
       'name': 'Furniture',
       'description': 'Transactions made for the purchase of Furnitures',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 20) Water Bill
     await db.insert(masterLedgerTable, {
       'name': 'Water Bill',
       'description': 'Payment of Water bill',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 21) Tax
     await db.insert(masterLedgerTable, {
       'name': 'Tax',
       'description': 'Payment of Tax',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 22) Office Expenses
     await db.insert(masterLedgerTable, {
       'name': 'Office Expenses',
       'description': 'Office Expenses',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 23) Sundry
     await db.insert(masterLedgerTable, {
       'name': 'Sundry Expenses',
       'description': 'Sundry Expenses',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 24) Printing & Stiationery
     await db.insert(masterLedgerTable, {
       'name': 'Printing & Stationery',
       'description': 'printing and Stationery',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 25) Telephone Charges
     await db.insert(masterLedgerTable, {
       'name': 'Telephone Charges',
       'description': 'Telephone bills and charges',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 26) Staff welfare expenses
     await db.insert(masterLedgerTable, {
       'name': 'Staff welfare expenses',
       'description': 'staff welfare expenses',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET,
     });
     // 27) Establishment
     await db.insert(masterLedgerTable, {
       'name': 'Establishment Expenses',
       'description': 'Establishment Expenses',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 28) Internet bill
     await db.insert(masterLedgerTable, {
       'name': 'Internet Bill',
       'description': 'internet bill',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 29) courier charge
     await db.insert(masterLedgerTable, {
       'name': 'Courier Charge',
       'description': 'courier charges',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 30) Distribution expenses
     await db.insert(masterLedgerTable, {
       'name': 'Distribution Expenses',
       'description': 'distribution expenses account',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 31) Travelling
     await db.insert(masterLedgerTable, {
       'name': 'Travelling Expenses',
       'description': 'transactions involving travelling',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 32) Freight outward
     await db.insert(masterLedgerTable, {
       'name': 'Freight Outward',
       'description': 'Freight outward account',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 33) Audit fee
     await db.insert(masterLedgerTable, {
       'name': 'Audit Fee',
       'description': 'fees for auditing',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 34) Bad debts
     await db.insert(masterLedgerTable, {
       'name': 'Bad Debts',
       'description': 'Debts which are estimated to be uncollectible',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 35) Provision for bad debts
     await db.insert(masterLedgerTable, {
       'name': 'Provision for bad debts',
       'description': 'acoount to make solution for bad debts',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 36) Advertisement
     await db.insert(masterLedgerTable, {
       'name': 'Advertisement',
       'description': 'money use for advertisement',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 37) Charity/Donation
     await db.insert(masterLedgerTable, {
       'name': 'Charity/Donation',
       'description': 'Transactions made for Charity and/or Donations',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 38) Depreciation
     await db.insert(masterLedgerTable, {
       'name': 'Depreciation',
       'description': 'depreciation account',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 39) Bank charges
     await db.insert(masterLedgerTable, {
       'name': 'Bank Charges',
       'description': 'charges made by the bank to us',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 40) Administrative Expenses
     await db.insert(masterLedgerTable, {
       'name': 'Administrative Expenses',
       'description': 'expenses for the cause of administrations',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 41) Commission
     await db.insert(masterLedgerTable, {
       'name': 'Commission',
       'description': 'commission account',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 42) Sample
     await db.insert(masterLedgerTable, {
       'name': 'Sample Expenses',
       'description': 'Sample Expenses',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 43) Liscense fee
     await db.insert(masterLedgerTable, {
       'name': 'Liscense Fee',
       'description': 'fees paid for liscense',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 44) Delivery Charges
     await db.insert(masterLedgerTable, {
       'name': 'Delivery Charges',
       'description': 'delivery charges',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 45) Sales tax paid
     await db.insert(masterLedgerTable, {
       'name': 'Sales tax paid',
       'description': 'Sales tax paid',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 46) Loss on sale of assets
     await db.insert(masterLedgerTable, {
       'name': 'Loss on sale of assets',
       'description': 'loss on sale of assets',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 47) Loss by fire/theft
     await db.insert(masterLedgerTable, {
       'name': 'Loss by fire/theft',
       'description': 'loss by fire/theft',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 48) repairs/ renewal/ maintenance
     await db.insert(masterLedgerTable, {
       'name': 'Repair/Renewal/Maintenance A/c',
       'description': 'account for repair, renewal and maintenance',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 49) Legal charges
     await db.insert(masterLedgerTable, {
       'name': 'Legal Charges',
       'description': 'legal charges',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
     // 50) insurance
     await db.insert(masterLedgerTable, {
       'name': 'Insurance',
       'description': 'insurance account',
       'directOrIndirect': cIndirectAc,
-      'party': cNotPartyAc
+      'party': cNotPartyAc,
+      'asset': cNonASSET
     });
 
     // -----------Mock Data----------
@@ -514,7 +574,8 @@ class DatabaseHelper {
       'description': 'Purchase of Material for Resell or for Production',
       'sumChetVelDanType': 1,
       'debitSideLedger': 3,
-      'creditSideLedger': 2
+      'creditSideLedger': 2,
+      'partyLedger': 0,
     });
     await db.insert(transactionTypeTable, {
       'name': 'Purchase of Assets',
@@ -522,7 +583,8 @@ class DatabaseHelper {
           'Purchase of Material for Business, not for Resell or Raw Material',
       'sumChetVelDanType': 1,
       'debitSideLedger': 3,
-      'creditSideLedger': 2
+      'creditSideLedger': 2,
+      'partyLedger': 0,
     });
   }
 }

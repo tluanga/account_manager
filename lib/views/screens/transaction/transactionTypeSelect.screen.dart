@@ -1,8 +1,11 @@
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class TransactionTypeSelectScreen extends StatefulWidget {
   const TransactionTypeSelectScreen({Key key}) : super(key: key);
@@ -80,15 +83,28 @@ class _TransactionTypeSelectScreenState
                     if (model.transactionTypeList[index].sumChetVelDanType ==
                         cHRALH) {
                       _labelColor = Colors.blue.shade400;
-                      _labelText = 'Pekchhuah';
+                      _labelText = 'Hralh';
                     }
                     return Padding(
                       padding: EdgeInsets.all(6),
                       child: GestureDetector(
                         onTap: () {
+                          _modalBottomSheet(context);
+                          if (model.transactionTypeList[index].id ==
+                              TransactionTypeConstant.cPURCHASEOFASSET) {
+                            // if the selected type is purchase of asset-> we have to select or create new asset
+                            // task: create a asset variable in master ledger to identity the asset ledger.
+                            // call the asset ledger selection
+                            _modalBottomSheet(context);
+                            print('Asset Type Selected');
+                          } else {
+                            Navigator.pop(context);
+                          }
+
                           if (model.selectedTransactionType == null) {
                             model.selectedTransactionType =
                                 model.transactionTypeList[index];
+
                             Navigator.pop(context);
                           } else {
                             model.selectedTransactionType =
@@ -157,4 +173,230 @@ class _TransactionTypeSelectScreenState
       ),
     );
   }
+}
+
+void _modalBottomSheet(context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
+            child: Consumer<TransactionTypeSelectViewModel>(
+              builder: (context, model, child) {
+                model.loadAssetTypeLedger();
+                return Container(
+                  height: MediaQuery.of(context).size.height * .60,
+                  width: 300,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Select Asset Ledger',
+                        style: TextStyle(
+                            color: HexColor(TEXTCOLOR),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          height: 40,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: TextFormField(
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Search by Name...',
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: model.assetTypeList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              padding: EdgeInsets.all(5),
+                              width: MediaQuery.of(context).size.width,
+                              child: GestureDetector(
+                                onTap: () {
+                                  model.setAssetLedger(
+                                      model.assetTypeList[index]);
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  width: 400,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: HexColor(TEXTCOLOR),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      model.assetTypeList[index].name,
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              height: 20,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: HexColor(TEXTCOLOR),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Select',
+                                  style: TextStyle(
+                                    color: HexColor(SECONDARYGREYCOLOR),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _newAssetLedgermodalBottomSheet(context);
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  color: HexColor(TEXTCOLOR),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Add New',
+                                    style: TextStyle(
+                                      color: HexColor(SECONDARYGREYCOLOR),
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      });
+}
+
+void _newAssetLedgermodalBottomSheet(context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
+            child: Consumer<TransactionTypeSelectViewModel>(
+              builder: (context, model, child) {
+                return Container(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      // --All asset are of direct expense
+                      Text('New Asset Ledger Creation'),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: 'Name of Asset'),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: 'Description'),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: HexColor(TEXTCOLOR),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    color: HexColor(SECONDARYGREYCOLOR),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _newAssetLedgermodalBottomSheet(context);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: HexColor(TEXTCOLOR),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                    color: HexColor(SECONDARYGREYCOLOR),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      });
 }
