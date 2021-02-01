@@ -47,18 +47,21 @@ class _CompanyProfileScreenState extends State<EditCompanyProfileScreen> {
   }
 
   void _submit() {
-    var result = _companyProfileViewModel.newCompanyProfile(
-      Company(
-          name: _name,
-          address: _address,
-          city: _city,
-          country: _country,
-          state: _state,
-          email: _email,
-          phoneNumber: _phoneNumber,
-          gstTin: _gstTin),
-    );
-    print(result.toString());
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      var result = _companyProfileViewModel.newCompanyProfile(
+        Company(
+            name: _name,
+            address: _address,
+            city: _city,
+            country: _country,
+            state: _state,
+            email: _email,
+            phoneNumber: _phoneNumber,
+            gstTin: _gstTin),
+      );
+      print(result.toString());
+    }
   }
 
   @override

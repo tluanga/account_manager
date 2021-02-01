@@ -342,7 +342,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                'Select',
+                                'Selected',
                                 style: TextStyle(
                                   color: HexColor(SECONDARYGREYCOLOR),
                                   fontSize: 20,

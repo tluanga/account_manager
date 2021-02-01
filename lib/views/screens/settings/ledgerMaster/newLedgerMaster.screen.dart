@@ -21,23 +21,26 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
-    NewLedgerMasterViewModel _ledgerMasterViewModel =
-        serviceLocator<NewLedgerMasterViewModel>();
-    _ledgerMasterViewModel.newLedgerMaster(
-      LedgerMaster(
-          name: _name,
-          description: _description,
-          party: partyOrNotParty,
-          directOrIndirect: directOrIndirect,
-          asset: asset),
-    );
-    print(_name);
-    print(_description);
-    print(directOrIndirect.toString());
-    String party = directOrIndirect.toString();
-    print('Direct or Indirect $party');
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      NewLedgerMasterViewModel _ledgerMasterViewModel =
+          serviceLocator<NewLedgerMasterViewModel>();
+      _ledgerMasterViewModel.newLedgerMaster(
+        LedgerMaster(
+            name: _name,
+            description: _description,
+            party: partyOrNotParty,
+            directOrIndirect: directOrIndirect,
+            asset: asset),
+      );
+      print(_name);
+      print(_description);
+      print(directOrIndirect.toString());
+      String party = directOrIndirect.toString();
+      print('Direct or Indirect $party');
 
-    Navigator.pop(context);
+      Navigator.pop(context);
+    }
   }
 
   @override

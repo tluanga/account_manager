@@ -130,7 +130,7 @@ class _TransactionTypeSelectScreenState
                                     ),
                                     child: Center(
                                       child: Text(
-                                        _labelText,
+                                        '_labelText',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,

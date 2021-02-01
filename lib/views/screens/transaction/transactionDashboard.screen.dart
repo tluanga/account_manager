@@ -15,7 +15,7 @@ class TransactionDashboardScreen extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 20,
+            height: 24,
           ),
           Container(
             child: Text(

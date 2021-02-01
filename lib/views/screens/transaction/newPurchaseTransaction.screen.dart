@@ -1,4 +1,3 @@
-import 'package:account_manager/business_logic/models/party.model.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
@@ -27,6 +26,15 @@ class _NewPurchaseTransactionScreenState
   String _particular;
   int _baOrBalo;
   int _bankOrCash;
+  final _formKey = GlobalKey<FormState>();
+
+  _submit() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      _journalConfirmBottomSheet(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,220 +49,224 @@ class _NewPurchaseTransactionScreenState
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Text(
-                      'Purchase',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: HexColor(
-                            TEXTCOLOR,
-                          )),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Amount',
-                        focusColor: HexColor(TEXTCOLOR),
-                        hoverColor: HexColor(TEXTCOLOR),
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 30,
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 24,
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Amount';
-                        }
-                        return null;
-                      },
-                      onChanged: (text) {
-                        setState(() {
-                          _amount = int.parse(text);
-                        });
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Particulars'),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Particular';
-                        }
-                        return null;
-                      },
-                      onChanged: (text) {
-                        setState(() {
-                          _particular = text;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ToggleSwitch(
-                        minWidth: 120.0,
-                        minHeight: 40.0,
-                        fontSize: 16.0,
-                        activeBgColor: HexColor(PRIMARYCOLOR),
-                        inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                        activeFgColor: HexColor(TEXTCOLOR),
-                        initialLabelIndex: 1,
-                        labels: ['Ba', 'Balo'],
-                        onToggle: (index) {
-                          _baOrBalo = index;
-                          if (index == cBA) {
-                            _modalBottomSheet(context);
+                      Text(
+                        'Purchase',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: HexColor(
+                              TEXTCOLOR,
+                            )),
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: 'Amount',
+                          focusColor: HexColor(TEXTCOLOR),
+                          hoverColor: HexColor(TEXTCOLOR),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Amount';
                           }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            _amount = int.parse(value);
+                          });
                         },
                       ),
-                    ),
-                    ToggleSwitch(
-                      minWidth: 120.0,
-                      minHeight: 40.0,
-                      activeBgColor: cprimaryColor,
-                      inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                      activeFgColor: HexColor(TEXTCOLOR),
-                      initialLabelIndex: 0,
-                      labels: ['Cash', 'Bank'],
-                      onToggle: (index) {
-                        _bankOrCash = index;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: cprimaryColor)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Date :'),
-                            RaisedButton(
-                              elevation: 0,
-                              color: Colors.transparent,
-                              onPressed: () {
-                                showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2010),
-                                  lastDate: DateTime(2030),
-                                ).then((date) {
-                                  setState(() {
-                                    _dateTime = date;
+                      SizedBox(height: 10),
+                      TextFormField(
+                        decoration: InputDecoration(labelText: 'Particulars'),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Enter Particular';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            _particular = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ToggleSwitch(
+                          minWidth: 120.0,
+                          minHeight: 40.0,
+                          fontSize: 16.0,
+                          activeBgColor: HexColor(PRIMARYCOLOR),
+                          inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                          activeFgColor: HexColor(TEXTCOLOR),
+                          initialLabelIndex: 1,
+                          labels: ['Ba', 'Balo'],
+                          onToggle: (index) {
+                            _baOrBalo = index;
+                            if (index == cBA) {
+                              _modalBottomSheet(context);
+                            }
+                          },
+                        ),
+                      ),
+                      ToggleSwitch(
+                        minWidth: 120.0,
+                        minHeight: 40.0,
+                        activeBgColor: cprimaryColor,
+                        inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                        activeFgColor: HexColor(TEXTCOLOR),
+                        initialLabelIndex: 0,
+                        labels: ['Cash', 'Bank'],
+                        onToggle: (index) {
+                          _bankOrCash = index;
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: cprimaryColor)),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Date :'),
+                              RaisedButton(
+                                elevation: 0,
+                                color: Colors.transparent,
+                                onPressed: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2010),
+                                    lastDate: DateTime(2030),
+                                  ).then((date) {
+                                    setState(() {
+                                      _dateTime = date;
+                                    });
                                   });
-                                });
-                              },
-                              child: Text(
-                                DateFormat('dd/MM/yyyy').format(_dateTime),
+                                },
+                                child: Text(
+                                  DateFormat('dd/MM/yyyy').format(_dateTime),
+                                ),
+                              ),
+                            ]),
+                      ),
+                      SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  TransactionTypeSelectScreen(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: HexColor(PRIMARYCOLOR),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              labelText,
+                              style: TextStyle(
+                                color: HexColor(TEXTCOLOR),
+                                fontSize: 15,
                               ),
                             ),
-                          ]),
-                    ),
-                    SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TransactionTypeSelectScreen(),
                           ),
-                        );
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          newTransaction.newTransaction(
+                            amount: _amount,
+                            particulars: _particular,
+                            baOrBalo: _baOrBalo,
+                            cashOrBank: _bankOrCash,
+                            transactionTypeId: transactionTypeSelect
+                                .selectedTransactionType.id,
+                          );
+
+                          //------Reset Part
+                          transactionTypeSelect.deSelectTransactionType(
+                              transactionTypeSelect.selectedTransactionType.id);
+                          Navigator.pushNamed(context, rMyApp);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
                             color: HexColor(PRIMARYCOLOR),
                           ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            labelText,
-                            style: TextStyle(
-                              color: HexColor(TEXTCOLOR),
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        newTransaction.newTransaction(
-                          amount: _amount,
-                          particulars: _particular,
-                          baOrBalo: _baOrBalo,
-                          cashOrBank: _bankOrCash,
-                          transactionTypeId:
-                              transactionTypeSelect.selectedTransactionType.id,
-                        );
-
-                        //------Reset Part
-                        transactionTypeSelect.deSelectTransactionType(
-                            transactionTypeSelect.selectedTransactionType.id);
-                        Navigator.pushNamed(context, rMyApp);
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: HexColor(PRIMARYCOLOR),
-                        ),
-                        child: Center(
-                          child: FlatButton(
-                            onPressed: () {
-                              _journalConfirmBottomSheet(context);
-                            },
-                            child: Text(
-                              'Submit',
-                              style: TextStyle(
-                                color: HexColor(TEXTCOLOR),
-                                fontSize: 19,
+                          child: Center(
+                            child: FlatButton(
+                              onPressed: () {
+                                _submit();
+                              },
+                              child: Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: HexColor(TEXTCOLOR),
+                                  fontSize: 19,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: HexColor(PRIMARYCOLOR),
-                        ),
-                        child: Center(
-                          child: FlatButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              'Back',
-                              style: TextStyle(
-                                color: HexColor(TEXTCOLOR),
-                                fontSize: 19,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: HexColor(PRIMARYCOLOR),
+                          ),
+                          child: Center(
+                            child: FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'Back',
+                                style: TextStyle(
+                                  color: HexColor(TEXTCOLOR),
+                                  fontSize: 19,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -360,7 +372,7 @@ class _NewPurchaseTransactionScreenState
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Container(
-                                height: 20,
+                                height: 40,
                                 width: 150,
                                 decoration: BoxDecoration(
                                   color: HexColor(TEXTCOLOR),

@@ -37,6 +37,7 @@ dependencies:
   hexcolor: ^1.0.6
   pin_code_fields:
   flutter_typeahead: ^2.0.0
+  charts_flutter: ^0.9.0
 
 dev_dependencies:
   test:

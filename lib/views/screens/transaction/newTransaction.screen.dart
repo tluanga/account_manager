@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/models/party.model.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel%20copy%202.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
@@ -100,7 +100,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                       labels: ['Ba', 'Balo'],
                       onToggle: (index) {
                         _baOrBalo = index;
-                        if (index == BA) {
+                        if (index == 1) {
                           _modalBottomSheet(context);
                         }
                       },
@@ -313,7 +313,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                'Select',
+                                'Selected',
                                 style: TextStyle(
                                   color: HexColor(SECONDARYGREYCOLOR),
                                   fontSize: 20,
@@ -485,14 +485,36 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                child: TextField(
+                child: TextFormField(
                   decoration: InputDecoration(hintText: 'Enter Party Name...'),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Name';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      _amount = int.parse(value);
+                    });
+                  },
                 ),
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: TextField(
+                child: TextFormField(
                   decoration: InputDecoration(hintText: 'Description'),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Amount';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      _amount = int.parse(value);
+                    });
+                  },
                 ),
               ),
               SizedBox(height: 20,),

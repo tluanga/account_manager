@@ -572,19 +572,304 @@ class DatabaseHelper {
     await db.insert(transactionTypeTable, {
       'name': 'Purchase of Material',
       'description': 'Purchase of Material for Resell or for Production',
+      'sumChetVelDanType': 0,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //2
+    await db.insert(transactionTypeTable, {
+      'name': 'Purchase of Assets',
+      'description':
+          'Purchase of Material for Business, not for Resell or Raw Material',
+      'sumChetVelDanType': 0,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //3
+    await db.insert(transactionTypeTable, {
+      'name': 'Sale of Goods',
+      'description':
+          'Sales of Goods which are not manufactured',
       'sumChetVelDanType': 1,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
       'partyLedger': 0,
     });
+    //4
     await db.insert(transactionTypeTable, {
-      'name': 'Purchase of Assets',
+      'name': 'Wages',
       'description':
-          'Purchase of Material for Business, not for Resell or Raw Material',
-      'sumChetVelDanType': 1,
+          'Hnathawkte hlawh',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //5
+    await db.insert(transactionTypeTable, {
+      'name': 'Carriage expenses',
+      'description':
+          'Bungraw phur kualnaa sum hman',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //6
+    await db.insert(transactionTypeTable, {
+      'name': 'Manufacturing expenses',
+      'description':
+          'bungraw lakkhawmna',
+      'sumChetVelDanType': 0,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //7
+    await db.insert(transactionTypeTable, {
+      'name': 'Packing expenses',
+      'description':
+          'bungraw pack na',
+      'sumChetVelDanType': 0,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //8
+    await db.insert(transactionTypeTable, {
+      'name': 'Salaries ',
+      'description':
+          'hnathawkate thla tin hlawh',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //9
+    await db.insert(transactionTypeTable, {
+      'name': 'Office rent',
+      'description':
+          'office luahna man',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //10
+    await db.insert(transactionTypeTable, {
+      'name': 'Printing & Stationery',
+      'description':
+          'Lehkha print na,etc. leh Stationary a sum hman te',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //11
+    await db.insert(transactionTypeTable, {
+      'name': 'Telephone Charges',
+      'description':
+          'bungraw pack na',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //12
+    await db.insert(transactionTypeTable, {
+      'name': 'Postage and telegram',
+      'description':
+          'postage and telegram',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //13
+    await db.insert(transactionTypeTable, {
+      'name': 'Insurance',
+      'description':
+          'Insurance',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //14
+    await db.insert(transactionTypeTable, {
+      'name': 'Audit fees',
+      'description':
+          'audit fee',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //15
+    await db.insert(transactionTypeTable, {
+      'name': 'Electricity',
+      'description':
+          'Electric bill leh electric lama sum hmanna te',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //16
+    await db.insert(transactionTypeTable, {
+      'name': 'Repairs and renewal',
+      'description':
+          'Thil siam thatnaa sum hman te',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //17
+    await db.insert(transactionTypeTable, {
+      'name': 'Advertisement',
+      'description':
+          'advertisement',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //18
+    await db.insert(transactionTypeTable, {
+      'name': 'Discount',
+      'description':
+          'Discount kan pek na',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //19
+    await db.insert(transactionTypeTable, {
+      'name': 'Depreciation',
+      'description':
+          'Thil man a ai tlawma kan pekna zat',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //20
+    await db.insert(transactionTypeTable, {
+      'name': 'Carriage outward',
+      'description':
+          'Carriage outward',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //21
+    await db.insert(transactionTypeTable, {
+      'name': 'Bad debts',
+      'description':
+          'Ba min pek tawh loh tur te',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //22
+    await db.insert(transactionTypeTable, {
+      'name': 'Provision for bad debts',
+      'description':
+          'bat ral te phuhrukna tur',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //23
+    await db.insert(transactionTypeTable, {
+      'name': 'Selling commission',
+      'description':
+          'Selling commission',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //24
+    await db.insert(transactionTypeTable, {
+      'name': 'Bank charges',
+      'description':
+          'bank charges',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //25
+    await db.insert(transactionTypeTable, {
+      'name': 'Loss on sale of asset',
+      'description':
+          'bungraw hralhchhawnna a pawisa hloh na',
+      'sumChetVelDanType': 3,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+
+    ///////////////////////////////////////////////////////////////////
+    
+    //26
+    await db.insert(transactionTypeTable, {
+      'name': 'Discount Recieved',
+      'description':
+          'thil leina a discount kan dawn zat',
+      'sumChetVelDanType': 2,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //27
+    await db.insert(transactionTypeTable, {
+      'name': 'Commission recieved',
+      'description':
+          'commission na a hmuh zat',
+      'sumChetVelDanType': 2,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //28
+    await db.insert(transactionTypeTable, {
+      'name': 'Bank interest',
+      'description':
+          'bank interest dawn zat',
+      'sumChetVelDanType': 2,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //29
+    await db.insert(transactionTypeTable, {
+      'name': 'Rent recieved',
+      'description':
+          'Kan in/dawr luahman atanga sum dawn',
+      'sumChetVelDanType': 2,
+      'debitSideLedger': 3,
+      'creditSideLedger': 2,
+      'partyLedger': 0,
+    });
+    //30
+    await db.insert(transactionTypeTable, {
+      'name': 'Profit on sale of asset',
+      'description':
+          'Bungraw hralhchhawnna atanga hlawkna',
+      'sumChetVelDanType': 2,
       'debitSideLedger': 3,
       'creditSideLedger': 2,
       'partyLedger': 0,
     });
   }
 }
+
