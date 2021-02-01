@@ -445,10 +445,10 @@ class _NewPurchaseTransactionScreenState
                     TableRow(children: [
                       Text('Particulars', textAlign: TextAlign.center),
                       Text(
-                        'Credit',
+                        'Debit',
                         textAlign: TextAlign.center,
                       ),
-                      Text('Debit', textAlign: TextAlign.center)
+                      Text('Credit', textAlign: TextAlign.center)
                     ]),
                     TableRow(children: [
                       Column(children: [
