@@ -11,7 +11,8 @@ import 'package:account_manager/business_logic/view_models/settings/party/partyD
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
@@ -38,7 +39,8 @@ import 'package:account_manager/views/screens/settings/settingsDashboard.screen.
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
-import 'package:account_manager/views/screens/transaction/newTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 
 // ------SCREENS-----BOOKS---------------
@@ -91,13 +93,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CompanyProfileViewModel()),
         // ---------NEW TRANSACTION----------------
         ChangeNotifierProvider(
-          create: (context) => NewTransactionViewModel(),
+          create: (context) => NewPurchaseTransactionViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeDetailViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NewAssetLedgerCreationViewModel(),
         ),
 
         // ChangeNotifierProvider(
@@ -156,7 +161,8 @@ class MyApp extends StatelessWidget {
           rParty: (context) => PartyDashboardScreen(),
 
           // ------------Transaction---------------
-          rNewTransaction: (context) => NewTransactionScreen(),
+          rTransactionDashboard: (context) => TransactionDashboardScreen(),
+          rNewTransaction: (context) => NewPurchaseTransactionScreen(),
           rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
           //-------------Book------------------------
@@ -189,7 +195,7 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     //LedgerMasterDashboard(),
     DashBoard(),
     BooksDashboard(),
-    NewTransactionScreen(),
+    TransactionDashboardScreen(),
     //  LedgerDashboard(),
     AnalyticsDashboardScreen(),
     SettingsDashboard(),

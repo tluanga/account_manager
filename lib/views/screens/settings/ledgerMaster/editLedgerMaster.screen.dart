@@ -22,6 +22,13 @@ class _EditLedgerMasterScreenState extends State<EditLedgerMasterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
+    if (_formKey.currentState.validate()) {
+      // If the form is valid, display a snackbar. In the real world,
+      // you'd often call a server or save the information in a database.
+
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Processing Data')));
+    }
     EditLedgerMasterViewModel _ledgerMasterViewModel =
         serviceLocator<EditLedgerMasterViewModel>();
     _ledgerMasterViewModel.updateLedgerMaster(
