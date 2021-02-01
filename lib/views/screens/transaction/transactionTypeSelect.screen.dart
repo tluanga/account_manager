@@ -130,7 +130,7 @@ class _TransactionTypeSelectScreenState
                                     ),
                                     child: Center(
                                       child: Text(
-                                        '_labelText',
+                                        _labelText,
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
@@ -213,14 +213,11 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                 return await model.getFilteredLedgerMaster(pattern);
               },
               itemBuilder: (context, suggestion) {
-                print(suggestion['id']);
-                // return ListTile(
-                //   leading: Icon(Icons.shopping_cart),
-                //   title: Text(suggestion['name']),
-                //   subtitle: Text('\$${suggestion['price']}'),
-                // );
+                // print(suggestion['id']);
                 return ListTile(
-                  title: Text('test'),
+                  leading: Icon(Icons.shopping_cart),
+                  title: Text(suggestion['name']),
+                  //   subtitle: Text('\$${suggestion['price']}'),
                 );
               },
               onSuggestionSelected: (suggestion) {
