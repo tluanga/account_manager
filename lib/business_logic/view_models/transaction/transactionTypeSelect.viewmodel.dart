@@ -54,4 +54,15 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   void setAssetLedger(LedgerMaster _ledgerMaster) {
     selectedAssetLedger = _ledgerMaster;
   }
+
+  Future<List<LedgerMaster>> getFilteredLedgerMaster(
+      String _searchString) async {
+    print('The search string is $_searchString');
+    if (_searchString == null) {
+      return [];
+    }
+    var result = await _ledgerMasterService.getFilterdLedgerList(_searchString);
+    print(result.length);
+    return result;
+  }
 }

@@ -5,7 +5,6 @@ import 'package:account_manager/business_logic/view_models/transaction/transacti
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -179,104 +178,143 @@ class _TransactionTypeSelectScreenState
 }
 
 void _modalBottomSheet(context) {
-  Navigator.of(context).push(new MaterialPageRoute<Null>(
+  showModalBottomSheet(
+      context: context,
       builder: (BuildContext context) {
-        return new AddEntryDialog();
-      },
-      fullscreenDialog: false));
-}
-
-class AddEntryDialog extends StatefulWidget {
-  @override
-  AddEntryDialogState createState() => new AddEntryDialogState();
-}
-
-class AddEntryDialogState extends State<AddEntryDialog> {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: const Text('Select Asset Ledger'),
-      ),
-      body: Consumer<TransactionTypeSelectViewModel>(
-        builder: (context, model, child) {
-          return Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: TypeAheadField(
-              textFieldConfiguration: TextFieldConfiguration(
-                  autofocus: true,
-                  style: DefaultTextStyle.of(context)
-                      .style
-                      .copyWith(fontStyle: FontStyle.italic),
-                  decoration: InputDecoration(border: OutlineInputBorder())),
-              suggestionsCallback: (pattern) async {
-                return await model.getFilteredLedgerMaster(pattern);
-              },
-              itemBuilder: (context, suggestion) {
-                print(suggestion['id']);
-                // return ListTile(
-                //   leading: Icon(Icons.shopping_cart),
-                //   title: Text(suggestion['name']),
-                //   subtitle: Text('\$${suggestion['price']}'),
-                // );
-                return ListTile(
-                  title: Text('test'),
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
+            child: Consumer<TransactionTypeSelectViewModel>(
+              builder: (context, model, child) {
+                model.loadAssetTypeLedger();
+                return Container(
+                  height: MediaQuery.of(context).size.height * .60,
+                  width: 300,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Select Asset Ledger',
+                        style: TextStyle(
+                            color: HexColor(TEXTCOLOR),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          height: 40,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: TextFormField(
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Search by Name...',
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: model.assetTypeList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              padding: EdgeInsets.all(5),
+                              width: MediaQuery.of(context).size.width,
+                              child: GestureDetector(
+                                onTap: () {
+                                  model.setAssetLedger(
+                                      model.assetTypeList[index]);
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  width: 400,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: HexColor(TEXTCOLOR),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      model.assetTypeList.length != null
+                                          ? model.assetTypeList[index].name
+                                          : '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: HexColor(TEXTCOLOR),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    color: HexColor(SECONDARYGREYCOLOR),
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _newAssetLedgermodalBottomSheet(context);
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  color: HexColor(TEXTCOLOR),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Add New',
+                                    style: TextStyle(
+                                      color: HexColor(SECONDARYGREYCOLOR),
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 );
               },
-              onSuggestionSelected: (suggestion) {
-                Navigator.pop(context);
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => ProductPage(product: suggestion)
-                // ));
-              },
             ),
-          );
-        },
-      ),
-    );
-  }
+          ),
+        );
+      });
 }
-
-//   showModalBottomSheet(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return GestureDetector(
-//           onTap: () => FocusScope.of(context).unfocus(),
-//           child: SingleChildScrollView(
-//             child: Consumer<TransactionTypeSelectViewModel>(
-//               builder: (context, model, child) {
-//                 model.loadAssetTypeLedger();
-//                 return TypeAheadField(
-//                   textFieldConfiguration: TextFieldConfiguration(
-//                       autofocus: true,
-//                       style: DefaultTextStyle.of(context)
-//                           .style
-//                           .copyWith(fontStyle: FontStyle.italic),
-//                       decoration:
-//                           InputDecoration(border: OutlineInputBorder())),
-//                   suggestionsCallback: (pattern) async {
-//                     return await model.getFilteredLedgerMaster(pattern);
-//                   },
-//                   itemBuilder: (context, suggestion) {
-//                     return ListTile(
-//                       leading: Icon(Icons.shopping_cart),
-//                       title: Text(suggestion['name']),
-//                       subtitle: Text('\$${suggestion['price']}'),
-//                     );
-//                   },
-//                   onSuggestionSelected: (suggestion) {
-//                     Navigator.pop(context);
-//                     // Navigator.of(context).push(MaterialPageRoute(
-//                     //   builder: (context) => ProductPage(product: suggestion)
-//                     // ));
-//                   },
-//                 );
-//               },
-//             ),
-//           ),
-//         );
-//       });
-// }
 
 void _newAssetLedgermodalBottomSheet(context) {
   showModalBottomSheet(

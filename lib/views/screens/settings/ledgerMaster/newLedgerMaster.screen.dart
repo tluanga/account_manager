@@ -17,6 +17,7 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
   String _description;
   int directOrIndirect = 0;
   int partyOrNotParty = 1;
+  int asset;
   final _formKey = GlobalKey<FormState>();
 
   void _onSubmit() {
@@ -27,7 +28,8 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
           name: _name,
           description: _description,
           party: partyOrNotParty,
-          directOrIndirect: directOrIndirect),
+          directOrIndirect: directOrIndirect,
+          asset: asset),
     );
     print(_name);
     print(_description);
@@ -113,6 +115,21 @@ class _NewLedgerMasterScreenState extends State<NewLedgerMasterScreen> {
                       labels: ['Party Account', 'Not a Party Account'],
                       onToggle: (index) {
                         partyOrNotParty = index;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ToggleSwitch(
+                      minWidth: 150.0,
+                      minHeight: 40.0,
+                      activeBgColor: cprimaryColor,
+                      inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
+                      activeFgColor: HexColor(TEXTCOLOR),
+                      initialLabelIndex: 1,
+                      labels: ['Asset Type Account', 'Not Asset Type Account'],
+                      onToggle: (index) {
+                        asset = index;
                       },
                     ),
                   ),

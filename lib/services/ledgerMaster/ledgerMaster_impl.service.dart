@@ -99,4 +99,19 @@ class LedgerMasterImpl implements LedgerMasterService {
 
     return ledgerMasterList;
   }
+
+  Future<List<LedgerMaster>> getFilterdLedgerList(String _searchString) async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE asset=$cASSET AND name LIKE '$_searchString%'
+      ''');
+    print('all data');
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+
+    return ledgerMasterList;
+  }
 }

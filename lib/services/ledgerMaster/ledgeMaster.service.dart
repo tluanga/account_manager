@@ -8,4 +8,5 @@ abstract class LedgerMasterService {
   Future<int> delete(int id);
   Future<List<LedgerMaster>> getPartyList();
   Future<List<LedgerMaster>> getAssetLedgerList();
+  Future<List<LedgerMaster>> getFilterdLedgerList(String _searchString);
 }
