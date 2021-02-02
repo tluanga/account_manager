@@ -4,14 +4,18 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../static/transactionType.constant.dart';
 
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);
@@ -89,10 +93,7 @@ class _NewPurchaseTransactionScreenState
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Amount';
-                          } else if (labelText == labelText) {
-                            return 'Please select Transaction type';
-                          } else
-                            return null;
+                          }
                         },
                         onChanged: (value) {
                           setState(() {
@@ -151,7 +152,7 @@ class _NewPurchaseTransactionScreenState
                       Container(
                         child: Text(newTransaction.getPartyName() != null
                             ? newTransaction.getPartyName().toString()
-                            : 'Please Select Party'),
+                            : ''),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -162,6 +163,16 @@ class _NewPurchaseTransactionScreenState
                                   TransactionTypeSelectScreen(),
                             ),
                           );
+                          if (newTransaction.getTransactionTypeId() ==
+                              TransactionTypeConstant.cPURCHASEOFASSET) {
+                            print('Asset Type Select');
+                            Navigator.of(context)
+                                .push(new MaterialPageRoute<Null>(
+                                    builder: (BuildContext context) {
+                                      return new AssetSelectScreen();
+                                    },
+                                    fullscreenDialog: true));
+                          }
                         },
                         child: Container(
                           width: double.infinity,

@@ -8,6 +8,8 @@ import 'package:account_manager/static/purchaseType.constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import '../../../static/constants.dart';
+
 import '../../../static/ledgerId.constants.dart';
 
 import '../../models/transactionType.models.dart';
@@ -57,6 +59,17 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         await _transactionTypeService.getTransactionTypeList(_searchString);
     print(transactionTypeList.length.toString());
     notifyListeners();
+  }
+
+  void newAssetLedger(String _name, String _description) async {
+    await _ledgerMasterService.insert(
+      LedgerMaster(
+          name: _name,
+          description: _description,
+          directOrIndirect: cDirectAc,
+          party: cNotPartyAc,
+          asset: cASSET),
+    );
   }
 
   // void setData() async {

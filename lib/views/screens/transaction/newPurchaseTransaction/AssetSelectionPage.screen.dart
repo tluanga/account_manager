@@ -1,4 +1,3 @@
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
 
 import 'package:flutter/material.dart';
@@ -8,12 +7,9 @@ import 'package:provider/provider.dart';
 
 import '../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import '../../../../static/constants.dart';
-import '../../../../static/constants.dart';
-import '../../../../static/transactionType.constant.dart';
-import '../../../../static/transactionType.constant.dart';
 
-class TransactionTypeSelectScreen extends StatelessWidget {
-  const TransactionTypeSelectScreen({Key key}) : super(key: key);
+class AssetSelectScreen extends StatelessWidget {
+  const AssetSelectScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +87,7 @@ class TransactionTypeSelectScreen extends StatelessWidget {
                               model.transactionTypeList[index].id);
                           model.setTransactionTypeName(
                               model.transactionTypeList[index].name);
-
+                          if (model.getTransactionTypeId() == cASSET) {}
                           Navigator.pop(context);
                         },
                         child: Padding(
