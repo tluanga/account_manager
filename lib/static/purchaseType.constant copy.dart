@@ -1,11 +1,11 @@
-class PurchaseType {
-  //1) Asset -Balo - Bank payment- DebitSide: Asset Account Credit Side:Bank
-  static const int assetBaloBank = 1;
+class SalesType {
+  //1) BaloCash - Bank payment- DebitSide: Cash Credit Side:sales A/c
+  static const int baLo = 1;
 
-  //2) Asset -Balo - Cash payment- DebitSide: Asset Account Credit Side:Cash
-  static const int assetBaloCash = 2;
+  //2) Balo Bank - Bank payment- DebitSide: Bank Account Credit Side:Sales A/C
+  static const int baloBank = 2;
 
-  //3) Asset-Ba- Debit:Asset Account Credit: Party Ac
+  //3) Ba Debit:Party Ac DebitSide: party Ac creditSide: Sales A/c
   static const int assetBa = 3;
 
   //4) Asset-Ba-Cash Partial Cash Payment- Debit:Asset Account Credit:Cash Credit:Party Ac

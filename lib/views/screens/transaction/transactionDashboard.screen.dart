@@ -6,6 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'newPurchaseTransaction.screen.dart';
 
 class TransactionDashboardScreen extends StatelessWidget {
+  final double height = 80;
+  final double width = 400;
   const TransactionDashboardScreen({Key key}) : super(key: key);
 
   @override
@@ -39,8 +41,8 @@ class TransactionDashboardScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                width: 400,
-                height: 100,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                   color: cprimaryColor,
                   border: Border.all(
@@ -51,7 +53,10 @@ class TransactionDashboardScreen extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Buy',
-                    style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: HexColor(TEXTCOLOR),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -60,8 +65,8 @@ class TransactionDashboardScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              width: 400,
-              height: 100,
+              width: width,
+              height: height,
               decoration: BoxDecoration(
                 color: cprimaryColor,
                 border: Border.all(
@@ -70,10 +75,53 @@ class TransactionDashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Text(
-                  'Sell',
-                  style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold)
+                child: Text('Sell',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: HexColor(TEXTCOLOR),
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                color: cprimaryColor,
+                border: Border.all(
+                  color: HexColor(SECONDARYGREYCOLOR),
                 ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text('Lakluh',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: HexColor(TEXTCOLOR),
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                color: cprimaryColor,
+                border: Border.all(
+                  color: HexColor(SECONDARYGREYCOLOR),
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text('Pek Chhuah',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: HexColor(TEXTCOLOR),
+                        fontWeight: FontWeight.bold)),
               ),
             ),
           ),
@@ -88,8 +136,8 @@ class TransactionDashboardScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                width: 400,
-                height: 100,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                   color: cprimaryColor,
                   border: Border.all(
@@ -98,10 +146,11 @@ class TransactionDashboardScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
-                  child: Text(
-                    'Customer Debt Settlement',
-                    style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold)
-                  ),
+                  child: Text('Customer Debt Settlement',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: HexColor(TEXTCOLOR),
+                          fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
@@ -109,8 +158,8 @@ class TransactionDashboardScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-                width: 400,
-                height: 100,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                   color: cprimaryColor,
                   border: Border.all(
@@ -119,10 +168,11 @@ class TransactionDashboardScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
-                  child: Text(
-                    'Business Debt Settlement',
-                    style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold)
-                  ),
+                  child: Text('Business Debt Settlement',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: HexColor(TEXTCOLOR),
+                          fontWeight: FontWeight.bold)),
                 )),
           ),
         ],
