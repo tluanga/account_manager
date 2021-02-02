@@ -20,7 +20,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int _cashOrBank = CASH; //user input
   DateTime _date = DateTime.now(); //user input
   int _baType = cFullBA; //BA partial or Full --user input
-  int _party; //user purchase is made by BA
+  int _partyId; //user purchase is made by BA
   String _partyName; //Computed
   int _assetLedger; //if the purchase is of asset//user input
   String _assetLedgerName;
@@ -55,17 +55,19 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     // ----IF asset is bought it will go to debitsite
     if (_assetLedger != null) {
       _debitSideLedgerId = _assetLedger;
-      if (_party != null && _baType == cFullBA) {
-        _creditSideLedgerId = _party;
+      if (_partyId != null && _baType == cFullBA) {
+        _creditSideLedgerId = _partyId;
         LedgerMaster ledgerMaster =
             await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
         _creditSideLedgerName = ledgerMaster.name;
-      } else if (_party != null && _baType == cPartialBA) {
+        notifyListeners();
+      } else if (_partyId != null && _baType == cPartialBA) {
         if (_cashOrBank == CASH) {
           _creditSideLedgerId = _transationType.creditSideLedger;
           LedgerMaster ledgerMaster =
               await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
           _creditSideLedgerName = ledgerMaster.name;
+          notifyListeners();
         }
       }
     } else if (_assetLedger == null) {
@@ -76,15 +78,16 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       String _ledgerMasterName = ledgerMaster.name;
       print('Debit Side LedgerName $_ledgerMasterName');
       _debitSideLedgerName = ledgerMaster.name;
-      if (_party != null && _baType == cFullBA) {
+      if (_partyId != null && _baType == cFullBA) {
         // Ba full a nih chuan
         // creditside ah partyLedger
         print('Party is not Null and Ba type is full');
-        _creditSideLedgerId = _party;
+        _creditSideLedgerId = _partyId;
         LedgerMaster ledgerMaster =
             await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
         _creditSideLedgerName = ledgerMaster.name;
-      } else if (_party != null && _baType == cPartialBA) {
+        notifyListeners();
+      } else if (_partyId != null && _baType == cPartialBA) {
         // Partial Ba ah
         // Credit Side ah Bank or Cash
         print('Party is not Null and Ba type is partial');
@@ -95,6 +98,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           LedgerMaster ledgerMaster =
               await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
           _creditSideLedgerName = ledgerMaster.name;
+          notifyListeners();
         } else if (_cashOrBank == BANK) {
           print(
               'Party is not Null and Ba type is partial, transaction is Bank');
@@ -102,6 +106,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           LedgerMaster ledgerMaster =
               await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
           _creditSideLedgerName = ledgerMaster.name;
+          notifyListeners();
         }
       } else {
         if (_cashOrBank == CASH) {
@@ -110,16 +115,30 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           LedgerMaster ledgerMaster =
               await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
           _creditSideLedgerName = ledgerMaster.name;
+          notifyListeners();
         } else if (_cashOrBank == BANK) {
           print('Asset Nilo, Ba lo leh Bank  a thil lei');
           _creditSideLedgerId = _transationType.creditSideLedger;
           LedgerMaster ledgerMaster =
               await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
           _creditSideLedgerName = ledgerMaster.name;
+          notifyListeners();
         }
       }
+      printData();
     }
+
     notifyListeners();
+  }
+
+  void printData() {
+    print('Amount:$_amount');
+    print('Particular:$_particular');
+    print('Ba or Balo:$_baOrBalo');
+    print('Cash or Bank:$_cashOrBank');
+    print('Ba Type:$_baType');
+    print('Party Id:$_partyId');
+    print('Party Name :$_partyName');
   }
 
   // // ---For creating a new transaction
@@ -266,9 +285,15 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int getParty() => _baType;
-  void setParty(int value) {
-    _party = value;
+  int getPartyId() => _partyId;
+  void setPartyId(int value) {
+    _partyId = value;
+    notifyListeners();
+  }
+
+  String getPartyName() => _partyName;
+  void setPartyName(String value) {
+    _partyName = value;
     notifyListeners();
   }
 
@@ -284,7 +309,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String getPartyName() => _partyName;
   String getAssetLedgerName() => _assetLedgerName;
   String getDebitSideLedgerName() => _debitSideLedgerName;
   String getCreditSideLedgerName() => _creditSideLedgerName;

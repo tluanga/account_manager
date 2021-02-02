@@ -8,13 +8,11 @@ import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/screens/transaction/widget/baOrBalo.widget.dart';
 import 'package:account_manager/views/screens/transaction/widget/cashOrBank.widget.dart';
-import 'package:account_manager/views/widgets/toggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);
@@ -148,6 +146,11 @@ class _NewPurchaseTransactionScreenState
                             ]),
                       ),
                       SizedBox(height: 20),
+                      Container(
+                        child: Text(newTransaction.getPartyName() != null
+                            ? newTransaction.getPartyName().toString()
+                            : 'Please Select Party'),
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
