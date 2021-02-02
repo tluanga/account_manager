@@ -1,5 +1,3 @@
-import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:flutter/material.dart';
 
 class ToggleWidget extends StatelessWidget {

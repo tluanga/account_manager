@@ -8,7 +8,6 @@ import 'package:account_manager/static/purchaseType.constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
-import '../../models/transactionType.models.dart';
 
 import '../../../services/transaction/transaction.service.dart';
 

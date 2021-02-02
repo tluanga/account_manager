@@ -9,7 +9,9 @@ class TradingAccountViewModel extends ChangeNotifier {
   int closingStock; //Needs to be calculated
   int grossProfit;
   // ---Get all direct expenes
+  // ignore: unused_field
   List<DirectExpense> _directExpenseList = [];
+  // ignore: unused_field
   LedgerTransactionService _ledgerTransactionService =
       serviceLocator<LedgerTransactionService>();
   TradingAccountService _tradingAccountService =

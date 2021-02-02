@@ -6,7 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'newPurchaseTransaction.screen.dart';
 
 class TransactionDashboardScreen extends StatelessWidget {
-  final double height = 80;
+  final double height = 25;
   final double width = 400;
   const TransactionDashboardScreen({Key key}) : super(key: key);
 

@@ -1,7 +1,6 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/dashboard/dashBoard.screen.dart';
 import 'package:account_manager/views/screens/transaction/widget/newParty.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';

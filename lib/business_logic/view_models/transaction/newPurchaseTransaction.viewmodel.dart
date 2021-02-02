@@ -26,17 +26,22 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int _assetLedger; //if the purchase is of asset//user input
   String _assetLedgerName;
   int _transactionTypeId; //user input
+  // ignore: unused_field
   int _debitSideLedgerId; //computed-
   String _debitSideLedgerName; //computed --
-  int _creditSideLedgerId; //computed --
+//computed --
   // ignore: unused_field
   String _creditSideLedgerName; //--computer
+  // ignore: unused_field
   int _purchaseType;
   List<LedgerMaster> partyList = [];
 
+  // ignore: unused_field
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
+  // ignore: unused_field
   TransactionService _transactionService = serviceLocator<TransactionService>();
+  // ignore: unused_field
   LedgerTransactionService _ledgerTransactionService =
       serviceLocator<LedgerTransactionService>();
   LedgerMasterService _ledgerMasterService =
@@ -140,16 +145,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         //Transaction is Ba
         if (_baType == cCredit) {
           print('assetBa Full = 3');
-          _creditSideLedgerId = _partyId;
           _purchaseType = PurchaseType.assetDebt;
         } else {
           if (_cashOrBank == CASH) {
             print('assetBaCashPartial = 4');
-            _creditSideLedgerId = LedgerID.CASHAC;
             _purchaseType = PurchaseType.assetDebtCashPartial;
           } else if (_cashOrBank == BANK) {
             print('assetBaBankPartial = 5');
-            _creditSideLedgerId = LedgerID.BANK;
             _purchaseType = PurchaseType.assetDebtBankPartial;
           }
         }
@@ -159,12 +161,10 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         if (_cashOrBank == CASH) {
           //Transaction Type is Cash
           print('assetBaloCash = 2');
-          _creditSideLedgerId = LedgerID.CASHAC;
           _purchaseType = PurchaseType.cashDownCash;
         } else if (_cashOrBank == BANK) {
           //Transaction Type is Bank
           print('assetBaloBank = 1');
-          _creditSideLedgerId = LedgerID.BANK;
           _purchaseType = PurchaseType.cashDownBank;
         }
       } else {
@@ -173,16 +173,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           //Transaction is Ba
           if (_baType == cCredit) {
             print('nonAssetBa = 8');
-            _creditSideLedgerId = _partyId;
             _purchaseType = PurchaseType.nonAssetDebt;
           } else {
             if (_cashOrBank == CASH) {
               print('nonAssetBaCashPartial = 9');
-              _creditSideLedgerId = LedgerID.CASHAC;
               _purchaseType = PurchaseType.nonAssetDebtCashPartial;
             } else if (_cashOrBank == BANK) {
               print('nonAssetBaBankPartial = 10');
-              _creditSideLedgerId = LedgerID.BANK;
               _purchaseType = PurchaseType.nonAssetDebtBankPartial;
             }
           }
@@ -192,12 +189,10 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           if (_cashOrBank == CASH) {
             //Transaction Type is Cash
             print('nonAssetBaloCash = 7');
-            _creditSideLedgerId = LedgerID.CASHAC;
             _purchaseType = PurchaseType.nonAssetCashDownCash;
           } else if (_cashOrBank == BANK) {
             //Transaction Type is Bank
             print('nonAssetBaloBank = 6');
-            _creditSideLedgerId = LedgerID.BANK;
             _purchaseType = PurchaseType.nonAssetCashDownBank;
           }
         }
