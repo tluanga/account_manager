@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 void modalBottomSheet(context) {
   showModalBottomSheet(
@@ -68,7 +67,6 @@ void modalBottomSheet(context) {
                         itemBuilder: (context, suggestion) {
                           String _name = suggestion.name.toString();
                           return ListTile(
-                            leading: Icon(Icons.shopping_cart),
                             title: Text(_name),
                             // subtitle: Text('\$${suggestion['price']}'),
                           );
