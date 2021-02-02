@@ -6,6 +6,7 @@ import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/widget/baOrBalo.widget.dart';
 import 'package:account_manager/views/screens/transaction/widget/cashOrBank.widget.dart';
 import 'package:account_manager/views/widgets/toggle.widget.dart';
 
@@ -113,10 +114,7 @@ class _NewPurchaseTransactionScreenState
                         },
                       ),
                       SizedBox(height: 20),
-                      ToggleWidget(
-                        option1Label: 'BA',
-                        option2Label: 'BALO',
-                      ),
+                      SelectBaOrBaloToggle(),
                       SizedBox(height: 20),
                       SelectCashOrBankToggle(),
                       SizedBox(height: 20),

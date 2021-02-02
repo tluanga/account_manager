@@ -18,7 +18,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   String _particular; //--user input
   int _baOrBalo = cBALO; //user input
   int _cashOrBank = CASH; //user input
-  DateTime _date; //user input
+  DateTime _date = DateTime.now(); //user input
   int _baType = cFullBA; //BA partial or Full --user input
   int _party; //user purchase is made by BA
   String _partyName; //Computed
