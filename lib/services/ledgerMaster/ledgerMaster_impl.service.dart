@@ -117,11 +117,29 @@ class LedgerMasterImpl implements LedgerMasterService {
      SELECT * FROM masterLedger_table
      WHERE asset=$cASSET AND name LIKE '$_searchString%'
       ''');
-    print('all data');
+    print(_partyList.length.toString());
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+
+      return ledgerMasterList;
+    });
+  }
+
+  Future<List<LedgerMaster>> getFilterdPartyLedgerList(
+      String _searchString) async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE name LIKE '$_searchString%'
+      ''');
+    String length = _partyList.length.toString();
+    // print('The Search yield $length');
     final List<LedgerMaster> ledgerMasterList = [];
     _partyList.forEach((ledgerMasterMap) {
       ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
     });
+    if (_partyList.length == 0) return [];
 
     return ledgerMasterList;
   }

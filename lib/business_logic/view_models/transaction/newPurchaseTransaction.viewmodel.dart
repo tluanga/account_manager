@@ -200,9 +200,26 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   //     _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
   //   }
   // }
+  Future<List<LedgerMaster>> getFilterdPartyLedgerMaster(
+      String _searchString) async {
+    List<LedgerMaster> _ledgerMasterList =
+        await _ledgerMasterService.getFilterdPartyLedgerList(_searchString);
+    print(_searchString);
+    String _length = _ledgerMasterList.length.toString();
+    print('The search Returned $_length result in the viewmodel');
+    return _ledgerMasterList;
+  }
 
-  Future<int> createPartyLedger({name, description}) async {
-    var payload = LedgerMaster(name: name, description: description);
+  Future<int> newPartyLedger({
+    name,
+    description,
+  }) async {
+    var payload = LedgerMaster(
+        name: name,
+        description: description,
+        directOrIndirect: cDirectAc,
+        party: cPartyAc,
+        asset: cNonASSET);
     var result = await _ledgerMasterService.insert(payload);
     return result;
   }
