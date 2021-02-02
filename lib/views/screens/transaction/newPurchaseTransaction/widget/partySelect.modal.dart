@@ -28,6 +28,10 @@ class PartySelect extends StatelessWidget {
                     itemCount: model.partyList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
+                        onTap: () {
+                          model.setPartyId(model.partyList[index].id);
+                          Navigator.pop(context);
+                        },
                         child: ListTile(
                           title: Text(model.partyList[index].name),
                         ),
