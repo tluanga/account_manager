@@ -65,18 +65,17 @@ void modalBottomSheet(context) {
                           return _ledgerMasterList;
                           // return await BackendService.getSuggestions(pattern);
                         },
-                        itemBuilder: (context, suggestion){
-                          print(suggestion.name.toString());
+                        itemBuilder: (context, suggestion) {
+                          String _name = suggestion.name.toString();
                           return ListTile(
                             leading: Icon(Icons.shopping_cart),
-                            title: Text(suggestion.name.toString()),
+                            title: Text(_name),
                             // subtitle: Text('\$${suggestion['price']}'),
                           );
                         },
                         onSuggestionSelected: (suggestion) {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  DashBoard()));
+                              builder: (context) => DashBoard()));
                         },
                       ),
                       // Expanded(
