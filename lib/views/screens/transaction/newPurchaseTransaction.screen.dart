@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
@@ -14,21 +12,22 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);
 
   @override
-  _NewPurchaseTransactionScreenState createState() => _NewPurchaseTransactionScreenState();
-
-
+  _NewPurchaseTransactionScreenState createState() =>
+      _NewPurchaseTransactionScreenState();
 }
 
-class _NewPurchaseTransactionScreenState extends State<NewPurchaseTransactionScreen> {
+class _NewPurchaseTransactionScreenState
+    extends State<NewPurchaseTransactionScreen> {
   NewPurchaseTransactionViewModel _newPurchaseTransactionViewModel =
       serviceLocator<NewPurchaseTransactionViewModel>();
 
   final _formKey = GlobalKey<FormState>();
+
+  DateTime _dateTime = DateTime.now();
 
   _submit() {
     if (_formKey.currentState.validate()) {
@@ -203,7 +202,7 @@ class _NewPurchaseTransactionScreenState extends State<NewPurchaseTransactionScr
                           child: Center(
                             child: FlatButton(
                               onPressed: () {
-                                newTransaction.setData();
+                                //  newTransaction.setData();
                                 _submit();
                               },
                               child: Text(
@@ -388,5 +387,4 @@ class _NewPurchaseTransactionScreenState extends State<NewPurchaseTransactionScr
       },
     );
   }
-}
 }
