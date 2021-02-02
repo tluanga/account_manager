@@ -68,7 +68,7 @@ void modalBottomSheet(context) {
                         itemBuilder: (context, suggestion) {
                           String _name = suggestion.name.toString();
                           return ListTile(
-                            leading: Icon(Icons.shopping_cart),
+                            leading: Icon(Icons.adjust),
                             title: Text(_name),
                             // subtitle: Text('\$${suggestion['price']}'),
                           );
