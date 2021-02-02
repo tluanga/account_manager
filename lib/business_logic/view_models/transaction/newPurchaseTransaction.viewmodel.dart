@@ -3,6 +3,7 @@ import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
+import 'package:account_manager/static/purchaseType.constant.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -30,7 +31,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int _creditSideLedgerId; //computed --
   // ignore: unused_field
   String _creditSideLedgerName; //--computer
-
+  int _purchaseType;
   List<LedgerMaster> partyList = [];
 
   TransactionTypeService _transactionTypeService =
@@ -41,94 +42,184 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void setData() async {
-    var _transactionTypeResult = await _transactionTypeService.getList(id: 1);
+  // void setData() async {
+  //   var _transactionTypeResult = await _transactionTypeService.getList(id: 1);
 
-    if (_transactionTypeResult == null) {
-      print('Transaction Type access fail');
-    } else
-      print(_transactionTypeResult.toString());
-    TransactionType _transationType = _transactionTypeResult[0];
-    String _transactionTypeName = _transationType.name;
-    print('Transaction Type name $_transactionTypeName');
+  //   if (_transactionTypeResult == null) {
+  //     print('Transaction Type access fail');
+  //   } else
+  //     print(_transactionTypeResult.toString());
+  //   TransactionType _transationType = _transactionTypeResult[0];
+  //   String _transactionTypeName = _transationType.name;
+  //   print('Transaction Type name $_transactionTypeName');
 
-    // ----IF asset is bought it will go to debitsite
+  //   // ----IF asset is bought it will go to debitsite
+  //   if (_assetLedger != null) {
+  //     _debitSideLedgerId = _assetLedger;
+  //     if (_partyId != null && _baType == cFullBA) {
+  //       _creditSideLedgerId = _partyId;
+  //       LedgerMaster ledgerMaster =
+  //           await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
+  //       _creditSideLedgerName = ledgerMaster.name;
+  //       notifyListeners();
+  //     } else if (_partyId != null && _baType == cPartialBA) {
+  //       if (_cashOrBank == CASH) {
+  //         _creditSideLedgerId = _transationType.creditSideLedger;
+  //         LedgerMaster ledgerMaster =
+  //             await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
+  //         _creditSideLedgerName = ledgerMaster.name;
+  //         notifyListeners();
+  //       }
+  //     }
+  //   } else if (_assetLedger == null) {
+  //     print('Not an asset');
+  //     _debitSideLedgerId = _transationType.debitSideLedger;
+  //     LedgerMaster ledgerMaster =
+  //         await _ledgerMasterService.getLedgerMaster(_debitSideLedgerId);
+  //     String _ledgerMasterName = ledgerMaster.name;
+  //     print('Debit Side LedgerName $_ledgerMasterName');
+  //     _debitSideLedgerName = ledgerMaster.name;
+  //     if (_partyId != null && _baType == cFullBA) {
+  //       // Ba full a nih chuan
+  //       // creditside ah partyLedger
+  //       print('Party is not Null and Ba type is full');
+  //       _creditSideLedgerId = _partyId;
+  //       LedgerMaster ledgerMaster =
+  //           await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
+  //       _creditSideLedgerName = ledgerMaster.name;
+  //       notifyListeners();
+  //     } else if (_partyId != null && _baType == cPartialBA) {
+  //       // Partial Ba ah
+  //       // Credit Side ah Bank or Cash
+  //       print('Party is not Null and Ba type is partial');
+  //       if (_cashOrBank == CASH) {
+  //         print(
+  //             'Party is not Null and Ba type is partial, transaction is Cash');
+  //         _creditSideLedgerId = _transationType.creditSideLedger;
+  //         LedgerMaster ledgerMaster =
+  //             await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
+  //         _creditSideLedgerName = ledgerMaster.name;
+  //         notifyListeners();
+  //       } else if (_cashOrBank == BANK) {
+  //         print(
+  //             'Party is not Null and Ba type is partial, transaction is Bank');
+  //         _creditSideLedgerId = _transationType.creditSideLedger;
+  //         LedgerMaster ledgerMaster =
+  //             await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
+  //         _creditSideLedgerName = ledgerMaster.name;
+  //         notifyListeners();
+  //       }
+  //     } else {
+  //       if (_cashOrBank == CASH) {
+  //         print('Asset Nilo, Ba lo leh Cash  a thil lei');
+  //         _creditSideLedgerId = _transationType.creditSideLedger;
+  //         LedgerMaster ledgerMaster =
+  //             await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
+  //         _creditSideLedgerName = ledgerMaster.name;
+  //         notifyListeners();
+  //       } else if (_cashOrBank == BANK) {
+  //         print('Asset Nilo, Ba lo leh Bank  a thil lei');
+  //         _creditSideLedgerId = _transationType.creditSideLedger;
+  //         LedgerMaster ledgerMaster =
+  //             await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
+  //         _creditSideLedgerName = ledgerMaster.name;
+  //         notifyListeners();
+  //       }
+  //     }
+  //     printData();
+  //   }
+
+  //   notifyListeners();
+  // }
+  void setData() {
+    setPurchaseType();
+    switch (_purchaseType) {
+      case PurchaseType.assetBa:
+        {
+          print('Type 1');
+        }
+        break;
+    }
+  }
+
+  void setPurchaseType() {
     if (_assetLedger != null) {
+      //Transaction type is asset
       _debitSideLedgerId = _assetLedger;
-      if (_partyId != null && _baType == cFullBA) {
-        _creditSideLedgerId = _partyId;
-        LedgerMaster ledgerMaster =
-            await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
-        _creditSideLedgerName = ledgerMaster.name;
-        notifyListeners();
-      } else if (_partyId != null && _baType == cPartialBA) {
-        if (_cashOrBank == CASH) {
-          _creditSideLedgerId = _transationType.creditSideLedger;
-          LedgerMaster ledgerMaster =
-              await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
-          _creditSideLedgerName = ledgerMaster.name;
-          notifyListeners();
+      if (_baOrBalo == cBA) {
+        //Transaction is Ba
+        if (_baType == cFullBA) {
+          print('assetBa Full = 3');
+          _creditSideLedgerId = _partyId;
+          _purchaseType = PurchaseType.assetBa;
+        } else {
+          if (_cashOrBank == CASH) {
+            print('assetBaCashPartial = 4');
+            _creditSideLedgerId = LedgerID.CASHAC;
+            _purchaseType = PurchaseType.assetBaCashPartial;
+          } else if (_cashOrBank == BANK) {
+            print('assetBaBankPartial = 5');
+            _creditSideLedgerId = LedgerID.BANK;
+            _purchaseType = PurchaseType.assetBaBankPartial;
+          }
         }
       }
-    } else if (_assetLedger == null) {
-      print('Not an asset');
-      _debitSideLedgerId = _transationType.debitSideLedger;
-      LedgerMaster ledgerMaster =
-          await _ledgerMasterService.getLedgerMaster(_debitSideLedgerId);
-      String _ledgerMasterName = ledgerMaster.name;
-      print('Debit Side LedgerName $_ledgerMasterName');
-      _debitSideLedgerName = ledgerMaster.name;
-      if (_partyId != null && _baType == cFullBA) {
-        // Ba full a nih chuan
-        // creditside ah partyLedger
-        print('Party is not Null and Ba type is full');
-        _creditSideLedgerId = _partyId;
-        LedgerMaster ledgerMaster =
-            await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
-        _creditSideLedgerName = ledgerMaster.name;
-        notifyListeners();
-      } else if (_partyId != null && _baType == cPartialBA) {
-        // Partial Ba ah
-        // Credit Side ah Bank or Cash
-        print('Party is not Null and Ba type is partial');
+      if (_baOrBalo == cBALO) {
+        //transaction Type is Balo
         if (_cashOrBank == CASH) {
-          print(
-              'Party is not Null and Ba type is partial, transaction is Cash');
-          _creditSideLedgerId = _transationType.creditSideLedger;
-          LedgerMaster ledgerMaster =
-              await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
-          _creditSideLedgerName = ledgerMaster.name;
-          notifyListeners();
+          //Transaction Type is Cash
+          print('assetBaloCash = 2');
+          _creditSideLedgerId = LedgerID.CASHAC;
+          _purchaseType = PurchaseType.assetBaloCash;
         } else if (_cashOrBank == BANK) {
-          print(
-              'Party is not Null and Ba type is partial, transaction is Bank');
-          _creditSideLedgerId = _transationType.creditSideLedger;
-          LedgerMaster ledgerMaster =
-              await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
-          _creditSideLedgerName = ledgerMaster.name;
-          notifyListeners();
+          //Transaction Type is Bank
+          print('assetBaloBank = 1');
+          _creditSideLedgerId = LedgerID.BANK;
+          _purchaseType = PurchaseType.assetBaloBank;
         }
       } else {
-        if (_cashOrBank == CASH) {
-          print('Asset Nilo, Ba lo leh Cash  a thil lei');
-          _creditSideLedgerId = _transationType.creditSideLedger;
-          LedgerMaster ledgerMaster =
-              await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
-          _creditSideLedgerName = ledgerMaster.name;
-          notifyListeners();
-        } else if (_cashOrBank == BANK) {
-          print('Asset Nilo, Ba lo leh Bank  a thil lei');
-          _creditSideLedgerId = _transationType.creditSideLedger;
-          LedgerMaster ledgerMaster =
-              await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
-          _creditSideLedgerName = ledgerMaster.name;
-          notifyListeners();
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        if (_baOrBalo == cBA) {
+          //Transaction is Ba
+          if (_baType == cFullBA) {
+            print('nonAssetBa = 8');
+            _creditSideLedgerId = _partyId;
+            _purchaseType = PurchaseType.nonAssetBa;
+          } else {
+            if (_cashOrBank == CASH) {
+              print('nonAssetBaCashPartial = 9');
+              _creditSideLedgerId = LedgerID.CASHAC;
+              _purchaseType = PurchaseType.nonAssetBaCashPartial;
+            } else if (_cashOrBank == BANK) {
+              print('nonAssetBaBankPartial = 10');
+              _creditSideLedgerId = LedgerID.BANK;
+              _purchaseType = PurchaseType.nonAssetBaBankPartial;
+            }
+          }
+        }
+        if (_baOrBalo == cBALO) {
+          //transaction Type is Balo
+          if (_cashOrBank == CASH) {
+            //Transaction Type is Cash
+            print('nonAssetBaloCash = 7');
+            _creditSideLedgerId = LedgerID.CASHAC;
+            _purchaseType = PurchaseType.nonAssetBaloCash;
+          } else if (_cashOrBank == BANK) {
+            //Transaction Type is Bank
+            print('nonAssetBaloBank = 6');
+            _creditSideLedgerId = LedgerID.BANK;
+            _purchaseType = PurchaseType.nonAssetBaloBank;
+          }
         }
       }
-      printData();
     }
+  }
 
-    notifyListeners();
+  void saveData() {
+    // Asset a nih chuan debit ah assetLedger
+    // Asset a nih loh chuan Purchase Ac
+    if (_assetLedger == cBA) {
+    } else {}
   }
 
   void printData() {
@@ -141,84 +232,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('Party Name :$_partyName');
   }
 
-  // // ---For creating a new transaction
-  // void newTransaction({
-  //   int amount,
-  //   String particulars,
-  //   DateTime date,
-  //   int baOrBalo,
-  //   int cashOrBank,
-  //   int transactionTypeId,
-  //   int partyAccount = 0,
-  // } //Ba a thil lei a nih in party ledger account id a ngai
-  //     ) async {
-  //   // 1 -- save the transaction
-  //   var _result = await _transactionService.insert(
-  //     Transaction(
-  //       amount: amount,
-  //       date: DateTime.now(),
-  //       particular: particulars,
-  //       baOrBalo: baOrBalo,
-  //       cashOrBank: cashOrBank,
-  //       transactionTypeId: transactionTypeId,
-  //     ),
-  //   );
-  //   if (_result != null) {
-  //     print('New transaction Inserted-$_result');
-  //   }
-  //   // 2---Get Transaction type Object
-  //   var _transactionTypeResult = await _transactionTypeService.getList(id: 1);
-  //   if (_transactionTypeResult == null) {
-  //     print('Transaction Type access fail');
-  //   } else
-  //     print(_transactionTypeResult.toString());
-
-  //   // 3----CREDIT SIDE LEDGER
-  //   // --------Check for Cash or Bank
-  //   // -------Get Bank Ledger ID--------
-  //   TransactionType _transationType = _transactionTypeResult[0];
-
-  //   if (cashOrBank == BANK) {
-  //     LedgerTransaction _ledgerTransactionCreditPayload = LedgerTransaction(
-  //       ledgerId: 1, //Ledger ID of Bank Ledger is 1
-  //       amount: amount,
-  //       particular: particulars,
-  //       debitOrCredit: CREDIT,
-  //       date: date,
-  //     );
-  //     _ledgerTransactionService.insert(_ledgerTransactionCreditPayload);
-  //   } else if (cashOrBank == CASH) {
-  //     LedgerTransaction _ledgerTransactionCreditPayload = LedgerTransaction(
-  //       ledgerId: _transationType.creditSideLedger,
-  //       amount: amount,
-  //       particular: particulars,
-  //       debitOrCredit: CREDIT,
-  //       date: date,
-  //     );
-  //     _ledgerTransactionService.insert(_ledgerTransactionCreditPayload);
-  //   }
-
-  //   // 4- Create a ledgerTransaction entry for debitSideLedger
-  //   if (baOrBalo == cBALO) {
-  //     LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
-  //       ledgerId: _transationType.debitSideLedger,
-  //       amount: amount,
-  //       particular: particulars,
-  //       debitOrCredit: DEBIT,
-  //       date: date,
-  //     );
-  //     _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
-  //   } else if (baOrBalo == cBA) {
-  //     LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
-  //       ledgerId: partyAccount,
-  //       amount: amount,
-  //       particular: particulars,
-  //       debitOrCredit: DEBIT,
-  //       date: date,
-  //     );
-  //     _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
-  //   }
-  // }
   Future<List<LedgerMaster>> getFilterdPartyLedgerMaster(
       String _searchString) async {
     List<LedgerMaster> _ledgerMasterList =
@@ -264,6 +277,11 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int getBaOrBalo() => _baOrBalo;
   void setBaOrBalo(int value) {
     _baOrBalo = value;
+    if (_baOrBalo == cBALO) {
+      _partyId = null;
+      _partyName = null;
+      notifyListeners();
+    }
     notifyListeners();
   }
 
