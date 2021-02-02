@@ -39,7 +39,7 @@ import 'package:account_manager/views/screens/settings/settingsDashboard.screen.
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/newPurchaseTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 

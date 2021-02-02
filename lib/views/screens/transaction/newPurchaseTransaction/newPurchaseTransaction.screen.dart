@@ -4,9 +4,10 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
-import 'package:account_manager/views/screens/transaction/widget/baOrBalo.widget.dart';
-import 'package:account_manager/views/screens/transaction/widget/cashOrBank.widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
