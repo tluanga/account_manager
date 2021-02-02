@@ -8,7 +8,7 @@ const int CREDIT = 2;
 const int CASH = 0;
 const int BANK = 1;
 
-const int cBA = 0;
+const int cCredit = 0;
 const int cCashDown = 1;
 
 //---Sum Chet Vel dan
@@ -24,7 +24,6 @@ const int cDirectAc = 0;
 const int cIndirectAc = 1;
 
 const int cPartialBA = 0;
-const int cCredit = 0;
 
 //---------ASSET or NON ASSET-------
 const int cASSET = 0;
