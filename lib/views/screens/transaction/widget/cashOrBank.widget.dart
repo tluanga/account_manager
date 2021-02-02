@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SelectCashOrBankToggle extends StatelessWidget {
+  BuildContext context;
+  SelectCashOrBankToggle({this.context});
   final BoxDecoration _activeBoxDecoration = BoxDecoration(
     border: Border.all(
       color: Colors.yellow.shade700,

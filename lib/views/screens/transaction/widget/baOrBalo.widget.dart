@@ -3,7 +3,11 @@ import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'modalBottomSheet.modal.dart';
+
 class SelectBaOrBaloToggle extends StatelessWidget {
+  final BuildContext context;
+  SelectBaOrBaloToggle({this.context});
   final BoxDecoration _activeBoxDecoration = BoxDecoration(
     border: Border.all(
       color: Colors.yellow.shade700,
@@ -38,7 +42,10 @@ class SelectBaOrBaloToggle extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: () => model.setBaOrBalo(cBA),
+              onTap: () {
+                model.setBaOrBalo(cBA);
+                modalBottomSheet(context);
+              },
               child: Container(
                 height: 40,
                 width: 165,

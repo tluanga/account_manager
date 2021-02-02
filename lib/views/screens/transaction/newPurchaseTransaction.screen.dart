@@ -114,7 +114,9 @@ class _NewPurchaseTransactionScreenState
                         },
                       ),
                       SizedBox(height: 20),
-                      SelectBaOrBaloToggle(),
+                      SelectBaOrBaloToggle(
+                        context: context,
+                      ),
                       SizedBox(height: 20),
                       SelectCashOrBankToggle(),
                       SizedBox(height: 20),
