@@ -21,7 +21,7 @@ class TransactionDashboardScreen extends StatelessWidget {
             child: Text(
               'Transaction Dashboard',
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 18,
               ),
             ),
           ),
@@ -42,14 +42,17 @@ class TransactionDashboardScreen extends StatelessWidget {
                 width: 400,
                 height: 100,
                 decoration: BoxDecoration(
+                  color: cprimaryColor,
                   border: Border.all(
                     color: HexColor(SECONDARYGREYCOLOR),
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  'Buy',
-                  style: TextStyle(fontSize: 18),
+                child: Center(
+                  child: Text(
+                    'Buy',
+                    style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
@@ -60,14 +63,17 @@ class TransactionDashboardScreen extends StatelessWidget {
               width: 400,
               height: 100,
               decoration: BoxDecoration(
+                color: cprimaryColor,
                 border: Border.all(
                   color: HexColor(SECONDARYGREYCOLOR),
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                'Sell',
-                style: TextStyle(fontSize: 18),
+              child: Center(
+                child: Text(
+                  'Sell',
+                  style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold)
+                ),
               ),
             ),
           ),
@@ -85,14 +91,17 @@ class TransactionDashboardScreen extends StatelessWidget {
                 width: 400,
                 height: 100,
                 decoration: BoxDecoration(
+                  color: cprimaryColor,
                   border: Border.all(
                     color: HexColor(SECONDARYGREYCOLOR),
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  'Customer Debt Settlement',
-                  style: TextStyle(fontSize: 18),
+                child: Center(
+                  child: Text(
+                    'Customer Debt Settlement',
+                    style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold)
+                  ),
                 ),
               ),
             ),
@@ -103,14 +112,17 @@ class TransactionDashboardScreen extends StatelessWidget {
                 width: 400,
                 height: 100,
                 decoration: BoxDecoration(
+                  color: cprimaryColor,
                   border: Border.all(
                     color: HexColor(SECONDARYGREYCOLOR),
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  'Business Debt Settlement',
-                  style: TextStyle(fontSize: 18),
+                child: Center(
+                  child: Text(
+                    'Business Debt Settlement',
+                    style: TextStyle(fontSize: 20, color: HexColor(TEXTCOLOR), fontWeight: FontWeight.bold)
+                  ),
                 )),
           ),
         ],
