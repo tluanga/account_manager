@@ -1,4 +1,3 @@
-import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
@@ -8,23 +7,10 @@ import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/screens/transaction/widget/baOrBalo.widget.dart';
 import 'package:account_manager/views/screens/transaction/widget/cashOrBank.widget.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-class NewPurchaseTransactionScreen extends StatefulWidget {
-  const NewPurchaseTransactionScreen({Key key}) : super(key: key);
-
-  @override
-  _NewPurchaseTransactionScreenState createState() =>
-      _NewPurchaseTransactionScreenState();
-}
-
-class _NewPurchaseTransactionScreenState
-    extends State<NewPurchaseTransactionScreen> {
-  DateTime _dateTime = DateTime.now();
   NewPurchaseTransactionViewModel _newPurchaseTransactionViewModel =
       serviceLocator<NewPurchaseTransactionViewModel>();
 
@@ -89,8 +75,10 @@ class _NewPurchaseTransactionScreenState
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Amount';
-                          }
-                          return null;
+                          } else if (labelText == labelText) {
+                            return 'Please select Transaction type';
+                          } else
+                            return null;
                         },
                         onChanged: (value) {
                           setState(() {
