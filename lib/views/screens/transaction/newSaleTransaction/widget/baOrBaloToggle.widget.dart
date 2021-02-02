@@ -44,7 +44,7 @@ class SelectBaOrBaloToggle extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 model.setBaOrBalo(cCredit);
-                modalBottomSheet(context);
+                // modalBottomSheet(context);
               },
               child: Container(
                 height: 40,

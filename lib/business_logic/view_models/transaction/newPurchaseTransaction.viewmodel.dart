@@ -8,6 +8,8 @@ import 'package:account_manager/static/purchaseType.constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import '../../../static/ledgerId.constants.dart';
+import '../../../static/ledgerId.constants.dart';
 import '../../models/transactionType.models.dart';
 
 import '../../../services/transaction/transaction.service.dart';
@@ -31,6 +33,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   String _debitSideLedgerName; //computed --
 //computed --
   // ignore: unused_field
+  int _creditSideLedgerId;
   String _creditSideLedgerName; //--computer
   // ignore: unused_field
   int _purchaseType;
@@ -137,7 +140,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void setPurchaseType() {
+  void setPurchaseType() async {
     if (_assetLedger != null) {
       //Transaction type is asset
       _debitSideLedgerId = _assetLedger;
@@ -146,13 +149,19 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         if (_baType == cCredit) {
           print('assetBa Full = 3');
           _purchaseType = PurchaseType.assetDebt;
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = _partyId;
         } else {
           if (_cashOrBank == CASH) {
             print('assetBaCashPartial = 4');
             _purchaseType = PurchaseType.assetDebtCashPartial;
+            _debitSideLedgerId = _assetLedger;
+            _creditSideLedgerId = LedgerID.CASHAC;
           } else if (_cashOrBank == BANK) {
             print('assetBaBankPartial = 5');
             _purchaseType = PurchaseType.assetDebtBankPartial;
+            _debitSideLedgerId = _assetLedger;
+            _creditSideLedgerId = LedgerID.CASHAC;
           }
         }
       }
@@ -161,26 +170,36 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         if (_cashOrBank == CASH) {
           //Transaction Type is Cash
           print('assetBaloCash = 2');
-          _purchaseType = PurchaseType.cashDownCash;
+          _purchaseType = PurchaseType.assetCashDownCash;
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.CASHAC;
         } else if (_cashOrBank == BANK) {
           //Transaction Type is Bank
           print('assetBaloBank = 1');
-          _purchaseType = PurchaseType.cashDownBank;
+          _purchaseType = PurchaseType.assetCashDownBank;
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.BANK;
         }
       } else {
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         if (_isCredit == cCredit) {
           //Transaction is Ba
           if (_baType == cCredit) {
-            print('nonAssetBa = 8');
+            print('nonAssetDebt = 8');
             _purchaseType = PurchaseType.nonAssetDebt;
+            _debitSideLedgerId = LedgerID.PURCHASEAC;
+            _creditSideLedgerId = _partyId;
           } else {
             if (_cashOrBank == CASH) {
-              print('nonAssetBaCashPartial = 9');
+              print('nonAssetDebtCashPartial = 9');
               _purchaseType = PurchaseType.nonAssetDebtCashPartial;
+              _debitSideLedgerId = LedgerID.PURCHASEAC;
+              _creditSideLedgerId = LedgerID.CASHAC;
             } else if (_cashOrBank == BANK) {
-              print('nonAssetBaBankPartial = 10');
+              print('nonAssetDebtBankPartial = 10');
               _purchaseType = PurchaseType.nonAssetDebtBankPartial;
+              _debitSideLedgerId = LedgerID.PURCHASEAC;
+              _creditSideLedgerId = LedgerID.BANK;
             }
           }
         }
@@ -190,14 +209,22 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             //Transaction Type is Cash
             print('nonAssetBaloCash = 7');
             _purchaseType = PurchaseType.nonAssetCashDownCash;
+            _debitSideLedgerId = LedgerID.PURCHASEAC;
+            _creditSideLedgerId = LedgerID.CASHAC;
           } else if (_cashOrBank == BANK) {
             //Transaction Type is Bank
             print('nonAssetBaloBank = 6');
             _purchaseType = PurchaseType.nonAssetCashDownBank;
+            _debitSideLedgerId = LedgerID.PURCHASEAC;
+            _creditSideLedgerId = LedgerID.BANK;
           }
         }
       }
     }
+    _debitSideLedgerName =
+        await _ledgerMasterService.getLedgerMasterName(_debitSideLedgerId);
+    _creditSideLedgerName =
+        await _ledgerMasterService.getLedgerMasterName(_creditSideLedgerId);
   }
 
   void saveData() {
@@ -217,14 +244,14 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('Party Name :$_partyName');
   }
 
-  Future<List<LedgerMaster>> getFilterdPartyLedgerMaster(
-      String _searchString) async {
+  void getFilterdPartyLedgerMaster(String _searchString) async {
     List<LedgerMaster> _ledgerMasterList =
         await _ledgerMasterService.getFilterdPartyLedgerList(_searchString);
     print(_searchString);
     String _length = _ledgerMasterList.length.toString();
+    partyList = _ledgerMasterList;
     print('The search Returned $_length result in the viewmodel');
-    return _ledgerMasterList;
+    notifyListeners();
   }
 
   Future<int> newPartyLedger({

@@ -1,16 +1,16 @@
 class SaleType {
-  //1) Sale -Balo - Bank payment- DebitSide: Asset Account Credit Side:Bank
-  static const int saleBaloBank = 1;
+  //1) Sale -Balo - Bank payment- DebitSide: Bank Account Credit Side:Sales Ac
+  static const int saleCashDownBank = 1;
 
-  //2) Sale -Balo - Cash payment- DebitSide: Asset Account Credit Side:Bank
+  //2) Sale -Balo - Cash payment- DebitSide: Cash Account  Credit Side:Sales Ac
   static const int saleBaloCash = 2;
 
-  //3) Sale -Ba- - DebitSide: Asset Account Credit Side:Cash
-  static const int saleBa = 2;
+  //3) Sale -Ba- - DebitSide: Party Ac  Credit Side:Sales
+  static const int saleDebt = 3;
 
-  //4) Sale-Ba-Partial Paymen Bank Debit:Asset Account Credit: Party Ac
-  static const int saleBaPartialBank = 3;
+  //4) Sale-Ba-Partial Paymen Bank Debit:Bank   Debit:Party   Account Credit: Sales
+  static const int saleBaPartialBank = 4;
 
-  //5) Sale-Ba-Partial Payment-Ba-Cash Partial Cash Payment- Debit:Asset Account Credit:Cash Credit:Party Ac
-  static const int assetBaPartialCash = 4;
+  //5) Sale-Ba-Partial Payment-Ba-Cash Partial Cash Payment- Debit:Bank Debit Party Credit:Sales
+  static const int assetBaPartialCash = 5;
 }

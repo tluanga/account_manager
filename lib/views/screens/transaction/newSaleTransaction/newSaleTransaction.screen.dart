@@ -1,13 +1,12 @@
-import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/newSaleTransaction/widget/baOrBaloToggle.widget.dart';
+import 'package:account_manager/views/screens/transaction/newSaleTransaction/widget/cashOrBankToggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -23,8 +22,8 @@ class NewSaleTransactionScreen extends StatefulWidget {
 }
 
 class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
-  NewPurchaseTransactionViewModel _newPurchaseTransactionViewModel =
-      serviceLocator<NewPurchaseTransactionViewModel>();
+  NewSaleTransactionViewModel _newSaleTransactionViewModel =
+      serviceLocator<NewSaleTransactionViewModel>();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -40,9 +39,9 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
 
   void setCashOrBank(int index) {
     if (index == CASH) {
-      _newPurchaseTransactionViewModel.setCashOrBank(index);
+      _newSaleTransactionViewModel.setCashOrBank(index);
     } else if (index == BANK) {
-      _newPurchaseTransactionViewModel.setCashOrBank(index);
+      _newSaleTransactionViewModel.setCashOrBank(index);
     }
   }
 
@@ -258,7 +257,7 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
       isScrollControlled: false,
       context: context,
       builder: (BuildContext contex) {
-        return Consumer<NewPurchaseTransactionViewModel>(
+        return Consumer<NewSaleTransactionViewModel>(
           builder: (context, model, child) {
             String _debitLedgerName = model.getDebitSideLedgerName();
             String _creditSideLedgerName = model.getCreditSideLedgerName();

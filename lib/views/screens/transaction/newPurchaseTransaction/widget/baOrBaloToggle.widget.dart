@@ -1,5 +1,6 @@
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/partySelect.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +45,12 @@ class SelectBaOrBaloToggle extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 model.setBaOrBalo(cCredit);
-                modalBottomSheet(context);
+                // modalBottomSheet(context);
+                Navigator.of(context).push(new MaterialPageRoute<Null>(
+                    builder: (BuildContext context) {
+                      return new PartySelect();
+                    },
+                    fullscreenDialog: true));
               },
               child: Container(
                 height: 40,

@@ -32,7 +32,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   // ignore: unused_field
   String _creditSideLedgerName; //--computer
   // ignore: unused_field
-  int _purchaseType;
+  int _saleType;
   List<LedgerMaster> partyList = [];
 
   // ignore: unused_field
@@ -46,7 +46,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void setPurchaseType() {
+  void setData() {
     if (_assetLedger != null) {
       //Transaction type is asset
       _debitSideLedgerId = _assetLedger;
@@ -54,14 +54,14 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
         //Transaction is Ba
         if (_baType == cCredit) {
           print('assetBa Full = 3');
-          _purchaseType = PurchaseType.assetDebt;
+          _saleType = PurchaseType.assetDebt;
         } else {
           if (_cashOrBank == CASH) {
             print('assetBaCashPartial = 4');
-            _purchaseType = PurchaseType.assetDebtCashPartial;
+            _saleType = PurchaseType.assetDebtCashPartial;
           } else if (_cashOrBank == BANK) {
             print('assetBaBankPartial = 5');
-            _purchaseType = PurchaseType.assetDebtBankPartial;
+            _saleType = PurchaseType.assetDebtBankPartial;
           }
         }
       }
@@ -70,11 +70,11 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
         if (_cashOrBank == CASH) {
           //Transaction Type is Cash
           print('assetBaloCash = 2');
-          _purchaseType = PurchaseType.cashDownCash;
+          _saleType = PurchaseType.assetCashDownCash;
         } else if (_cashOrBank == BANK) {
           //Transaction Type is Bank
           print('assetBaloBank = 1');
-          _purchaseType = PurchaseType.cashDownBank;
+          _saleType = PurchaseType.assetCashDownBank;
         }
       } else {
         _debitSideLedgerId = LedgerID.PURCHASEAC;
@@ -82,14 +82,14 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
           //Transaction is Ba
           if (_baType == cCredit) {
             print('nonAssetBa = 8');
-            _purchaseType = PurchaseType.nonAssetDebt;
+            _saleType = PurchaseType.nonAssetDebt;
           } else {
             if (_cashOrBank == CASH) {
               print('nonAssetBaCashPartial = 9');
-              _purchaseType = PurchaseType.nonAssetDebtCashPartial;
+              _saleType = PurchaseType.nonAssetDebtCashPartial;
             } else if (_cashOrBank == BANK) {
               print('nonAssetBaBankPartial = 10');
-              _purchaseType = PurchaseType.nonAssetDebtBankPartial;
+              _saleType = PurchaseType.nonAssetDebtBankPartial;
             }
           }
         }
@@ -98,11 +98,11 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
           if (_cashOrBank == CASH) {
             //Transaction Type is Cash
             print('nonAssetBaloCash = 7');
-            _purchaseType = PurchaseType.nonAssetCashDownCash;
+            _saleType = PurchaseType.nonAssetCashDownCash;
           } else if (_cashOrBank == BANK) {
             //Transaction Type is Bank
             print('nonAssetBaloBank = 6');
-            _purchaseType = PurchaseType.nonAssetCashDownBank;
+            _saleType = PurchaseType.nonAssetCashDownBank;
           }
         }
       }
