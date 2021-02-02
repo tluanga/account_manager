@@ -1,6 +1,7 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/views/dashboard/dashBoard.screen.dart';
 import 'package:account_manager/views/screens/transaction/widget/newParty.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -64,18 +65,18 @@ void modalBottomSheet(context) {
                           return _ledgerMasterList;
                           // return await BackendService.getSuggestions(pattern);
                         },
-                        itemBuilder: (context, suggestion) {
-                          print(suggestion.toString());
+                        itemBuilder: (context, suggestion){
+                          print(suggestion.name.toString());
                           return ListTile(
                             leading: Icon(Icons.shopping_cart),
-                            title: Text(suggestion['name']),
-                            subtitle: Text('\$${suggestion['price']}'),
+                            title: Text(suggestion.name.toString()),
+                            // subtitle: Text('\$${suggestion['price']}'),
                           );
                         },
                         onSuggestionSelected: (suggestion) {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) =>
-                          //         ProductPage(product: suggestion)));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  DashBoard()));
                         },
                       ),
                       // Expanded(
