@@ -5,6 +5,8 @@ import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../static/constants.dart';
+
 class LedgerMasterImpl implements LedgerMasterService {
   Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
     Database db = await DatabaseHelper.instance.db;
@@ -131,7 +133,7 @@ class LedgerMasterImpl implements LedgerMasterService {
     Database db = await DatabaseHelper.instance.db;
     List<Map<String, dynamic>> _partyList = await db.rawQuery('''
      SELECT * FROM masterLedger_table
-     WHERE name LIKE '$_searchString%'
+     WHERE name LIKE '$_searchString%' AND party=$cPartyAc
       ''');
     String length = _partyList.length.toString();
     // print('The Search yield $length');

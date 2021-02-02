@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import '../../../static/ledgerId.constants.dart';
-import '../../../static/ledgerId.constants.dart';
+
 import '../../models/transactionType.models.dart';
 
 import '../../../services/transaction/transaction.service.dart';
@@ -27,7 +27,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   String _partyName; //Computed
   int _assetLedger; //if the purchase is of asset//user input
   String _assetLedgerName;
-  int _transactionTypeId; //user input
+  int _transactionTypeId;
+  String _transactionTypeName; //user input
   // ignore: unused_field
   int _debitSideLedgerId; //computed-
   String _debitSideLedgerName; //computed --
@@ -49,6 +50,14 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       serviceLocator<LedgerTransactionService>();
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
+
+  List<TransactionType> transactionTypeList = [];
+  void setTransactionTypeList(_searchString) async {
+    transactionTypeList =
+        await _transactionTypeService.getTransactionTypeList(_searchString);
+    print(transactionTypeList.length.toString());
+    notifyListeners();
+  }
 
   // void setData() async {
   //   var _transactionTypeResult = await _transactionTypeService.getList(id: 1);
@@ -265,6 +274,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         party: cPartyAc,
         asset: cNonASSET);
     var result = await _ledgerMasterService.insert(payload);
+
+    notifyListeners();
     return result;
   }
 
@@ -272,6 +283,12 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     final _partyList = await _ledgerMasterService.getPartyList();
 
     partyList = _partyList;
+    notifyListeners();
+  }
+
+  void loadTransactionType() async {
+    transactionTypeList = await _transactionTypeService.getList();
+    notifyListeners();
   }
 
   int getAmount() => _amount;
@@ -340,7 +357,16 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String getTransactionTypeName() => _transactionTypeName;
+  void setTransactionTypeName(String value) {
+    _transactionTypeName = value;
+    notifyListeners();
+  }
+
   String getAssetLedgerName() => _assetLedgerName;
   String getDebitSideLedgerName() => _debitSideLedgerName;
   String getCreditSideLedgerName() => _creditSideLedgerName;
+
+  //-------Transaction Type--------
+
 }

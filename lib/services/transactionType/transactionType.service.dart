@@ -8,4 +8,5 @@ abstract class TransactionTypeService {
   Future<int> insert(TransactionType ledgerMaster);
   Future<int> update(TransactionType ledgerMaster);
   Future<int> delete(int id);
+  Future<List<TransactionType>> getTransactionTypeList(String _searchString);
 }
