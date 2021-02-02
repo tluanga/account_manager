@@ -6,6 +6,8 @@ import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/widget/cashOrBank.widget.dart';
+import 'package:account_manager/views/widgets/toggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -34,6 +36,14 @@ class _NewPurchaseTransactionScreenState
       _formKey.currentState.save();
 
       _journalConfirmBottomSheet(context);
+    }
+  }
+
+  void setCashOrBank(int index) {
+    if (index == CASH) {
+      _newPurchaseTransactionViewModel.setCashOrBank(index);
+    } else if (index == BANK) {
+      _newPurchaseTransactionViewModel.setCashOrBank(index);
     }
   }
 
@@ -102,39 +112,14 @@ class _NewPurchaseTransactionScreenState
                           newTransaction.setParticular(value);
                         },
                       ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ToggleSwitch(
-                          minWidth: 120.0,
-                          minHeight: 40.0,
-                          fontSize: 16.0,
-                          activeBgColor: HexColor(PRIMARYCOLOR),
-                          inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                          activeFgColor: HexColor(TEXTCOLOR),
-                          initialLabelIndex: 1,
-                          labels: ['Ba', 'Balo'],
-                          onToggle: (index) {
-                            newTransaction.setBaOrBalo(index);
-                            if (index == cBA) {
-                              _modalBottomSheet(context);
-                            }
-                          },
-                        ),
+                      SizedBox(height: 20),
+                      ToggleWidget(
+                        option1Label: 'BA',
+                        option2Label: 'BALO',
                       ),
-                      ToggleSwitch(
-                        minWidth: 120.0,
-                        minHeight: 40.0,
-                        activeBgColor: cprimaryColor,
-                        inactiveBgColor: HexColor(SECONDARYGREYCOLOR),
-                        activeFgColor: HexColor(TEXTCOLOR),
-                        initialLabelIndex: 0,
-                        labels: ['Cash', 'Bank'],
-                        onToggle: (index) {
-                          newTransaction.setCashOrBank(index);
-                        },
-                      ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
+                      SelectCashOrBankToggle(),
+                      SizedBox(height: 20),
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -162,7 +147,7 @@ class _NewPurchaseTransactionScreenState
                               ),
                             ]),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -194,10 +179,7 @@ class _NewPurchaseTransactionScreenState
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       GestureDetector(
                         onTap: () {

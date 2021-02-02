@@ -5,8 +5,8 @@ const int NONE = 0;
 const int DEBIT = 1;
 const int CREDIT = 2;
 
+const int CASH = 0;
 const int BANK = 1;
-const int CASH = 2;
 
 const int cBA = 0;
 const int cBALO = 1;

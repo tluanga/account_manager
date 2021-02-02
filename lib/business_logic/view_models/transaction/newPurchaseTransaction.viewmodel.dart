@@ -104,13 +104,22 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _creditSideLedgerName = ledgerMaster.name;
         }
       } else {
-        //Ba lo a thil lei in
-        _creditSideLedgerId = _transationType.creditSideLedger;
-        LedgerMaster ledgerMaster =
-            await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
-        _creditSideLedgerName = ledgerMaster.name;
+        if (_cashOrBank == CASH) {
+          print('Asset Nilo, Ba lo leh Cash  a thil lei');
+          _creditSideLedgerId = _transationType.creditSideLedger;
+          LedgerMaster ledgerMaster =
+              await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
+          _creditSideLedgerName = ledgerMaster.name;
+        } else if (_cashOrBank == BANK) {
+          print('Asset Nilo, Ba lo leh Bank  a thil lei');
+          _creditSideLedgerId = _transationType.creditSideLedger;
+          LedgerMaster ledgerMaster =
+              await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
+          _creditSideLedgerName = ledgerMaster.name;
+        }
       }
     }
+    notifyListeners();
   }
 
   // // ---For creating a new transaction
@@ -205,31 +214,58 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   int getAmount() => _amount;
-  void setAmount(int value) => _amount = value;
+  void setAmount(int value) {
+    _amount = value;
+    notifyListeners();
+  }
 
   String getParticular() => _particular;
-  void setParticular(String value) => _particular = value;
+  void setParticular(String value) {
+    _particular = value;
+    notifyListeners();
+  }
 
   int getBaOrBalo() => _baOrBalo;
-  void setBaOrBalo(int value) => _baOrBalo = value;
+  void setBaOrBalo(int value) {
+    _baOrBalo = value;
+    notifyListeners();
+  }
 
   int getCashOrBank() => _cashOrBank;
-  void setCashOrBank(int value) => _cashOrBank = value;
+  void setCashOrBank(int value) {
+    _cashOrBank = value;
+    notifyListeners();
+  }
 
   DateTime getDate() => _date;
-  void setDate(DateTime value) => _date = value;
+  void setDate(DateTime value) {
+    _date = value;
+    notifyListeners();
+  }
 
   int getBaType() => _baType;
-  void setBaType(int value) => _baType = value;
+  void setBaType(int value) {
+    _baType = value;
+    notifyListeners();
+  }
 
   int getParty() => _baType;
-  void setParty(int value) => _party = value;
+  void setParty(int value) {
+    _party = value;
+    notifyListeners();
+  }
 
   int getAssetLedger() => _assetLedger;
-  void setAssetLedger(int value) => _assetLedger = value;
+  void setAssetLedger(int value) {
+    _assetLedger = value;
+    notifyListeners();
+  }
 
   int getTransactionTypeId() => _transactionTypeId;
-  void setTransactionTypeId(int value) => _transactionTypeId = value;
+  void setTransactionTypeId(int value) {
+    _transactionTypeId = value;
+    notifyListeners();
+  }
 
   String getPartyName() => _partyName;
   String getAssetLedgerName() => _assetLedgerName;

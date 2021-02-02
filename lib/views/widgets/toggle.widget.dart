@@ -1,3 +1,5 @@
+import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:flutter/material.dart';
 
 class ToggleWidget extends StatelessWidget {
@@ -17,49 +19,51 @@ class ToggleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (selectedIndex == 0) {}
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: 50,
-            width: 165,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.purple,
-                width: 2,
+    return GestureDetector(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 40,
+              width: 165,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.yellow.shade700,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(7),
               ),
-              borderRadius: BorderRadius.circular(7),
-            ),
-            child: Center(
-              child: Text(
-                option1Label,
-                style: TextStyle(
-                  color: Colors.purple,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
+              child: Center(
+                child: Text(
+                  option1Label,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 15,
-          ),
-          Container(
-            height: 50,
-            width: 165,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-                width: 2,
+            SizedBox(
+              width: 15,
+            ),
+            Container(
+              height: 40,
+              width: 165,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(7),
               ),
-              borderRadius: BorderRadius.circular(7),
+              child: Center(
+                child: Text(option2Label),
+              ),
             ),
-            child: Center(
-              child: Text(option2Label),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
