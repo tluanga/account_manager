@@ -9,10 +9,10 @@ const int CASH = 0;
 const int BANK = 1;
 
 const int cBA = 0;
-const int cBALO = 1;
+const int cCashDown = 1;
 
 //---Sum Chet Vel dan
-const int cLEI = 0;
+const int cPurchase = 0;
 const int cHRALH = 1;
 const int cLAKLUH = 2;
 const int cPEKCHHUAH = 3;
@@ -24,7 +24,7 @@ const int cDirectAc = 0;
 const int cIndirectAc = 1;
 
 const int cPartialBA = 0;
-const int cFullBA = 0;
+const int cCredit = 0;
 
 //---------ASSET or NON ASSET-------
 const int cASSET = 0;

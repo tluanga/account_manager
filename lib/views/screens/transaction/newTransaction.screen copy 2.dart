@@ -23,7 +23,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
   DateTime _dateTime = DateTime.now();
   int _amount;
   String _particular;
-  int _baOrBalo;
+  int _isCredit;
   int _bankOrCash;
   @override
   Widget build(BuildContext context) {
@@ -102,8 +102,8 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                         initialLabelIndex: 1,
                         labels: ['Ba', 'Balo'],
                         onToggle: (index) {
-                          _baOrBalo = index;
-                          if (index == cBA) {
+                          _isCredit = index;
+                          if (index == cCredit) {
                             _modalBottomSheet(context);
                           }
                         },

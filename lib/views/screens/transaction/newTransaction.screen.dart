@@ -21,7 +21,7 @@
 //   DateTime _dateTime = DateTime.now();
 //   int _amount;
 //   String _particular;
-//   int _baOrBalo;
+//   int _isCredit;
 //   int _bankOrCash;
 //   @override
 //   Widget build(BuildContext context) {
@@ -98,7 +98,7 @@
 //                       initialLabelIndex: 1,
 //                       labels: ['Ba', 'Balo'],
 //                       onToggle: (index) {
-//                         _baOrBalo = index;
+//                         _isCredit = index;
 //                         if (index == 1) {
 //                           _modalBottomSheet(context);
 //                         }
@@ -188,7 +188,7 @@
 //                       newTransaction.newTransaction(
 //                         amount: _amount,
 //                         particulars: _particular,
-//                         baOrBalo: _baOrBalo,
+//                         baOrBalo: _isCredit,
 //                         cashOrBank: _bankOrCash,
 //                         transactionTypeId:
 //                             transactionTypeSelect.selectedTransactionType.id,

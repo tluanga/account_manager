@@ -43,18 +43,18 @@ class SelectBaOrBaloToggle extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                model.setBaOrBalo(cBA);
+                model.setBaOrBalo(cCredit);
                 modalBottomSheet(context);
               },
               child: Container(
                 height: 40,
                 width: 165,
-                decoration: model.getBaOrBalo() == cBA
+                decoration: model.getBaOrBalo() == cCredit
                     ? _activeBoxDecoration
                     : _inActiveBoxDecoration,
                 child: Center(
                   child: Text('Ba',
-                      style: model.getBaOrBalo() == cBA
+                      style: model.getBaOrBalo() == cCredit
                           ? _activeTextStyle
                           : _inActiveTextStyle),
                 ),
@@ -64,16 +64,16 @@ class SelectBaOrBaloToggle extends StatelessWidget {
               width: 15,
             ),
             GestureDetector(
-              onTap: () => model.setBaOrBalo(cBALO),
+              onTap: () => model.setBaOrBalo(cCashDown),
               child: Container(
                 height: 40,
                 width: 165,
-                decoration: model.getBaOrBalo() == cBALO
+                decoration: model.getBaOrBalo() == cCashDown
                     ? _activeBoxDecoration
                     : _inActiveBoxDecoration,
                 child: Center(
                   child: Text('Balo',
-                      style: model.getBaOrBalo() == cBALO
+                      style: model.getBaOrBalo() == cCashDown
                           ? _activeTextStyle
                           : _inActiveTextStyle),
                 ),
