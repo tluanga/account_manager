@@ -82,8 +82,10 @@ class TransactionTypeSelectScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          model.setTransactionTypeId(model.partyList[index].id);
-                          model.setPartyName(model.partyList[index].name);
+                          model.setTransactionTypeId(
+                              model.transactionTypeList[index].id);
+                          model.setTransactionTypeName(
+                              model.transactionTypeList[index].name);
                           Navigator.pop(context);
                         },
                         child: Padding(

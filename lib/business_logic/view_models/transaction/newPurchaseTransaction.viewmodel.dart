@@ -27,8 +27,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   String _partyName; //Computed
   int _assetLedger; //if the purchase is of asset//user input
   String _assetLedgerName;
-  int _transactionTypeId;
-  String _transactionTypeName; //user input
+  int _transactionTypeId = 0;
+  String _transactionTypeName = ''; //user input
   // ignore: unused_field
   int _debitSideLedgerId; //computed-
   String _debitSideLedgerName; //computed --

@@ -174,7 +174,11 @@ class _NewPurchaseTransactionScreenState
                           ),
                           child: Center(
                             child: Text(
-                              labelText,
+                              newTransaction.getTransactionTypeId() == 0
+                                  ? 'Please Select Transaction Type'
+                                  : newTransaction
+                                      .getTransactionTypeName()
+                                      .toString(),
                               style: TextStyle(
                                 color: HexColor(TEXTCOLOR),
                                 fontSize: 15,
