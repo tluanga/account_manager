@@ -81,7 +81,7 @@ void newPartyModal(context) {
                                       name: _name,
                                       description: _description,
                                     );
-                                    model.setParty(id);
+
                                     Navigator.pop(context);
                                   },
                                   child: Center(

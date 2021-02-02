@@ -11,19 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-
-class NewPurchaseTransactionScreen extends StatefulWidget {
-  const NewPurchaseTransactionScreen({Key key}) : super(key: key);
-
-  @override
-  _NewPurchaseTransactionScreenState createState() =>
-      _NewPurchaseTransactionScreenState();
-}
-
-class _NewPurchaseTransactionScreenState
-    extends State<NewPurchaseTransactionScreen> {
-  DateTime _dateTime = DateTime.now();
   NewPurchaseTransactionViewModel _newPurchaseTransactionViewModel =
       serviceLocator<NewPurchaseTransactionViewModel>();
 
@@ -147,6 +134,11 @@ class _NewPurchaseTransactionScreenState
                             ]),
                       ),
                       SizedBox(height: 20),
+                      Container(
+                        child: Text(newTransaction.getPartyName() != null
+                            ? newTransaction.getPartyName().toString()
+                            : 'Please Select Party'),
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(

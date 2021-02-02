@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 void modalBottomSheet(context) {
   showModalBottomSheet(
@@ -43,9 +42,7 @@ void modalBottomSheet(context) {
                       //   },
                       // ),
                       // Text('Seleted party Id'),
-                      Text(
-                        model.getParty().toString(),
-                      ),
+
                       SizedBox(
                         height: 5,
                       ),
@@ -68,49 +65,18 @@ void modalBottomSheet(context) {
                         itemBuilder: (context, suggestion) {
                           String _name = suggestion.name.toString();
                           return ListTile(
-                            leading: Icon(Icons.adjust),
                             title: Text(_name),
                             // subtitle: Text('\$${suggestion['price']}'),
                           );
                         },
                         onSuggestionSelected: (suggestion) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => DashBoard()));
+                          print(suggestion.id.toString());
+                          model.setPartyId(suggestion.id);
+                          model.setPartyName(suggestion.name);
+
+                          Navigator.pop(context);
                         },
                       ),
-                      // Expanded(
-                      //   child: ListView.builder(
-                      //     itemCount: model.partyList.length,
-                      //     itemBuilder: (BuildContext context, int index) {
-                      //       return Container(
-                      //         padding: EdgeInsets.all(5),
-                      //         width: MediaQuery.of(context).size.width,
-                      //         child: GestureDetector(
-                      //           onTap: () {
-                      //             model.setParty(model.partyList[index].id);
-                      //             Navigator.pop(context);
-                      //           },
-                      //           child: Container(
-                      //             width: 400,
-                      //             height: 30,
-                      //             decoration: BoxDecoration(
-                      //               border: Border.all(
-                      //                 color: HexColor(TEXTCOLOR),
-                      //               ),
-                      //               borderRadius: BorderRadius.circular(10),
-                      //             ),
-                      //             child: Center(
-                      //               child: Text(
-                      //                 model.partyList[index].name,
-                      //                 style: TextStyle(fontSize: 16),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       );
-                      //     },
-                      //   ),
-                      // ),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
