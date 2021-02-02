@@ -4,7 +4,7 @@ import 'package:account_manager/business_logic/view_models/transaction/transacti
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
-import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';

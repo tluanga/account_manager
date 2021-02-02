@@ -13,6 +13,7 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
@@ -41,7 +42,7 @@ import 'package:account_manager/views/screens/settings/transactionType/newTransa
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/newPurchaseTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
-import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
 
 // ------SCREENS-----BOOKS---------------
 import 'package:account_manager/views/screens/books/Journal/JournalDashboard.screen.dart';
@@ -103,6 +104,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NewAssetLedgerCreationViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NewSaleTransactionViewModel(),
         ),
 
         // ChangeNotifierProvider(

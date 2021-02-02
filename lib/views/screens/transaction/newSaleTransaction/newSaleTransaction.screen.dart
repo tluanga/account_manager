@@ -7,7 +7,7 @@ import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
-import 'package:account_manager/views/screens/transaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -72,7 +72,7 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                         height: 24,
                       ),
                       Text(
-                        'Purchase',
+                        'Sale',
                         style: TextStyle(
                             fontSize: 20,
                             color: HexColor(

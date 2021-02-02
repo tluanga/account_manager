@@ -77,7 +77,7 @@ void newPartyModal(context) {
                                 ),
                                 child: GestureDetector(
                                   onTap: () async {
-                                    int id = await model.newPartyLedger(
+                                    await model.newPartyLedger(
                                       name: _name,
                                       description: _description,
                                     );
