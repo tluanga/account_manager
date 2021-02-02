@@ -42,11 +42,11 @@ class SettingsDashboard extends StatelessWidget {
               routeUrl: rChangeAuthenticationPin,
               iconName: Icons.history,
             ),
-            UICard(
-              title: 'Backup',
-              routeUrl: rTransactionTypeDashboard,
-              iconName: Icons.backup,
-            ),
+            // UICard(
+            //   title: 'Backup',
+            //      routeUrl: rTransactionTypeDashboard,
+            //   iconName: Icons.backup,
+            // ),
           ],
         ),
       ),
