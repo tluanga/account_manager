@@ -186,13 +186,15 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _creditSideLedgerId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -245,22 +247,26 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.CASHAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
           //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _partyId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -279,22 +285,26 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.BANK,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.BANK,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
           //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _partyId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -315,13 +325,15 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _creditSideLedgerId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -342,13 +354,15 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _creditSideLedgerId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -369,13 +383,15 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _creditSideLedgerId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -394,22 +410,26 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.CASHAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
           //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _partyId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
@@ -428,22 +448,26 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.BANK,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.BANK,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
           //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _partyId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
