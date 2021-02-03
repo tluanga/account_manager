@@ -6,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../static/constants.dart';
 
-
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._instance();
   static Database _db;
@@ -75,9 +74,8 @@ class DatabaseHelper {
   String transactionTransactionTypeName = 'transactionTypeName';
   String transactionDebitSideLedgerId = 'debitSideLedgerId';
   String transactionDebitSideLedgerName = 'debitSideLedgerName';
-  String transactionCreditSideLedgerId = 'creditSideLedgerId' ;
+  String transactionCreditSideLedgerId = 'creditSideLedgerId';
   String transactionCreditSideLedgerName = 'creditSideLedgerName';
-
 
   //------TABLE 6 LEDGER TRANSACTION TABLE---------
   String ledgerTransactionTable = 'ledgerTranction_table';
@@ -917,6 +915,5 @@ class DatabaseHelper {
       'party': cNotPartyAc,
       'asset': cASSET
     });
-    
   }
 }

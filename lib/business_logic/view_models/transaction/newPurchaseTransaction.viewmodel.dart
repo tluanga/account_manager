@@ -620,7 +620,10 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   // To Test Type -1 Purchase Transaction
 
   void processMockData() {
-    Transaction _purchasemock1 = Transaction(
+    List<Transaction> _purchaseMockData = [];
+    //--copy parameter to variable
+    //---Purchase Transaction Type -1
+    _purchaseMockData.add(Transaction(
       amount: 10000,
       particular: 'Chair Leina',
       isCredit: cCredit,
@@ -632,20 +635,172 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       assetLedger: AssetMockData.chair,
       transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
       transactionTypeName: 'Purchase of Asset',
+    ));
+
+    //--Purchase Transaction Type-2
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
     );
-    //--copy parameter to variable
-    _amount = _purchasemock1.amount;
-    _particular = _purchasemock1.particular;
-    _isCredit = _purchasemock1.isCredit;
-    _cashOrBank = _purchasemock1.cashOrBank;
-    _date = _purchasemock1.date;
-    _creditType = _purchasemock1.creditType;
-    _partyId = _purchasemock1.partyId;
-    _partyName = _purchasemock1.partyName;
-    _assetLedger = _purchasemock1.assetLedger;
-    _transactionTypeId = _purchasemock1.transactionTypeId;
-    _transactionTypeName = _purchasemock1.transactionTypeName;
-    setPurchaseType();
-    saveData();
+
+    //--Purchase Transaction Type-3
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    //--Purchase Transaction Type-4
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+    //--Purchase Transaction Type-5
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    //--Purchase Transaction Type-6
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    //--Purchase Transaction Type-7
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    //--Purchase Transaction Type-8
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+    //--Purchase Transaction Type-9
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    //--Purchase Transaction Type-10
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+    for (int i = 0; i < _purchaseMockData.length; i++) {
+      _amount = _purchaseMockData[i].amount;
+      _particular = _purchaseMockData[i].particular;
+      _isCredit = _purchaseMockData[i].isCredit;
+      _cashOrBank = _purchaseMockData[i].cashOrBank;
+      _date = _purchaseMockData[i].date;
+      _creditType = _purchaseMockData[i].creditType;
+      _partyId = _purchaseMockData[i].partyId;
+      _partyName = _purchaseMockData[i].partyName;
+      _assetLedger = _purchaseMockData[i].assetLedger;
+      _transactionTypeId = _purchaseMockData[i].transactionTypeId;
+      _transactionTypeName = _purchaseMockData[i].transactionTypeName;
+      setPurchaseType();
+      saveData();
+    }
   }
 }
