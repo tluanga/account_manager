@@ -171,7 +171,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         break;
       case PurchaseType.assetCashDownCash:
         {
-          print('2) Asset-CashDown-Bank');
+          print('2) assetCashDownCash');
           // --process debit side
           _debitSideLedgerId = _assetLedger;
           _creditSideLedgerId = LedgerID.CASHAC;

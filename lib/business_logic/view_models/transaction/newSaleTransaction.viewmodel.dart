@@ -467,7 +467,6 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
       print('inside mock data looop');
       setSaleType();
       saveData();
-      printData();
     }
   }
 }
