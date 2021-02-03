@@ -9,12 +9,13 @@ import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/static/inWardType.constant.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:account_manager/static/outwardType.constant.dart';
 import 'package:account_manager/static/partyMock.constant.dart';
 import 'package:flutter/widgets.dart';
 
-class NewOutwardTransactionViewModel extends ChangeNotifier {
+class NewInwardTransactionViewModel extends ChangeNotifier {
   int _amount;
   String _particular; //--user input
   int _isCredit = cCashDown; //user input
@@ -55,7 +56,7 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setOutwardType() async {
+  void setInwardType() async {
     if (_cashOrBank == BANK) {
       print('Banks is selected');
       _outwardType = OutwardType.bankParty;
@@ -70,16 +71,16 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
       particular: _particular,
       isCredit: _isCredit,
       cashOrBank: _cashOrBank,
-      date: _date,
+      date: _date, //////// la dah lo
       partyId: _partyId,
     ));
     print(_outwardType.toString());
     switch (_outwardType) {
-      case OutwardType.bankParty:
+      case InWardType.bankParty:
         {
           print('type-1:outWardBank');
-          _debitSideLedgerId = _partyId;
-          _creditSideLedgerId = LedgerID.BANK;
+          _debitSideLedgerId = LedgerID.BANK;
+          _creditSideLedgerId = _partyId;
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -103,11 +104,11 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
           );
         }
         break;
-      case OutwardType.cashParty:
+      case InWardType.cashParty:
         {
           print('type-2:outWardCash');
-          _debitSideLedgerId = _partyId;
-          _creditSideLedgerId = LedgerID.CASHAC;
+          _debitSideLedgerId = LedgerID.CASHAC;
+          _creditSideLedgerId = _partyId;
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -278,7 +279,7 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
 
     for (int i = 0; i < _outwardMockData.length; i++) {
       String id = _outwardMockData[i].cashOrBank.toString();
-      print('The id of outward cash is $id');
+
       _amount = _outwardMockData[i].amount;
       _particular = _outwardMockData[i].particular;
       _isCredit = _outwardMockData[i].isCredit;
@@ -291,7 +292,7 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
       _transactionTypeId = _outwardMockData[i].transactionTypeId;
       _transactionTypeName = _outwardMockData[i].transactionTypeName;
 
-      setOutwardType();
+      setInwardType();
       saveData();
     }
   }

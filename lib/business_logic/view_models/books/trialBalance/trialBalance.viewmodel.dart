@@ -39,7 +39,8 @@ class TrialBalanceViewModel extends ChangeNotifier {
         }
         sumValue = sumValue + list[j].amount;
       }
-      if (creditAmount >= debitAmount) {
+      int value = creditAmount - debitAmount;
+      if (value > 0) {
         ledgerTransactions.add(
           TrialBalance(
               ledgerId: ledgerIds[i],
@@ -47,7 +48,7 @@ class TrialBalanceViewModel extends ChangeNotifier {
               amount: creditAmount - debitAmount,
               debitOrCredit: CREDIT),
         );
-      } else {
+      } else if (value < 0) {
         ledgerTransactions.add(
           TrialBalance(
               ledgerId: ledgerIds[i],

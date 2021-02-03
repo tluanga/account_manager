@@ -5,7 +5,7 @@ import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:account_manager/static/partyMock.constant.dart';
-import 'package:account_manager/static/purchaseType.constant.dart';
+
 import 'package:account_manager/static/saleType.constant.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 

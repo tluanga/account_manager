@@ -8,9 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import '../../../../static/constants.dart';
-import '../../../../static/constants.dart';
-import '../../../../static/transactionType.constant.dart';
-import '../../../../static/transactionType.constant.dart';
 
 class TransactionTypeSelectScreen extends StatelessWidget {
   const TransactionTypeSelectScreen({Key key}) : super(key: key);
