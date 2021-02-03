@@ -186,6 +186,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.assetCashDownBank:
         {
           // --process debit side
+          print('type-1:assetCashDownBank');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _assetLedger,
@@ -209,6 +210,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         break;
       case PurchaseType.assetCashDownCash:
         {
+          print('type-2:assetCashDownCash');
           // --process debit side
           _ledgerTransactionService.insert(
             LedgerTransaction(
@@ -234,6 +236,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.assetDebt:
         // ---Type 3----
         {
+          print('type-3:assetDebt');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _assetLedger,
@@ -258,6 +261,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.assetDebtCashPartial:
         // ---Type 4----
         {
+          print('type-4:assetDebtCashPartial');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _assetLedger,
@@ -291,6 +295,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.assetDebtBankPartial:
         // ---Type 5----
         {
+          print('type-5:assetDebtBankPartial');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _assetLedger,
@@ -323,6 +328,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         break;
       case PurchaseType.nonAssetCashDownBank:
         {
+          print('type-6:nonAssetCashDownBank');
           //-----6-----------
           // --process debit side
           _ledgerTransactionService.insert(
@@ -349,6 +355,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.nonAssetCashDownCash:
         {
           //----------7-------------
+          print('type-7:nonAssetCashDownCash');
           // --process debit side
           _ledgerTransactionService.insert(
             LedgerTransaction(
@@ -374,6 +381,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.nonAssetDebt:
         // ---Type 8----
         {
+          print('type-8:nonAssetDebt');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.PURCHASEAC,
@@ -398,6 +406,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.nonAssetDebtCashPartial:
         // ---Type 9----
         {
+          print('type-9:nonAssetDebtCashPartial');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.PURCHASEAC,
@@ -431,6 +440,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.nonAssetDebtBankPartial:
         // ---Type 10----
         {
+          print('type-10:nonAssetDebtBankPartial');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.PURCHASEAC,
