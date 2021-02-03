@@ -1,3 +1,4 @@
+import 'package:account_manager/views/dashboard/ledger.widget.dart';
 import 'package:account_manager/views/dashboard/transaction.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _DashBoardState extends State<DashBoard> {
     // First(),
     //---Last 10 transactions
     TransactionDashboardWidget(),
-    giveCenter("Search Page"),
+    LedgerDashboardScreen(),
     Container(
       child: Text('Hi'),
     ),

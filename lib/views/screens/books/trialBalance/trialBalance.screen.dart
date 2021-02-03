@@ -122,7 +122,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                               padding: EdgeInsets.all(15),
                               color: Colors.cyan[50],
                               child: Text(
-                                'Credit/Debit',
+                                'Debit',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontWeight: FontWeight.w500),
                               ))),
@@ -134,7 +134,7 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                               padding: EdgeInsets.all(15),
                               color: Colors.cyan[50],
                               child: Text(
-                                'Amount',
+                                'Credit',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(fontWeight: FontWeight.w500),
                               ))),
@@ -144,32 +144,69 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                     child: ListView.builder(
                       itemCount: model.trialBalanceElements.length,
                       itemBuilder: (BuildContext context, int index) {
-                        String _debitOrCredit = '';
-                        Color _color;
+                        String _debitValue = '';
+                        String _creditValue = '';
+                        Color _colorCredit;
+                        Color _colorDebit;
                         if (model.trialBalanceElements[index].debitOrCredit ==
                             CREDIT) {
-                          _debitOrCredit = 'Credit';
-                          _color = Colors.red.shade200;
+                          _creditValue = model
+                              .trialBalanceElements[index].amount
+                              .toString();
+                          _colorCredit = Colors.red.shade200;
                         } else {
-                          _debitOrCredit = 'Debit';
-                          _color = Colors.green.shade500;
+                          _debitValue = model.trialBalanceElements[index].amount
+                              .toString();
+                          _colorDebit = Colors.green.shade500;
                         }
 
                         return Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                  model.trialBalanceElements[index].ledgerName),
-                              Text(
-                                _debitOrCredit,
-                                style: TextStyle(color: _color),
-                              ),
-                              Text(
-                                model.trialBalanceElements[index].amount
-                                    .toString(),
-                              )
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  // color: Colors.blue,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      model.trialBalanceElements[index]
+                                          .ledgerName,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  // color: Colors.green,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: Center(
+                                    child: Text(
+                                      _debitValue,
+                                      style: TextStyle(color: _colorDebit),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  // color: Colors.red,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      _creditValue,
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(color: _colorCredit),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },

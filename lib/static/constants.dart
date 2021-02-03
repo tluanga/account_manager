@@ -26,9 +26,9 @@ const int cNonASSET = 13;
 
 //---Sum Chet Vel dan
 const int cPurchase = 100;
-const int cHRALH = 101;
-const int cLAKLUH = 102;
-const int cPEKCHHUAH = 103;
+const int cSale = 101;
+const int cInward = 102;
+const int cOutward = 103;
 
 const String PRIMARYCOLOR = '#FBAF02';
 const String TEXTCOLOR = '#080040';

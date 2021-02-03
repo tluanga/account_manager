@@ -159,4 +159,18 @@ class LedgerMasterImpl implements LedgerMasterService {
     });
     return ledgerMasterList[0].name;
   }
+
+  Future<List<LedgerMaster>> getTopTenLedgerList() async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT m.name, m.description FROM masterLedger_table m
+      INNER JOIN ledgerTranction_table  ON m.id=ledgerTranction_table.ledgerID
+      ''');
+
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+    return ledgerMasterList;
+  }
 }
