@@ -15,6 +15,7 @@ import '../../../static/constants.dart';
 
 import '../../../static/ledgerId.constants.dart';
 
+import '../../models/ledgerTransaction.model.dart';
 import '../../models/ledgermaster.models.dart';
 import '../../models/transaction.model.dart';
 import '../../models/transactionType.models.dart';
@@ -29,7 +30,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int _isCredit = cCashDown; //user input
   int _cashOrBank = CASH; //user input
   DateTime _date = DateTime.now(); //user input
-  int _baType = cCredit; //BA partial or Full --user input
+  int _creditType = cCredit; //BA partial or Full --user input
   int _partyId; //user purchase is made by BA
   String _partyName; //Computed
   int _assetLedger; //if the purchase is of asset//user input
@@ -83,7 +84,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       _debitSideLedgerId = _assetLedger;
       if (_isCredit == cCredit) {
         //Transaction is Ba
-        if (_baType == cCredit) {
+        if (_creditType == cCredit) {
           print('assetBa Full = 3');
           _purchaseType = PurchaseType.assetDebt;
           _debitSideLedgerId = _assetLedger;
@@ -121,7 +122,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         if (_isCredit == cCredit) {
           //Transaction is Ba
-          if (_baType == cCredit) {
+          if (_creditType == cCredit) {
             print('nonAssetDebt = 8');
             _purchaseType = PurchaseType.nonAssetDebt;
             _debitSideLedgerId = LedgerID.PURCHASEAC;
@@ -165,10 +166,302 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   void saveData() {
-    // Asset a nih chuan debit ah assetLedger
-    // Asset a nih loh chuan Purchase Ac
-    if (_assetLedger == cCredit) {
-    } else {}
+    _transactionService.insert(
+      Transaction(
+        amount: _amount,
+        particular: _particular,
+        isCredit: _isCredit,
+        cashOrBank: _cashOrBank,
+        date: _date,
+        creditType: _creditType,
+        partyId: _partyId,
+        partyName: _partyName,
+        assetLedger: _assetLedger,
+        transactionTypeId: _transactionTypeId,
+        transactionTypeName: _transactionTypeName,
+      ),
+    );
+
+    switch (_purchaseType) {
+      case PurchaseType.assetCashDownBank:
+        {
+          // --process debit side
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _assetLedger,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.BANK,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.assetCashDownCash:
+        {
+          // --process debit side
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _assetLedger,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.CASHAC,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.assetDebt:
+        // ---Type 3----
+        {
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _assetLedger,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: _partyId,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.assetDebtCashPartial:
+        // ---Type 4----
+        {
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _assetLedger,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.CASHAC,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+          //process credit side-party ac
+          LedgerTransaction(
+            ledgerId: _partyId,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.assetDebtBankPartial:
+        // ---Type 5----
+        {
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _assetLedger,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.BANK,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+          //process credit side-party ac
+          LedgerTransaction(
+            ledgerId: _partyId,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.nonAssetCashDownBank:
+        {
+          //-----6-----------
+          // --process debit side
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.PURCHASEAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.BANK,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.nonAssetCashDownCash:
+        {
+          //----------7-------------
+          // --process debit side
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.PURCHASEAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.CASHAC,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.nonAssetDebt:
+        // ---Type 8----
+        {
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.PURCHASEAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: _partyId,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.nonAssetDebtCashPartial:
+        // ---Type 9----
+        {
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.PURCHASEAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.CASHAC,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+          //process credit side-party ac
+          LedgerTransaction(
+            ledgerId: _partyId,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+      case PurchaseType.nonAssetDebtBankPartial:
+        // ---Type 10----
+        {
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.PURCHASEAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          LedgerTransaction(
+            ledgerId: LedgerID.BANK,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+          //process credit side-party ac
+          LedgerTransaction(
+            ledgerId: _partyId,
+            amount: _amount,
+            particular: _particular,
+            date: _date,
+            debitOrCredit: CREDIT,
+            cashOrBank: _cashOrBank,
+          );
+        }
+        break;
+    }
   }
 
   void printData() {
@@ -176,7 +469,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('Particular:$_particular');
     print('Ba or Balo:$_isCredit');
     print('Cash or Bank:$_cashOrBank');
-    print('Ba Type:$_baType');
+    print('Ba Type:$_creditType');
     print('Party Id:$_partyId');
     print('Party Name :$_partyName');
   }
@@ -254,9 +547,9 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int getBaType() => _baType;
+  int getBaType() => _creditType;
   void setBaType(int value) {
-    _baType = value;
+    _creditType = value;
     notifyListeners();
   }
 
@@ -328,4 +621,31 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
     transactionTypeName: 'Purchase of Asset',
   );
+  void processMockData(
+      amount,
+      particular,
+      isCredit,
+      cashOrBank,
+      date,
+      creditType,
+      partyId,
+      partyName,
+      assetLedger,
+      transactionTypeId,
+      transactionTypeName) {
+    //--copy parameter to variable
+    _amount = amount;
+    _particular = particular;
+    _isCredit = isCredit;
+    _cashOrBank = cashOrBank;
+    _date = date;
+    _creditType = creditType;
+    _partyId = partyId;
+    _partyName = partyName;
+    _assetLedger = assetLedger;
+    _transactionTypeId = transactionTypeId;
+    _transactionTypeName = transactionTypeName;
+    setPurchaseType();
+    saveData();
+  }
 }
