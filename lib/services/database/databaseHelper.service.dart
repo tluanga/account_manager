@@ -562,6 +562,16 @@ class DatabaseHelper {
       'party': cNotPartyAc,
       'asset': cNonASSET
     });
+    //--------------Sales and Incomes-----------------
+    // 51) Sales
+    await db.insert(masterLedgerTable, {
+      'name': 'Sales',
+      'description': 'Sales account excluding sale returns',
+      'directOrIndirect': cDirectAc,
+      'party': cNotPartyAc,
+      'asset': cNonASSET
+    });
+
 
     // -----------Mock Data----------
     // 7)LedgerTransaction
@@ -599,7 +609,7 @@ class DatabaseHelper {
           'Purchase of Material for Business, not for Resell or Raw Material',
       'sumChetVelDanType': 0,
       'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //3
@@ -616,8 +626,8 @@ class DatabaseHelper {
       'name': 'Wages',
       'description': 'Hnathawkte hlawh',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.WAGES,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //5
@@ -625,8 +635,8 @@ class DatabaseHelper {
       'name': 'Carriage expenses',
       'description': 'Bungraw phur kualnaa sum hman',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.CARRIAGE,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //6
@@ -634,8 +644,8 @@ class DatabaseHelper {
       'name': 'Manufacturing expenses',
       'description': 'bungraw lakkhawmna',
       'sumChetVelDanType': 0,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': 3, //MANUFACTURING LEDGER A LA AWM LO
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //7
@@ -643,8 +653,8 @@ class DatabaseHelper {
       'name': 'Packing expenses',
       'description': 'bungraw pack na',
       'sumChetVelDanType': 0,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.PACKING,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //8
@@ -652,8 +662,8 @@ class DatabaseHelper {
       'name': 'Salaries ',
       'description': 'hnathawkate thla tin hlawh',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.SALARIES,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //9
@@ -661,8 +671,8 @@ class DatabaseHelper {
       'name': 'Office rent',
       'description': 'office luahna man',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.OFFICE_EXPENSES,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //10
@@ -670,8 +680,8 @@ class DatabaseHelper {
       'name': 'Printing & Stationery',
       'description': 'Lehkha print na,etc. leh Stationary a sum hman te',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.PRINTING_AND_STATIONERY,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //11
@@ -679,8 +689,8 @@ class DatabaseHelper {
       'name': 'Telephone Charges',
       'description': 'bungraw pack na',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.TELEPHONE_CHARGES,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //12
@@ -688,8 +698,8 @@ class DatabaseHelper {
       'name': 'Postage and telegram',
       'description': 'postage and telegram',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.PRINTING_AND_STATIONERY,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //13
@@ -697,8 +707,8 @@ class DatabaseHelper {
       'name': 'Insurance',
       'description': 'Insurance',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.INSURANCE,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //14
@@ -706,8 +716,8 @@ class DatabaseHelper {
       'name': 'Audit fees',
       'description': 'audit fee',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.AUDIT_FEE,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //15
@@ -715,8 +725,8 @@ class DatabaseHelper {
       'name': 'Electricity',
       'description': 'Electric bill leh electric lama sum hmanna te',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.ELECTRIC_BILL,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //16
@@ -724,8 +734,8 @@ class DatabaseHelper {
       'name': 'Repairs and renewal',
       'description': 'Thil siam thatnaa sum hman te',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.REPAIRS_RENEWAL_MAINTENANCE,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //17
@@ -733,8 +743,8 @@ class DatabaseHelper {
       'name': 'Advertisement',
       'description': 'advertisement',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.ADVERTISEMENT,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //18
@@ -742,8 +752,8 @@ class DatabaseHelper {
       'name': 'Discount',
       'description': 'Discount kan pek na',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.DISCOUNTAC,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //19
@@ -751,8 +761,8 @@ class DatabaseHelper {
       'name': 'Depreciation',
       'description': 'Thil man a ai tlawma kan pekna zat',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.DEPRECIATIONAC,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //20
@@ -760,8 +770,8 @@ class DatabaseHelper {
       'name': 'Carriage outward',
       'description': 'Carriage outward',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.CARRIAGE,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //21
@@ -769,8 +779,8 @@ class DatabaseHelper {
       'name': 'Bad debts',
       'description': 'Ba min pek tawh loh tur te',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.BAD_DEBTS,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //22
@@ -778,8 +788,8 @@ class DatabaseHelper {
       'name': 'Provision for bad debts',
       'description': 'bat ral te phuhrukna tur',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.PROVISION_FOR_BAD_DEBTS,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //23
@@ -787,8 +797,8 @@ class DatabaseHelper {
       'name': 'Selling commission',
       'description': 'Selling commission',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.COMMISSION,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //24
@@ -796,8 +806,8 @@ class DatabaseHelper {
       'name': 'Bank charges',
       'description': 'bank charges',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.BANK_CHARGES,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
     //25
@@ -805,8 +815,8 @@ class DatabaseHelper {
       'name': 'Loss on sale of asset',
       'description': 'bungraw hralhchhawnna a pawisa hloh na',
       'sumChetVelDanType': 3,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.LOSS_ON_SALE_OF_ASSETS,
+      'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
 
@@ -817,8 +827,8 @@ class DatabaseHelper {
       'name': 'Discount Recieved',
       'description': 'thil leina a discount kan dawn zat',
       'sumChetVelDanType': 2,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.CASHAC,
+      'creditSideLedger': LedgerID.DISCOUNTAC,
       'partyLedger': 0,
     });
     //27
@@ -826,8 +836,8 @@ class DatabaseHelper {
       'name': 'Commission recieved',
       'description': 'commission na a hmuh zat',
       'sumChetVelDanType': 2,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.CASHAC,
+      'creditSideLedger': LedgerID.COMMISSION,
       'partyLedger': 0,
     });
     //28
@@ -835,8 +845,8 @@ class DatabaseHelper {
       'name': 'Bank interest',
       'description': 'bank interest dawn zat',
       'sumChetVelDanType': 2,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.BANK,
+      'creditSideLedger': 2, // la ngaihtuah tur
       'partyLedger': 0,
     });
     //29
@@ -844,8 +854,8 @@ class DatabaseHelper {
       'name': 'Rent recieved',
       'description': 'Kan in/dawr luahman atanga sum dawn',
       'sumChetVelDanType': 2,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.CASHAC,
+      'creditSideLedger': LedgerID.RENT,
       'partyLedger': 0,
     });
     //30
@@ -853,8 +863,8 @@ class DatabaseHelper {
       'name': 'Profit on sale of asset',
       'description': 'Bungraw hralhchhawnna atanga hlawkna',
       'sumChetVelDanType': 2,
-      'debitSideLedger': 3,
-      'creditSideLedger': 2,
+      'debitSideLedger': LedgerID.CASHAC,
+      'creditSideLedger': 2, // profit on sale of asset ledger siam a ngai a ngem??
       'partyLedger': 0,
     });
 

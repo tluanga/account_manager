@@ -1,4 +1,32 @@
 class TransactionTypeConstant {
   static int cPURCHASEOFRAWMATERIAL = 1;
   static int cPURCHASEOFASSET = 2;
+  static int cSALEOFGOODS = 3;
+  static int cWAGES = 4;
+  static int cCARRIAGEEXPENSES = 5;
+  static int cMANUFACTURINGEXPENSES = 6;
+  static int cPACKINGEXPENSES = 7;
+  static int cSALARIES = 8;
+  static int cOFFICERENT = 9;
+  static int cPRINTINGANDSTATIONERY = 10;
+  static int cTELEPHONECHARGES = 11;
+  static int cPOSTAGEANDTELEGRAM = 12;
+  static int cINSURANCE = 13;
+  static int cAUDITFEES = 14;
+  static int cELECTRICITY = 15;
+  static int cREPAIRSANDRENEWAL = 16;
+  static int cADVERTISEMENT = 17;
+  static int cDISCOUNT = 18;
+  static int cDEPRECIATION = 19;
+  static int cCARRIAGEOUTWARD = 20;
+  static int cBADDEBTS = 21;
+  static int cPROVISIONFORBADDEBTS = 22;
+  static int cSELLINGCOMMISSION = 23;
+  static int cBANKCHARGES = 24;
+  static int cLOSSONSALEOFASET = 25;
+  static int cDISCOUNTRECIEVED = 26;
+  static int cCOMMISSIONRECIEVED = 27;
+  static int cBANKINTEREST = 28;
+  static int cRENTRECIEVED = 29;
+  static int cPROFITONSALEOFASSET = 30;
 }
