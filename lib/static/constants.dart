@@ -23,7 +23,7 @@ const int cNotPartyAc = 1;
 const int cDirectAc = 0;
 const int cIndirectAc = 1;
 
-const int cPartialBA = 0;
+const int cPartialCredit = 0;
 
 //---------ASSET or NON ASSET-------
 const int cASSET = 0;

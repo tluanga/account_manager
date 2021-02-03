@@ -128,9 +128,10 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           // --process debit side
           print('type-1:saleCashDownBank');
           _debitSideLedgerId = LedgerID.BANK;
+          _creditSideLedgerId = LedgerID.SALESAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -139,23 +140,27 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.BANK,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
-      case PurchaseType.assetCashDownCash:
+      case SaleType.saleCashDownCash:
         {
-          print('type-2:assetCashDownCash');
+          print('type-2:saleCashDownCash');
           // --process debit side
+          _debitSideLedgerId = LedgerID.CASHAC;
+          _creditSideLedgerId = LedgerID.SALESAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -164,23 +169,27 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
-      case PurchaseType.assetDebt:
+      case SaleType.saleDebt:
         // ---Type 3----
         {
-          print('type-3:assetDebt');
+          print('type-3:saleDebt');
+          _debitSideLedgerId = _partyId;
+          _creditSideLedgerId = LedgerID.SALESAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -189,23 +198,25 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
-      case PurchaseType.assetDebtCashPartial:
+      case SaleType.saleBaPartialBank:
         // ---Type 4----
         {
-          print('type-4:assetDebtCashPartial');
+          print('type-4:saleBaPartialBank');
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: LedgerID.BANK,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -215,16 +226,16 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
+            ledgerId: _partyId,
             amount: _amount,
             particular: _particular,
             date: _date,
-            debitOrCredit: CREDIT,
+            debitOrCredit: DEBIT,
             cashOrBank: _cashOrBank,
           );
           //process credit side-party ac
           LedgerTransaction(
-            ledgerId: _partyId,
+            ledgerId: LedgerID.SALESAC,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -233,13 +244,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
         }
         break;
-      case PurchaseType.assetDebtBankPartial:
+      case SaleType.assetBaPartialCash:
         // ---Type 5----
         {
-          print('type-5:assetDebtBankPartial');
+          print('type-5:assetBaPartialCash');
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: LedgerID.CASHAC,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -249,7 +260,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: LedgerID.BANK,
+            ledgerId: _partyId,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -258,152 +269,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit side-party ac
           LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-        }
-        break;
-      case PurchaseType.nonAssetCashDownBank:
-        {
-          print('type-6:nonAssetCashDownBank');
-          //-----6-----------
-          // --process debit side
-          _ledgerTransactionService.insert(
-            LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
-              particular: _particular,
-              date: _date,
-              debitOrCredit: DEBIT,
-              cashOrBank: _cashOrBank,
-            ),
-          );
-          //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.BANK,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-        }
-        break;
-      case PurchaseType.nonAssetCashDownCash:
-        {
-          //----------7-------------
-          print('type-7:nonAssetCashDownCash');
-          // --process debit side
-          _ledgerTransactionService.insert(
-            LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
-              particular: _particular,
-              date: _date,
-              debitOrCredit: DEBIT,
-              cashOrBank: _cashOrBank,
-            ),
-          );
-          //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-        }
-        break;
-      case PurchaseType.nonAssetDebt:
-        // ---Type 8----
-        {
-          print('type-8:nonAssetDebt');
-          _ledgerTransactionService.insert(
-            LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
-              particular: _particular,
-              date: _date,
-              debitOrCredit: DEBIT,
-              cashOrBank: _cashOrBank,
-            ),
-          );
-          //process credit Side
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-        }
-        break;
-      case PurchaseType.nonAssetDebtCashPartial:
-        // ---Type 9----
-        {
-          print('type-9:nonAssetDebtCashPartial');
-          _ledgerTransactionService.insert(
-            LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
-              particular: _particular,
-              date: _date,
-              debitOrCredit: DEBIT,
-              cashOrBank: _cashOrBank,
-            ),
-          );
-          //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-          //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-        }
-        break;
-      case PurchaseType.nonAssetDebtBankPartial:
-        // ---Type 10----
-        {
-          print('type-10:nonAssetDebtBankPartial');
-          _ledgerTransactionService.insert(
-            LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
-              particular: _particular,
-              date: _date,
-              debitOrCredit: DEBIT,
-              cashOrBank: _cashOrBank,
-            ),
-          );
-          //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.BANK,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
-          );
-          //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: _partyId,
+            ledgerId: LedgerID.SALESAC,
             amount: _amount,
             particular: _particular,
             date: _date,
