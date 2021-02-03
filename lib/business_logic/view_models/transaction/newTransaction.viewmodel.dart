@@ -14,7 +14,7 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 
 class NewTransactionViewModel extends ChangeNotifier {
-  int baOrBalo;
+  int isCredit;
 
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
@@ -24,8 +24,8 @@ class NewTransactionViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void setBaOrBalo(int data) {
-    baOrBalo = data;
+  void setisCredit(int data) {
+    isCredit = data;
     notifyListeners();
   }
 
@@ -34,7 +34,7 @@ class NewTransactionViewModel extends ChangeNotifier {
     int amount,
     String particulars,
     DateTime date,
-    int baOrBalo,
+    int isCredit,
     int cashOrBank,
     int transactionTypeId,
     int partyAccount = 0,
@@ -46,7 +46,7 @@ class NewTransactionViewModel extends ChangeNotifier {
         amount: amount,
         date: DateTime.now(),
         particular: particulars,
-        baOrBalo: baOrBalo,
+        isCredit: isCredit,
         cashOrBank: cashOrBank,
         transactionTypeId: transactionTypeId,
       ),
@@ -87,7 +87,7 @@ class NewTransactionViewModel extends ChangeNotifier {
     }
 
     // 4- Create a ledgerTransaction entry for debitSideLedger
-    if (baOrBalo == cCashDown) {
+    if (isCredit == cCashDown) {
       LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
         ledgerId: _transationType.debitSideLedger,
         amount: amount,
@@ -96,7 +96,7 @@ class NewTransactionViewModel extends ChangeNotifier {
         date: date,
       );
       _ledgerTransactionService.insert(_ledgerTransactionDebitPayload);
-    } else if (baOrBalo == cCredit) {
+    } else if (isCredit == cCredit) {
       LedgerTransaction _ledgerTransactionDebitPayload = LedgerTransaction(
         ledgerId: partyAccount,
         amount: amount,

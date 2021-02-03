@@ -917,6 +917,6 @@ class DatabaseHelper {
       'party': cNotPartyAc,
       'asset': cASSET
     });
-    /
+    
   }
 }
