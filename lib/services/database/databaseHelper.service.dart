@@ -86,6 +86,7 @@ class DatabaseHelper {
   String ledgerTransactionParticular = 'particular';
   String ledgerTransactionDebitOrCredit = 'debitOrCredit';
   String ledgerTransactionCashOrBank = 'cashOrBank';
+  String ledgerTransactionTypeOfTransaction = 'typeOfTransaction';
 
   //------TABLE 7 PARTY TABLE
   String partyTable = 'party_table';
@@ -146,7 +147,7 @@ class DatabaseHelper {
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(
-      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER)',
+      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER,$ledgerTransactionTypeOfTransaction INT)',
     );
 
     // Table 7 - Authenticaion PIN
@@ -579,6 +580,7 @@ class DatabaseHelper {
       'particular': 'Purchase of Raw Material',
       'debitOrCredit': 1,
       'cashOrBank': 1,
+      'typeOfTransaction': cPurchase,
     });
     //53
     await db.insert(ledgerTransactionTable, {
@@ -588,6 +590,7 @@ class DatabaseHelper {
       'particular': 'Purchase of Raw Material',
       'debitOrCredit': 1,
       'cashOrBank': 1,
+      'typeOfTransaction': cPurchase,
     });
 
     //--------Special Transaction Type--------------
