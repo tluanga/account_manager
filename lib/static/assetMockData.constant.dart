@@ -1,4 +1,4 @@
 class AssetMockData {
-  static const int chair = 37;
-  static const int machinery = 38;
+  static const int chair = 58;
+  static const int machinery = 59;
 }

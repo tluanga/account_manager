@@ -7,26 +7,37 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:account_manager/static/outwardType.constant.dart';
+import 'package:account_manager/static/partyMock.constant.dart';
 import 'package:flutter/widgets.dart';
 
 class NewOutwardTransactionViewModel extends ChangeNotifier {
   int _amount;
-  String _particular;
-  int _isCredit = cCashDown;
-  int _outwardType;
-  int _debitSideLedgerId = 0;
-  int _creditSideLedgerId = 0;
-  int _partyId;
-  int _cashOrBank = CASH;
-  List<LedgerMaster> partyList = [];
-  String _partyName;
-  DateTime _date = DateTime.now();
-  int _creditType = cCredit;
+  String _particular; //--user input
+  int _isCredit = cCashDown; //user input
+  int _cashOrBank = CASH; //user input
+  DateTime _date = DateTime.now(); //user input
+  int _creditType = cCredit; //BA partial or Full --user input
+  int _partyId; //user purchase is made by BA
+  String _partyName; //Computed
+  int _assetLedger; //if the purchase is of asset//user input
+  String _assetLedgerName;
   int _transactionTypeId = 0;
-  String _transactionTypeName = ''; 
+  String _transactionTypeName = ''; //user input
+  // ignore: unused_field
+  int _debitSideLedgerId = 0; //computed-
+  String _debitSideLedgerName; //computed --
+//computed --
+  // ignore: unused_field
+  int _creditSideLedgerId = 0;
+  String _creditSideLedgerName;
+
+  List<LedgerMaster> partyList = [];
+
+  int _outwardType;
 
   TransactionTypeService _transactionTypeService =
       serviceLocator<TransactionTypeService>();
@@ -45,62 +56,95 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
   }
 
   void setOutwardType() async {
-    if (_isCredit == cCredit) {
-      // transaction type is ba
-      _outwardType = OutwardType.debt;
-      _debitSideLedgerId = _partyId;
-      _creditSideLedgerId = , // cash/bank/ba account
-    }
-    else if(_isCredit == cCashDown){
-      // transaction type is ba lo
-      if(_cashOrBank == CASH){
-        _outwardType = OutwardType.cashdowncash;
-        _debitSideLedgerId = //////// 
-        _creditSideLedgerId = LedgerID.CASHAC;
-      }
-      else if(_cashOrBank == BANK){
-        _outwardType = OutwardType.cashdownbank;
-        _debitSideLedgerId = ///
-        _creditSideLedgerId = LedgerID.BANK;
-      }
+    if (_cashOrBank == BANK) {
+      print('Banks is selected');
+      _outwardType = OutwardType.bankParty;
+    } else if (_cashOrBank == CASH) {
+      
+      _outwardType = OutwardType.cashParty;
     }
   }
 
-  void saveData(){
-    _transactionService.insert(
-      Transaction(
+  void saveData() {
+    _transactionService.insert(Transaction(
       amount: _amount,
       particular: _particular,
       isCredit: _isCredit,
       cashOrBank: _cashOrBank,
-      date: _date,//////// la dah lo
+      date: _date, //////// la dah lo
       partyId: _partyId,
-      )
-    );
-
-    switch (_outwardType){
-      case OutwardType.cashdownbank:{
-        _ledgerTransactionService.insert(
-          LedgerTransaction(
-            ledgerId: ,////
-            amount: _amount,
-            particular: _particular,
-            date: _date, ///////
-            debitOrCredit: DEBIT,
-            cashOrBank: _cashOrBank,
-          )
-        );
-        LedgerTransaction(
-          ledgerId: LedgerID.BANK,
-          amount: _amount,
-          particular: _particular,
-          date: _date,
-          debitOrCredit: CREDIT,
-          cashOrBank: _cashOrBank,
-        );
-      }
+    ));
+    print(_outwardType.toString());
+    switch (_outwardType) {
+      case OutwardType.bankParty:
+        {
+          print('type-1:outWardBank');
+          _debitSideLedgerId = LedgerID.BANK;
+          _creditSideLedgerId = _partyId;
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _debitSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+        }
+        break;
+      case OutwardType.cashParty:
+        {
+          print('type-2:outWardCash');
+          _debitSideLedgerId = LedgerID.CASHAC;
+          _creditSideLedgerId = _partyId;
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _debitSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: DEBIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+          //process credit Side
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
+          );
+        }
+        break;
     }
   }
+
+  void printData() {
+    print('Amount:$_amount');
+    print('Particular:$_particular');
+    print('Ba or Balo:$_isCredit');
+    print('Cash or Bank:$_cashOrBank');
+    print('Ba Type:$_creditType');
+    print('Party Id:$_partyId');
+    print('Party Name :$_partyName');
+  }
+
   void getFilterdPartyLedgerMaster(String _searchString) async {
     List<LedgerMaster> _ledgerMasterList =
         await _ledgerMasterService.getFilterdPartyLedgerList(_searchString);
@@ -119,7 +163,8 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
         name: name,
         description: description,
         directOrIndirect: cDirectAc,
-        party: cPartyAc,);
+        party: cPartyAc,
+        asset: cNonASSET);
     var result = await _ledgerMasterService.insert(payload);
 
     notifyListeners();
@@ -127,9 +172,8 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
   }
 
   void loadParty() async {
-    final _partyList = await _ledgerMasterService.getPartyList();
+    partyList = await _ledgerMasterService.getPartyList();
 
-    partyList = _partyList;
     notifyListeners();
   }
 
@@ -192,6 +236,12 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  int getAssetLedger() => _assetLedger;
+  void setAssetLedger(int value) {
+    _assetLedger = value;
+    notifyListeners();
+  }
+
   int getTransactionTypeId() => _transactionTypeId;
   void setTransactionTypeId(int value) {
     _transactionTypeId = value;
@@ -202,5 +252,48 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
   void setTransactionTypeName(String value) {
     _transactionTypeName = value;
     notifyListeners();
+  }
+
+  String getAssetLedgerName() => _assetLedgerName;
+  String getDebitSideLedgerName() => _debitSideLedgerName;
+  String getCreditSideLedgerName() => _creditSideLedgerName;
+
+  void processMockData() {
+    List<Transaction> _outwardMockData = [];
+    //--Purchase Transaction Type-3
+    _outwardMockData.add(
+      Transaction(
+        amount: 30000,
+        particular: 'Chair Leina',
+        isCredit: NONE,
+        cashOrBank: CASH,
+        date: DateTime.now(),
+        creditType: NONE,
+        partyId: PartyMockConstant.Rotluanga,
+        partyName: 'Rotluanga',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: LedgerID.WAGES,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    for (int i = 0; i < _outwardMockData.length; i++) {
+      String id = _outwardMockData[i].cashOrBank.toString();
+      print('The id of outward cash is $id');
+      _amount = _outwardMockData[i].amount;
+      _particular = _outwardMockData[i].particular;
+      _isCredit = _outwardMockData[i].isCredit;
+      _cashOrBank = _outwardMockData[i].cashOrBank;
+      _date = _outwardMockData[i].date;
+      _creditType = _outwardMockData[i].creditType;
+      _partyId = _outwardMockData[i].partyId;
+      _partyName = _outwardMockData[i].partyName;
+      _assetLedger = _outwardMockData[i].assetLedger;
+      _transactionTypeId = _outwardMockData[i].transactionTypeId;
+      _transactionTypeName = _outwardMockData[i].transactionTypeName;
+
+      setOutwardType();
+      saveData();
+    }
   }
 }

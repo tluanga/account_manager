@@ -12,6 +12,7 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
@@ -95,6 +96,9 @@ class MyApp extends StatelessWidget {
         // ---------NEW TRANSACTION----------------
         ChangeNotifierProvider(
           create: (context) => NewPurchaseTransactionViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NewOutwardTransactionViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
