@@ -4,6 +4,9 @@ import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../static/constants.dart';
+
+
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._instance();
   static Database _db;
@@ -59,11 +62,22 @@ class DatabaseHelper {
   String transactionTable = 'transaction_table';
   String transactionId = 'id';
   String transactionAmount = 'amount';
-  String transactionDate = 'date';
   String transactionParticular = 'particular';
-  String transactionTransactionTypeId = 'transactionTypeId';
-  String transactionBaOrBalo = 'baOrBalo';
+  String transactionIsCredit = 'isCredit';
   String transactionCashOrBank = 'cashOrBank';
+  String transactionDate = 'date';
+  String transactionCreditType = 'creditType';
+  String transactionPartyId = 'partyId';
+  String transactionPartyName = 'partyName';
+  String transactionassetLedger = 'assetLedger';
+  String transactionassetLedgerName = 'assetLedgerName';
+  String transactionTransactionTypeId = 'transactionTypeId';
+  String transactionTransactionTypeName = 'transactionTypeName';
+  String transactionDebitSideLedgerId = 'debitSideLedgerId';
+  String transactionDebitSideLedgerName = 'debitSideLedgerName';
+  String transactionCreditSideLedgerId = 'creditSideLedgerId' ;
+  String transactionCreditSideLedgerName = 'creditSideLedgerName';
+
 
   //------TABLE 6 LEDGER TRANSACTION TABLE---------
   String ledgerTransactionTable = 'ledgerTranction_table';
@@ -130,7 +144,7 @@ class DatabaseHelper {
     );
     // Table 5 - Transaction Table
     await db.execute(
-      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT, $transactionDate INT, $transactionParticular TEXT, $transactionTransactionTypeId INTEGER, $transactionBaOrBalo INTEGER,$transactionCashOrBank INTEGER)',
+      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT,$transactionParticular TEXT,$transactionIsCredit INT,$transactionCashOrBank INT, $transactionDate INT, $transactionCreditType INT, $transactionPartyId INT, $transactionPartyName TEXT,$transactionassetLedger INTEGER,$transactionassetLedgerName TEXT,$transactionTransactionTypeId INT,$transactionTransactionTypeName TEXT,$transactionDebitSideLedgerId INT,$transactionDebitSideLedgerName TEXT,$transactionCreditSideLedgerId INT,$transactionCreditSideLedgerName TEXT  )',
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(
@@ -843,5 +857,66 @@ class DatabaseHelper {
       'creditSideLedger': 2,
       'partyLedger': 0,
     });
+
+    //--------Mock Data -- LedgerMaster Party-------------------
+    await db.insert(masterLedgerTable, {
+      'name': 'Alex Telles',
+      'description': 'Aizawl',
+      'directOrIndirect': cDirectAc,
+      'party': cPartyAc,
+      'asset': cNonASSET
+    });
+    await db.insert(masterLedgerTable, {
+      'name': 'William Defoe',
+      'description': 'Kan Hmun',
+      'directOrIndirect': cDirectAc,
+      'party': cPartyAc,
+      'asset': cNonASSET
+    });
+    await db.insert(masterLedgerTable, {
+      'name': 'Rema ',
+      'description': 'Zohmun',
+      'directOrIndirect': cDirectAc,
+      'party': cPartyAc,
+      'asset': cNonASSET
+    });
+    await db.insert(masterLedgerTable, {
+      'name': 'Zomawia ',
+      'description': 'Aizawl',
+      'directOrIndirect': cDirectAc,
+      'party': cPartyAc,
+      'asset': cNonASSET
+    });
+    await db.insert(masterLedgerTable, {
+      'name': 'Zasiama ',
+      'description': 'Lunglei',
+      'directOrIndirect': cDirectAc,
+      'party': cPartyAc,
+      'asset': cNonASSET
+    });
+    await db.insert(masterLedgerTable, {
+      'name': 'Rotluanga ',
+      'description': 'Thingkawrdeng',
+      'directOrIndirect': cDirectAc,
+      'party': cPartyAc,
+      'asset': cNonASSET
+    });
+
+    //-----------------MockData for Asset Item----------
+    await db.insert(masterLedgerTable, {
+      'name': 'Chair ',
+      'description': 'Chair',
+      'directOrIndirect': cDirectAc,
+      'party': cNotPartyAc,
+      'asset': cASSET
+    });
+    await db.insert(masterLedgerTable, {
+      'name': 'Machinery ',
+      'description': 'Machiner',
+      'directOrIndirect': cDirectAc,
+      'party': cNotPartyAc,
+      'asset': cASSET
+    });
+    /
   }
 }

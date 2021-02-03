@@ -1,9 +1,12 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
+import 'package:account_manager/static/partyMock.constant.dart';
 import 'package:account_manager/static/purchaseType.constant.dart';
+import 'package:account_manager/static/transactionType.constant.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -12,6 +15,8 @@ import '../../../static/constants.dart';
 
 import '../../../static/ledgerId.constants.dart';
 
+import '../../models/ledgermaster.models.dart';
+import '../../models/transaction.model.dart';
 import '../../models/transactionType.models.dart';
 
 import '../../../services/transaction/transaction.service.dart';
@@ -32,11 +37,11 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int _transactionTypeId = 0;
   String _transactionTypeName = ''; //user input
   // ignore: unused_field
-  int _debitSideLedgerId; //computed-
+  int _debitSideLedgerId = 0; //computed-
   String _debitSideLedgerName; //computed --
 //computed --
   // ignore: unused_field
-  int _creditSideLedgerId;
+  int _creditSideLedgerId = 0;
   String _creditSideLedgerName; //--computer
   // ignore: unused_field
   int _purchaseType;
@@ -71,96 +76,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           asset: cASSET),
     );
   }
-
-  // void setData() async {
-  //   var _transactionTypeResult = await _transactionTypeService.getList(id: 1);
-
-  //   if (_transactionTypeResult == null) {
-  //     print('Transaction Type access fail');
-  //   } else
-  //     print(_transactionTypeResult.toString());
-  //   TransactionType _transationType = _transactionTypeResult[0];
-  //   String _transactionTypeName = _transationType.name;
-  //   print('Transaction Type name $_transactionTypeName');
-
-  //   // ----IF asset is bought it will go to debitsite
-  //   if (_assetLedger != null) {
-  //     _debitSideLedgerId = _assetLedger;
-  //     if (_partyId != null && _baType == cCredit) {
-  //       _creditSideLedgerId = _partyId;
-  //       LedgerMaster ledgerMaster =
-  //           await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
-  //       _creditSideLedgerName = ledgerMaster.name;
-  //       notifyListeners();
-  //     } else if (_partyId != null && _baType == cPartialBA) {
-  //       if (_cashOrBank == CASH) {
-  //         _creditSideLedgerId = _transationType.creditSideLedger;
-  //         LedgerMaster ledgerMaster =
-  //             await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
-  //         _creditSideLedgerName = ledgerMaster.name;
-  //         notifyListeners();
-  //       }
-  //     }
-  //   } else if (_assetLedger == null) {
-  //     print('Not an asset');
-  //     _debitSideLedgerId = _transationType.debitSideLedger;
-  //     LedgerMaster ledgerMaster =
-  //         await _ledgerMasterService.getLedgerMaster(_debitSideLedgerId);
-  //     String _ledgerMasterName = ledgerMaster.name;
-  //     print('Debit Side LedgerName $_ledgerMasterName');
-  //     _debitSideLedgerName = ledgerMaster.name;
-  //     if (_partyId != null && _baType == cCredit) {
-  //       // Ba full a nih chuan
-  //       // creditside ah partyLedger
-  //       print('Party is not Null and Ba type is full');
-  //       _creditSideLedgerId = _partyId;
-  //       LedgerMaster ledgerMaster =
-  //           await _ledgerMasterService.getLedgerMaster(_creditSideLedgerId);
-  //       _creditSideLedgerName = ledgerMaster.name;
-  //       notifyListeners();
-  //     } else if (_partyId != null && _baType == cPartialBA) {
-  //       // Partial Ba ah
-  //       // Credit Side ah Bank or Cash
-  //       print('Party is not Null and Ba type is partial');
-  //       if (_cashOrBank == CASH) {
-  //         print(
-  //             'Party is not Null and Ba type is partial, transaction is Cash');
-  //         _creditSideLedgerId = _transationType.creditSideLedger;
-  //         LedgerMaster ledgerMaster =
-  //             await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
-  //         _creditSideLedgerName = ledgerMaster.name;
-  //         notifyListeners();
-  //       } else if (_cashOrBank == BANK) {
-  //         print(
-  //             'Party is not Null and Ba type is partial, transaction is Bank');
-  //         _creditSideLedgerId = _transationType.creditSideLedger;
-  //         LedgerMaster ledgerMaster =
-  //             await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
-  //         _creditSideLedgerName = ledgerMaster.name;
-  //         notifyListeners();
-  //       }
-  //     } else {
-  //       if (_cashOrBank == CASH) {
-  //         print('Asset Nilo, Ba lo leh Cash  a thil lei');
-  //         _creditSideLedgerId = _transationType.creditSideLedger;
-  //         LedgerMaster ledgerMaster =
-  //             await _ledgerMasterService.getLedgerMaster(LedgerID.CASHAC);
-  //         _creditSideLedgerName = ledgerMaster.name;
-  //         notifyListeners();
-  //       } else if (_cashOrBank == BANK) {
-  //         print('Asset Nilo, Ba lo leh Bank  a thil lei');
-  //         _creditSideLedgerId = _transationType.creditSideLedger;
-  //         LedgerMaster ledgerMaster =
-  //             await _ledgerMasterService.getLedgerMaster(LedgerID.BANK);
-  //         _creditSideLedgerName = ledgerMaster.name;
-  //         notifyListeners();
-  //       }
-  //     }
-  //     printData();
-  //   }
-
-  //   notifyListeners();
-  // }
 
   void setPurchaseType() async {
     if (_assetLedger != null) {
@@ -380,6 +295,37 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   String getDebitSideLedgerName() => _debitSideLedgerName;
   String getCreditSideLedgerName() => _creditSideLedgerName;
 
-  //-------Transaction Type--------
+  //-----Mock----The Business Model--
 
+  // Transaction _purchasemock1 = Transaction(
+  //   amount:
+  //   particular:
+  //   isCredit:
+  //   cashOrBank:
+  //   date:
+  //   creditType:
+  //   partyId:
+  //   partyName:
+  //   assetLedger:
+  //   transactionTypeId:
+  //   transactionTypeName:
+  //   debitSideLedgerId:
+  //   debitSideLedgerName:
+  //   creditSideLedgerId:
+  //   creditSideLedgerName:
+  // );
+  // To Test Type -1 Purchase Transaction
+  Transaction _purchasemock1 = Transaction(
+    amount: 10000,
+    particular: 'Chair Leina',
+    isCredit: cCredit,
+    cashOrBank: BANK,
+    date: DateTime.now(),
+    creditType: cCredit,
+    partyId: PartyMockConstant.AlexTelles,
+    partyName: 'Alex Telles',
+    assetLedger: AssetMockData.chair,
+    transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    transactionTypeName: 'Purchase of Asset',
+  );
 }
