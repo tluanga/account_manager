@@ -133,6 +133,13 @@ class _LedgerState extends State<Ledger> {
                               child: Column(
                                 children: [
                                   Row(
+                                    children: [
+                                      Text(
+                                        model.debit.toString(),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [

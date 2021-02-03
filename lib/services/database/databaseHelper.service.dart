@@ -570,9 +570,8 @@ class DatabaseHelper {
       'asset': cNonASSET
     });
 
-
     // -----------Mock Data----------
-    // 7)LedgerTransaction
+    // 52)LedgerTransaction
     await db.insert(ledgerTransactionTable, {
       'ledgerId': 1,
       'date': 1611744439,
@@ -581,6 +580,7 @@ class DatabaseHelper {
       'debitOrCredit': 1,
       'cashOrBank': 1,
     });
+    //53
     await db.insert(ledgerTransactionTable, {
       'ledgerId': 1,
       'date': 1611744450,
@@ -592,6 +592,7 @@ class DatabaseHelper {
 
     //--------Special Transaction Type--------------
     // 1---Purchase of Material for Resell or for Production
+    //54
     await db.insert(transactionTypeTable, {
       'name': 'Purchase of Material',
       'description': 'Purchase of Material for Resell or for Production',
@@ -600,7 +601,7 @@ class DatabaseHelper {
       'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
-    //2
+    //55
     await db.insert(transactionTypeTable, {
       'name': 'Purchase of Assets',
       'description':
@@ -610,7 +611,7 @@ class DatabaseHelper {
       'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
-    //3
+    //56
     await db.insert(transactionTypeTable, {
       'name': 'Sale of Goods',
       'description': 'Sales of Goods which are not manufactured',
@@ -619,7 +620,7 @@ class DatabaseHelper {
       'creditSideLedger': 2,
       'partyLedger': 0,
     });
-    //4
+    //57
     await db.insert(transactionTypeTable, {
       'name': 'Wages',
       'description': 'Hnathawkte hlawh',
@@ -628,7 +629,7 @@ class DatabaseHelper {
       'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
-    //5
+    //58
     await db.insert(transactionTypeTable, {
       'name': 'Carriage expenses',
       'description': 'Bungraw phur kualnaa sum hman',
@@ -637,7 +638,7 @@ class DatabaseHelper {
       'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
-    //6
+    //59
     await db.insert(transactionTypeTable, {
       'name': 'Manufacturing expenses',
       'description': 'bungraw lakkhawmna',
@@ -646,7 +647,7 @@ class DatabaseHelper {
       'creditSideLedger': LedgerID.CASHAC,
       'partyLedger': 0,
     });
-    //7
+    //60
     await db.insert(transactionTypeTable, {
       'name': 'Packing expenses',
       'description': 'bungraw pack na',
@@ -862,11 +863,13 @@ class DatabaseHelper {
       'description': 'Bungraw hralhchhawnna atanga hlawkna',
       'sumChetVelDanType': 2,
       'debitSideLedger': LedgerID.CASHAC,
-      'creditSideLedger': 2, // profit on sale of asset ledger siam a ngai a ngem??
+      'creditSideLedger':
+          2, // profit on sale of asset ledger siam a ngai a ngem??
       'partyLedger': 0,
     });
 
     //--------Mock Data -- LedgerMaster Party-------------------
+    //31
     await db.insert(masterLedgerTable, {
       'name': 'Alex Telles',
       'description': 'Aizawl',
@@ -874,6 +877,7 @@ class DatabaseHelper {
       'party': cPartyAc,
       'asset': cNonASSET
     });
+    //32
     await db.insert(masterLedgerTable, {
       'name': 'William Defoe',
       'description': 'Kan Hmun',
@@ -881,6 +885,7 @@ class DatabaseHelper {
       'party': cPartyAc,
       'asset': cNonASSET
     });
+    //33
     await db.insert(masterLedgerTable, {
       'name': 'Rema ',
       'description': 'Zohmun',
@@ -888,6 +893,7 @@ class DatabaseHelper {
       'party': cPartyAc,
       'asset': cNonASSET
     });
+    //34
     await db.insert(masterLedgerTable, {
       'name': 'Zomawia ',
       'description': 'Aizawl',
@@ -895,6 +901,7 @@ class DatabaseHelper {
       'party': cPartyAc,
       'asset': cNonASSET
     });
+    //35
     await db.insert(masterLedgerTable, {
       'name': 'Zasiama ',
       'description': 'Lunglei',
@@ -902,6 +909,7 @@ class DatabaseHelper {
       'party': cPartyAc,
       'asset': cNonASSET
     });
+    //36
     await db.insert(masterLedgerTable, {
       'name': 'Rotluanga ',
       'description': 'Thingkawrdeng',
@@ -911,6 +919,7 @@ class DatabaseHelper {
     });
 
     //-----------------MockData for Asset Item----------
+    //37
     await db.insert(masterLedgerTable, {
       'name': 'Chair ',
       'description': 'Chair',
@@ -918,6 +927,7 @@ class DatabaseHelper {
       'party': cNotPartyAc,
       'asset': cASSET
     });
+    //38
     await db.insert(masterLedgerTable, {
       'name': 'Machinery ',
       'description': 'Machiner',

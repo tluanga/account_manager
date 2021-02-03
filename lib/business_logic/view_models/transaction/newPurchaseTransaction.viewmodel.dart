@@ -218,13 +218,15 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _creditSideLedgerId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
