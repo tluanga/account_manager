@@ -608,43 +608,33 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   //   creditSideLedgerName:
   // );
   // To Test Type -1 Purchase Transaction
-  Transaction _purchasemock1 = Transaction(
-    amount: 10000,
-    particular: 'Chair Leina',
-    isCredit: cCredit,
-    cashOrBank: BANK,
-    date: DateTime.now(),
-    creditType: cCredit,
-    partyId: PartyMockConstant.AlexTelles,
-    partyName: 'Alex Telles',
-    assetLedger: AssetMockData.chair,
-    transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-    transactionTypeName: 'Purchase of Asset',
-  );
-  void processMockData(
-      amount,
-      particular,
-      isCredit,
-      cashOrBank,
-      date,
-      creditType,
-      partyId,
-      partyName,
-      assetLedger,
-      transactionTypeId,
-      transactionTypeName) {
+
+  void processMockData() {
+    Transaction _purchasemock1 = Transaction(
+      amount: 10000,
+      particular: 'Chair Leina',
+      isCredit: cCredit,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: cCredit,
+      partyId: PartyMockConstant.AlexTelles,
+      partyName: 'Alex Telles',
+      assetLedger: AssetMockData.chair,
+      transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+      transactionTypeName: 'Purchase of Asset',
+    );
     //--copy parameter to variable
-    _amount = amount;
-    _particular = particular;
-    _isCredit = isCredit;
-    _cashOrBank = cashOrBank;
-    _date = date;
-    _creditType = creditType;
-    _partyId = partyId;
-    _partyName = partyName;
-    _assetLedger = assetLedger;
-    _transactionTypeId = transactionTypeId;
-    _transactionTypeName = transactionTypeName;
+    _amount = _purchasemock1.amount;
+    _particular = _purchasemock1.particular;
+    _isCredit = _purchasemock1.isCredit;
+    _cashOrBank = _purchasemock1.cashOrBank;
+    _date = _purchasemock1.date;
+    _creditType = _purchasemock1.creditType;
+    _partyId = _purchasemock1.partyId;
+    _partyName = _purchasemock1.partyName;
+    _assetLedger = _purchasemock1.assetLedger;
+    _transactionTypeId = _purchasemock1.transactionTypeId;
+    _transactionTypeName = _purchasemock1.transactionTypeName;
     setPurchaseType();
     saveData();
   }
