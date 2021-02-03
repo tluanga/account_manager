@@ -161,20 +161,52 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                         }
 
                         return Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                  model.trialBalanceElements[index].ledgerName),
-                              Text(
-                                _debitValue,
-                                style: TextStyle(color: _colorDebit),
-                              ),
-                              Text(
-                                _creditValue,
-                                style: TextStyle(color: _colorCredit),
-                              )
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  // color: Colors.blue,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      model.trialBalanceElements[index]
+                                          .ledgerName,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  // color: Colors.green,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: Center(
+                                    child: Text(
+                                      _debitValue,
+                                      style: TextStyle(color: _colorDebit),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  // color: Colors.red,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      _creditValue,
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(color: _colorCredit),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },

@@ -2,6 +2,7 @@ import 'package:account_manager/business_logic/view_models/books/ledger/ledger.v
 import 'package:account_manager/business_logic/view_models/books/tradingAccount/tradingAccount.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -112,7 +113,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewSaleTransactionViewModel(),
         ),
-
+        ChangeNotifierProvider(
+          create: (context) => LedgerMainDashboardViewModel(),
+        ),
         // ChangeNotifierProvider(
         //   create: (context) => TransactionDashboardViewModel(),
         // ),
@@ -204,7 +207,6 @@ class _BottomNavigationBarMainState extends State<BottomNavigationBarMain> {
     DashBoard(),
     BooksDashboard(),
     TransactionDashboardScreen(),
-    //  LedgerDashboard(),
     AnalyticsDashboardScreen(),
     SettingsDashboard(),
   ];
