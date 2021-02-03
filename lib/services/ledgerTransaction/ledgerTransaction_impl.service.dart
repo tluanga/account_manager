@@ -70,6 +70,7 @@ class LedgerTransactionImpl implements LedgerTransactionService {
     print(_ledgerTransaction.first.amount.toString());
     print(_ledgerTransaction.first.cashOrBank.toString());
     print(_ledgerTransaction.first.debitOrCredit.toString());
+
     print(_result.first.toString());
 
     return result;
