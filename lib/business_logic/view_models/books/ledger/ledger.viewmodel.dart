@@ -4,6 +4,8 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/foundation.dart';
 
 class LedgerViewModel extends ChangeNotifier {
+  int debit;
+  int credit;
   List<LedgerTransaction> ledgerTransactionList = [];
   String name = '';
 

@@ -25,7 +25,7 @@ import '../../../services/transaction/transaction.service.dart';
 
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 
-class NewPurchaseTransactionViewModel extends ChangeNotifier {
+class NewSaleTransactionViewModel extends ChangeNotifier {
   int _amount;
   String _particular; //--user input
   int _isCredit = cCashDown; //user input

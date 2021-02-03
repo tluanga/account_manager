@@ -51,10 +51,27 @@ class LedgerTransactionImpl implements LedgerTransactionService {
   }
 
   Future<int> insert(LedgerTransaction ledgerTransaction) async {
+    int ledgerId = ledgerTransaction.ledgerId;
+    print('Before inserting Data the ledgerId is :$ledgerId');
     Database db = await DatabaseHelper.instance.db;
 
     final int result =
         await db.insert('ledgerTranction_table', ledgerTransaction.toMap());
+
+    // --Get the ledger Transaction Resultt---
+    List<LedgerTransaction> _ledgerTransaction = await getList(id: result);
+    int ledgerID = _ledgerTransaction.first.ledgerId;
+    final List<Map<String, dynamic>> _result = await db.rawQuery('''
+      SELECT * FROM masterLedger_table
+      WHERE id=$ledgerID    
+      ''');
+    print('--------Ledger Transation Created-----------');
+    print(_ledgerTransaction.first.id.toString());
+    print(_ledgerTransaction.first.amount.toString());
+    print(_ledgerTransaction.first.cashOrBank.toString());
+    print(_ledgerTransaction.first.debitOrCredit.toString());
+    print(_result.first.toString());
+
     return result;
   }
 

@@ -80,89 +80,46 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
 
   void setPurchaseType() async {
     if (_assetLedger != null) {
-      //Transaction type is asset
-      _debitSideLedgerId = _assetLedger;
-      if (_isCredit == cCredit) {
-        //Transaction is Ba
-        if (_creditType == cCredit) {
-          print('assetBa Full = 3');
+      if (_isCredit == cCashDown) {
+        if (_cashOrBank == BANK) {
+          print('1) Asset-CashDown-Bank');
+          _purchaseType = PurchaseType.assetCashDownBank;
+        } else if (_cashOrBank == BANK) {
+          print('2) Asset-CashDown-Cash');
+          _purchaseType = PurchaseType.assetCashDownCash;
+        }
+      } else if (_isCredit == cCredit) {
+        if (_creditType != cPartialCredit) {
+          print('3) Asset-Credit');
           _purchaseType = PurchaseType.assetDebt;
-          _debitSideLedgerId = _assetLedger;
-          _creditSideLedgerId = _partyId;
-        } else {
-          if (_cashOrBank == CASH) {
-            print('assetBaCashPartial = 4');
-            _purchaseType = PurchaseType.assetDebtCashPartial;
-            _debitSideLedgerId = _assetLedger;
-            _creditSideLedgerId = LedgerID.CASHAC;
-          } else if (_cashOrBank == BANK) {
-            print('assetBaBankPartial = 5');
-            _purchaseType = PurchaseType.assetDebtBankPartial;
-            _debitSideLedgerId = _assetLedger;
-            _creditSideLedgerId = LedgerID.CASHAC;
-          }
+        } else if (_cashOrBank == CASH) {
+          print('4) Asset-Credit-Partial-Cash');
+          _purchaseType = PurchaseType.assetDebtPartialCash;
+        } else if (_cashOrBank == BANK) {
+          print('5) Asset-Credit-Partial-Bank');
+          _purchaseType = PurchaseType.assetDebtPartialBank;
         }
       }
-      if (_isCredit == cCashDown) {
-        //transaction Type is Balo
-        if (_cashOrBank == CASH) {
-          //Transaction Type is Cash
-          print('assetBaloCash = 2');
-          _purchaseType = PurchaseType.assetCashDownCash;
-          _debitSideLedgerId = _assetLedger;
-          _creditSideLedgerId = LedgerID.CASHAC;
-        } else if (_cashOrBank == BANK) {
-          //Transaction Type is Bank
-          print('assetBaloBank = 1');
-          _purchaseType = PurchaseType.assetCashDownBank;
-          _debitSideLedgerId = _assetLedger;
-          _creditSideLedgerId = LedgerID.BANK;
-        }
-      } else {
-        _debitSideLedgerId = LedgerID.PURCHASEAC;
-        if (_isCredit == cCredit) {
-          //Transaction is Ba
-          if (_creditType == cCredit) {
-            print('nonAssetDebt = 8');
-            _purchaseType = PurchaseType.nonAssetDebt;
-            _debitSideLedgerId = LedgerID.PURCHASEAC;
-            _creditSideLedgerId = _partyId;
-          } else {
-            if (_cashOrBank == CASH) {
-              print('nonAssetDebtCashPartial = 9');
-              _purchaseType = PurchaseType.nonAssetDebtCashPartial;
-              _debitSideLedgerId = LedgerID.PURCHASEAC;
-              _creditSideLedgerId = LedgerID.CASHAC;
-            } else if (_cashOrBank == BANK) {
-              print('nonAssetDebtBankPartial = 10');
-              _purchaseType = PurchaseType.nonAssetDebtBankPartial;
-              _debitSideLedgerId = LedgerID.PURCHASEAC;
-              _creditSideLedgerId = LedgerID.BANK;
-            }
-          }
-        }
-        if (_isCredit == cCashDown) {
-          //transaction Type is Balo
-          if (_cashOrBank == CASH) {
-            //Transaction Type is Cash
-            print('nonAssetBaloCash = 7');
-            _purchaseType = PurchaseType.nonAssetCashDownCash;
-            _debitSideLedgerId = LedgerID.PURCHASEAC;
-            _creditSideLedgerId = LedgerID.CASHAC;
-          } else if (_cashOrBank == BANK) {
-            //Transaction Type is Bank
-            print('nonAssetBaloBank = 6');
-            _purchaseType = PurchaseType.nonAssetCashDownBank;
-            _debitSideLedgerId = LedgerID.PURCHASEAC;
-            _creditSideLedgerId = LedgerID.BANK;
-          }
-        }
+    } else if (_isCredit == cCashDown) {
+      if (_cashOrBank == CASH) {
+        print('6) Non-Asset-CashDown');
+        _purchaseType = PurchaseType.nonAssetCashDownBank;
+      } else if (_cashOrBank == BANK) {
+        print('7) Non-Asset-Cashdown-Cash-');
+        _purchaseType = PurchaseType.nonAssetCashDownCash;
+      }
+    } else if (_isCredit == cCredit) {
+      if (_creditType != cPartialCredit) {
+        print('8) Non-Asset-Credit-');
+        _purchaseType = PurchaseType.nonAssetDebt;
+      } else if (_cashOrBank == CASH) {
+        print('9) Non-Asset-Credit-Cash Partial');
+        _purchaseType = PurchaseType.nonAssetDebtCashPartial;
+      } else if (_cashOrBank == BANK) {
+        print('10) Non-Asset-Ba-Bank Partial');
+        _purchaseType = PurchaseType.assetDebtPartialBank;
       }
     }
-    _debitSideLedgerName =
-        await _ledgerMasterService.getLedgerMasterName(_debitSideLedgerId);
-    _creditSideLedgerName =
-        await _ledgerMasterService.getLedgerMasterName(_creditSideLedgerId);
   }
 
   void saveData() {
@@ -185,11 +142,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     switch (_purchaseType) {
       case PurchaseType.assetCashDownBank:
         {
-          // --process debit side
           print('type-1:assetCashDownBank');
+          // --process debit side
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.BANK;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -198,23 +157,27 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: LedgerID.BANK,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _creditSideLedgerId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+            ),
           );
         }
         break;
       case PurchaseType.assetCashDownCash:
         {
-          print('type-2:assetCashDownCash');
+          print('2) Asset-CashDown-Bank');
           // --process debit side
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.CASHAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -224,7 +187,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
+            ledgerId: _creditSideLedgerId,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -236,10 +199,17 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.assetDebt:
         // ---Type 3----
         {
-          print('type-3:assetDebt');
+          print('3)Save Data- Asset-Credit--');
+          // --process debit side
+
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = _partyId;
+          print('---Before Saving data----');
+          print('_debitSideLedgerId:$_debitSideLedgerId');
+          print('_creditSideLedgerId:$_creditSideLedgerId');
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: _assetLedger,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -249,7 +219,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: _partyId,
+            ledgerId: _creditSideLedgerId,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -258,7 +228,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
         }
         break;
-      case PurchaseType.assetDebtCashPartial:
+      case PurchaseType.assetDebtPartialCash:
         // ---Type 4----
         {
           print('type-4:assetDebtCashPartial');
@@ -292,7 +262,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
         }
         break;
-      case PurchaseType.assetDebtBankPartial:
+      case PurchaseType.assetDebtPartialBank:
         // ---Type 5----
         {
           print('type-5:assetDebtBankPartial');
@@ -329,11 +299,12 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.nonAssetCashDownBank:
         {
           print('type-6:nonAssetCashDownBank');
-          //-----6-----------
           // --process debit side
+          _debitSideLedgerId = LedgerID.PURCHASEAC;
+          _creditSideLedgerId = LedgerID.BANK;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -343,7 +314,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: LedgerID.BANK,
+            ledgerId: _creditSideLedgerId,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -354,12 +325,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         break;
       case PurchaseType.nonAssetCashDownCash:
         {
-          //----------7-------------
-          print('type-7:nonAssetCashDownCash');
+          print('type-7) Non-Asset-Cashdown-Cash-');
           // --process debit side
+          _debitSideLedgerId = LedgerID.PURCHASEAC;
+          _creditSideLedgerId = LedgerID.CASHAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -369,7 +341,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: LedgerID.CASHAC,
+            ledgerId: _creditSideLedgerId,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -381,10 +353,12 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       case PurchaseType.nonAssetDebt:
         // ---Type 8----
         {
-          print('type-8:nonAssetDebt');
+          print('type-8:Non-Asset-Credit-');
+          _debitSideLedgerId = LedgerID.PURCHASEAC;
+          _creditSideLedgerId = _partyId;
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: LedgerID.PURCHASEAC,
+              ledgerId: _debitSideLedgerId,
               amount: _amount,
               particular: _particular,
               date: _date,
@@ -394,7 +368,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           );
           //process credit Side
           LedgerTransaction(
-            ledgerId: _partyId,
+            ledgerId: _creditSideLedgerId,
             amount: _amount,
             particular: _particular,
             date: _date,
@@ -623,170 +597,170 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     List<Transaction> _purchaseMockData = [];
     //--copy parameter to variable
     //---Purchase Transaction Type -1
-    _purchaseMockData.add(Transaction(
-      amount: 10000,
-      particular: 'Chair Leina',
-      isCredit: cCredit,
-      cashOrBank: BANK,
-      date: DateTime.now(),
-      creditType: cCredit,
-      partyId: PartyMockConstant.AlexTelles,
-      partyName: 'Alex Telles',
-      assetLedger: AssetMockData.chair,
-      transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-      transactionTypeName: 'Purchase of Asset',
-    ));
+    // _purchaseMockData.add(Transaction(
+    //   amount: 10000,
+    //   particular: 'Chair Leina',
+    //   isCredit: cCashDown,
+    //   cashOrBank: BANK,
+    //   date: DateTime.now(),
+    //   creditType: cCredit,
+    //   partyId: PartyMockConstant.AlexTelles,
+    //   partyName: 'Alex Telles',
+    //   assetLedger: AssetMockData.chair,
+    //   transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //   transactionTypeName: 'Purchase of Asset',
+    // ));
 
-    //--Purchase Transaction Type-2
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // //--Purchase Transaction Type-2
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 20000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: CASH,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.Rema,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
 
     //--Purchase Transaction Type-3
     _purchaseMockData.add(
       Transaction(
-        amount: 10000,
+        amount: 30000,
         particular: 'Chair Leina',
         isCredit: cCredit,
-        cashOrBank: BANK,
+        cashOrBank: NONE,
         date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
+        creditType: NONE,
+        partyId: PartyMockConstant.Rotluanga,
+        partyName: 'Rotluanga',
         assetLedger: AssetMockData.chair,
         transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
         transactionTypeName: 'Purchase of Asset',
       ),
     );
 
-    //--Purchase Transaction Type-4
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
-    //--Purchase Transaction Type-5
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // //--Purchase Transaction Type-4
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
+    // //--Purchase Transaction Type-5
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
 
-    //--Purchase Transaction Type-6
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // //--Purchase Transaction Type-6
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
 
-    //--Purchase Transaction Type-7
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // //--Purchase Transaction Type-7
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
 
-    //--Purchase Transaction Type-8
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
-    //--Purchase Transaction Type-9
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // //--Purchase Transaction Type-8
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
+    // //--Purchase Transaction Type-9
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
 
-    //--Purchase Transaction Type-10
-    _purchaseMockData.add(
-      Transaction(
-        amount: 10000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: BANK,
-        date: DateTime.now(),
-        creditType: cCredit,
-        partyId: PartyMockConstant.AlexTelles,
-        partyName: 'Alex Telles',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // //--Purchase Transaction Type-10
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 10000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: cCredit,
+    //     partyId: PartyMockConstant.AlexTelles,
+    //     partyName: 'Alex Telles',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
     for (int i = 0; i < _purchaseMockData.length; i++) {
       _amount = _purchaseMockData[i].amount;
       _particular = _purchaseMockData[i].particular;

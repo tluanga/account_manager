@@ -1,6 +1,7 @@
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/transaction/debtSettlementDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newSaleTransaction/newSaleTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/testTransaction/testTransaction.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -185,6 +186,35 @@ class TransactionDashboardScreen extends StatelessWidget {
                           color: HexColor(TEXTCOLOR),
                           fontWeight: FontWeight.bold)),
                 )),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TestTransactionScreen()),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  width: width,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: cprimaryColor,
+                    border: Border.all(
+                      color: HexColor(SECONDARYGREYCOLOR),
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text('Test Transaction',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: HexColor(TEXTCOLOR),
+                            fontWeight: FontWeight.bold)),
+                  )),
+            ),
           ),
         ],
       ),

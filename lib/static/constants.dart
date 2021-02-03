@@ -5,29 +5,30 @@ const int NONE = 0;
 const int DEBIT = 1;
 const int CREDIT = 2;
 
-const int CASH = 0;
-const int BANK = 1;
+const int CASH = 3;
+const int BANK = 4;
+//--Credit Or CashDown
+const int cCredit = 5;
+const int cCashDown = 6;
+//----PARTY OR NOT PARTY--
+const int cPartyAc = 7;
+const int cNotPartyAc = 8;
+//----Direct Or Indirect--
+const int cDirectAc = 9;
+const int cIndirectAc = 10;
 
-const int cCredit = 0;
-const int cCashDown = 1;
-
-//---Sum Chet Vel dan
-const int cPurchase = 0;
-const int cHRALH = 1;
-const int cLAKLUH = 2;
-const int cPEKCHHUAH = 3;
-//---------PARTY OR NOT PARTY
-const int cPartyAc = 0;
-const int cNotPartyAc = 1;
-
-const int cDirectAc = 0;
-const int cIndirectAc = 1;
-
-const int cPartialCredit = 0;
+//----Type of Credit
+const int cPartialCredit = 11;
 
 //---------ASSET or NON ASSET-------
-const int cASSET = 0;
-const int cNonASSET = 1;
+const int cASSET = 12;
+const int cNonASSET = 13;
+
+//---Sum Chet Vel dan
+const int cPurchase = 100;
+const int cHRALH = 101;
+const int cLAKLUH = 102;
+const int cPEKCHHUAH = 103;
 
 const String PRIMARYCOLOR = '#FBAF02';
 const String TEXTCOLOR = '#080040';
