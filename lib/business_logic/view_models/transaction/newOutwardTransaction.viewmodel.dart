@@ -258,42 +258,42 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
   String getDebitSideLedgerName() => _debitSideLedgerName;
   String getCreditSideLedgerName() => _creditSideLedgerName;
 
-  void processMockData() {
-    List<Transaction> _outwardMockData = [];
-    //--Purchase Transaction Type-3
-    _outwardMockData.add(
-      Transaction(
-        amount: 30000,
-        particular: 'Chair Leina',
-        isCredit: NONE,
-        cashOrBank: CASH,
-        date: DateTime.now(),
-        creditType: NONE,
-        partyId: PartyMockConstant.Rotluanga,
-        partyName: 'Rotluanga',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: LedgerID.WAGES,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+  // void processMockData() {
+  //   List<Transaction> _outwardMockData = [];
+  //   //--Purchase Transaction Type-3
+  //   _outwardMockData.add(
+  //     Transaction(
+  //       amount: 30000,
+  //       particular: 'Chair Leina',
+  //       isCredit: NONE,
+  //       cashOrBank: CASH,
+  //       date: DateTime.now(),
+  //       creditType: NONE,
+  //       partyId: PartyMockConstant.Rotluanga,
+  //       partyName: 'Rotluanga',
+  //       assetLedger: AssetMockData.chair,
+  //       transactionTypeId: LedgerID.WAGES,
+  //       transactionTypeName: 'Purchase of Asset',
+  //     ),
+  //   );
 
-    for (int i = 0; i < _outwardMockData.length; i++) {
-      String id = _outwardMockData[i].cashOrBank.toString();
-      print('The id of outward cash is $id');
-      _amount = _outwardMockData[i].amount;
-      _particular = _outwardMockData[i].particular;
-      _isCredit = _outwardMockData[i].isCredit;
-      _cashOrBank = _outwardMockData[i].cashOrBank;
-      _date = _outwardMockData[i].date;
-      _creditType = _outwardMockData[i].creditType;
-      _partyId = _outwardMockData[i].partyId;
-      _partyName = _outwardMockData[i].partyName;
-      _assetLedger = _outwardMockData[i].assetLedger;
-      _transactionTypeId = _outwardMockData[i].transactionTypeId;
-      _transactionTypeName = _outwardMockData[i].transactionTypeName;
+  //   for (int i = 0; i < _outwardMockData.length; i++) {
+  //     String id = _outwardMockData[i].cashOrBank.toString();
+  //     print('The id of outward cash is $id');
+  //     _amount = _outwardMockData[i].amount;
+  //     _particular = _outwardMockData[i].particular;
+  //     _isCredit = _outwardMockData[i].isCredit;
+  //     _cashOrBank = _outwardMockData[i].cashOrBank;
+  //     _date = _outwardMockData[i].date;
+  //     _creditType = _outwardMockData[i].creditType;
+  //     _partyId = _outwardMockData[i].partyId;
+  //     _partyName = _outwardMockData[i].partyName;
+  //     _assetLedger = _outwardMockData[i].assetLedger;
+  //     _transactionTypeId = _outwardMockData[i].transactionTypeId;
+  //     _transactionTypeName = _outwardMockData[i].transactionTypeName;
 
-      setOutwardType();
-      saveData();
-    }
-  }
+  //     setOutwardType();
+  //     saveData();
+  //   }
+  // }
 }

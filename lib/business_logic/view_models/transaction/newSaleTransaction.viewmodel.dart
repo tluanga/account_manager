@@ -1,11 +1,9 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
-import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:account_manager/static/partyMock.constant.dart';
-import 'package:account_manager/static/purchaseType.constant.dart';
 import 'package:account_manager/static/saleType.constant.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 
@@ -79,7 +77,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
     );
   }
 
-  void setPurchaseType() async {
+  void setSaleType() async {
     if (_isCredit == cCashDown) {
       if (_cashOrBank == BANK) {
         //type -1 --saleCashDownBank
@@ -100,7 +98,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
         _salesType = SaleType.saleBaPartialBank;
       } else if (_cashOrBank == CASH) {
         //Type 5 Sales Partial BA - CASH
-        _salesType = SaleType.assetBaPartialCash;
+        _salesType = SaleType.saleBaPartialCash;
       }
     }
   }
@@ -244,10 +242,10 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
           );
         }
         break;
-      case SaleType.assetBaPartialCash:
+      case SaleType.saleBaPartialCash:
         // ---Type 5----
         {
-          print('type-5:assetBaPartialCash');
+          print('type-5:saleBaPartialCash');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.CASHAC,
@@ -407,7 +405,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
 
   //-----Mock----The Business Model--
 
-  // Transaction _purchasemock1 = Transaction(
+  // Transaction _saleMockData = Transaction(
   //   amount:
   //   particular:
   //   isCredit:
@@ -425,34 +423,51 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   //   creditSideLedgerName:
   // );
   // To Test Type -1 Purchase Transaction
-
+  // Sale test type 1 Sale without debt
+  // void processMockData() {
+  //   List<Transaction> _saleMockData = [];
+  //   _saleMockData.add(Transaction(
+  //     amount: 10000,
+  //     particular: 'Sale of Goods',
+  //     isCredit: cCashDown,
+  //     cashOrBank: CASH,
+  //     date: DateTime.now(),
+  //     creditType: cCredit,
+  //     transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+  //     transactionTypeName: 'Sales of Goods',
+  //   ));
+  // Sale test type 2 Sale without debt
   void processMockData() {
-    Transaction _purchasemock1 = Transaction(
-      amount: 10000,
-      particular: 'Chair Leina',
+    List<Transaction> _saleMockData = [];
+    _saleMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Sale of Goods full debt',
       isCredit: cCredit,
-      cashOrBank: BANK,
+      cashOrBank: CASH,
       date: DateTime.now(),
-      creditType: cCredit,
+      creditType: cPartialCredit,
       partyId: PartyMockConstant.AlexTelles,
-      partyName: 'Alex Telles',
-      assetLedger: AssetMockData.chair,
-      transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-      transactionTypeName: 'Purchase of Asset',
-    );
+      partyName: "Alex Telles",
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+      transactionTypeName: 'Sales of Goods',
+    ));
     //--copy parameter to variable
-    _amount = _purchasemock1.amount;
-    _particular = _purchasemock1.particular;
-    _isCredit = _purchasemock1.isCredit;
-    _cashOrBank = _purchasemock1.cashOrBank;
-    _date = _purchasemock1.date;
-    _creditType = _purchasemock1.creditType;
-    _partyId = _purchasemock1.partyId;
-    _partyName = _purchasemock1.partyName;
-    _assetLedger = _purchasemock1.assetLedger;
-    _transactionTypeId = _purchasemock1.transactionTypeId;
-    _transactionTypeName = _purchasemock1.transactionTypeName;
-    setPurchaseType();
-    saveData();
+    for (int i = 0; i < _saleMockData.length; i++) {
+      _amount = _saleMockData[i].amount;
+      _particular = _saleMockData[i].particular;
+      _isCredit = _saleMockData[i].isCredit;
+      _cashOrBank = _saleMockData[i].cashOrBank;
+      _date = _saleMockData[i].date;
+      _creditType = _saleMockData[i].creditType;
+      _partyId = _saleMockData[i].partyId;
+      _partyName = _saleMockData[i].partyName;
+      _assetLedger = _saleMockData[i].assetLedger;
+      _transactionTypeId = _saleMockData[i].transactionTypeId;
+      _transactionTypeName = _saleMockData[i].transactionTypeName;
+      print('inside mock data looop');
+      setSaleType();
+      saveData();
+      printData();
+    }
   }
 }

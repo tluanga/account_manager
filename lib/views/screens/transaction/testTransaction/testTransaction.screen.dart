@@ -1,5 +1,4 @@
-import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -15,7 +14,7 @@ class TestTransactionScreen extends StatelessWidget {
         child: Container(
           child: Column(
             children: [
-              Consumer<NewPurchaseTransactionViewModel>(
+              Consumer<NewSaleTransactionViewModel>(
                 builder: (contex, model, child) {
                   return GestureDetector(
                     onTap: () {
@@ -44,7 +43,7 @@ class TestTransactionScreen extends StatelessWidget {
                   );
                 },
               ),
-              Consumer<NewOutwardTransactionViewModel>(
+              Consumer<NewSaleTransactionViewModel>(
                 builder: (contex, model, child) {
                   return GestureDetector(
                     onTap: () {

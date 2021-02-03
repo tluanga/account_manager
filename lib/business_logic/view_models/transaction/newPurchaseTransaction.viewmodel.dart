@@ -101,10 +101,10 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         }
       }
     } else if (_isCredit == cCashDown) {
-      if (_cashOrBank == CASH) {
+      if (_cashOrBank == BANK) {
         print('6) Non-Asset-CashDown');
         _purchaseType = PurchaseType.nonAssetCashDownBank;
-      } else if (_cashOrBank == BANK) {
+      } else if (_cashOrBank == CASH) {
         print('7) Non-Asset-Cashdown-Cash-');
         _purchaseType = PurchaseType.nonAssetCashDownCash;
       }
@@ -655,71 +655,68 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     // );
 
     //--Purchase Transaction Type-3
-    _purchaseMockData.add(
-      Transaction(
-        amount: 30000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
-        cashOrBank: NONE,
-        date: DateTime.now(),
-        creditType: NONE,
-        partyId: PartyMockConstant.Rotluanga,
-        partyName: 'Rotluanga',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
-      ),
-    );
+    // _purchaseMockData.add(
+    //   Transaction(
+    //     amount: 30000,
+    //     particular: 'Chair Leina',
+    //     isCredit: cCredit,
+    //     cashOrBank: NONE,
+    //     date: DateTime.now(),
+    //     creditType: NONE,
+    //     partyId: PartyMockConstant.Rotluanga,
+    //     partyName: 'Rotluanga',
+    //     assetLedger: AssetMockData.chair,
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+    //     transactionTypeName: 'Purchase of Asset',
+    //   ),
+    // );
 
     // //--Purchase Transaction Type-4
     // _purchaseMockData.add(
     //   Transaction(
-    //     amount: 10000,
-    //     particular: 'Chair Leina',
-    //     isCredit: cCredit,
-    //     cashOrBank: BANK,
+    //     amount: 5000,
+    //     particular: 'Eitur Leina',
+    //     isCredit: cCashDown,
+    //     cashOrBank: CASH,
     //     date: DateTime.now(),
     //     creditType: cCredit,
-    //     partyId: PartyMockConstant.AlexTelles,
-    //     partyName: 'Alex Telles',
-    //     assetLedger: AssetMockData.chair,
-    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-    //     transactionTypeName: 'Purchase of Asset',
+    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+    //     transactionTypeName: 'Purchase of Non - Asset',
     //   ),
     // );
     // //--Purchase Transaction Type-5
+    // // debt of non asset non partial
     // _purchaseMockData.add(
     //   Transaction(
     //     amount: 10000,
-    //     particular: 'Chair Leina',
+    //     particular: 'card board bat na',
     //     isCredit: cCredit,
     //     cashOrBank: BANK,
     //     date: DateTime.now(),
     //     creditType: cCredit,
     //     partyId: PartyMockConstant.AlexTelles,
     //     partyName: 'Alex Telles',
-    //     assetLedger: AssetMockData.chair,
     //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-    //     transactionTypeName: 'Purchase of Asset',
+    //     transactionTypeName: 'Purchase of Raw Material',
     //   ),
     // );
 
-    // //--Purchase Transaction Type-6
-    // _purchaseMockData.add(
-    //   Transaction(
-    //     amount: 10000,
-    //     particular: 'Chair Leina',
-    //     isCredit: cCredit,
-    //     cashOrBank: BANK,
-    //     date: DateTime.now(),
-    //     creditType: cCredit,
-    //     partyId: PartyMockConstant.AlexTelles,
-    //     partyName: 'Alex Telles',
-    //     assetLedger: AssetMockData.chair,
-    //     transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-    //     transactionTypeName: 'Purchase of Asset',
-    //   ),
-    // );
+    //--Purchase Transaction Type-6
+    _purchaseMockData.add(
+      Transaction(
+        amount: 3500,
+        particular: 'Thil Hralh leh tur 7000 ah 3500 kan pe',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cPartialCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.machinery,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of Raw Material',
+      ),
+    );
 
     // //--Purchase Transaction Type-7
     // _purchaseMockData.add(
@@ -799,6 +796,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       _assetLedger = _purchaseMockData[i].assetLedger;
       _transactionTypeId = _purchaseMockData[i].transactionTypeId;
       _transactionTypeName = _purchaseMockData[i].transactionTypeName;
+      print('inside mock data looop');
+      print(_cashOrBank.toString());
       setPurchaseType();
       saveData();
     }
