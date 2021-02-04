@@ -8,7 +8,6 @@ import 'package:account_manager/views/screens/transaction/newPurchaseTransaction
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -51,6 +50,13 @@ class _NewPurchaseTransactionScreenState
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _newPurchaseTransactionViewModel.loadParty();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer2<NewPurchaseTransactionViewModel,
@@ -60,7 +66,7 @@ class _NewPurchaseTransactionScreenState
           if (transactionTypeSelect.selectedTransactionType != null) {
             labelText = transactionTypeSelect.selectedTransactionType.name;
           }
-          newTransaction.loadParty();
+
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
