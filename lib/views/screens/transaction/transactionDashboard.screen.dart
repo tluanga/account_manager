@@ -22,10 +22,16 @@ class TransactionDashboardScreen extends StatelessWidget {
             height: 24,
           ),
           Container(
+            padding: EdgeInsets.only(bottom: 10),
+            alignment: Alignment.bottomCenter,
+            height: 70,
+            width: MediaQuery.of(context).size.width,
+            color: cprimaryColor,
             child: Text(
               'Transaction Dashboard',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 23,
+                color: HexColor(TEXTCOLOR)
               ),
             ),
           ),

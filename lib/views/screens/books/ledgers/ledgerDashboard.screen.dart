@@ -17,65 +17,68 @@ class LedgerDashboard extends StatelessWidget {
           model.loadData();
           return Stack(
             children: [
-              CustomScrollView(slivers: [
-                SliverAppBar(
-                  automaticallyImplyLeading: false,
-                  floating: false,
-                  pinned: true,
-                  toolbarHeight: 50,
-                  expandedHeight: 120,
-                  backgroundColor: Colors.white,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: Text(
-                      'Ledger Dashboard',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.only(top:24),
+                child: CustomScrollView(slivers: [
+                  SliverAppBar(
+                    automaticallyImplyLeading: false,
+                    floating: false,
+                    pinned: true,
+                    toolbarHeight: 30,
+                    expandedHeight: 120,
+                    backgroundColor: Colors.white,
+                    flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: true,
+                      title: Text(
+                        'Ledger Dashboard',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
-                ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    List.generate(
-                      model.ledgerMasterList.length,
-                      (index) => CustomWidget(
-                        index: index,
-                        ledgerName: model.ledgerMasterList[index].name,
-                        ledgerId: model.ledgerMasterList[index].id,
-                        totalCredit: 0,
-                        totalDebit: 0,
-                      ),
-                    ).toList(),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      List.generate(
+                        model.ledgerMasterList.length,
+                        (index) => CustomWidget(
+                          index: index,
+                          ledgerName: model.ledgerMasterList[index].name,
+                          ledgerId: model.ledgerMasterList[index].id,
+                          totalCredit: 0,
+                          totalDebit: 0,
+                        ),
+                      ).toList(),
+                    ),
                   ),
-                ),
-              ]),
-              Positioned(
-                left: 10,
-                right: 10,
-                height: 46,
-                // width: MediaQuery.of(context).size.width,
-                top: 26,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 5,
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextField(
-                      cursorColor: Colors.white,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          hintText: 'Search',
-                          hintStyle: TextStyle(color: Colors.white))),
-                ),
-              )
+                ]),
+              ),
+              // Positioned(    // include this widget when we can impliment search
+              //   left: 10,
+              //   right: 10,
+              //   height: 46,
+              //   // width: MediaQuery.of(context).size.width,
+              //   top: 26,
+              //   child: Container(
+              //     padding: EdgeInsets.symmetric(
+              //       horizontal: 20,
+              //       vertical: 5,
+              //     ),
+              //     decoration: BoxDecoration(
+              //         color: Colors.grey[400],
+              //         borderRadius: BorderRadius.circular(10)),
+              //     child: TextField(
+              //         cursorColor: Colors.white,
+              //         style: TextStyle(color: Colors.white),
+              //         decoration: InputDecoration(
+              //             enabledBorder: InputBorder.none,
+              //             focusedBorder: InputBorder.none,
+              //             icon: Icon(
+              //               Icons.search,
+              //               color: Colors.white,
+              //             ),
+              //             hintText: 'Search',
+              //             hintStyle: TextStyle(color: Colors.white))),
+              //   ),
+              // )
             ],
           );
         }),

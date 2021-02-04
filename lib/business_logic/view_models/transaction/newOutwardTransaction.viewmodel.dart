@@ -257,24 +257,49 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
   String getDebitSideLedgerName() => _debitSideLedgerName;
   String getCreditSideLedgerName() => _creditSideLedgerName;
 
-  // void processMockData() {
-  //   List<Transaction> _outwardMockData = [];
-  //   //--Purchase Transaction Type-3
-  //   _outwardMockData.add(
-  //     Transaction(
-  //       amount: 30000,
-  //       particular: 'Chair Leina',
-  //       isCredit: NONE,
-  //       cashOrBank: CASH,
-  //       date: DateTime.now(),
-  //       creditType: NONE,
-  //       partyId: PartyMockConstant.Rotluanga,
-  //       partyName: 'Rotluanga',
-  //       assetLedger: AssetMockData.chair,
-  //       transactionTypeId: LedgerID.WAGES,
-  //       transactionTypeName: 'Purchase of Asset',
-  //     ),
-  //   );
+  void processMockData() {
+    List<Transaction> _outwardMockData = [];
+    //--Outward Transaction Type-1 CashDownCash
+    _outwardMockData.add(
+      Transaction(
+        amount: 30000,
+        particular: 'Salaries of Employees',
+        isCredit: cCashDown,
+        cashOrBank: CASH,
+        date: DateTime.now(),
+        creditType: NONE,
+        transactionTypeId: LedgerID.SALARIES,
+        transactionTypeName: 'Salaries of Employees',
+      ),
+    );
+    //--Outward Transaction Type-2 CashDownBank
+    _outwardMockData.add(
+      Transaction(
+        amount: 30000,
+        particular: 'Salaries of Employees',
+        isCredit: cCashDown,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: NONE,
+        transactionTypeId: LedgerID.SALARIES,
+        transactionTypeName: 'Salaries of Employees',
+      ),
+    );
+
+    //--Outward Transaction Type-2 CashDownBank
+    // _outwardMockData.add(
+    //   Transaction(
+    //     amount: 30000,
+    //     particular: 'Salaries of Employees',
+    //     isCredit: cCashDown,
+    //     cashOrBank: BANK,
+    //     date: DateTime.now(),
+    //     creditType: NONE,
+    //     transactionTypeId: LedgerID.SALARIES,
+    //     transactionTypeName: 'Salaries of Employees',
+    //   ),
+    // );
+  }
 
   //   for (int i = 0; i < _outwardMockData.length; i++) {
   //     String id = _outwardMockData[i].cashOrBank.toString();

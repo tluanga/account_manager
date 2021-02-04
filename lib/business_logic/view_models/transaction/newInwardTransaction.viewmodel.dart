@@ -259,38 +259,49 @@ class NewInwardTransactionViewModel extends ChangeNotifier {
   String getCreditSideLedgerName() => _creditSideLedgerName;
 
   void processMockData() {
-    List<Transaction> _outwardMockData = [];
-    //--Purchase Transaction Type-3
-    _outwardMockData.add(
+    List<Transaction> _inwardMockData = [];
+    //inward transaction type 1 cashdown cash
+    _inwardMockData.add(
       Transaction(
-        amount: 30000,
-        particular: 'Chair Leina',
-        isCredit: NONE,
+        amount: 20000,
+        particular: 'Rent paid by tennants',
+        isCredit: cCashDown,
         cashOrBank: CASH,
         date: DateTime.now(),
         creditType: NONE,
-        partyId: PartyMockConstant.Rotluanga,
-        partyName: 'Rotluanga',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: LedgerID.WAGES,
-        transactionTypeName: 'Purchase of Asset',
+        transactionTypeId: LedgerID.RENT,
+        transactionTypeName: 'rent paid by tennants',
       ),
     );
 
-    for (int i = 0; i < _outwardMockData.length; i++) {
-      String id = _outwardMockData[i].cashOrBank.toString();
+    //inward transaction type 2 cashdown bank
+    _inwardMockData.add(
+      Transaction(
+        amount: 20000,
+        particular: 'Rent paid by tennants',
+        isCredit: cCashDown,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: NONE,
+        transactionTypeId: LedgerID.RENT,
+        transactionTypeName: 'rent paid by tennants',
+      ),
+    );
 
-      _amount = _outwardMockData[i].amount;
-      _particular = _outwardMockData[i].particular;
-      _isCredit = _outwardMockData[i].isCredit;
-      _cashOrBank = _outwardMockData[i].cashOrBank;
-      _date = _outwardMockData[i].date;
-      _creditType = _outwardMockData[i].creditType;
-      _partyId = _outwardMockData[i].partyId;
-      _partyName = _outwardMockData[i].partyName;
-      _assetLedger = _outwardMockData[i].assetLedger;
-      _transactionTypeId = _outwardMockData[i].transactionTypeId;
-      _transactionTypeName = _outwardMockData[i].transactionTypeName;
+    for (int i = 0; i < _inwardMockData.length; i++) {
+      String id = _inwardMockData[i].cashOrBank.toString();
+
+      _amount = _inwardMockData[i].amount;
+      _particular = _inwardMockData[i].particular;
+      _isCredit = _inwardMockData[i].isCredit;
+      _cashOrBank = _inwardMockData[i].cashOrBank;
+      _date = _inwardMockData[i].date;
+      _creditType = _inwardMockData[i].creditType;
+      _partyId = _inwardMockData[i].partyId;
+      _partyName = _inwardMockData[i].partyName;
+      _assetLedger = _inwardMockData[i].assetLedger;
+      _transactionTypeId = _inwardMockData[i].transactionTypeId;
+      _transactionTypeName = _inwardMockData[i].transactionTypeName;
 
       setInwardType();
       saveData();

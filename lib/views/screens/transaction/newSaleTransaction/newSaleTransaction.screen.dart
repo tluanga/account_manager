@@ -216,26 +216,24 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: HexColor(PRIMARYCOLOR),
-                          ),
-                          child: Center(
-                            child: FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                'Back',
-                                style: TextStyle(
-                                  color: HexColor(TEXTCOLOR),
-                                  fontSize: 19,
-                                ),
+                      SizedBox(height: 10,),
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: HexColor(PRIMARYCOLOR),
+                        ),
+                        child: Center(
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Back',
+                              style: TextStyle(
+                                color: HexColor(TEXTCOLOR),
+                                fontSize: 19,
                               ),
                             ),
                           ),
