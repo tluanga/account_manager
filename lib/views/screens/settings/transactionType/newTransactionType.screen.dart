@@ -32,20 +32,17 @@ class _AppState extends State<NewTransactionType> {
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-     // print('$_name, $_description, $_sumChetVelDanType, $_selectedDebitSideLedgerId');
+      // print('$_name, $_description, $_sumChetVelDanType, $_selectedDebitSideLedgerId');
 
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-              child: SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Consumer<NewTransactionTypeViewModel>(
             builder: (context, model, child) {
               print(model.ledgerMasterList.length.toString());
@@ -63,7 +60,8 @@ class _AppState extends State<NewTransactionType> {
                         Container(
                           height: 50,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Colors.grey.shade200),
+                          decoration:
+                              BoxDecoration(color: Colors.grey.shade200),
                           child: Container(
                             child: Center(
                               child: Text(
@@ -112,11 +110,11 @@ class _AppState extends State<NewTransactionType> {
                               //     _description = value;
                               //   });
                               // },
-                               validator: (input) => input.trim().isEmpty
-                              ? 'Please enter Description'
-                              : null,
-                            onSaved: (input) => _description = input,
-                            initialValue: _description,
+                              validator: (input) => input.trim().isEmpty
+                                  ? 'Please enter Description'
+                                  : null,
+                              onSaved: (input) => _description = input,
+                              initialValue: _description,
                             ),
                           ),
                         ),
@@ -154,17 +152,7 @@ class _AppState extends State<NewTransactionType> {
                               decoration: InputDecoration(
                                 labelText: 'Sum Chetna',
                                 labelStyle: TextStyle(fontSize: 16.0),
-                                // border: OutlineInputBorder(
-                                //   borderRadius: BorderRadius.circular(10.0),
-                                // ),
                               ),
-                            //                             onSaved: (input) => _sumChetVelDanType = input,
-                            // onChanged: (value) {
-                            //   setState(() {
-                            //     _sumChetVelDanType = value;
-                            //   });
-                            // },
-                            // value: _sumChetVelDanType, 
                             ),
                           ),
                         ),
@@ -179,7 +167,8 @@ class _AppState extends State<NewTransactionType> {
                             //     borderRadius: BorderRadius.circular(20),
                             //     border: Border.all(color: Colors.green[300])),
                             child: debitSideLedgerSelect(
-                                model.getLedgerMasterListForSearchableDropdown(),
+                                model
+                                    .getLedgerMasterListForSearchableDropdown(),
                                 "local"),
                           ),
                         ),
@@ -193,7 +182,10 @@ class _AppState extends State<NewTransactionType> {
                             // decoration: BoxDecoration(
                             //     borderRadius: BorderRadius.circular(20),
                             //     border: Border.all(color: Colors.green[300])),
-                            child: creditSideLedgerSelect(localData, "local"),
+                            child: debitSideLedgerSelect(
+                                model
+                                    .getLedgerMasterListForSearchableDropdown(),
+                                "local"),
                           ),
                         ),
                         GestureDetector(
@@ -217,7 +209,7 @@ class _AppState extends State<NewTransactionType> {
                               child: Center(
                                 child: FlatButton(
                                   onPressed: _submit,
-                                   child: Text(
+                                  child: Text(
                                     'Submit',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -244,25 +236,27 @@ class _AppState extends State<NewTransactionType> {
   Widget debitSideLedgerSelect(List<DropdownMenuItem> listData, mapKey) {
     List<DropdownMenuItem> items = [];
     for (int i = 0; i < listData.length; i++) {
-      items.add(new DropdownMenuItem(
-        child: new Text(
-          listData[i].value,
+      items.add(
+        new DropdownMenuItem(
+          child: new Text(
+            listData[i].value,
+          ),
+          value: listData[i],
         ),
-        value: listData[i],
-      ),);
+      );
     }
-    
+
     var length = listData.length.toString();
     print('Length of the data is:$length');
 
     return new SearchableDropdown(
-                              //       onChanged: (String newValue) {
-                              //   setState(() {
-                              //     dropdownValue = newValue;
-                              //     _sumChetVelDanType =
-                              //         model.formatSumChetdanType(newValue);
-                              //   });
-                              // },
+      //       onChanged: (String newValue) {
+      //   setState(() {
+      //     dropdownValue = newValue;
+      //     _sumChetVelDanType =
+      //         model.formatSumChetdanType(newValue);
+      //   });
+      // },
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: listData,
@@ -294,22 +288,21 @@ class _AppState extends State<NewTransactionType> {
       ));
     }
     return new SearchableDropdown(
-          isExpanded: true,
-          underline: Padding(padding: EdgeInsets.all(5)),
-          items: items,
-          value: selectedCreditSideLedger[mapKey].toString(),
-          isCaseSensitiveSearch: false,
-          hint: new Text('Select Credit side Ledger'),
-          searchHint: new Text(
-            'Select One',
-            style: new TextStyle(fontSize: 20),
-          ),
-          onChanged: (value) {
-            setState(() {
-              selectedCreditSideLedger[mapKey] = value;
-            });
-          },
-        );
-   
+      isExpanded: true,
+      underline: Padding(padding: EdgeInsets.all(5)),
+      items: items,
+      value: selectedCreditSideLedger[mapKey].toString(),
+      isCaseSensitiveSearch: false,
+      hint: new Text('Select Credit side Ledger'),
+      searchHint: new Text(
+        'Select One',
+        style: new TextStyle(fontSize: 20),
+      ),
+      onChanged: (value) {
+        setState(() {
+          selectedCreditSideLedger[mapKey] = value;
+        });
+      },
+    );
   }
 }
