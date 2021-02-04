@@ -16,23 +16,24 @@ class Transaction {
   String debitSideLedgerName; //computed --
   int creditSideLedgerId;
   String creditSideLedgerName; //--compu
-  Transaction({
-    this.amount,
-    this.particular,
-    this.isCredit,
-    this.cashOrBank,
-    this.date,
-    this.creditType,
-    this.partyId,
-    this.partyName,
-    this.assetLedger,
-    this.transactionTypeId,
-    this.transactionTypeName,
-    this.debitSideLedgerId,
-    this.debitSideLedgerName,
-    this.creditSideLedgerId,
-    this.creditSideLedgerName,
-  });
+  int isReturn;
+  Transaction(
+      {this.amount,
+      this.particular,
+      this.isCredit,
+      this.cashOrBank,
+      this.date,
+      this.creditType,
+      this.partyId,
+      this.partyName,
+      this.assetLedger,
+      this.transactionTypeId,
+      this.transactionTypeName,
+      this.debitSideLedgerId,
+      this.debitSideLedgerName,
+      this.creditSideLedgerId,
+      this.creditSideLedgerName,
+      this.isReturn});
   Transaction.withId({
     this.id,
     this.amount,
@@ -51,6 +52,7 @@ class Transaction {
     this.debitSideLedgerName,
     this.creditSideLedgerId,
     this.creditSideLedgerName,
+    this.isReturn,
   });
 
   Map<String, dynamic> toMap() {
@@ -75,6 +77,8 @@ class Transaction {
     map['debitSideLedgerName'] = debitSideLedgerName;
     map['creditSideLedgerId'] = creditSideLedgerId;
     map['creditSideLedgerName'] = creditSideLedgerName;
+    map['isReturn'] = isReturn;
+
     print('date value is');
     print(map['date']);
     print(map['date'].runtimeType);
@@ -99,6 +103,7 @@ class Transaction {
       debitSideLedgerName: map['debitSideLedgerName'],
       creditSideLedgerId: map['creditSideLedgerId'],
       creditSideLedgerName: map['creditSideLedgerName'],
+      isReturn: map['isReturn'],
     );
   }
 }

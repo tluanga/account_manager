@@ -29,6 +29,8 @@ import 'package:account_manager/services/transactionType/transactionType.service
 import 'package:account_manager/services/transactionType/transactionType_implementation.service.dart';
 import 'package:get_it/get_it.dart';
 
+import 'Reports/tradingAccount/tradingAccount/tradingAccount.service.dart';
+import 'Reports/tradingAccount/tradingAccount/tradingAccount_impl.service.dart';
 import 'ledgerMaster/ledgerMaster_impl.service.dart';
 
 GetIt serviceLocator = GetIt.instance;
@@ -51,6 +53,10 @@ void setUpServiceLocator() {
   );
 
   serviceLocator.registerLazySingleton<PartyService>(() => PartyImpl());
+  // --------Report Service--------
+
+  serviceLocator
+      .registerLazySingleton<TradingAccountService>(() => TradingAccountImpl());
 
   // ---Service Registration for trading account
 

@@ -119,4 +119,20 @@ class LedgerTransactionImpl implements LedgerTransactionService {
 
     return list;
   }
+
+  //--------LedgerTransaction With Master Data-----
+  //--------Will Display all ledger transaction wih ledgermaster Data
+  void ledgerTransactionWithMasterData() async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _data = await db.rawQuery('''
+    Select 
+    lt.ledgerId,
+    SUM(lt.[amount]) as[TotalAmount],
+    lm[name]
+    from ledgerTranction_table lt 
+    INNER JOIN masterLedger_table lm
+    ON lt.[ledgerId]=lm.[ID]    
+    GROUP BY lm.[ledgerID]
+    ''');
+  }
 }

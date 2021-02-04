@@ -154,6 +154,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -165,6 +166,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -183,6 +185,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -194,6 +197,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -217,6 +221,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -228,6 +233,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -244,6 +250,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -255,6 +262,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit side-party ac
@@ -266,6 +274,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -282,6 +291,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -293,6 +303,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit side-party ac
@@ -304,6 +315,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -322,6 +334,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -333,6 +346,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -351,6 +365,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -362,6 +377,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -380,6 +396,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -391,6 +408,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -407,6 +425,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -418,6 +437,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit side-party ac
@@ -429,6 +449,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -445,6 +466,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -456,6 +478,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit side-party ac
@@ -467,6 +490,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -621,6 +645,9 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
 
   void processMockData() {
     List<Transaction> _purchaseMockData = [];
+    //--copy parameter to variable
+    // ---Purchase Transaction Type -1
+
     // --copy parameter to variable
     // ---Purchase Transaction Type -1
     _purchaseMockData.add(Transaction(
@@ -675,33 +702,29 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     _purchaseMockData.add(
       Transaction(
         amount: 5000,
-        particular: 'Chair Leina',
-        isCredit: cCredit,
+        particular: 'Eitur Leina',
+        isCredit: cCashDown,
         cashOrBank: CASH,
         date: DateTime.now(),
-        creditType: cPartialCredit,
-        partyId: PartyMockConstant.Zasiama,
-        partyName: 'Zasiama',
-        assetLedger: AssetMockData.chair,
-        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
+        creditType: cCredit,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of Non - Asset',
       ),
     );
     //--Purchase Transaction Type-5
     // debt of non asset non partial
     _purchaseMockData.add(
       Transaction(
-        amount: 5000,
-        particular: 'Chair Leina',
+        amount: 10000,
+        particular: 'card board bat na',
         isCredit: cCredit,
         cashOrBank: BANK,
         date: DateTime.now(),
-        creditType: cPartialCredit,
-        partyId: PartyMockConstant.Zasiama,
-        partyName: 'Zasiama',
-        assetLedger: AssetMockData.chair,
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
         transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
-        transactionTypeName: 'Purchase of Asset',
+        transactionTypeName: 'Purchase of Raw Material',
       ),
     );
 
@@ -779,8 +802,20 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         transactionTypeName: 'Purchase of raw Material',
       ),
     );
+    _purchaseMockData.add(
+      Transaction(
+          particular: 'Chair Leina',
+          isCredit: cCredit,
+          cashOrBank: CASH,
+          date: DateTime.now(),
+          creditType: cPartialCredit,
+          partyId: PartyMockConstant.Zasiama,
+          partyName: 'Zasiama',
+          assetLedger: AssetMockData.chair,
+          transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+          transactionTypeName: 'Purchase of Asset'),
+    );
 
-    
     for (int i = 0; i < _purchaseMockData.length; i++) {
       _amount = _purchaseMockData[i].amount;
       _particular = _purchaseMockData[i].particular;
