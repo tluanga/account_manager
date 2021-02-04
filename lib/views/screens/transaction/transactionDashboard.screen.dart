@@ -108,7 +108,7 @@ class TransactionDashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Text('Lakluh',
+                child: Text('Inward',
                     style: TextStyle(
                         fontSize: 20,
                         color: HexColor(TEXTCOLOR),
@@ -129,7 +129,7 @@ class TransactionDashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Text('Pek Chhuah',
+                child: Text('Outward',
                     style: TextStyle(
                         fontSize: 20,
                         color: HexColor(TEXTCOLOR),
@@ -187,35 +187,35 @@ class TransactionDashboardScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold)),
                 )),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TestTransactionScreen()),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  width: width,
-                  height: height,
-                  decoration: BoxDecoration(
-                    color: cprimaryColor,
-                    border: Border.all(
-                      color: HexColor(SECONDARYGREYCOLOR),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text('Test Transaction',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: HexColor(TEXTCOLOR),
-                            fontWeight: FontWeight.bold)),
-                  )),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => TestTransactionScreen()),
+          //     );
+          //   },
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Container(
+          //         width: width,
+          //         height: height,
+          //         decoration: BoxDecoration(
+          //           color: cprimaryColor,
+          //           border: Border.all(
+          //             color: HexColor(SECONDARYGREYCOLOR),
+          //           ),
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //         child: Center(
+          //           child: Text('Test Transaction',
+          //               style: TextStyle(
+          //                   fontSize: 20,
+          //                   color: HexColor(TEXTCOLOR),
+          //                   fontWeight: FontWeight.bold)),
+          //         )),
+          //   ),
+          // ),
         ],
       ),
     );
