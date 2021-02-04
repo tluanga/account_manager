@@ -1,6 +1,8 @@
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 import '../../../../business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
@@ -19,7 +21,7 @@ class _AppState extends State<NewTransactionType> {
   Map<String, dynamic> selectedCreditSideLedger = Map();
   String _name;
   String _description;
-  int _sumChetVelDanType;
+  int _sumChetVelDanType = 1;
 
   String dropdownValue = 'Hralh';
   final _formKey = GlobalKey<FormState>();
@@ -182,40 +184,28 @@ class _AppState extends State<NewTransactionType> {
                             // decoration: BoxDecoration(
                             //     borderRadius: BorderRadius.circular(20),
                             //     border: Border.all(color: Colors.green[300])),
-                            child: debitSideLedgerSelect(
+                            child: creditSideLedgerSelect(
                                 model
                                     .getLedgerMasterListForSearchableDropdown(),
                                 "local"),
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            print(
-                              _sumChetVelDanType.toString(),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 50,
-                              width: 420,
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade400,
-                                border: Border.all(
-                                  color: Colors.green,
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Center(
-                                child: FlatButton(
-                                  onPressed: _submit,
-                                  child: Text(
-                                    'Submit',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    ),
-                                  ),
+                          onTap: () => {print(_sumChetVelDanType.toString())},
+                          child: Container(
+                            height: 50,
+                            width: 420,
+                            decoration: BoxDecoration(
+                              color: HexColor(PRIMARYCOLOR),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: HexColor(TEXTCOLOR),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -277,23 +267,38 @@ class _AppState extends State<NewTransactionType> {
     );
   }
 
-  Widget creditSideLedgerSelect(List<String> listData, mapKey) {
+  Widget creditSideLedgerSelect(List<DropdownMenuItem> listData, mapKey) {
     List<DropdownMenuItem> items = [];
     for (int i = 0; i < listData.length; i++) {
-      items.add(new DropdownMenuItem(
-        child: new Text(
-          listData[i],
+      items.add(
+        new DropdownMenuItem(
+          child: new Text(
+            listData[i].value,
+          ),
+          value: listData[i],
         ),
-        value: listData[i],
-      ));
+      );
     }
+
+    var length = listData.length.toString();
+    print('Length of the data is:$length');
+
     return new SearchableDropdown(
+      //       onChanged: (String newValue) {
+      //   setState(() {
+      //     dropdownValue = newValue;
+      //     _sumChetVelDanType =
+      //         model.formatSumChetdanType(newValue);
+      //   });
+      // },
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
-      items: items,
-      value: selectedCreditSideLedger[mapKey].toString(),
+      items: listData,
+      value: selectedCreditSideLedger[mapKey],
       isCaseSensitiveSearch: false,
-      hint: new Text('Select Credit side Ledger'),
+      hint: new Text(
+        'Select Credit side Ledger',
+      ),
       searchHint: new Text(
         'Select One',
         style: new TextStyle(fontSize: 20),
