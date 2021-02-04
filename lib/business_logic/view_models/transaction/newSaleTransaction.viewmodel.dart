@@ -436,9 +436,61 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   //     transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
   //     transactionTypeName: 'Sales of Goods',
   //   ));
-  // Sale test type 2 Sale without debt
+  // Sale test type 1 SALECASHDOWNBANK
   void processMockData() {
     List<Transaction> _saleMockData = [];
+    _saleMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Sale of Goods full debt',
+      isCredit: cCashDown,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: NONE,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+      transactionTypeName: 'Sales of Goods',
+    ));
+
+    // sale test type 2 SALECASHDOWNCASH
+    _saleMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Sale of Goods full debt',
+      isCredit: cCashDown,
+      cashOrBank: CASH,
+      date: DateTime.now(),
+      creditType: NONE,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+      transactionTypeName: 'Sales of Goods',
+    ));
+
+    // sale test type 3 saledebt
+    _saleMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Sale of Goods full debt',
+      isCredit: cCredit,
+      cashOrBank: NONE,
+      date: DateTime.now(),
+      creditType: cCredit,
+      partyId: PartyMockConstant.Zomawia,
+      partyName: 'Zomawia',
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+      transactionTypeName: 'Sales of Goods',
+    ));
+
+    // sale test type 4 SALEBAPARTIALBANK
+    _saleMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Sale of Goods full debt',
+      isCredit: cCredit,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: cPartialCredit,
+      partyId: PartyMockConstant.Zomawia,
+      partyName: 'Zomawia',
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+      transactionTypeName: 'Sales of Goods',
+    ));
+
+    // sale test type 5 SALEBAPARTIALCASH
     _saleMockData.add(Transaction(
       amount: 5000,
       particular: 'Sale of Goods full debt',
@@ -446,11 +498,12 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
       cashOrBank: CASH,
       date: DateTime.now(),
       creditType: cPartialCredit,
-      partyId: PartyMockConstant.AlexTelles,
-      partyName: "Alex Telles",
+      partyId: PartyMockConstant.Zomawia,
+      partyName: 'Zomawia',
       transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
       transactionTypeName: 'Sales of Goods',
     ));
+    
     //--copy parameter to variable
     for (int i = 0; i < _saleMockData.length; i++) {
       _amount = _saleMockData[i].amount;

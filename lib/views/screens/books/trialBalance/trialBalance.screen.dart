@@ -212,9 +212,27 @@ class _TrialBalanceScreenState extends State<TrialBalanceScreen> {
                       },
                     ),
                   ),
+                  Divider(),
                   Container(
+                    height: 30,
                     child: Row(
-                      children: [Text('Total'), Text('10000'), Text('2000')],
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.35,
+                          alignment: Alignment.centerRight,
+                          child: Text('Total', style: TextStyle(fontWeight: FontWeight.bold),)
+                        ), 
+                        Container(
+                          child: Text('10000'),
+                          width: MediaQuery.of(context).size.width*0.3,
+                          alignment: Alignment.centerRight
+                        ), 
+                        Container(
+                          child: Text('2000'),
+                          width: MediaQuery.of(context).size.width*0.3,
+                          alignment: Alignment.centerRight
+                        )
+                      ],
                     ),
                   )
                 ],
