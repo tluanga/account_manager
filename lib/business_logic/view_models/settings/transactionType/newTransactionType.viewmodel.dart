@@ -36,7 +36,7 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
         child: new Text(
           ledgerMasterList[i].name,
         ),
-        value: ledgerMasterList[i].name,
+        value: ledgerMasterList[i].id,
       ));
     }
     // notifyListeners();

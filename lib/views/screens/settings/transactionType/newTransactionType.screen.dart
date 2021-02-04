@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/models/transactionType.models.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
@@ -18,6 +19,7 @@ class _AppState extends State<NewTransactionType> {
   NewTransactionTypeViewModel _transactionTypeViewModel =
       serviceLocator<NewTransactionTypeViewModel>();
   Map<String, String> selectedDebitSideLedger = Map();
+  int _selectedDebitSideLedgerId;
   Map<String, dynamic> selectedCreditSideLedger = Map();
   String _name;
   String _description;
@@ -35,7 +37,13 @@ class _AppState extends State<NewTransactionType> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       // print('$_name, $_description, $_sumChetVelDanType, $_selectedDebitSideLedgerId');
-
+      _transactionTypeViewModel.newTransactionType(
+        TransactionType(
+          name: _name,
+          description: _description,
+          sumChetVelDanType: _sumChetVelDanType,
+        ),
+      );
     }
   }
 
@@ -191,7 +199,7 @@ class _AppState extends State<NewTransactionType> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => {},
+                          onTap: () => _submit(),
                           child: Container(
                             height: 50,
                             width: 420,
@@ -236,17 +244,7 @@ class _AppState extends State<NewTransactionType> {
       );
     }
 
-    var length = listData.length.toString();
-    print('Length of the data is:$length');
-
     return new SearchableDropdown(
-      //       onChanged: (String newValue) {
-      //   setState(() {
-      //     dropdownValue = newValue;
-      //     _sumChetVelDanType =
-      //         model.formatSumChetdanType(newValue);
-      //   });
-      // },
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: listData,
@@ -260,6 +258,8 @@ class _AppState extends State<NewTransactionType> {
         style: new TextStyle(fontSize: 20),
       ),
       onChanged: (value) {
+        print('Selected Debit Side Value');
+        print(value.toString());
         setState(() {
           selectedDebitSideLedger[mapKey] = value;
         });
@@ -280,17 +280,7 @@ class _AppState extends State<NewTransactionType> {
       );
     }
 
-    var length = listData.length.toString();
-    print('Length of the data is:$length');
-
     return new SearchableDropdown(
-      //       onChanged: (String newValue) {
-      //   setState(() {
-      //     dropdownValue = newValue;
-      //     _sumChetVelDanType =
-      //         model.formatSumChetdanType(newValue);
-      //   });
-      // },
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: listData,
@@ -304,6 +294,7 @@ class _AppState extends State<NewTransactionType> {
         style: new TextStyle(fontSize: 20),
       ),
       onChanged: (value) {
+        print(value.toString());
         setState(() {
           selectedCreditSideLedger[mapKey] = value;
         });
