@@ -3,6 +3,7 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
+import '../../../../business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 
 class NewTransactionType extends StatefulWidget {
   @override
@@ -15,12 +16,10 @@ class _AppState extends State<NewTransactionType> {
   NewTransactionTypeViewModel _transactionTypeViewModel =
       serviceLocator<NewTransactionTypeViewModel>();
   Map<String, String> selectedDebitSideLedger = Map();
-  Map<String, String> selectedCreditSideLedger = Map();
+  Map<String, dynamic> selectedCreditSideLedger = Map();
   String _name;
   String _description;
   int _sumChetVelDanType;
-  int _selectedDebitSideLedgerId;
-  int _selectedCreditSideLedgerId;
 
   String dropdownValue = 'Hralh';
   final _formKey = GlobalKey<FormState>();
@@ -243,18 +242,19 @@ class _AppState extends State<NewTransactionType> {
   }
 
   Widget debitSideLedgerSelect(List<DropdownMenuItem> listData, mapKey) {
-    // List<DropdownMenuItem> items = [];
-    // for (int i = 0; i < listData.length; i++) {
-    //   items.add(new DropdownMenuItem(
-    //     child: new Text(
-    //       listData[i],
-    //     ),
-    //     value: listData[i],
-    //   ));
-    // }
+    List<DropdownMenuItem> items = [];
+    for (int i = 0; i < listData.length; i++) {
+      items.add(new DropdownMenuItem(
+        child: new Text(
+          listData[i].value,
+        ),
+        value: listData[i],
+      ),);
+    }
     
     var length = listData.length.toString();
     print('Length of the data is:$length');
+
     return new SearchableDropdown(
                               //       onChanged: (String newValue) {
                               //   setState(() {
@@ -277,7 +277,6 @@ class _AppState extends State<NewTransactionType> {
       ),
       onChanged: (value) {
         setState(() {
-          _selectedDebitSideLedgerId = value;
           selectedDebitSideLedger[mapKey] = value;
         });
       },
@@ -295,22 +294,22 @@ class _AppState extends State<NewTransactionType> {
       ));
     }
     return new SearchableDropdown(
-      isExpanded: true,
-      underline: Padding(padding: EdgeInsets.all(5)),
-      items: items,
-      value: selectedCreditSideLedger[mapKey],
-      isCaseSensitiveSearch: false,
-      hint: new Text('Select Credit side Ledger'),
-      searchHint: new Text(
-        'Select One',
-        style: new TextStyle(fontSize: 20),
-      ),
-      onChanged: (value) {
-        setState(() {
-          _selectedCreditSideLedgerId = value;
-          selectedCreditSideLedger[mapKey] = value;
-        });
-      },
-    );
+          isExpanded: true,
+          underline: Padding(padding: EdgeInsets.all(5)),
+          items: items,
+          value: selectedCreditSideLedger[mapKey].toString(),
+          isCaseSensitiveSearch: false,
+          hint: new Text('Select Credit side Ledger'),
+          searchHint: new Text(
+            'Select One',
+            style: new TextStyle(fontSize: 20),
+          ),
+          onChanged: (value) {
+            setState(() {
+              selectedCreditSideLedger[mapKey] = value;
+            });
+          },
+        );
+   
   }
 }

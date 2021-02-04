@@ -34,12 +34,12 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
     for (int i = 0; i < ledgerMasterList.length; i++) {
       items.add(new DropdownMenuItem(
         child: new Text(
-          ledgerMasterList[i].name.toString(),
+          ledgerMasterList[i].name,
         ),
-        value: ledgerMasterList[i],
+        value: ledgerMasterList[i].name,
       ));
     }
-    notifyListeners();
+    // notifyListeners();
     return items;
   }
 
