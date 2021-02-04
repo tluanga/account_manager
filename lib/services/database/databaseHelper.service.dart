@@ -76,6 +76,7 @@ class DatabaseHelper {
   String transactionDebitSideLedgerName = 'debitSideLedgerName';
   String transactionCreditSideLedgerId = 'creditSideLedgerId';
   String transactionCreditSideLedgerName = 'creditSideLedgerName';
+  String transactionIsReturn = 'isReturn';
 
   //------TABLE 6 LEDGER TRANSACTION TABLE---------
   String ledgerTransactionTable = 'ledgerTranction_table';
@@ -86,6 +87,7 @@ class DatabaseHelper {
   String ledgerTransactionParticular = 'particular';
   String ledgerTransactionDebitOrCredit = 'debitOrCredit';
   String ledgerTransactionCashOrBank = 'cashOrBank';
+  String ledgerTransactionIsReturn = 'isReturn';
 
   //------TABLE 7 PARTY TABLE
   String partyTable = 'party_table';
@@ -142,11 +144,11 @@ class DatabaseHelper {
     );
     // Table 5 - Transaction Table
     await db.execute(
-      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT,$transactionParticular TEXT,$transactionIsCredit INT,$transactionCashOrBank INT, $transactionDate INT, $transactionCreditType INT, $transactionPartyId INT, $transactionPartyName TEXT,$transactionassetLedger INTEGER,$transactionassetLedgerName TEXT,$transactionTransactionTypeId INT,$transactionTransactionTypeName TEXT,$transactionDebitSideLedgerId INT,$transactionDebitSideLedgerName TEXT,$transactionCreditSideLedgerId INT,$transactionCreditSideLedgerName TEXT  )',
+      'CREATE TABLE $transactionTable($transactionId INTEGER PRIMARY KEY AUTOINCREMENT, $transactionAmount INT,$transactionParticular TEXT,$transactionIsCredit INT,$transactionCashOrBank INT, $transactionDate INT, $transactionCreditType INT, $transactionPartyId INT, $transactionPartyName TEXT,$transactionassetLedger INTEGER,$transactionassetLedgerName TEXT,$transactionTransactionTypeId INT,$transactionTransactionTypeName TEXT,$transactionDebitSideLedgerId INT,$transactionDebitSideLedgerName TEXT,$transactionCreditSideLedgerId INT,$transactionCreditSideLedgerName TEXT,$ledgerTransactionIsReturn INT  )',
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(
-      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER)',
+      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER,$transactionIsReturn INT)',
     );
 
     // Table 7 - Authenticaion PIN

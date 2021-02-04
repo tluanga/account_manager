@@ -30,6 +30,9 @@ const int cPurchase = 1;
 const int cInward = 2;
 const int cOutward = 3;
 
+// ---Return Check
+const int cReturn = 1;
+
 const String PRIMARYCOLOR = '#FBAF02';
 const String TEXTCOLOR = '#080040';
 const String GREYCOLOR = '#6A6A6A';

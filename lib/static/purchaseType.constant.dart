@@ -6,7 +6,7 @@ class PurchaseType {
 
   //2) Asset-CashDown-Bank - Bank payment-
   //DebitSide: assetName
-  //Credit Side:Cash A/C
+  //Credit Side:Cash A/C76
   static const int assetCashDownCash = 2;
 
   //3) Asset-Credit

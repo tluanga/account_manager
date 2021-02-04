@@ -1,3 +1,4 @@
+import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
 
@@ -88,7 +89,15 @@ class TransactionTypeSelectScreen extends StatelessWidget {
                               model.transactionTypeList[index].id);
                           model.setTransactionTypeName(
                               model.transactionTypeList[index].name);
-
+                          if (model.transactionTypeList[index].id ==
+                              TransactionTypeConstant.cPURCHASEOFASSET) {
+                            Navigator.of(context)
+                                .push(new MaterialPageRoute<Null>(
+                                    builder: (BuildContext context) {
+                                      return new AssetSelectScreen();
+                                    },
+                                    fullscreenDialog: true));
+                          }
                           Navigator.pop(context);
                         },
                         child: Padding(

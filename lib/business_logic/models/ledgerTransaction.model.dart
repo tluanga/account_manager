@@ -6,6 +6,7 @@ class LedgerTransaction {
   DateTime date;
   int debitOrCredit; // 0 for debit -1 for credit
   int cashOrBank; //0 for cash - 1 for bank-2 for credit
+  int isReturn;
   LedgerTransaction({
     //this.id,
     this.ledgerId,
@@ -14,6 +15,7 @@ class LedgerTransaction {
     this.date,
     this.debitOrCredit,
     this.cashOrBank,
+    this.isReturn,
   });
   LedgerTransaction.withId({
     this.id,
@@ -23,6 +25,7 @@ class LedgerTransaction {
     this.date,
     this.debitOrCredit,
     this.cashOrBank,
+    this.isReturn,
   });
 
   Map<String, dynamic> toMap() {
@@ -36,6 +39,7 @@ class LedgerTransaction {
     map['ledgerId'] = ledgerId;
     map['debitOrCredit'] = debitOrCredit;
     map['cashOrBank'] = cashOrBank;
+    map['isReturn'] = isReturn;
     print('date value is');
     print(map['date']);
     print(map['date'].runtimeType);
@@ -51,6 +55,7 @@ class LedgerTransaction {
       ledgerId: map['ledgerId'],
       debitOrCredit: map['debitOrCredit'],
       cashOrBank: map['cashOrBank'],
+      isReturn: map['isReturn'],
     );
   }
 }

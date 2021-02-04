@@ -1,7 +1,12 @@
-import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
-import 'package:account_manager/services/Reports/tradingAccount/tradingAccount/tradingAccount.service.dart';
+// import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+// import 'package:account_manager/services/Reports/tradingAccount/tradingAccount/tradingAccount.service.dart';
 
-class TradingAccountImpl implements TradingAccountService {
-  Future<List<LedgerMaster>> getFilterdPartyLedgerList(
-      {int statDate = 0, int endDate = 0}) {}
-}
+// class TradingAccountImpl implements TradingAccountService {
+//   Future<List<LedgerMaster>> getFilterdPartyLedgerList(
+//       {int statDate = 0, int endDate = 0}) {
+//         // select all direct expenses
+//         // from where are we gonna get direct expenses
+//         // if()
+//         // select all direct oncome
+//       }
+// }
