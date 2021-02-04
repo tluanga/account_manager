@@ -11,16 +11,16 @@ import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
-import '../../../static/constants.dart';
+import '../../../../static/constants.dart';
 
-import '../../../static/ledgerId.constants.dart';
+import '../../../../static/ledgerId.constants.dart';
 
-import '../../models/ledgerTransaction.model.dart';
-import '../../models/ledgermaster.models.dart';
-import '../../models/transaction.model.dart';
-import '../../models/transactionType.models.dart';
+import '../../../models/ledgerTransaction.model.dart';
+import '../../../models/ledgermaster.models.dart';
+import '../../../models/transaction.model.dart';
+import '../../../models/transactionType.models.dart';
 
-import '../../../services/transaction/transaction.service.dart';
+import '../../../../services/transaction/transaction.service.dart';
 
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 

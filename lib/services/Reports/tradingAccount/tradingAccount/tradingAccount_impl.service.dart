@@ -22,6 +22,7 @@ class TradingAccountImpl implements TradingAccountService {
     List<Map<String, dynamic>> _data = await db.rawQuery('''
     Select 
     lt.ledgerId,
+    lm.name,
     SUM(lt.[amount]) as[TotalAmount]
     from ledgerTranction_table lt
     INNER JOIN masterLedger_table lm    

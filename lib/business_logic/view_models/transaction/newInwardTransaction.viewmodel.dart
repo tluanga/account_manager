@@ -7,12 +7,10 @@ import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.ser
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
-import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/inWardType.constant.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:account_manager/static/outwardType.constant.dart';
-import 'package:account_manager/static/partyMock.constant.dart';
 import 'package:flutter/widgets.dart';
 
 class NewInwardTransactionViewModel extends ChangeNotifier {
