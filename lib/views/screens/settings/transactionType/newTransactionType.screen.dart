@@ -191,7 +191,7 @@ class _AppState extends State<NewTransactionType> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => {print(_sumChetVelDanType.toString())},
+                          onTap: () => {},
                           child: Container(
                             height: 50,
                             width: 420,

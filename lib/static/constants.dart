@@ -25,10 +25,10 @@ const int cASSET = 12;
 const int cNonASSET = 13;
 
 //---Sum Chet Vel dan
-const int cPurchase = 100;
-const int cSale = 101;
-const int cInward = 102;
-const int cOutward = 103;
+const int cSale = 0;
+const int cPurchase = 1;
+const int cInward = 2;
+const int cOutward = 3;
 
 const String PRIMARYCOLOR = '#FBAF02';
 const String TEXTCOLOR = '#080040';
