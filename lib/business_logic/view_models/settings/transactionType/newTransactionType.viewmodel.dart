@@ -3,6 +3,7 @@ import 'package:account_manager/business_logic/models/transactionType.models.dar
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
+import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +36,11 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
       items.add(new DropdownMenuItem(
         child: new Text(
           ledgerMasterList[i].name,
+          style: TextStyle(
+            color: Colors.black,
+          ),
         ),
-        value: ledgerMasterList[i].id,
+        value: ledgerMasterList[i].id.toString(),
       ));
     }
     // notifyListeners();

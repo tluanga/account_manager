@@ -13,7 +13,6 @@ class TradingAccountScreen extends StatelessWidget {
       ),
       body: Consumer<TradingAccountViewModel>(
         builder: (context, model, child) {
-          model.loadData();
           return Container(
             child: Text('Trading Account'),
           );

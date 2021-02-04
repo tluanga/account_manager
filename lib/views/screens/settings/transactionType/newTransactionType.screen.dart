@@ -20,6 +20,7 @@ class _AppState extends State<NewTransactionType> {
       serviceLocator<NewTransactionTypeViewModel>();
   Map<String, String> selectedDebitSideLedger = Map();
   int _selectedDebitSideLedgerId;
+  int _selectedCreditSideLedgerId;
   Map<String, dynamic> selectedCreditSideLedger = Map();
   String _name;
   String _description;
@@ -42,8 +43,11 @@ class _AppState extends State<NewTransactionType> {
           name: _name,
           description: _description,
           sumChetVelDanType: _sumChetVelDanType,
+          debitSideLedger: _selectedDebitSideLedgerId,
+          creditSideLedger: _selectedCreditSideLedgerId,
         ),
       );
+      Navigator.pop(context);
     }
   }
 
@@ -173,9 +177,6 @@ class _AppState extends State<NewTransactionType> {
                           ),
                           child: Container(
                             width: 400,
-                            // decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(20),
-                            //     border: Border.all(color: Colors.green[300])),
                             child: debitSideLedgerSelect(
                                 model
                                     .getLedgerMasterListForSearchableDropdown(),
@@ -189,9 +190,6 @@ class _AppState extends State<NewTransactionType> {
                           ),
                           child: Container(
                             width: 400,
-                            // decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(20),
-                            //     border: Border.all(color: Colors.green[300])),
                             child: creditSideLedgerSelect(
                                 model
                                     .getLedgerMasterListForSearchableDropdown(),
@@ -232,54 +230,28 @@ class _AppState extends State<NewTransactionType> {
   }
 
   Widget debitSideLedgerSelect(List<DropdownMenuItem> listData, mapKey) {
-    List<DropdownMenuItem> items = [];
-    for (int i = 0; i < listData.length; i++) {
-      items.add(
-        new DropdownMenuItem(
-          child: new Text(
-            listData[i].value,
-          ),
-          value: listData[i],
-        ),
-      );
-    }
-
     return new SearchableDropdown(
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
       items: listData,
-      value: selectedDebitSideLedger[mapKey],
+      value: selectedDebitSideLedger,
       isCaseSensitiveSearch: false,
       hint: new Text(
-        'Select Debit side Ledger',
+        'Select Debit side Ledgersss',
       ),
       searchHint: new Text(
         'Select One',
         style: new TextStyle(fontSize: 20),
       ),
       onChanged: (value) {
-        print('Selected Debit Side Value');
-        print(value.toString());
         setState(() {
-          selectedDebitSideLedger[mapKey] = value;
+          _selectedDebitSideLedgerId = value;
         });
       },
     );
   }
 
   Widget creditSideLedgerSelect(List<DropdownMenuItem> listData, mapKey) {
-    List<DropdownMenuItem> items = [];
-    for (int i = 0; i < listData.length; i++) {
-      items.add(
-        new DropdownMenuItem(
-          child: new Text(
-            listData[i].value,
-          ),
-          value: listData[i],
-        ),
-      );
-    }
-
     return new SearchableDropdown(
       isExpanded: true,
       underline: Padding(padding: EdgeInsets.all(5)),
@@ -294,9 +266,8 @@ class _AppState extends State<NewTransactionType> {
         style: new TextStyle(fontSize: 20),
       ),
       onChanged: (value) {
-        print(value.toString());
         setState(() {
-          selectedCreditSideLedger[mapKey] = value;
+          _selectedCreditSideLedgerId = value;
         });
       },
     );

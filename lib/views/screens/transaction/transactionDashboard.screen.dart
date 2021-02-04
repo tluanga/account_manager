@@ -221,5 +221,3 @@ class TransactionDashboardScreen extends StatelessWidget {
     );
   }
 }
-
-class HexCode {}
