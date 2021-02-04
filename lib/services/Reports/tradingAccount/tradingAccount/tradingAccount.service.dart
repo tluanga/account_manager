@@ -1,8 +1,8 @@
-// import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+abstract class TradingAccountService {
+  //Future<List<LedgerMaster>> getLedgerMasterList(databaseProvider);
 
-// abstract class TradingService {
-//   //Future<List<LedgerMaster>> getLedgerMasterList(databaseProvider);
+  // Future<List<LedgerMaster>> getFilterdPartyLedgerList(
+  //     int startDate, int endDate);
 
-//   Future<List<LedgerMaster>> getFilterdPartyLedgerList(
-//       int statDate, int endDate);
-// }
+  void getDirectIncomeData({int startDate, int endDate});
+}

@@ -30,6 +30,11 @@ const int cPurchase = 1;
 const int cInward = 2;
 const int cOutward = 3;
 
+const int cHralh = 0;
+const int cLei = 1;
+const int cLakluh = 2;
+const int cPekchhuah = 3;
+
 // ---Return Check
 const int cReturn = 1;
 

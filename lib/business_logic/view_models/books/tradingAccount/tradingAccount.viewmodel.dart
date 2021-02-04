@@ -1,5 +1,6 @@
-import 'package:account_manager/business_logic/models/tradingAccount.models.dart';
+import 'package:account_manager/services/Reports/tradingAccount/tradingAccount/tradingAccount.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
+
 import 'package:account_manager/services/serviceLocator.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,10 @@ class TradingAccountViewModel extends ChangeNotifier {
   int openingStock; //Requires input from the user
   int closingStock; //Needs to be calculated
   int grossProfit;
+  TradingAccountService _tradingAccountService =
+      serviceLocator<TradingAccountService>();
+  LedgerTransactionService _ledgerTransactionService =
+      serviceLocator<LedgerTransactionService>();
   // ---Get all direct expenes
   // ignore: unused_field
   // List<DirectExpense> _directExpenseList = [];
@@ -17,9 +22,10 @@ class TradingAccountViewModel extends ChangeNotifier {
   // TradingAccountService _tradingAccountService =
   //     serviceLocator<TradingAccountService>();
 
-  // void loadData() async {
-  //   _directExpenseList = await _tradingAccountService.getDirectExpense();
-  // }
+  void loadData() async {
+    _tradingAccountService.getDirectIncomeData();
+    var _ledgerTransaction = await _ledgerTransactionService.getList();
+  }
 
   // ---Get all direct income
 }

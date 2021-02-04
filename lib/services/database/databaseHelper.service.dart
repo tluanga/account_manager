@@ -88,6 +88,7 @@ class DatabaseHelper {
   String ledgerTransactionDebitOrCredit = 'debitOrCredit';
   String ledgerTransactionCashOrBank = 'cashOrBank';
   String ledgerTransactionIsReturn = 'isReturn';
+  String ledgerTransactionTransactionTypeId = 'transactionTypeId';
 
   //------TABLE 7 PARTY TABLE
   String partyTable = 'party_table';
@@ -148,7 +149,7 @@ class DatabaseHelper {
     );
     // Table 6 - Ledger Transaction Table
     await db.execute(
-      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER,$transactionIsReturn INT)',
+      'CREATE TABLE $ledgerTransactionTable($ledgerTransactionId INTEGER PRIMARY KEY AUTOINCREMENT, $ledgerTransactionLedgerId INT, $transactionDate INT, $ledgerTransactionAmount INT, $ledgerTransactionParticular TEXT, $ledgerTransactionDebitOrCredit INTEGER,$ledgerTransactionCashOrBank INTEGER,$transactionIsReturn INT,$ledgerTransactionTransactionTypeId INT)',
     );
 
     // Table 7 - Authenticaion PIN
