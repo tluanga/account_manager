@@ -35,7 +35,7 @@ class BooksDashboard extends StatelessWidget {
               ),
               UICard(
                 title: 'Profit and Loss',
-                routeUrl: rTrialBalance,
+                routeUrl: rProfitAndLossAccount,
                 iconName: Icons.library_books,
               ),
               UICard(

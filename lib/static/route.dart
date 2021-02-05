@@ -27,6 +27,7 @@ const String rGeneralJournalDashboard = '/generalJournalDashboard';
 const String rTrialBalance = 'books/trialBalance';
 const String rTradingAccount = 'books/tradingAccount';
 const String rBalanceSheet = 'books/balanceSheet';
+const String rProfitAndLossAccount = 'books/profitAndLossAccount';
 
 // -----------------Dashboard route----------
 const String rDashBoard = '/dashboard';

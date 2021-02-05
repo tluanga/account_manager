@@ -30,6 +30,7 @@ import 'package:account_manager/views/screens/analytics/analyticsDashboard.scree
 import 'package:account_manager/views/screens/authentication/confirm.pin.dart';
 import 'package:account_manager/views/screens/books/balanceSheet/balanceSheet.screen.dart';
 import 'package:account_manager/views/screens/books/booksDashboard.screen.dart';
+import 'package:account_manager/views/screens/books/profitAndLossAccount/profitAndLossAccount.screen.dart';
 import 'package:account_manager/views/screens/books/tradingAccount/tradingAccount.screen.dart';
 import 'package:account_manager/views/screens/books/trialBalance/trialBalance.screen.dart';
 import 'package:account_manager/views/screens/settings/accountingYear/accountingYear.screen.dart';
@@ -183,6 +184,7 @@ class MyApp extends StatelessWidget {
               GeneralJournalDashboardScreen(),
           rTrialBalance: (context) => TrialBalanceScreen(),
           rTradingAccount: (context) => TradingAccountScreen(),
+          rProfitAndLossAccount: (context) => ProfitAndLossScreen(),
           rBalanceSheet: (context) => BalanceSheetScreen(),
         },
         //  home: Dashboard(),
