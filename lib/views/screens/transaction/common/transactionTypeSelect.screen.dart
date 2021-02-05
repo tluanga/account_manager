@@ -1,6 +1,8 @@
+import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
+import 'package:account_manager/views/screens/transaction/common/AssetSelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/widget/newAsset.modal.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -18,9 +20,13 @@ class TransactionTypeSelectScreen extends StatefulWidget {
 
 class _TransactionTypeSelectScreenState
     extends State<TransactionTypeSelectScreen> {
+  TransactionTypeSelectViewModel _model =
+      serviceLocator<TransactionTypeSelectViewModel>();
   @override
   void initState() {
     super.initState();
+    _model.loadData();
+    _model.printData();
   }
 
   @override
@@ -28,6 +34,8 @@ class _TransactionTypeSelectScreenState
     return Scaffold(
       body: Consumer<NewPurchaseTransactionViewModel>(
         builder: (context, model, child) {
+          String _length = model.transactionTypeList.toString();
+          print('length of transaction typelist inside view is $_length');
           return Container(
             padding: EdgeInsets.all(15),
             child: Column(

@@ -1,4 +1,5 @@
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newParty.modal.dart';
+import 'package:account_manager/views/screens/transaction/common/widget/newParty.modal.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 

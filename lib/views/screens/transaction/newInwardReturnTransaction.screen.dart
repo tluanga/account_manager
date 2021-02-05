@@ -2,20 +2,17 @@ import 'package:account_manager/business_logic/view_models/transaction/purchase/
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/static/route.dart';
+
 import 'package:account_manager/views/screens/myApp.screen.dart';
-import 'package:account_manager/views/screens/transaction/newInwardReturn/PartySelectionPage.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/AssetSelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../static/transactionType.constant.dart';
+import '../../../static/transactionType.constant.dart';
 
 class NewInwardReturnTransactionScreen extends StatefulWidget {
   const NewInwardReturnTransactionScreen({Key key}) : super(key: key);
@@ -57,9 +54,9 @@ class _NewInwardReturnTransactionScreenState
           TransactionTypeSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, child) {
           String labelText = 'Please Select Transaction Type';
-          if (transactionTypeSelect.selectedTransactionType != null) {
-            labelText = transactionTypeSelect.selectedTransactionType.name;
-          }
+          // if (transactionTypeSelect.selectedTransactionType != null) {
+          //   labelText = transactionTypeSelect.selectedTransactionType.name;
+          // }
           newTransaction.loadParty();
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
@@ -153,12 +150,12 @@ class _NewInwardReturnTransactionScreenState
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PartySelectScreen(),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => PartySelectScreen(),
+                          //   ),
+                          // );
                           if (newTransaction.getTransactionTypeId() ==
                               TransactionTypeConstant.cPURCHASEOFASSET) {
                             print('Asset Type Select');
@@ -200,9 +197,9 @@ class _NewInwardReturnTransactionScreenState
                       GestureDetector(
                         onTap: () {
                           //------Reset Part
-                          transactionTypeSelect.deSelectTransactionType(
-                              transactionTypeSelect.selectedTransactionType.id);
-                          Navigator.pushNamed(context, rMyApp);
+                          // transactionTypeSelect.deSelectTransactionType(
+                          //     transactionTypeSelect.selectedTransactionType.id);
+                          // Navigator.pushNamed(context, rMyApp);
                         },
                         child: Container(
                           width: double.infinity,

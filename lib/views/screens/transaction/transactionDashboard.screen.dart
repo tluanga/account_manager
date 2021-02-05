@@ -1,12 +1,12 @@
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/screens/transaction/debtSettlementDashboard.screen.dart';
-import 'package:account_manager/views/screens/transaction/newInwardReturn/newInwardReturnTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/newInwardReturnTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/newOutwardTransaction.screen.dart';
 
-import 'package:account_manager/views/screens/transaction/testTransaction/testTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/testTransaction.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'newPurchaseTransaction/newPurchaseTransaction.screen.dart';
+import 'newPurchaseTransaction.screen.dart';
 
 class TransactionDashboardScreen extends StatelessWidget {
   final double height = 80;
@@ -170,24 +170,34 @@ class TransactionDashboardScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: width,
-                        height: height,
-                        decoration: BoxDecoration(
-                          color: cprimaryColor,
-                          border: Border.all(
-                            color: HexColor(SECONDARYGREYCOLOR),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NewOutwardTransactionScreen(),
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text('Outward',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: HexColor(TEXTCOLOR),
-                                  fontWeight: FontWeight.bold)),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: width,
+                          height: height,
+                          decoration: BoxDecoration(
+                            color: cprimaryColor,
+                            border: Border.all(
+                              color: HexColor(SECONDARYGREYCOLOR),
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text('Outward',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: HexColor(TEXTCOLOR),
+                                    fontWeight: FontWeight.bold)),
+                          ),
                         ),
                       ),
                     ),
@@ -217,14 +227,6 @@ class TransactionDashboardScreen extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  CustomerDebtSettlementDashboard()),
-                        );
-                      },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(

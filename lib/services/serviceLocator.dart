@@ -104,9 +104,6 @@ void setUpServiceLocator() {
   //   () => CreditSideLedgerSelectViewModel(),
   // );
 
-  // ----------Transaction View Model -----------------
-  serviceLocator.registerFactory(() => TransactionTypeSelectViewModel());
-
   // -------------Company Profile------------
   serviceLocator
       .registerFactory<CompanyProfileService>(() => CompanyProfileImpl());

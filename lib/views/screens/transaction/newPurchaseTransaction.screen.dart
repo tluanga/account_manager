@@ -5,6 +5,7 @@ import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/AssetSelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
 
@@ -50,7 +51,6 @@ class _NewPurchaseTransactionScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     _newPurchaseTransactionViewModel.loadParty();
     super.initState();
   }
@@ -62,9 +62,9 @@ class _NewPurchaseTransactionScreenState
           TransactionTypeSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, child) {
           String labelText = 'Please Select Transaction Type';
-          if (transactionTypeSelect.selectedTransactionType != null) {
-            labelText = transactionTypeSelect.selectedTransactionType.name;
-          }
+          // if (transactionTypeSelect.selectedTransactionType != null) {
+          //   labelText = transactionTypeSelect.selectedTransactionType.name;
+          // }
 
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
@@ -209,9 +209,9 @@ class _NewPurchaseTransactionScreenState
                       GestureDetector(
                         onTap: () {
                           //------Reset Part
-                          transactionTypeSelect.deSelectTransactionType(
-                              transactionTypeSelect.selectedTransactionType.id);
-                          Navigator.pushNamed(context, rMyApp);
+                          // transactionTypeSelect.deSelectTransactionType(
+                          //     transactionTypeSelect.selectedTransactionType.id);
+                          // Navigator.pushNamed(context, rMyApp);
                         },
                         child: Container(
                           width: double.infinity,
