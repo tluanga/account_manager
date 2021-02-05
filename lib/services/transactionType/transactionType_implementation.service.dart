@@ -83,4 +83,22 @@ class TransactionTypeImpl implements TransactionTypeService {
 
     return transactionTypeList;
   }
+
+  Future<List<TransactionType>> getFilterdTransactionTypeList(
+      String _searchString) async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _transactionTypeList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE name LIKE '$_searchString%' 
+      ''');
+
+    // print('The Search yield $length');
+    final List<TransactionType> ledgerMasterList = [];
+    _transactionTypeList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(TransactionType.fromMap(ledgerMasterMap));
+    });
+    if (_transactionTypeList.length == 0) return [];
+
+    return ledgerMasterList;
+  }
 }

@@ -75,10 +75,14 @@ void setUpServiceLocator() {
   serviceLocator.registerFactory<NewTransactionTypeViewModel>(
       () => NewTransactionTypeViewModel());
 
-  //----------Transaction View Model -----------
+  //----------Transaction Module -----------
+  serviceLocator.registerFactory<TransactionTypeSelectViewModel>(
+      () => TransactionTypeSelectViewModel());
+
   serviceLocator.registerFactory<NewPurchaseTransactionViewModel>(
     () => NewPurchaseTransactionViewModel(),
   );
+
   serviceLocator.registerFactory<NewAssetLedgerCreationViewModel>(
     () => NewAssetLedgerCreationViewModel(),
   );

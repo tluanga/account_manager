@@ -4,17 +4,16 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/AssetSelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/widget/baOrBaloToggle.widget.dart';
+import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../static/transactionType.constant.dart';
+import '../../../static/transactionType.constant.dart';
 
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);

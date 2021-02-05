@@ -19,7 +19,7 @@ class App extends StatelessWidget {
         primaryColor: HexColor(PRIMARYCOLOR),
         primarySwatch: cprimaryColor,
       ),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: SplashScreen(),
     );
   }

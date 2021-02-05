@@ -36,18 +36,62 @@ class TradingAccountImpl implements TradingAccountService {
     });
   }
 
+  // void ledgerTransactionWithMasterData() async {
+  //   Database db = await DatabaseHelper.instance.db;
+  //   List<Map<String, dynamic>> _data = await db.rawQuery('''
+  //   Select
+  //   lt.ledgerId,
+  //   SUM(lt.[amount]) as[TotalAmount],
+  //   lm.[name],
+  //   lm.[directOrIndirect]
+  //   from ledgerTranction_table lt
+  //   INNER JOIN masterLedger_table lm
+  //   ON lt.[ledgerId]=lm.[ID]
+  //   GROUP BY lm.[id]
+  //   ''');
+  //   _data.forEach((element) {
+  //     print('----------Ledger Transaction Master Data---');
+  //     print(element.toString());
+  //   });
+  // }
+
   void ledgerTransactionWithMasterData() async {
     Database db = await DatabaseHelper.instance.db;
     List<Map<String, dynamic>> _data = await db.rawQuery('''
-    Select 
-    lt.ledgerId,
-    SUM(lt.[amount]) as[TotalAmount],
-    lm.[name],
-    lm.[directOrIndirect]
-    from ledgerTranction_table lt 
-    INNER JOIN masterLedger_table lm
-    ON lt.[ledgerId]=lm.[ID]    
-    GROUP BY lm.[id]
+   SELECT
+ledgerId, name,
+abs(CASE WHEN sum(amount) filter (where debitorcredit = 'debit') IS NULL THEN 0 
+	ELSE sum(amount) filter (where debitorcredit = 'debit') 
+	END  -
+CASE WHEN sum(amount) filter (where debitorcredit = 'credit') IS NULL THEN 0 
+	ELSE sum(amount) filter (where debitorcredit = 'credit') 
+	END)  amount,
+case WHEN
+CASE WHEN sum(amount) filter (where debitorcredit = 'debit') IS NULL THEN 0 
+	ELSE sum(amount) filter (where debitorcredit = 'debit') 
+	END  >
+CASE WHEN sum(amount) filter (where debitorcredit = 'credit') IS NULL THEN 0 
+	ELSE sum(amount) filter (where debitorcredit = 'credit') 
+	END 
+then 'debit'
+else 'credit' end debitorCredit
+FROM
+(
+  SELECT
+  distinct lt.*,lm.name
+  from
+  ledgerTransaction_table lt,
+  masterLedger_table lm,
+  transactionType_table tt
+  where
+  lt.ledgerId = lm.id
+  and lt.transactionTypeId = tt.transactionType
+  and lm.directOrIndirect = 0 --filter only direct txns
+  and lm.id not in (12,13) --exclude Purchase and Sales return types
+  and tt.transactionType in (0,3) --filter only Buy and Outward txns
+)
+group by 
+ledgerId, name
     ''');
     _data.forEach((element) {
       print('----------Ledger Transaction Master Data---');

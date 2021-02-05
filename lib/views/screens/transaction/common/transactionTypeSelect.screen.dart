@@ -1,14 +1,27 @@
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newParty.modal.dart';
+import 'package:account_manager/static/transactionType.constant.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../../../business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
-import '../../../../../static/constants.dart';
+import '../../../../business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
+import '../../../../static/constants.dart';
 
-class PartySelect extends StatelessWidget {
-  const PartySelect({Key key}) : super(key: key);
+class TransactionTypeSelectScreen extends StatefulWidget {
+  @override
+  _TransactionTypeSelectScreenState createState() =>
+      _TransactionTypeSelectScreenState();
+}
+
+class _TransactionTypeSelectScreenState
+    extends State<TransactionTypeSelectScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +33,8 @@ class PartySelect extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Search Party....'),
+                  decoration:
+                      InputDecoration(labelText: 'Search Transaction Type....'),
                   onChanged: (value) {
                     model.getFilterdPartyLedgerMaster(value);
                   },
@@ -58,7 +72,7 @@ class PartySelect extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () async {
-                          newPartyModal(context);
+                          newAssetModal(context);
                         },
                         child: Center(
                           child: Text(
@@ -76,12 +90,23 @@ class PartySelect extends StatelessWidget {
                 SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: model.partyList.length,
+                    itemCount: model.transactionTypeList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          model.setPartyId(model.partyList[index].id);
-                          model.setPartyName(model.partyList[index].name);
+                          model.setTransactionTypeId(
+                              model.transactionTypeList[index].id);
+                          model.setTransactionTypeName(
+                              model.transactionTypeList[index].name);
+                          if (model.transactionTypeList[index].id ==
+                              TransactionTypeConstant.cPURCHASEOFASSET) {
+                            Navigator.of(context)
+                                .push(new MaterialPageRoute<Null>(
+                                    builder: (BuildContext context) {
+                                      return new AssetSelectScreen();
+                                    },
+                                    fullscreenDialog: true));
+                          }
                           Navigator.pop(context);
                         },
                         child: Padding(
@@ -92,7 +117,8 @@ class PartySelect extends StatelessWidget {
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blueAccent)),
                             child: Center(
-                              child: Text(model.partyList[index].name),
+                              child:
+                                  Text(model.transactionTypeList[index].name),
                             ),
                           ),
                         ),

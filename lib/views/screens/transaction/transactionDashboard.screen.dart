@@ -1,7 +1,7 @@
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/transaction/debtSettlementDashboard.screen.dart';
 import 'package:account_manager/views/screens/transaction/newInwardReturn/newInwardReturnTransaction.screen.dart';
-import 'package:account_manager/views/screens/transaction/newSaleTransaction/newSaleTransaction.screen.dart';
+
 import 'package:account_manager/views/screens/transaction/testTransaction/testTransaction.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -85,7 +85,8 @@ class TransactionDashboardScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NewSaleTransactionScreen(),
+                              builder: (context) =>
+                                  NewInwardReturnTransactionScreen(),
                             ),
                           );
                         },
