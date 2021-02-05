@@ -40,7 +40,7 @@ class BooksDashboard extends StatelessWidget {
               ),
               UICard(
                 title: 'Balance Sheet',
-                routeUrl: rTrialBalance,
+                routeUrl: rBalanceSheet,
                 iconName: Icons.library_books,
               ),
             ],
