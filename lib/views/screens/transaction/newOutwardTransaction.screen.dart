@@ -5,7 +5,6 @@ import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
-import 'package:account_manager/views/screens/transaction/common/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -58,12 +57,12 @@ class _NewOutwardTransactionScreenState
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 24,
+                      height: 50,
                     ),
                     Text(
                       'Pekchhuah',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 24,
                           color: HexColor(
                             TEXTCOLOR,
                           )),
