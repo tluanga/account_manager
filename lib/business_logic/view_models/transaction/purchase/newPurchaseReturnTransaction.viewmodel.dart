@@ -541,11 +541,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void loadTransactionType() async {
-    transactionTypeList = await _transactionTypeService.getList();
-    notifyListeners();
-  }
-
   int getAmount() => _amount;
   void setAmount(int value) {
     _amount = value;

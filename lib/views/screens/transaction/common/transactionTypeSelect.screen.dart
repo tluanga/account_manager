@@ -25,116 +25,85 @@ class _TransactionTypeSelectScreenState
   @override
   void initState() {
     super.initState();
-    _model.loadData();
-    _model.printData();
+    // _model.loadData();
+    // _model.printData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<NewPurchaseTransactionViewModel>(
+      body: Consumer<TransactionTypeSelectViewModel>(
         builder: (context, model, child) {
+          // model.loadData();
+
           String _length = model.transactionTypeList.toString();
           print('length of transaction typelist inside view is $_length');
-          return Container(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Search Transaction Type....'),
-                  onChanged: (value) {
-                    model.getFilterdPartyLedgerMaster(value);
-                  },
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: HexColor(TEXTCOLOR),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Center(
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                              color: HexColor(SECONDARYGREYCOLOR),
-                              fontSize: 20,
-                            ),
+          return Padding(
+            padding: const EdgeInsets.only(
+              top: 15,
+            ),
+            child: Container(
+              padding: EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text('back'),
+                      Center(
+                        child: Text(
+                          'Transaction Type Selection',
+                          style: TextStyle(
+                            fontSize: 15,
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: HexColor(TEXTCOLOR),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: GestureDetector(
-                        onTap: () async {
-                          newAssetModal(context);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Add New',
-                            style: TextStyle(
-                              color: HexColor(SECONDARYGREYCOLOR),
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: model.transactionTypeList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          model.setTransactionTypeId(
-                              model.transactionTypeList[index].id);
-                          model.setTransactionTypeName(
-                              model.transactionTypeList[index].name);
-                          if (model.transactionTypeList[index].id ==
-                              TransactionTypeConstant.cPURCHASEOFASSET) {
-                            Navigator.of(context)
-                                .push(new MaterialPageRoute<Null>(
-                                    builder: (BuildContext context) {
-                                      return new AssetSelectScreen();
-                                    },
-                                    fullscreenDialog: true));
-                          }
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 400,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.blueAccent)),
-                            child: Center(
-                              child:
-                                  Text(model.transactionTypeList[index].name),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                    ],
                   ),
-                )
-              ],
+                  SizedBox(height: 10),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'Search Transaction Type....'),
+                    onChanged: (value) => model.setFilteredData(value),
+                  ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: model.transactionTypeList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            model.setSelectedTransactionType(
+                                model.transactionTypeList[index]);
+                            if (model.transactionTypeList[index].id ==
+                                TransactionTypeConstant.cPURCHASEOFASSET) {
+                              Navigator.of(context)
+                                  .push(new MaterialPageRoute<Null>(
+                                      builder: (BuildContext context) {
+                                        return new AssetSelectScreen();
+                                      },
+                                      fullscreenDialog: true));
+                            }
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: 400,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueAccent)),
+                              child: Center(
+                                child:
+                                    Text(model.transactionTypeList[index].name),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },

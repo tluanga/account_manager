@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeSelectViewModel(),
+          child: MyApp(),
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionTypeDetailViewModel(),

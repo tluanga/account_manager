@@ -6,7 +6,6 @@ import 'package:account_manager/services/transactionType/transactionType.service
 import 'package:sqflite/sqflite.dart';
 
 import '../../business_logic/models/transactionType.models.dart';
-import '../../business_logic/models/transactionType.models.dart';
 
 class TransactionTypeImpl implements TransactionTypeService {
   Future<List<Map<String, dynamic>>> gettransactionTypeMapList(
@@ -88,17 +87,18 @@ class TransactionTypeImpl implements TransactionTypeService {
       String _searchString) async {
     Database db = await DatabaseHelper.instance.db;
     List<Map<String, dynamic>> _transactionTypeList = await db.rawQuery('''
-     SELECT * FROM masterLedger_table
+     SELECT * FROM transactionType_table
      WHERE name LIKE '$_searchString%' 
       ''');
 
     // print('The Search yield $length');
-    final List<TransactionType> ledgerMasterList = [];
+    final List<TransactionType> transactionTypeList = [];
     _transactionTypeList.forEach((ledgerMasterMap) {
-      ledgerMasterList.add(TransactionType.fromMap(ledgerMasterMap));
+      transactionTypeList.add(TransactionType.fromMap(ledgerMasterMap));
     });
     if (_transactionTypeList.length == 0) return [];
+    print(transactionTypeList.length.toString());
 
-    return ledgerMasterList;
+    return transactionTypeList;
   }
 }
