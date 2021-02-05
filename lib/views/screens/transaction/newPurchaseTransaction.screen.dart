@@ -2,7 +2,7 @@ import 'package:account_manager/business_logic/view_models/transaction/purchase/
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/static/route.dart';
+
 import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/AssetSelectionPage.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';

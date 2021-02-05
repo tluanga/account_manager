@@ -12,7 +12,7 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
     transactionTypeList = await _transactionTypeService.getList();
     String _length = transactionTypeList.length.toString();
     print('length of list $_length in loadData');
-    ChangeNotifier();
+    notifyListeners();
   }
 
   void printData() {
