@@ -1,9 +1,11 @@
-import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';
 import 'package:account_manager/views/screens/myApp.screen.dart';
+import 'package:account_manager/views/screens/transaction/newInwardReturn/PartySelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/AssetSelectionPage.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/cashOrBankToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/transactionTypeSelect.screen.dart';
@@ -13,16 +15,18 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class NewPurchaseTransactionScreen extends StatefulWidget {
-  const NewPurchaseTransactionScreen({Key key}) : super(key: key);
+import '../../../../static/transactionType.constant.dart';
+
+class NewInwardReturnTransactionScreen extends StatefulWidget {
+  const NewInwardReturnTransactionScreen({Key key}) : super(key: key);
 
   @override
-  _NewPurchaseTransactionScreenState createState() =>
-      _NewPurchaseTransactionScreenState();
+  _NewInwardReturnTransactionScreenState createState() =>
+      _NewInwardReturnTransactionScreenState();
 }
 
-class _NewPurchaseTransactionScreenState
-    extends State<NewPurchaseTransactionScreen> {
+class _NewInwardReturnTransactionScreenState
+    extends State<NewInwardReturnTransactionScreen> {
   NewPurchaseTransactionViewModel _newPurchaseTransactionViewModel =
       serviceLocator<NewPurchaseTransactionViewModel>();
 
@@ -33,7 +37,7 @@ class _NewPurchaseTransactionScreenState
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-
+      _newPurchaseTransactionViewModel.processMockData();
       _journalConfirmBottomSheet(context);
     }
   }
@@ -72,7 +76,7 @@ class _NewPurchaseTransactionScreenState
                         height: 24,
                       ),
                       Text(
-                        'Purchase',
+                        'Inward Return Transaction',
                         style: TextStyle(
                             fontSize: 20,
                             color: HexColor(
@@ -89,10 +93,7 @@ class _NewPurchaseTransactionScreenState
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Amount';
-                          } else if (labelText == labelText) {
-                            return 'Please select Transaction type';
-                          } else
-                            return null;
+                          }
                         },
                         onChanged: (value) {
                           setState(() {
@@ -114,9 +115,6 @@ class _NewPurchaseTransactionScreenState
                         },
                       ),
                       SizedBox(height: 20),
-                      SelectBaOrBaloToggle(
-                        context: context,
-                      ),
                       SizedBox(height: 20),
                       SelectCashOrBankToggle(),
                       SizedBox(height: 20),
@@ -151,17 +149,26 @@ class _NewPurchaseTransactionScreenState
                       Container(
                         child: Text(newTransaction.getPartyName() != null
                             ? newTransaction.getPartyName().toString()
-                            : 'Please Select Party'),
+                            : ''),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  TransactionTypeSelectScreen(),
+                              builder: (context) => PartySelectScreen(),
                             ),
                           );
+                          if (newTransaction.getTransactionTypeId() ==
+                              TransactionTypeConstant.cPURCHASEOFASSET) {
+                            print('Asset Type Select');
+                            Navigator.of(context)
+                                .push(new MaterialPageRoute<Null>(
+                                    builder: (BuildContext context) {
+                                      return new AssetSelectScreen();
+                                    },
+                                    fullscreenDialog: true));
+                          }
                         },
                         child: Container(
                           width: double.infinity,
@@ -174,7 +181,11 @@ class _NewPurchaseTransactionScreenState
                           ),
                           child: Center(
                             child: Text(
-                              labelText,
+                              newTransaction.getTransactionTypeId() == 0
+                                  ? 'Please Select Party'
+                                  : newTransaction
+                                      .getTransactionTypeName()
+                                      .toString(),
                               style: TextStyle(
                                 color: HexColor(TEXTCOLOR),
                                 fontSize: 15,
@@ -217,26 +228,24 @@ class _NewPurchaseTransactionScreenState
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: HexColor(PRIMARYCOLOR),
-                          ),
-                          child: Center(
-                            child: FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                'Back',
-                                style: TextStyle(
-                                  color: HexColor(TEXTCOLOR),
-                                  fontSize: 19,
-                                ),
+                      SizedBox(height: 10),
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: HexColor(PRIMARYCOLOR),
+                        ),
+                        child: Center(
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Back',
+                              style: TextStyle(
+                                color: HexColor(TEXTCOLOR),
+                                fontSize: 19,
                               ),
                             ),
                           ),

@@ -1,4 +1,3 @@
-import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/services/Reports/tradingAccount/tradingAccount/tradingAccount.service.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 import 'package:account_manager/static/constants.dart';
@@ -22,6 +21,7 @@ class TradingAccountImpl implements TradingAccountService {
     List<Map<String, dynamic>> _data = await db.rawQuery('''
     Select 
     lt.ledgerId,
+    lm.name,
     SUM(lt.[amount]) as[TotalAmount]
     from ledgerTranction_table lt
     INNER JOIN masterLedger_table lm    

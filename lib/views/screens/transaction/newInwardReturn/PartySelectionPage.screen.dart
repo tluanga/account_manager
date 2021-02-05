@@ -1,28 +1,30 @@
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newParty.modal.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/widget/newAsset.modal.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../../../business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
-import '../../../../../static/constants.dart';
+import '../../../../business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
+import '../../../../static/constants.dart';
 
-class PartySelect extends StatelessWidget {
-  const PartySelect({Key key}) : super(key: key);
+class PartySelectScreen extends StatelessWidget {
+  const PartySelectScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<NewPurchaseTransactionViewModel>(
         builder: (context, model, child) {
+          model.loadTransactionType();
           return Container(
             padding: EdgeInsets.all(15),
             child: Column(
               children: [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Search Party....'),
+                  decoration: InputDecoration(labelText: 'Search Party ....'),
                   onChanged: (value) {
-                    model.getFilterdPartyLedgerMaster(value);
+                    model.setTransactionTypeList(value);
                   },
                 ),
                 SizedBox(height: 20),
@@ -58,7 +60,7 @@ class PartySelect extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () async {
-                          newPartyModal(context);
+                          newAssetModal(context);
                         },
                         child: Center(
                           child: Text(
@@ -76,12 +78,15 @@ class PartySelect extends StatelessWidget {
                 SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: model.partyList.length,
+                    itemCount: model.transactionTypeList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          model.setPartyId(model.partyList[index].id);
-                          model.setPartyName(model.partyList[index].name);
+                          model.setTransactionTypeId(
+                              model.transactionTypeList[index].id);
+                          model.setTransactionTypeName(
+                              model.transactionTypeList[index].name);
+                          if (model.getTransactionTypeId() == cASSET) {}
                           Navigator.pop(context);
                         },
                         child: Padding(
@@ -92,7 +97,8 @@ class PartySelect extends StatelessWidget {
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blueAccent)),
                             child: Center(
-                              child: Text(model.partyList[index].name),
+                              child:
+                                  Text(model.transactionTypeList[index].name),
                             ),
                           ),
                         ),

@@ -19,6 +19,7 @@ class SaleType {
   //Credit: Sales
   static const int saleBaPartialBank = 4;
 
-  //5) Sale-Ba-Partial Payment-Ba-Cash Partial Cash Payment- Debit:Bank Debit Party Credit:Sales
+  //5) Sale-Ba-Partial Payment-Ba-Cash Partial Cash Payment-
+  // Debit:Bank Debit Party Credit:Sales
   static const int saleBaPartialCash = 5;
 }
