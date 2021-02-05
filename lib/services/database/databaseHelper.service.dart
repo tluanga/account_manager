@@ -48,14 +48,6 @@ class DatabaseHelper {
   String transactionTypedebitSideLedger = 'debitSideLedger';
   String transactionTypecreditSideLedger = 'creditSideLedger';
   String transactionTypePartyLedger = 'partyLedger';
-  // //-------TABLE 5-PURCHASE TRANSACTIONTYPE TABLE----------
-  // String purchaseTransactionTypeTable = 'transactionType_table';
-  // String purchaseTransactionTypeId = 'id';
-  // String purchaseTransactionTypeName = 'name';
-  // String purchaseTransactionDescription = 'description';
-  // String purchaseTransactionAssetOrLiabilities = 'assetOrLiabilities';
-  // String purchaseTransactiondebitSideLedger = 'debitSideLedger';
-  // String purchaseTransactioncreditSideLedger = 'creditSideLedger';
 
   //------TABLE 5 TRANSACTION TABLE ---------------
   String transactionTable = 'transaction_table';
