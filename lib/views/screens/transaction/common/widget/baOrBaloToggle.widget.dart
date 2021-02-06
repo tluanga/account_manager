@@ -26,12 +26,12 @@ class SelectBaOrBaloToggle extends StatelessWidget {
   );
   final TextStyle _activeTextStyle = TextStyle(
     color: Colors.black,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: FontWeight.w500,
   );
   final TextStyle _inActiveTextStyle = TextStyle(
     color: Colors.black,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: FontWeight.w500,
   );
 
@@ -55,7 +55,7 @@ class SelectBaOrBaloToggle extends StatelessWidget {
               },
               child: Container(
                 height: 40,
-                width: 165,
+                width: MediaQuery.of(context).size.width * 0.35,
                 decoration: model.getBaOrBalo() == cCredit
                     ? _activeBoxDecoration
                     : _inActiveBoxDecoration,
@@ -74,7 +74,7 @@ class SelectBaOrBaloToggle extends StatelessWidget {
               onTap: () => model.setBaOrBalo(cCashDown),
               child: Container(
                 height: 40,
-                width: 165,
+                width: MediaQuery.of(context).size.width * 0.35,
                 decoration: model.getBaOrBalo() == cCashDown
                     ? _activeBoxDecoration
                     : _inActiveBoxDecoration,

@@ -1,20 +1,25 @@
+import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/dashboard/ledger.widget.dart';
 import 'package:account_manager/views/dashboard/transaction.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'parties.dashboard.screen.dart';
 
 class DashBoard extends StatefulWidget {
-  final String title;
-  DashBoard({this.title});
-
   @override
   _DashBoardState createState() => _DashBoardState();
 }
 
 class _DashBoardState extends State<DashBoard> {
+  @override
+  void initState() {
+    Provider.of<LedgerMainDashboardViewModel>(context, listen: false)
+        .loadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -26,20 +31,20 @@ class _DashBoardState extends State<DashBoard> {
           centerTitle: true,
           title: Column(
             children: [
-            Text(
-            "Accounting Application",
-            style: TextStyle(color: Colors.black),
-            ),
-            Text(
-            "Current Month",
-            style: TextStyle(color: Colors.black),
-            ),
+              Text(
+                "Accounting Application",
+                style: TextStyle(color: Colors.black),
+              ),
+              Text(
+                "Current Month",
+                style: TextStyle(color: Colors.black),
+              ),
             ],
           ),
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 90.0),
             child: Row(
-              children:[
+              children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,35 +130,34 @@ class _DashBoardState extends State<DashBoard> {
                       Container(
                         height: 35,
                         child: TabBar(
-                          labelColor: Colors.white,
-                          unselectedLabelColor: Colors.black,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicator: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)),
-                              color: cprimaryColor),
-                          tabs: [
-                            Tab(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Ledgers"),
+                            labelColor: Colors.white,
+                            unselectedLabelColor: Colors.black,
+                            indicatorSize: TabBarIndicatorSize.label,
+                            indicator: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10)),
+                                color: cprimaryColor),
+                            tabs: [
+                              Tab(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Ledgers"),
+                                ),
                               ),
-                            ),
-                            Tab(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Transactions"),
+                              Tab(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Transactions"),
+                                ),
                               ),
-                            ),
-                            Tab(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Parties"),
+                              Tab(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Parties"),
+                                ),
                               ),
-                            ),
-                          ]
-                        ),
+                            ]),
                       ),
                     ],
                   ),

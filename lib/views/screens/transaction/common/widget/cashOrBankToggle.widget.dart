@@ -41,7 +41,7 @@ class SelectCashOrBankToggle extends StatelessWidget {
               onTap: () => model.setCashOrBank(CASH),
               child: Container(
                 height: 40,
-                width: 165,
+                width: MediaQuery.of(context).size.width * 0.35,
                 decoration: model.getCashOrBank() == CASH
                     ? _activeBoxDecoration
                     : _inActiveBoxDecoration,
@@ -60,7 +60,7 @@ class SelectCashOrBankToggle extends StatelessWidget {
               onTap: () => model.setCashOrBank(BANK),
               child: Container(
                 height: 40,
-                width: 165,
+                width: MediaQuery.of(context).size.width * 0.35,
                 decoration: model.getCashOrBank() == BANK
                     ? _activeBoxDecoration
                     : _inActiveBoxDecoration,
