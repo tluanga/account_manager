@@ -11,6 +11,7 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
 
   void loadData() async {
     transactionTypeList = await _transactionTypeService.getList();
+    print(transactionTypeList.length.toString());
     notifyListeners();
   }
 

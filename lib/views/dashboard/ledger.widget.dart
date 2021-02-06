@@ -18,11 +18,11 @@ class LedgerDashboardScreen extends StatelessWidget {
                   itemCount: model.ledgerMasterListSorted.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.grey,
+                            color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),

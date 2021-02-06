@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
@@ -52,6 +52,7 @@ class _NewPurchaseTransactionScreenState
   @override
   void initState() {
     _newPurchaseTransactionViewModel.loadParty();
+
     super.initState();
   }
 
@@ -303,7 +304,9 @@ class _NewPurchaseTransactionScreenState
                       2: FlexColumnWidth(3),
                     },
                     border: TableBorder.all(
-                        color: Colors.black, style: BorderStyle.solid, width: 1),
+                        color: Colors.black,
+                        style: BorderStyle.solid,
+                        width: 1),
                     children: [
                       TableRow(children: [
                         Text('Particulars', textAlign: TextAlign.center),
@@ -313,8 +316,7 @@ class _NewPurchaseTransactionScreenState
                         ),
                         Text('Credit', textAlign: TextAlign.center)
                       ]),
-                      TableRow(
-                        children: [
+                      TableRow(children: [
                         Text(
                             // particulars of transaction
                             '$_debitLedgerName Dr.',
@@ -328,10 +330,9 @@ class _NewPurchaseTransactionScreenState
                             '0',
                             textAlign: TextAlign.center),
                       ]),
-                      TableRow(
-                        children: [
+                      TableRow(children: [
                         Text('To $_creditSideLedgerName',
-                              textAlign: TextAlign.center),
+                            textAlign: TextAlign.center),
                         Text(
                             //debit amount fro second ledger
                             '0',

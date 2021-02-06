@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';

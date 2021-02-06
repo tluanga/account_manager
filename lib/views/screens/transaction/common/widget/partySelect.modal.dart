@@ -5,7 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../../../business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
+import '../../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import '../../../../../static/constants.dart';
 
 class PartySelect extends StatelessWidget {

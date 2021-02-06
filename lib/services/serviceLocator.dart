@@ -12,7 +12,7 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/transaction/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
