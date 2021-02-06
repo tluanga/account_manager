@@ -9,6 +9,7 @@ import 'package:account_manager/business_logic/view_models/settings/ledgerMaster
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/purchase/newPurchaseReturnTransaction.viewmodel.dart';
@@ -83,9 +84,14 @@ void setUpServiceLocator() {
     () => NewPurchaseTransactionViewModel(),
   );
 
+  //----------------Asset-----------
   serviceLocator.registerFactory<NewAssetLedgerCreationViewModel>(
     () => NewAssetLedgerCreationViewModel(),
   );
+  serviceLocator.registerFactory<AssetSelectViewModel>(
+    () => AssetSelectViewModel(),
+  );
+
   serviceLocator.registerFactory<NewSaleTransactionViewModel>(
     () => NewSaleTransactionViewModel(),
   );

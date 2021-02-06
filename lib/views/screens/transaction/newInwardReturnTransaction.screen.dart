@@ -4,7 +4,7 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 
 import 'package:account_manager/views/screens/myApp.screen.dart';
-import 'package:account_manager/views/screens/transaction/common/AssetSelectionPage.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/AssetSelection.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
 
 import 'package:flutter/material.dart';

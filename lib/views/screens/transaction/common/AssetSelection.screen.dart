@@ -1,33 +1,26 @@
-import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/business_logic/view_models/transaction/assetSelect.viewmodel.dart';
+
 import 'package:account_manager/static/transactionType.constant.dart';
-import 'package:account_manager/views/screens/transaction/common/AssetSelection.screen.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-class TransactionTypeSelectScreen extends StatefulWidget {
+class AssetSelectScreen extends StatefulWidget {
   @override
-  _TransactionTypeSelectScreenState createState() =>
-      _TransactionTypeSelectScreenState();
+  _AssetSelectScreenState createState() => _AssetSelectScreenState();
 }
 
-class _TransactionTypeSelectScreenState
-    extends State<TransactionTypeSelectScreen> {
-  TransactionTypeSelectViewModel _model =
-      serviceLocator<TransactionTypeSelectViewModel>();
+class _AssetSelectScreenState extends State<AssetSelectScreen> {
   @override
   void initState() {
     super.initState();
-    _model.loadData();
-    // _model.printData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<TransactionTypeSelectViewModel>(
+      body: Consumer<AssetSelectViewModel>(
         builder: (context, model, child) {
           return Padding(
             padding: const EdgeInsets.only(
@@ -38,21 +31,13 @@ class _TransactionTypeSelectScreenState
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('back'),
-                      ),
-                      Container(
-                        child: Center(
-                          child: Text(
-                            'Transaction Type Selection',
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
+                      Text('back'),
+                      Center(
+                        child: Text(
+                          'Asset Selection Selection',
+                          style: TextStyle(
+                            fontSize: 15,
                           ),
                         ),
                       ),
@@ -60,23 +45,18 @@ class _TransactionTypeSelectScreenState
                   ),
                   SizedBox(height: 10),
                   TextFormField(
-                    decoration: InputDecoration(
-                        labelText: 'Search Transaction Type....'),
+                    decoration: InputDecoration(labelText: 'Search Asset....'),
                     onChanged: (value) => model.setFilteredData(value),
                   ),
                   SizedBox(height: 10),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: model.transactionTypeList.length,
+                      itemCount: model.assetList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
-                            model.setSelectedTransactionType(
-                                model.transactionTypeList[index]);
-
-                            if (model.transactionTypeList[index].id ==
+                            if (model.assetList[index].id ==
                                 TransactionTypeConstant.cPURCHASEOFASSET) {
-                              print('asset selected');
                               Navigator.of(context)
                                   .push(new MaterialPageRoute<Null>(
                                       builder: (BuildContext context) {
@@ -94,8 +74,7 @@ class _TransactionTypeSelectScreenState
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.blueAccent)),
                               child: Center(
-                                child:
-                                    Text(model.transactionTypeList[index].name),
+                                child: Text(model.assetList[index].name),
                               ),
                             ),
                           ),

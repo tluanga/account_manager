@@ -23,6 +23,10 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   void setFilteredData(String _searchString) async {
     transactionTypeList = await _transactionTypeService
         .getFilterdTransactionTypeList(_searchString);
+    // transactionTypeList.forEach((element) {
+    //   String name = element.name;
+    //   print('$name');
+    // });
     notifyListeners();
   }
 
