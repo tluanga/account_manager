@@ -295,48 +295,45 @@ class _NewPurchaseTransactionScreenState
                     )
                   ],
                 ),
-                Table(
-                  columnWidths: {
-                    0: FlexColumnWidth(6),
-                    1: FlexColumnWidth(3),
-                    2: FlexColumnWidth(3),
-                  },
-                  border: TableBorder.all(
-                      color: Colors.black, style: BorderStyle.solid, width: 1),
-                  children: [
-                    TableRow(children: [
-                      Text('Particulars', textAlign: TextAlign.center),
-                      Text(
-                        'Debit',
-                        textAlign: TextAlign.center,
-                      ),
-                      Text('Credit', textAlign: TextAlign.center)
-                    ]),
-                    TableRow(children: [
-                      Column(children: [
+                Expanded(
+                  child: Table(
+                    columnWidths: {
+                      0: FlexColumnWidth(6),
+                      1: FlexColumnWidth(3),
+                      2: FlexColumnWidth(3),
+                    },
+                    border: TableBorder.all(
+                        color: Colors.black, style: BorderStyle.solid, width: 1),
+                    children: [
+                      TableRow(children: [
+                        Text('Particulars', textAlign: TextAlign.center),
+                        Text(
+                          'Debit',
+                          textAlign: TextAlign.center,
+                        ),
+                        Text('Credit', textAlign: TextAlign.center)
+                      ]),
+                      TableRow(
+                        children: [
                         Text(
                             // particulars of transaction
                             '$_debitLedgerName Dr.',
                             textAlign: TextAlign.left),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('To $_creditSideLedgerName',
-                            textAlign: TextAlign.center),
-                      ]),
-                      Column(children: [
                         Text(
                             //debit amount for first ledger
                             '$_amount',
                             textAlign: TextAlign.center),
                         Text(
-                            //debit amount fro second ledger
+                            // credit amount for first ledger
                             '0',
                             textAlign: TextAlign.center),
                       ]),
-                      Column(children: [
+                      TableRow(
+                        children: [
+                        Text('To $_creditSideLedgerName',
+                              textAlign: TextAlign.center),
                         Text(
-                            // credit amount for first ledger
+                            //debit amount fro second ledger
                             '0',
                             textAlign: TextAlign.center),
                         Text(
@@ -344,11 +341,8 @@ class _NewPurchaseTransactionScreenState
                             '$_amount',
                             textAlign: TextAlign.center),
                       ]),
-                    ]),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                    ],
+                  ),
                 ),
                 Padding(
                   padding:

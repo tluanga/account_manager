@@ -1,7 +1,10 @@
+import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/dashboard/ledger.widget.dart';
 import 'package:account_manager/views/dashboard/transaction.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'parties.dashboard.screen.dart';
 
 class DashBoard extends StatefulWidget {
   final String title;
@@ -12,54 +15,31 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  int theriGroupVakue = 0;
-
-  final Map<int, Widget> logoWidgets = const <int, Widget>{
-    0: Text("Transactions"),
-    1: Text("Ledgers"),
-    2: Text("Parties")
-  };
-
-  static Widget giveCenter(String yourText) {
-    return Center(
-      child: Text(
-        "Text: $yourText",
-        style: TextStyle(color: Colors.blue, fontSize: 20.0),
-      ),
-    );
-  }
-
-  static List<Widget> bodies = [
-    // First(),
-    //---Last 10 transactions
-    TransactionDashboardWidget(),
-    LedgerDashboardScreen(),
-    Container(
-      child: Text('Hi'),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: bodies[theriGroupVakue],
-      appBar: AppBar(
-        elevation: 2.0,
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text(
-          "Current Month",
-          style: TextStyle(color: Colors.black),
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size(double.infinity, 75.0),
-          child: Padding(
-            padding: EdgeInsets.only(top: 5.0, bottom: 10.0),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 2.0,
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          title: Column(
+            children: [
+            Text(
+            "Accounting Application",
+            style: TextStyle(color: Colors.black),
+            ),
+            Text(
+            "Current Month",
+            style: TextStyle(color: Colors.black),
+            ),
+            ],
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 90.0),
             child: Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 15.0,
-                ),
+              children:[
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,29 +121,53 @@ class _DashBoardState extends State<DashBoard> {
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      CupertinoSegmentedControl(
-                        unselectedColor: Colors.white,
-                        //  borderColor: Colors.red,
-                        groupValue: theriGroupVakue,
-                        onValueChanged: (changeFromGroupValue) {
-                          setState(() {
-                            theriGroupVakue = changeFromGroupValue;
-                          });
-                        },
-                        children: logoWidgets,
+                      SizedBox(height: 10),
+                      Container(
+                        height: 35,
+                        child: TabBar(
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Colors.black,
+                          indicatorSize: TabBarIndicatorSize.label,
+                          indicator: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10)),
+                              color: cprimaryColor),
+                          tabs: [
+                            Tab(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Ledgers"),
+                              ),
+                            ),
+                            Tab(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Transactions"),
+                              ),
+                            ),
+                            Tab(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Parties"),
+                              ),
+                            ),
+                          ]
+                        ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 15.0,
-                ),
               ],
             ),
           ),
+        ),
+        body: TabBarView(
+          children: [
+            LedgerDashboardScreen(),
+            TransactionDashboardWidget(),
+            PartiesDashBoardScreen()
+          ],
         ),
       ),
     );

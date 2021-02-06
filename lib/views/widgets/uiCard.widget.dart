@@ -18,7 +18,7 @@ class UICard extends StatelessWidget {
           Navigator.pushNamed(context, routeUrl);
         },
         child: Container(
-          padding: EdgeInsets.all(40),
+          padding: EdgeInsets.all(25),
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(color: Colors.grey.withOpacity(0.9), blurRadius: 5)
           ], color: Colors.white, borderRadius: BorderRadius.circular(10)),

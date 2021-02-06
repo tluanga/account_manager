@@ -57,27 +57,27 @@ class LedgerDashboard extends StatelessWidget {
               //   height: 46,
               //   // width: MediaQuery.of(context).size.width,
               //   top: 26,
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(
-              //       horizontal: 20,
-              //       vertical: 5,
-              //     ),
-              //     decoration: BoxDecoration(
-              //         color: Colors.grey[400],
-              //         borderRadius: BorderRadius.circular(10)),
-              //     child: TextField(
-              //         cursorColor: Colors.white,
-              //         style: TextStyle(color: Colors.white),
-              //         decoration: InputDecoration(
-              //             enabledBorder: InputBorder.none,
-              //             focusedBorder: InputBorder.none,
-              //             icon: Icon(
-              //               Icons.search,
-              //               color: Colors.white,
-              //             ),
-              //             hintText: 'Search',
-              //             hintStyle: TextStyle(color: Colors.white))),
-              //   ),
+                // child: Container(
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: 20,
+                //     vertical: 5,
+                //   ),
+                //   decoration: BoxDecoration(
+                //       color: Colors.grey[400],
+                //       borderRadius: BorderRadius.circular(10)),
+                //   child: TextField(
+                //       cursorColor: Colors.white,
+                //       style: TextStyle(color: Colors.white),
+                //       decoration: InputDecoration(
+                //           enabledBorder: InputBorder.none,
+                //           focusedBorder: InputBorder.none,
+                //           icon: Icon(
+                //             Icons.search,
+                //             color: Colors.white,
+                //           ),
+                //           hintText: 'Search',
+                //           hintStyle: TextStyle(color: Colors.white))),
+                // ),
               // )
             ],
           );
