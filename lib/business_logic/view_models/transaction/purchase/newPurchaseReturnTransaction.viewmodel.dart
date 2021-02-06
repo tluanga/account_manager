@@ -78,48 +78,88 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     );
   }
 
-  void setPurchaseType(Transaction) async {
+  void setPurchaseType() async {
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
         if (_cashOrBank == BANK) {
           print('1) Asset-CashDown-Bank');
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.BANK;
           _purchaseType = PurchaseType.assetCashDownBank;
+          notifyListeners();
         } else if (_cashOrBank == BANK) {
           print('2) Asset-CashDown-Cash');
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.CASHAC;
           _purchaseType = PurchaseType.assetCashDownCash;
+          notifyListeners();
         }
       } else if (_isCredit == cCredit) {
         if (_creditType != cPartialCredit) {
           print('3) Asset-Credit');
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = _partyId;
           _purchaseType = PurchaseType.assetDebt;
+          notifyListeners();
         } else if (_cashOrBank == CASH) {
           print('4) Asset-Credit-Partial-Cash');
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = _partyId;
           _purchaseType = PurchaseType.assetDebtPartialCash;
+          notifyListeners();
         } else if (_cashOrBank == BANK) {
           print('5) Asset-Credit-Partial-Bank');
+          _debitSideLedgerId = _assetLedger;
+          _creditSideLedgerId = LedgerID.BANK;
           _purchaseType = PurchaseType.assetDebtPartialBank;
+          notifyListeners();
         }
       }
     } else if (_isCredit == cCashDown) {
       if (_cashOrBank == BANK) {
         print('6) Non-Asset-CashDown-Bank');
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        _creditSideLedgerId = LedgerID.BANK;
         _purchaseType = PurchaseType.nonAssetCashDownBank;
+        notifyListeners();
       } else if (_cashOrBank == CASH) {
         print('7) Non-Asset-Cashdown-Cash-');
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        _creditSideLedgerId = LedgerID.CASHAC;
         _purchaseType = PurchaseType.nonAssetCashDownCash;
+        notifyListeners();
       }
     } else if (_isCredit == cCredit) {
       if (_creditType != cPartialCredit) {
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        _creditSideLedgerId = _partyId;
         print('8) Non-Asset-Credit-');
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        _creditSideLedgerId = _partyId;
         _purchaseType = PurchaseType.nonAssetDebt;
+        notifyListeners();
       } else if (_cashOrBank == CASH) {
         print('9) Non-Asset-Credit-Cash Partial');
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        _creditSideLedgerId = LedgerID.CASHAC;
         _purchaseType = PurchaseType.nonAssetDebtCashPartial;
+        notifyListeners();
       } else if (_cashOrBank == BANK) {
         print('10) Non-Asset-Ba-Bank Partial');
+        _debitSideLedgerId = LedgerID.PURCHASEAC;
+        _creditSideLedgerId = LedgerID.BANK;
         _purchaseType = PurchaseType.assetDebtPartialBank;
+        notifyListeners();
       }
     }
+  }
+
+  notifyListeners();
+  void setDebitAndCreditSideLedgerName() async {
+    _debitSideLedgerName =
+        await _ledgerMasterService.getLedgerMasterName(_debitSideLedgerId);
+    _creditSideLedgerName =
+        await _ledgerMasterService.getLedgerMasterName(_creditSideLedgerId);
   }
 
   void saveData() {
@@ -144,8 +184,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         {
           print('type-1:assetCashDownBank');
           // --process debit side
-          _debitSideLedgerId = _assetLedger;
-          _creditSideLedgerId = LedgerID.BANK;
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -175,8 +213,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         {
           print('2) assetCashDownCash');
           // --process debit side
-          _debitSideLedgerId = _assetLedger;
-          _creditSideLedgerId = LedgerID.CASHAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -207,9 +243,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         {
           print('3)Save Data- Asset-Credit--');
           // --process debit side
-
-          _debitSideLedgerId = _assetLedger;
-          _creditSideLedgerId = _partyId;
           print('---Before Saving data----');
           print('_debitSideLedgerId:$_debitSideLedgerId');
           print('_creditSideLedgerId:$_creditSideLedgerId');
@@ -324,8 +357,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         {
           print('type-6:nonAssetCashDownBank');
           // --process debit side
-          _debitSideLedgerId = LedgerID.PURCHASEAC;
-          _creditSideLedgerId = LedgerID.BANK;
+
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -355,8 +387,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         {
           print('type-7) Non-Asset-Cashdown-Cash-');
           // --process debit side
-          _debitSideLedgerId = LedgerID.PURCHASEAC;
-          _creditSideLedgerId = LedgerID.CASHAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -386,8 +416,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         // ---Type 8----
         {
           print('type-8:Non-Asset-Credit-');
-          _debitSideLedgerId = LedgerID.PURCHASEAC;
-          _creditSideLedgerId = _partyId;
+
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -506,6 +535,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('Ba Type:$_creditType');
     print('Party Id:$_partyId');
     print('Party Name :$_partyName');
+    print('Debit Side Ledger:$_debitSideLedgerId');
   }
 
   void getFilterdPartyLedgerMaster(String _searchString) async {

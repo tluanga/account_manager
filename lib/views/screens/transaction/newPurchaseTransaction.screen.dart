@@ -36,7 +36,7 @@ class _NewPurchaseTransactionScreenState
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      // _newPurchaseTransactionViewModel.s
+
       _journalConfirmBottomSheet(context);
     }
   }
@@ -274,12 +274,15 @@ class _NewPurchaseTransactionScreenState
       builder: (BuildContext contex) {
         return Consumer<NewPurchaseTransactionViewModel>(
           builder: (context, model, child) {
+            print('insideJournal Bottom Sheet ');
+            model.setPurchaseType();
+            model.printData();
             String _debitLedgerName = model.getDebitSideLedgerName();
             String _creditSideLedgerName = model.getCreditSideLedgerName();
             String _partyName = model.getPartyName();
             String _assetLedgerName = model.getAssetLedgerName();
             int _amount = model.getAmount();
-
+            print('Debit Side Ledger Name $_debitLedgerName');
             return Container(
               child: Column(children: [
                 Row(
