@@ -20,7 +20,27 @@ class LedgerDashboardScreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        child: Text(model.ledgerMasterListSorted[index].name),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Column(children: [
+                          Text(
+                            model.ledgerMasterListSorted[index].name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text('Debit:1121212'),
+                              Text('Credit:121212'),
+                            ],
+                          )
+                        ]),
                       ),
                     );
                   },
