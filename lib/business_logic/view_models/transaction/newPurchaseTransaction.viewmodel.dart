@@ -86,13 +86,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _debitSideLedgerId = _assetLedger;
           _creditSideLedgerId = LedgerID.BANK;
           _purchaseType = PurchaseType.assetCashDownBank;
-          notifyListeners();
+          // notifyListeners();
         } else if (_cashOrBank == BANK) {
           print('2) Asset-CashDown-Cash');
           _debitSideLedgerId = _assetLedger;
           _creditSideLedgerId = LedgerID.CASHAC;
           _purchaseType = PurchaseType.assetCashDownCash;
-          notifyListeners();
+          // notifyListeners();
         }
       } else if (_isCredit == cCredit) {
         if (_creditType != cPartialCredit) {
@@ -100,19 +100,19 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _debitSideLedgerId = _assetLedger;
           _creditSideLedgerId = _partyId;
           _purchaseType = PurchaseType.assetDebt;
-          notifyListeners();
+          // notifyListeners();
         } else if (_cashOrBank == CASH) {
           print('4) Asset-Credit-Partial-Cash');
           _debitSideLedgerId = _assetLedger;
           _creditSideLedgerId = _partyId;
           _purchaseType = PurchaseType.assetDebtPartialCash;
-          notifyListeners();
+          // notifyListeners();
         } else if (_cashOrBank == BANK) {
           print('5) Asset-Credit-Partial-Bank');
           _debitSideLedgerId = _assetLedger;
           _creditSideLedgerId = LedgerID.BANK;
           _purchaseType = PurchaseType.assetDebtPartialBank;
-          notifyListeners();
+          // notifyListeners();
         }
       }
     } else if (_isCredit == cCashDown) {
@@ -121,13 +121,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         _creditSideLedgerId = LedgerID.BANK;
         _purchaseType = PurchaseType.nonAssetCashDownBank;
-        notifyListeners();
+        // notifyListeners();
       } else if (_cashOrBank == CASH) {
         print('7) Non-Asset-Cashdown-Cash-');
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         _creditSideLedgerId = LedgerID.CASHAC;
         _purchaseType = PurchaseType.nonAssetCashDownCash;
-        notifyListeners();
+        // notifyListeners();
       }
     } else if (_isCredit == cCredit) {
       if (_creditType != cPartialCredit) {
@@ -137,19 +137,19 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         _creditSideLedgerId = _partyId;
         _purchaseType = PurchaseType.nonAssetDebt;
-        notifyListeners();
+        // notifyListeners();
       } else if (_cashOrBank == CASH) {
         print('9) Non-Asset-Credit-Cash Partial');
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         _creditSideLedgerId = LedgerID.CASHAC;
         _purchaseType = PurchaseType.nonAssetDebtCashPartial;
-        notifyListeners();
+        // notifyListeners();
       } else if (_cashOrBank == BANK) {
         print('10) Non-Asset-Ba-Bank Partial');
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         _creditSideLedgerId = LedgerID.BANK;
         _purchaseType = PurchaseType.assetDebtPartialBank;
-        notifyListeners();
+        // notifyListeners();
       }
     }
   }
