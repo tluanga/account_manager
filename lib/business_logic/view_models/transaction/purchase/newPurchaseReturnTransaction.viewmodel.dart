@@ -78,7 +78,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     );
   }
 
-  void setPurchaseType() async {
+  void setPurchaseType(Transaction) async {
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
         if (_cashOrBank == BANK) {

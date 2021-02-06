@@ -36,7 +36,7 @@ class _NewPurchaseTransactionScreenState
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      _newPurchaseTransactionViewModel.processMockData();
+      // _newPurchaseTransactionViewModel.s
       _journalConfirmBottomSheet(context);
     }
   }
