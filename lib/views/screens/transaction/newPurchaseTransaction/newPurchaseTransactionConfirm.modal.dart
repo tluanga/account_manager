@@ -82,7 +82,9 @@ void journalConfirmBottomSheet(context) {
                           textAlign: TextAlign.center),
                     ]),
                     model.getPartyId() != model.getCreditSideLedgerID() &&
-                            model.getPartyId() != model.getDebitSideLedgerId()
+                            model.getPartyId() !=
+                                model.getDebitSideLedgerId() &&
+                            model.getPartyId() != null
                         ? TableRow(children: [
                             Row(
                               children: [
