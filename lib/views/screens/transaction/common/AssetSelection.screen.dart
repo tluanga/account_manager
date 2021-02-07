@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
 import '../../../../static/route.dart';
+import '../../../../static/route.dart';
 
 class AssetSelectScreen extends StatefulWidget {
   @override
@@ -65,28 +66,29 @@ class _AssetSelectScreenState extends State<AssetSelectScreen> {
                               color: Colors.grey[400],
                               borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
-                              onChanged: (value) =>
-                                  model.setFilteredData(value),
-                              cursorColor: Colors.white,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  icon: Icon(
-                                    Icons.search,
-                                    color: Colors.white,
-                                  ),
-                                  hintText: 'Select Party...',
-                                  hintStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w900,
-                                      letterSpacing: 1))),
+                            onChanged: (value) => model.setFilteredData(value),
+                            cursorColor: Colors.white,
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                              hintText: 'Asset ...',
+                              hintStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 1),
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, rNewParty);
+                              Navigator.pushNamed(context, rAssetNew);
                             },
                             child: Container(
                               width: 100,
@@ -96,7 +98,7 @@ class _AssetSelectScreenState extends State<AssetSelectScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: Text('New Party'),
+                                child: Text('New Asset'),
                               ),
                             ),
                           ),
@@ -104,12 +106,12 @@ class _AssetSelectScreenState extends State<AssetSelectScreen> {
                         SizedBox(height: 10),
                         Expanded(
                           child: ListView.builder(
-                            itemCount: model.partyList.length,
+                            itemCount: model.assetList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
                                   model
-                                      .setSelectedParty(model.partyList[index]);
+                                      .setSelectedAsset(model.assetList[index]);
                                   Navigator.pushNamed(
                                       context, rNewPurchaseTransaction);
                                 },
@@ -129,18 +131,21 @@ class _AssetSelectScreenState extends State<AssetSelectScreen> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                            height: 50,
-                                            width: 300,
-                                            decoration: BoxDecoration(
-                                                color: cprimaryColor,
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(5),
-                                                    bottomLeft:
-                                                        Radius.circular(5))),
-                                            child: Center(
-                                                child: Text(model
-                                                    .partyList[index].name
-                                                    .toString()))),
+                                          height: 50,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                              color: cprimaryColor,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(5),
+                                                  bottomLeft:
+                                                      Radius.circular(5))),
+                                          child: Center(
+                                            child: Text(
+                                              model.assetList[index].name
+                                                  .toString(),
+                                            ),
+                                          ),
+                                        ),
                                         SizedBox(
                                           width: 2,
                                         ),

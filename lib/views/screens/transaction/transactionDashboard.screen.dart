@@ -6,7 +6,7 @@ import 'package:account_manager/views/screens/transaction/testTransaction.screen
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'newPurchaseTransaction.screen.dart';
+import 'newPurchaseTransaction/newPurchaseTransaction.screen.dart';
 
 class TransactionDashboardScreen extends StatelessWidget {
   final double height = 80;

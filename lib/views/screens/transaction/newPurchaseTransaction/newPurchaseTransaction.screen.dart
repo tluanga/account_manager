@@ -1,19 +1,21 @@
+import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 
-import 'package:account_manager/views/screens/myApp.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/newPurchaseTransactionConfirm.modal.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
-import '../../../services/serviceLocator.dart';
+import '../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import '../../../../services/serviceLocator.dart';
+import '../../../../services/serviceLocator.dart';
 
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);
@@ -30,13 +32,16 @@ class _NewPurchaseTransactionScreenState
   DateTime _dateTime = DateTime.now();
   NewPurchaseTransactionViewModel model =
       serviceLocator<NewPurchaseTransactionViewModel>();
+  PartySelectViewModel _partySelectViewModel =
+      serviceLocator<PartySelectViewModel>();
 
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       Provider.of<NewPurchaseTransactionViewModel>(context, listen: false)
           .setPurchaseType();
-      _journalConfirmBottomSheet(context);
+
+      journalConfirmBottomSheet(context);
     }
   }
 
@@ -48,9 +53,10 @@ class _NewPurchaseTransactionScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer2<NewPurchaseTransactionViewModel,
-          TransactionTypeSelectViewModel>(
-        builder: (context, newTransaction, transactionTypeSelect, child) {
+      body: Consumer3<NewPurchaseTransactionViewModel,
+          TransactionTypeSelectViewModel, PartySelectViewModel>(
+        builder: (context, newTransaction, transactionTypeSelect, partySelect,
+            child) {
           String labelText = 'Please Select Transaction Type';
           if (transactionTypeSelect.selectedTransactionType != null) {
             labelText = transactionTypeSelect.selectedTransactionType.name;
@@ -145,8 +151,8 @@ class _NewPurchaseTransactionScreenState
                       ),
                       SizedBox(height: 20),
                       Container(
-                        child: Text(newTransaction.getPartyName() != null
-                            ? newTransaction.getPartyName().toString()
+                        child: Text(model.getPartyId() != null
+                            ? model.getPartyName()
                             : ''),
                       ),
                       GestureDetector(
@@ -200,6 +206,13 @@ class _NewPurchaseTransactionScreenState
                             child: FlatButton(
                               onPressed: () {
                                 //  newTransaction.setData();
+                                print('value of partySelect');
+                                if (partySelect.selectedParty.id != 0) {
+                                  newTransaction
+                                      .setPartyId(partySelect.selectedParty.id);
+                                  newTransaction.setPartyName(
+                                      partySelect.selectedParty.name);
+                                }
                                 _submit();
                               },
                               child: Text(
@@ -244,127 +257,6 @@ class _NewPurchaseTransactionScreenState
           );
         },
       ),
-    );
-  }
-
-  void _journalConfirmBottomSheet(context) {
-    model.printData();
-    showModalBottomSheet(
-      isScrollControlled: false,
-      context: context,
-      builder: (BuildContext contex) {
-        return Container(
-          child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(model.getDate().toIso8601String()),
-                )
-              ],
-            ),
-            Expanded(
-              child: Table(
-                columnWidths: {
-                  0: FlexColumnWidth(6),
-                  1: FlexColumnWidth(3),
-                  2: FlexColumnWidth(3),
-                },
-                border: TableBorder.all(
-                    color: Colors.black, style: BorderStyle.solid, width: 1),
-                children: [
-                  TableRow(children: [
-                    Text('Particulars', textAlign: TextAlign.center),
-                    Text(
-                      'Debit',
-                      textAlign: TextAlign.center,
-                    ),
-                    Text('Credit', textAlign: TextAlign.center)
-                  ]),
-                  TableRow(children: [
-                    Row(
-                      children: [
-                        Text(''),
-                        Text(
-                          // particulars of transaction
-                          ' Dr.',
-                          textAlign: TextAlign.left,
-                        )
-                      ],
-                    ),
-                    Text(
-                        //debit amount for first ledger
-                        '11',
-                        textAlign: TextAlign.center),
-                    Text(
-                        // credit amount for first ledger
-                        '0',
-                        textAlign: TextAlign.center),
-                  ]),
-                  TableRow(children: [
-                    Text('To ', textAlign: TextAlign.center),
-                    Text(
-                        //debit amount fro second ledger
-                        '0',
-                        textAlign: TextAlign.center),
-                    Text(
-                        // credit amount for second ledger
-                        '11',
-                        textAlign: TextAlign.center),
-                  ]),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyApp()),
-                      );
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Colors.blue[800],
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                        child: Text(
-                          'Confirm',
-                          style: TextStyle(color: Colors.white, fontSize: 14),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => {Navigator.pop(context)},
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Colors.red[700],
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                        child: Text(
-                          'Decline',
-                          style: TextStyle(color: Colors.white, fontSize: 14),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ]),
-        );
-      },
     );
   }
 }

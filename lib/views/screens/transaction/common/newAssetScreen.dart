@@ -1,20 +1,20 @@
-import 'package:account_manager/business_logic/view_models/party/newParty.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/assetAccount/newAsset.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
 
-class NewPartyScreen extends StatelessWidget {
-  const NewPartyScreen({Key key}) : super(key: key);
+class NewAssetScreen extends StatelessWidget {
+  const NewAssetScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Party'),
+        title: Text('New Asset'),
       ),
-      body: Consumer<NewPartyViewModel>(
+      body: Consumer<NewAssetViewModel>(
         builder: (context, model, child) {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -65,7 +65,8 @@ class NewPartyScreen extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          model.newPartyLedger();
+                          print('new Asset Ledger');
+                          model.newAssetLedger();
 
                           Navigator.pop(context);
                         },

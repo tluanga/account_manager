@@ -151,7 +151,7 @@ class LedgerMasterImpl implements LedgerMasterService {
     Database db = await DatabaseHelper.instance.db;
     List<Map<String, dynamic>> _partyList = await db.rawQuery('''
      SELECT * FROM masterLedger_table
-     WHERE id=$_id%
+     WHERE id=$_id
       ''');
 
     final List<LedgerMaster> ledgerMasterList = [];

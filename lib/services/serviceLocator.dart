@@ -2,8 +2,10 @@
 // anywhere we need them in the app.
 
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/party/newParty.screen.dart';
+import 'package:account_manager/business_logic/view_models/party/newParty.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/assetAccount/newAsset.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -11,7 +13,7 @@ import 'package:account_manager/business_logic/view_models/settings/ledgerMaster
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
+
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
@@ -29,7 +31,6 @@ import 'package:account_manager/services/transactionType/transactionType.service
 import 'package:account_manager/services/transactionType/transactionType_implementation.service.dart';
 import 'package:get_it/get_it.dart';
 
-import '../business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
 import 'Reports/tradingAccount/tradingAccount/tradingAccount.service.dart';
 import 'Reports/tradingAccount/tradingAccount/tradingAccount_impl.service.dart';
 import 'ledgerMaster/ledgerMaster_impl.service.dart';
@@ -84,8 +85,8 @@ void setUpServiceLocator() {
   );
 
   //----------------Asset-----------
-  serviceLocator.registerFactory<NewAssetLedgerCreationViewModel>(
-    () => NewAssetLedgerCreationViewModel(),
+  serviceLocator.registerFactory<NewAssetViewModel>(
+    () => NewAssetViewModel(),
   );
   serviceLocator.registerFactory<AssetSelectViewModel>(
     () => AssetSelectViewModel(),
@@ -104,6 +105,9 @@ void setUpServiceLocator() {
   //-------------Party-----------------
   serviceLocator.registerFactory<NewPartyViewModel>(
     () => NewPartyViewModel(),
+  );
+  serviceLocator.registerFactory<PartySelectViewModel>(
+    () => PartySelectViewModel(),
   );
 
   // serviceLocator

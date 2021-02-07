@@ -3,8 +3,9 @@ import 'package:account_manager/business_logic/view_models/books/tradingAccount/
 import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/party/newParty.screen.dart';
+import 'package:account_manager/business_logic/view_models/party/newParty.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/assetAccount/newAsset.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -14,7 +15,7 @@ import 'package:account_manager/business_logic/view_models/settings/ledgerMaster
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/newAssetLedgerCreation.viewmodel.dart';
+
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
@@ -45,9 +46,10 @@ import 'package:account_manager/views/screens/settings/settingsDashboard.screen.
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/newAssetScreen.dart';
 import 'package:account_manager/views/screens/transaction/common/newPartyScreen.dart';
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
-import 'package:account_manager/views/screens/transaction/newPurchaseTransaction.screen.dart';
+import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/newPurchaseTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 
 // ------SCREENS-----BOOKS---------------
@@ -110,7 +112,7 @@ class MyApp extends StatelessWidget {
           create: (context) => TransactionTypeDetailViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => NewAssetLedgerCreationViewModel(),
+          create: (context) => NewAssetViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => NewSaleTransactionViewModel(),
@@ -131,6 +133,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AssetSelectViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => NewAssetViewModel(),
+        ),
+
         // ------------BOOKS-------------
         ChangeNotifierProvider(
           create: (context) => GeneralJournalViewModel(),
@@ -184,6 +190,7 @@ class MyApp extends StatelessWidget {
 
           //--------Asset---------------
           rAssetSelect: (context) => AssetSelectScreen(),
+          rAssetNew: (context) => NewAssetScreen(),
 
           // ------------Transaction---------------
           rTransactionDashboard: (context) => TransactionDashboardScreen(),
