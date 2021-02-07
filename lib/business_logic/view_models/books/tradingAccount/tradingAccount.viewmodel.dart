@@ -24,6 +24,7 @@ class TradingAccountViewModel extends ChangeNotifier {
 
   void loadData() async {
     _tradingAccountService.getDirectIncomeData();
+    // ignore: unused_local_variable
     var _ledgerTransaction = await _ledgerTransactionService.getList();
   }
 

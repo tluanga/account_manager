@@ -18,4 +18,10 @@ class LedgerDashboardViewmodel extends ChangeNotifier {
     ledgerMasterList = _ledgerMasterList;
     notifyListeners();
   }
+
+  void searchLedgerMaster(String _searchString) async {
+    ledgerMasterList =
+        await _ledgerMasterService.getFilterdLedgerList(_searchString);
+    notifyListeners();
+  }
 }

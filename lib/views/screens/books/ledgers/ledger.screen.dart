@@ -36,8 +36,8 @@ class _LedgerState extends State<Ledger> {
         builder: (context, model, child) {
           model.getData(
             id: widget.ledgerId,
-            startDate: DateTime.now(),
-            endDate: DateTime.now(),
+            // startDate: DateTime.now(),
+            // endDate: DateTime.now(),
           );
 
           return SafeArea(

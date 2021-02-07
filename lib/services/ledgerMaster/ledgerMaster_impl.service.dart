@@ -6,7 +6,6 @@ import 'package:account_manager/static/constants.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../static/constants.dart';
-import '../../static/constants.dart';
 
 class LedgerMasterImpl implements LedgerMasterService {
   Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
@@ -99,20 +98,20 @@ class LedgerMasterImpl implements LedgerMasterService {
     return ledgerMasterList;
   }
 
-  Future<List<LedgerMaster>> getFilterdLedgerList(String _searchString) async {
-    Database db = await DatabaseHelper.instance.db;
-    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
-     SELECT * FROM masterLedger_table
-     WHERE asset=$cASSET AND name LIKE '$_searchString%'
-      ''');
-    print(_partyList.length.toString());
-    final List<LedgerMaster> ledgerMasterList = [];
-    _partyList.forEach((ledgerMasterMap) {
-      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+  // Future<List<LedgerMaster>> getFilterdLedgerList(String _searchString) async {
+  //   Database db = await DatabaseHelper.instance.db;
+  //   List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+  //    SELECT * FROM masterLedger_table
+  //    WHERE asset=$cASSET AND name LIKE '$_searchString%'
+  //     ''');
+  //   print(_partyList.length.toString());
+  //   final List<LedgerMaster> ledgerMasterList = [];
+  //   _partyList.forEach((ledgerMasterMap) {
+  //     ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
 
-      return ledgerMasterList;
-    });
-  }
+  //     return ledgerMasterList;
+  //   });
+  // }
 
   Future<List<LedgerMaster>> getFilterdPartyLedgerList(
       String _searchString) async {
@@ -120,6 +119,23 @@ class LedgerMasterImpl implements LedgerMasterService {
     List<Map<String, dynamic>> _partyList = await db.rawQuery('''
      SELECT * FROM masterLedger_table
      WHERE name LIKE '$_searchString%' AND party=$cPartyAc
+      ''');
+    String length = _partyList.length.toString();
+    // print('The Search yield $length');
+    final List<LedgerMaster> ledgerMasterList = [];
+    _partyList.forEach((ledgerMasterMap) {
+      ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));
+    });
+    if (_partyList.length == 0) return [];
+
+    return ledgerMasterList;
+  }
+
+  Future<List<LedgerMaster>> getFilterdLedgerList(String _searchString) async {
+    Database db = await DatabaseHelper.instance.db;
+    List<Map<String, dynamic>> _partyList = await db.rawQuery('''
+     SELECT * FROM masterLedger_table
+     WHERE name LIKE '$_searchString%'
       ''');
     String length = _partyList.length.toString();
     // print('The Search yield $length');
