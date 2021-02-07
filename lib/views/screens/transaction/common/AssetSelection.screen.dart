@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
 import '../../../../static/route.dart';
+import '../../../../static/route.dart';
 
 class AssetSelectScreen extends StatefulWidget {
   @override
@@ -110,7 +111,8 @@ class _AssetSelectScreenState extends State<AssetSelectScreen> {
                                 onTap: () {
                                   model
                                       .setSelectedParty(model.partyList[index]);
-                                  Navigator.pop(context);
+                                  Navigator.pushNamed(
+                                      context, rNewPurchaseTransaction);
                                 },
                                 child: Padding(
                                   padding:

@@ -17,7 +17,7 @@ const String rParty = 'settings/party';
 
 // -------------New Transaction-----------------
 const String rTransactionDashboard = 'transactionDashboard';
-const String rNewTransaction = 'newTransaction';
+const String rNewPurchaseTransaction = 'newPurchaseTransaction';
 const String rTransactionTypeSelect = '/transactionTypeSelect';
 
 // -------------Books

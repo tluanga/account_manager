@@ -90,12 +90,6 @@ class _TransactionTypeSelectScreenState
                                       fontWeight: FontWeight.w900,
                                       letterSpacing: 1))),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, rAssetSelect);
-                          },
-                          child: Text('New Asset'),
-                        ),
                         SizedBox(height: 10),
                         Expanded(
                           child: ListView.builder(
@@ -112,9 +106,14 @@ class _TransactionTypeSelectScreenState
                                   if (model.transactionTypeList[index].id ==
                                       TransactionTypeConstant
                                           .cPURCHASEOFASSET) {
+                                    model.setSelectedTransactionType(
+                                        model.transactionTypeList[index]);
                                     Navigator.pushNamed(context, rAssetSelect);
-                                  } else
+                                  } else {
+                                    model.setSelectedTransactionType(
+                                        model.transactionTypeList[index]);
                                     Navigator.pop(context);
+                                  }
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

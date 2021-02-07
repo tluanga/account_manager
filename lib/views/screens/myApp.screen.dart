@@ -187,7 +187,7 @@ class MyApp extends StatelessWidget {
 
           // ------------Transaction---------------
           rTransactionDashboard: (context) => TransactionDashboardScreen(),
-          rNewTransaction: (context) => NewPurchaseTransactionScreen(),
+          rNewPurchaseTransaction: (context) => NewPurchaseTransactionScreen(),
           rTransactionTypeSelect: (context) => TransactionTypeSelectScreen(),
 
           //-------------Book------------------------
