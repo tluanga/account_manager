@@ -21,6 +21,8 @@ class LedgerDashboardScreen extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Container(
+                              width: 400,
+                              height: 50,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -37,10 +39,7 @@ class LedgerDashboardScreen extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text('Debit:1121212'),
-                                    Text('Credit:121212'),
-                                  ],
+                                  children: [Text('')],
                                 )
                               ]),
                             ),

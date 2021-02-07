@@ -182,29 +182,25 @@ class _GeneralJournalDashboardScreenState
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Party:'),
-                                      Text(
-                                        model.transactionList[index]
-                                                        .partyName !=
-                                                    null &&
-                                                model.transactionList[index]
-                                                        .partyName !=
-                                                    model.transactionList[index]
-                                                        .creditSideLedgerName &&
-                                                model.transactionList[index]
-                                                        .partyName !=
-                                                    model.transactionList[index]
-                                                        .debitSideLedgerName
-                                            ? model.transactionList[index]
-                                                .partyName
-                                            : '',
-                                      ),
-                                    ],
-                                  ),
+                                  model.transactionList[index].partyName !=
+                                              null &&
+                                          model.transactionList[index]
+                                                  .partyName !=
+                                              model.transactionList[index]
+                                                  .creditSideLedgerName &&
+                                          model.transactionList[index]
+                                                  .partyName !=
+                                              model.transactionList[index]
+                                                  .debitSideLedgerName
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                              Text('Party:'),
+                                              Text(model.transactionList[index]
+                                                  .partyName)
+                                            ])
+                                      : Container(),
                                   Row(
                                     children: [
                                       Text('Credit:'),

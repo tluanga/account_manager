@@ -207,7 +207,7 @@ class _NewPurchaseTransactionScreenState
                               onPressed: () {
                                 //  newTransaction.setData();
                                 print('value of partySelect');
-                                if (partySelect.selectedParty.id != 0) {
+                                if (partySelect.selectedParty != null) {
                                   newTransaction
                                       .setPartyId(partySelect.selectedParty.id);
                                   newTransaction.setPartyName(

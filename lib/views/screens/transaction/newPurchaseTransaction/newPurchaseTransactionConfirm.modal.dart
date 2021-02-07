@@ -1,3 +1,4 @@
+import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,8 +10,8 @@ void journalConfirmBottomSheet(context) {
     isScrollControlled: false,
     context: context,
     builder: (BuildContext contex) {
-      return Consumer<NewPurchaseTransactionViewModel>(
-        builder: (context, model, child) {
+      return Consumer2<NewPurchaseTransactionViewModel, PartySelectViewModel>(
+        builder: (context, model, partySelect, child) {
           model.printData();
           return Container(
             child: Column(children: [
@@ -129,7 +130,9 @@ void journalConfirmBottomSheet(context) {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        print('inside the confirm dialog');
                         model.saveData();
+                        partySelect.clearData();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => MyApp()),

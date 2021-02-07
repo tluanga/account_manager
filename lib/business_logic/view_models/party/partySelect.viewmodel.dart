@@ -50,4 +50,10 @@ class PartySelectViewModel extends ChangeNotifier {
     selectedParty = _party;
     notifyListeners();
   }
+
+  void clearData() {
+    partyList = null;
+    selectedParty = null;
+    isPartialCredit = NONE;
+  }
 }
