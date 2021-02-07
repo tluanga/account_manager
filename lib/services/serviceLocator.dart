@@ -2,6 +2,7 @@
 // anywhere we need them in the app.
 
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/party/newParty.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -21,7 +22,7 @@ import 'package:account_manager/services/companyProfile/companyProfile_impl.serv
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction_impl.service.dart';
-import 'package:account_manager/services/party%20copy/ledgerMaster_impl.service.dart';
+
 import 'package:account_manager/services/party/party.service.dart';
 
 import 'package:account_manager/services/transaction/transaction.service.dart';
@@ -53,7 +54,6 @@ void setUpServiceLocator() {
     () => LedgerTransactionImpl(),
   );
 
-  serviceLocator.registerLazySingleton<PartyService>(() => PartyImpl());
   // --------Report Service--------
 
   serviceLocator
@@ -100,6 +100,11 @@ void setUpServiceLocator() {
   );
   serviceLocator.registerFactory<LedgerMainDashboardViewModel>(
     () => LedgerMainDashboardViewModel(),
+  );
+
+  //-------------Party-----------------
+  serviceLocator.registerFactory<NewPartyViewModel>(
+    () => NewPartyViewModel(),
   );
 
   // serviceLocator

@@ -3,12 +3,13 @@ import 'package:account_manager/business_logic/view_models/books/tradingAccount/
 import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/party/newParty.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/party/partyDashboard.viewmodel.dart';
+
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDetail.viewmodel.dart';
@@ -16,7 +17,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newAssetL
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
@@ -38,11 +39,12 @@ import 'package:account_manager/views/screens/settings/companyProfile/companyPro
 import 'package:account_manager/views/screens/settings/ledgerMaster/ledgerMasterDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/ledgerMaster/newLedgerMaster.screen.dart';
-import 'package:account_manager/views/screens/settings/party/partyDashboard.screen.dart';
+
 import 'package:account_manager/views/screens/settings/settingsDashboard.screen.dart';
 
 import 'package:account_manager/views/screens/settings/transactionType/newTransactionType.screen.dart';
 import 'package:account_manager/views/screens/settings/transactionType/transactionTypeDashboard.screen.dart';
+import 'package:account_manager/views/screens/transaction/common/newPartyScreen.dart';
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction.screen.dart';
 import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
@@ -81,9 +83,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => EditCompanyProfileViewModel()),
 
-        //----Settings--Party----------
-        ChangeNotifierProvider(create: (context) => PartyDashboardViewModel()),
-
         ChangeNotifierProvider(
           create: (context) => EditLedgerMasterViewModel(),
         ),
@@ -120,9 +119,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => PartySelectViewModel(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (context) => TransactionDashboardViewModel(),
-        // ),
+
+        //------------Party---------
+        ChangeNotifierProvider(
+          create: (context) => NewPartyViewModel(),
+        ),
 
         // ------------BOOKS-------------
         ChangeNotifierProvider(
@@ -173,8 +174,7 @@ class MyApp extends StatelessWidget {
           rNewTransactionType: (context) => NewTransactionType(),
 
           // -------Settings - People----------
-          rParty: (context) => PartyDashboardScreen(),
-
+          rNewParty: (context) => NewPartyScreen(),
           // ------------Transaction---------------
           rTransactionDashboard: (context) => TransactionDashboardScreen(),
           rNewTransaction: (context) => NewPurchaseTransactionScreen(),

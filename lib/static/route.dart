@@ -37,3 +37,6 @@ const String rEnterLoginPin = '/loginPin';
 
 // -----------------Analytics--------------
 const String rAnalyticsDashboard = '/analyticsDashboard';
+
+// -----------------Party---------------------
+const String rNewParty = '/party/new';

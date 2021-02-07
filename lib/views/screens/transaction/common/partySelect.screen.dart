@@ -1,8 +1,12 @@
-import 'package:account_manager/business_logic/view_models/transaction/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../static/constants.dart';
+import '../../../../static/route.dart';
 
 class PartySelectScreen extends StatefulWidget {
   @override
@@ -77,6 +81,25 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                                       fontSize: 14,
                                       fontWeight: FontWeight.w900,
                                       letterSpacing: 1))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, rNewParty);
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: HexColor(PRIMARYCOLOR),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('New Party'),
+                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(height: 10),
                         Expanded(
