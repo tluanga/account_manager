@@ -85,6 +85,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           print('1) Asset-CashDown-Bank');
           setDebitSideLedger(_assetLedger);
           setCreditSideLedger(LedgerID.BANK);
+
           _purchaseType = PurchaseType.assetCashDownBank;
           notifyListeners();
         } else if (_cashOrBank == BANK) {
@@ -162,6 +163,18 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   void setCreditSideLedger(int id) async {
+    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _creditSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setAssetLedger(int id) async {
+    _assetLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _assetLedger = id;
+    notifyListeners();
+  }
+
+  void setPArtyLedger(int id) async {
     _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
     _creditSideLedgerId = id;
     notifyListeners();
@@ -644,10 +657,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   int getAssetLedger() => _assetLedger;
-  void setAssetLedger(int value) {
-    _assetLedger = value;
-    notifyListeners();
-  }
 
   int getTransactionTypeId() => _transactionTypeId;
   void setTransactionTypeId(int value) {
