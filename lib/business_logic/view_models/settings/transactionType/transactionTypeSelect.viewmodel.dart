@@ -3,6 +3,8 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../../static/constants.dart';
+
 class TransactionTypeSelectViewModel extends ChangeNotifier {
   List<TransactionType> transactionTypeList;
   TransactionType selectedTransactionType;
@@ -11,7 +13,7 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   bool isLoading;
 
   void loadData() async {
-    isLoading  = true;
+    isLoading = true;
     transactionTypeList = await _transactionTypeService.getList();
     isLoading = false;
     notifyListeners();
@@ -41,5 +43,32 @@ class TransactionTypeSelectViewModel extends ChangeNotifier {
   void setSelectedTransactionType(TransactionType _transactionType) {
     selectedTransactionType = _transactionType;
     notifyListeners();
+  }
+
+  String sumChetVelDan(int) {
+    switch (int) {
+      case cLei:
+        {
+          return 'Lei';
+        }
+        break;
+      case cHralh:
+        {
+          return 'Hralh';
+        }
+        break;
+      case cLei:
+        {
+          return 'Lei';
+        }
+        break;
+      case cLakluh:
+        {
+          return 'Lakluh';
+        }
+        break;
+      default:
+        return 'none';
+    }
   }
 }

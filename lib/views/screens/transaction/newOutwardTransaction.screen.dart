@@ -1,5 +1,5 @@
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/route.dart';

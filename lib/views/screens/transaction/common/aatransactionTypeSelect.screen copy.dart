@@ -2,15 +2,9 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
-import 'package:account_manager/views/screens/transaction/common/AssetSelection.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../static/constants.dart';
-import '../../../../static/ledgerId.constants.dart';
-import '../../../../static/route.dart';
-import '../../../../static/route.dart';
 import '../../../../static/route.dart';
 
 class TransactionTypeSelectScreen extends StatefulWidget {
@@ -101,44 +95,68 @@ class _TransactionTypeSelectScreenState
                           child: ListView.builder(
                             itemCount: model.transactionTypeList.length,
                             itemBuilder: (BuildContext context, int index) {
-                              String _sumChetVeldan = '';
-
-                              _sumChetVeldan = model.sumChetVelDan(model
-                                  .transactionTypeList[index]
-                                  .sumChetVelDanType);
-
                               return GestureDetector(
                                 onTap: () {
+                                  model.setSelectedTransactionType(
+                                      model.transactionTypeList[index]);
+
                                   if (model.transactionTypeList[index].id ==
                                       TransactionTypeConstant
                                           .cPURCHASEOFASSET) {
+                                    print('asset selected');
                                     Navigator.pushNamed(context, rAssetSelect);
-                                  } else
-                                    Navigator.pop(context);
+                                  }
+                                  Navigator.pop(context);
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
                                   child: Container(
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 40,
-                                          width: 40,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(5),
+                                        border:
+                                            Border.all(color: Colors.black12)),
+                                    child: Row(children: [
+                                      Container(
+                                          height: 50,
+                                          width: 70,
                                           decoration: BoxDecoration(
-                                            color: HexColor(PRIMARYCOLOR),
-                                          ),
-                                          child: Text(_sumChetVeldan),
+                                              color: cprimaryColor,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(5),
+                                                  bottomLeft:
+                                                      Radius.circular(5))),
+                                          child: Center(
+                                              child: Text(model
+                                                  .transactionTypeList[index]
+                                                  .sumChetVelDanType
+                                                  .toString()))),
+                                      SizedBox(
+                                        width: 2,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          model.transactionTypeList[index].name,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400),
                                         ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              model.transactionTypeList[index]
-                                                  .name,
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          model.transactionTypeList[index]
+                                              .description,
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                              color: Colors.grey[700]),
+                                        ),
+                                      )
+                                    ]),
                                   ),
                                 ),
                               );

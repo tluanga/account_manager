@@ -19,7 +19,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newOutwar
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
 

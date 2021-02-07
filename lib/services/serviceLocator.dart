@@ -16,7 +16,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newOutwar
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 
-import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/services/companyProfile/companyProfile.service.dart';
 import 'package:account_manager/services/companyProfile/companyProfile_impl.service.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
