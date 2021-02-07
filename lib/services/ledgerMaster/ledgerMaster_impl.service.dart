@@ -6,6 +6,7 @@ import 'package:account_manager/static/constants.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../static/constants.dart';
+import '../../static/constants.dart';
 
 class LedgerMasterImpl implements LedgerMasterService {
   Future<List<Map<String, dynamic>>> getLedgerMasterMapList() async {
@@ -89,7 +90,7 @@ class LedgerMasterImpl implements LedgerMasterService {
      SELECT * FROM masterLedger_table
      WHERE asset=$cASSET
       ''');
-    print('all data');
+    ;
     final List<LedgerMaster> ledgerMasterList = [];
     _partyList.forEach((ledgerMasterMap) {
       ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));

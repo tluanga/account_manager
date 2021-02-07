@@ -40,3 +40,7 @@ const String rAnalyticsDashboard = '/analyticsDashboard';
 
 // -----------------Party---------------------
 const String rNewParty = '/party/new';
+
+//-------------------Asset---------------
+const String rAssetDashboard = '/assetAccount/Dashboard';
+const String rAssetSelect = '/assetAccount/select';

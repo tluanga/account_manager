@@ -1,10 +1,13 @@
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
-import 'package:account_manager/services/serviceLocator.dart';
+
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 import 'package:account_manager/views/screens/transaction/common/AssetSelection.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../static/route.dart';
+import '../../../../static/route.dart';
 
 class TransactionTypeSelectScreen extends StatefulWidget {
   @override
@@ -83,6 +86,12 @@ class _TransactionTypeSelectScreenState
                                       fontWeight: FontWeight.w900,
                                       letterSpacing: 1))),
                         ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, rAssetSelect);
+                          },
+                          child: Text('New Asset'),
+                        ),
                         SizedBox(height: 10),
                         Expanded(
                           child: ListView.builder(
@@ -97,12 +106,7 @@ class _TransactionTypeSelectScreenState
                                       TransactionTypeConstant
                                           .cPURCHASEOFASSET) {
                                     print('asset selected');
-                                    Navigator.of(context)
-                                        .push(new MaterialPageRoute<Null>(
-                                            builder: (BuildContext context) {
-                                              return new AssetSelectScreen();
-                                            },
-                                            fullscreenDialog: true));
+                                    Navigator.pushNamed(context, rAssetSelect);
                                   }
                                   Navigator.pop(context);
                                 },

@@ -169,16 +169,6 @@ class _NewPurchaseTransactionScreenState
                                   TransactionTypeSelectScreen(),
                             ),
                           );
-                          if (newTransaction.getTransactionTypeId() ==
-                              TransactionTypeConstant.cPURCHASEOFASSET) {
-                            print('Asset Type Select');
-                            Navigator.of(context)
-                                .push(new MaterialPageRoute<Null>(
-                                    builder: (BuildContext context) {
-                                      return new AssetSelectScreen();
-                                    },
-                                    fullscreenDialog: true));
-                          }
                         },
                         child: Container(
                           width: double.infinity,

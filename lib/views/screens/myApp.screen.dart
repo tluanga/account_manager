@@ -4,6 +4,7 @@ import 'package:account_manager/business_logic/view_models/books/trialBalance/tr
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/party/newParty.screen.dart';
+import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/editCompanyProfile.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
@@ -59,6 +60,7 @@ import 'authentication/createLoginPin.screen.dart';
 import 'books/ledgers/ledger.screen.dart';
 import 'books/ledgers/ledgerDashboard.screen.dart';
 import '../dashboard/dashBoard.screen.dart';
+import 'transaction/common/AssetSelection.screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -125,6 +127,10 @@ class MyApp extends StatelessWidget {
           create: (context) => NewPartyViewModel(),
         ),
 
+        //------------Asset---------------
+        ChangeNotifierProvider(
+          create: (context) => AssetSelectViewModel(),
+        ),
         // ------------BOOKS-------------
         ChangeNotifierProvider(
           create: (context) => GeneralJournalViewModel(),
@@ -175,6 +181,10 @@ class MyApp extends StatelessWidget {
 
           // -------Settings - People----------
           rNewParty: (context) => NewPartyScreen(),
+
+          //--------Asset---------------
+          rAssetSelect: (context) => AssetSelectScreen(),
+
           // ------------Transaction---------------
           rTransactionDashboard: (context) => TransactionDashboardScreen(),
           rNewTransaction: (context) => NewPurchaseTransactionScreen(),

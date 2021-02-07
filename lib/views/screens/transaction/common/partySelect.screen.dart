@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
 import '../../../../static/route.dart';
+import '../../../../static/route.dart';
 
 class PartySelectScreen extends StatefulWidget {
   @override
@@ -108,9 +109,10 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
-                                  model
-                                      .setSelectedParty(model.partyList[index]);
-                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, rAssetSelect);
+                                  // model
+                                  //     .setSelectedParty(model.partyList[index]);
+                                  // Navigator.pop(context);
                                 },
                                 child: Padding(
                                   padding:
