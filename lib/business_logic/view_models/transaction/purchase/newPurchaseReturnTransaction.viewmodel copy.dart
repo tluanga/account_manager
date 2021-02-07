@@ -24,7 +24,7 @@ import '../../../../services/transaction/transaction.service.dart';
 
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 
-class NewPurchaseTransactionViewModel extends ChangeNotifier {
+class NewPurchaseReturnTransactionViewModel extends ChangeNotifier {
   int _amount;
   String _particular; //--user input
   int _isCredit = cCashDown; //user input
@@ -79,6 +79,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   void setPurchaseType() async {
+    String assetId = _assetLedger.toString();
+    print('The asset ledger id is $assetId');
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
         if (_cashOrBank == BANK) {

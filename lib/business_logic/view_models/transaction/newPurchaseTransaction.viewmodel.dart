@@ -105,7 +105,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         } else if (_cashOrBank == CASH) {
           print('4) Asset-Credit-Partial-Cash');
           setDebitSideLedger(_assetLedger);
-          setCreditSideLedger(_partyId);
+          setCreditSideLedger(LedgerID.CASHAC);
           _purchaseType = PurchaseType.assetDebtPartialCash;
           notifyListeners();
         } else if (_cashOrBank == BANK) {

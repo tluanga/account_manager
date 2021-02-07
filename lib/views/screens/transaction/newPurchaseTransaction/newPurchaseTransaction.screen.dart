@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
@@ -15,7 +16,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import '../../../../services/serviceLocator.dart';
-import '../../../../services/serviceLocator.dart';
+import '../../../../static/route.dart';
 
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);
@@ -53,10 +54,13 @@ class _NewPurchaseTransactionScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer3<NewPurchaseTransactionViewModel,
-          TransactionTypeSelectViewModel, PartySelectViewModel>(
+      body: Consumer4<
+          NewPurchaseTransactionViewModel,
+          TransactionTypeSelectViewModel,
+          PartySelectViewModel,
+          AssetSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, partySelect,
-            child) {
+            assetSelect, child) {
           String labelText = 'Please Select Transaction Type';
           if (transactionTypeSelect.selectedTransactionType != null) {
             labelText = transactionTypeSelect.selectedTransactionType.name;
@@ -215,6 +219,21 @@ class _NewPurchaseTransactionScreenState
                                   newTransaction.setCreditType(
                                       partySelect.isPartialCredit);
                                 }
+                                if (assetSelect.selectedAsset != null) {
+                                  newTransaction.setAssetLedger(
+                                      assetSelect.selectedAsset.id);
+                                }
+                                if (transactionTypeSelect
+                                        .selectedTransactionType !=
+                                    null) {
+                                  newTransaction.setTransactionTypeId(
+                                      transactionTypeSelect
+                                          .selectedTransactionType.id);
+                                  newTransaction.setTransactionTypeName(
+                                    transactionTypeSelect
+                                        .selectedTransactionType.name,
+                                  );
+                                }
                                 _submit();
                               },
                               child: Text(
@@ -239,7 +258,7 @@ class _NewPurchaseTransactionScreenState
                         child: Center(
                           child: FlatButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushNamed(context, rMyApp);
                             },
                             child: Text(
                               'Back',
