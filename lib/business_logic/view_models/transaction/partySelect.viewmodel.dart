@@ -38,8 +38,8 @@ class PartySelectViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedTransactionType(LedgerMaster _partyList) {
-    selectedParty = _partyList;
+  void setSelectedParty(LedgerMaster _party) {
+    selectedParty = _party;
     notifyListeners();
   }
 }

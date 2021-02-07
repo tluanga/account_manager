@@ -1,7 +1,6 @@
 import 'package:account_manager/business_logic/view_models/transaction/partySelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/static/transactionType.constant.dart';
-import 'package:account_manager/views/screens/transaction/common/AssetSelection.screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -86,6 +85,8 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
+                                  model
+                                      .setSelectedParty(model.partyList[index]);
                                   Navigator.pop(context);
                                 },
                                 child: Padding(
