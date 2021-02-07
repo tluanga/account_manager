@@ -6,9 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
-import '../../../../static/constants.dart';
-import '../../../../static/constants.dart';
-import '../../../../static/constants.dart';
+
 import '../../../../static/route.dart';
 
 class PartySelectScreen extends StatefulWidget {

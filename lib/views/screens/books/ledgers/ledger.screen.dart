@@ -6,26 +6,39 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class Ledger extends StatefulWidget {
-  final int ledgerId;
-  Ledger({Key key, this.ledgerId}) : super(key: key);
+import '../../../../business_logic/models/ledgermaster.models.dart';
+
+class LedgerScreen extends StatefulWidget {
+  final LedgerMaster ledger;
+  LedgerScreen({Key key, this.ledger}) : super(key: key);
 
   @override
-  _LedgerState createState() => _LedgerState();
+  _LedgerScreenState createState() => _LedgerScreenState();
 }
 
-class _LedgerState extends State<Ledger> {
+class _LedgerScreenState extends State<LedgerScreen> {
   EditAccountingYear accountingYear;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
 
   int valueSelected = 1;
   @override
+  void initState() {
+    Provider.of<LedgerViewModel>(context, listen: false).getData(
+      id: widget.ledger.id,
+      startDate: DateTime.now(),
+      endDate: DateTime.now(),
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String name = widget.ledger.name;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Ledger Name',
+          'Ledger - $name',
           style: TextStyle(
             color: HexColor(TEXTCOLOR),
             fontSize: 15,
@@ -34,12 +47,6 @@ class _LedgerState extends State<Ledger> {
       ),
       body: Consumer<LedgerViewModel>(
         builder: (context, model, child) {
-          model.getData(
-            id: widget.ledgerId,
-            // startDate: DateTime.now(),
-            // endDate: DateTime.now(),
-          );
-
           return SafeArea(
             child: Scaffold(
               body: Column(
@@ -124,51 +131,57 @@ class _LedgerState extends State<Ledger> {
                               ))),
                     ],
                   ),
-                  Container(
-                    child: Expanded(
-                      child: ListView.builder(
-                          itemCount: model.ledgerTransactionList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        model.debit.toString(),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(model.ledgerTransactionList[index]
-                                          .particular),
-                                      Text(
-                                        model
-                                            .ledgerTransactionList[index].amount
-                                            .toString(),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(model.ledgerTransactionList[index]
-                                          .cashOrBank
-                                          .toString())
-                                    ],
-                                  ),
-                                  Divider(
-                                    thickness: 5,
-                                    color: Colors.grey.shade200,
-                                  )
-                                ],
-                              ),
-                            );
-                          }),
-                    ),
-                  ),
+                  model.isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Container(
+                          child: Expanded(
+                            child: ListView.builder(
+                                itemCount: model.ledgerTransactionList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              model.debit.toString(),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(model
+                                                .ledgerTransactionList[index]
+                                                .particular),
+                                            Text(
+                                              model.ledgerTransactionList[index]
+                                                  .amount
+                                                  .toString(),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(model
+                                                .ledgerTransactionList[index]
+                                                .cashOrBank
+                                                .toString())
+                                          ],
+                                        ),
+                                        Divider(
+                                          thickness: 5,
+                                          color: Colors.grey.shade200,
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ),
                 ],
               ),
             ),

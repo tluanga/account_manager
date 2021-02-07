@@ -39,36 +39,51 @@ class LedgerDashboard extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 200,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: HexColor(PRIMARYCOLOR),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      model.ledgerMasterList[index].name,
-                                      style: TextStyle(
-                                        fontSize: 15,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LedgerScreen(
+                                      ledger: model.ledgerMasterList[index]),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 180,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: HexColor(PRIMARYCOLOR),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        model.ledgerMasterList[index].name,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  width: 100,
-                                  height: 50,
-                                  child: Text(
-                                    model.ledgerMasterList[index].description,
-                                    maxLines: 2,
-                                    softWrap: true,
-                                    overflow: TextOverflow.fade,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      width: 100,
+                                      height: 50,
+                                      child: Text(
+                                        model.ledgerMasterList[index]
+                                            .description,
+                                        maxLines: 3,
+                                        softWrap: true,
+                                        overflow: TextOverflow.fade,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

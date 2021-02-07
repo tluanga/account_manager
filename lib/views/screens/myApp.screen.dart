@@ -199,7 +199,7 @@ class MyApp extends StatelessWidget {
 
           //-------------Book------------------------
           rLedgerDashboard: (context) => LedgerDashboard(),
-          rLedger: (context) => Ledger(),
+          rLedger: (context) => LedgerScreen(),
           rGeneralJournalDashboard: (context) =>
               GeneralJournalDashboardScreen(),
           rTrialBalance: (context) => TrialBalanceScreen(),

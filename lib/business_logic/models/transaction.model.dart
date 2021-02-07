@@ -27,6 +27,7 @@ class Transaction {
       this.partyId,
       this.partyName,
       this.assetLedger,
+      this.assetLedgerName,
       this.transactionTypeId,
       this.transactionTypeName,
       this.debitSideLedgerId,

@@ -184,7 +184,12 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         partyId: _partyId,
         partyName: _partyName,
         assetLedger: _assetLedger,
+        assetLedgerName: _assetLedgerName,
         transactionTypeId: _transactionTypeId,
+        debitSideLedgerId: _debitSideLedgerId,
+        debitSideLedgerName: _debitSideLedgerName,
+        creditSideLedgerId: _creditSideLedgerId,
+        creditSideLedgerName: _creditSideLedgerName,
         transactionTypeName: _transactionTypeName,
       ),
     );

@@ -8,6 +8,7 @@ class GeneralJournalViewModel extends ChangeNotifier {
   List<Transaction> transactionList = [];
   void loadData() async {
     transactionList = await _transactionService.getList();
+
     notifyListeners();
   }
 
