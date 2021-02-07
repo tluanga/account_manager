@@ -212,6 +212,8 @@ class _NewPurchaseTransactionScreenState
                                       .setPartyId(partySelect.selectedParty.id);
                                   newTransaction.setPartyName(
                                       partySelect.selectedParty.name);
+                                  newTransaction.setCreditType(
+                                      partySelect.isPartialCredit);
                                 }
                                 _submit();
                               },

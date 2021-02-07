@@ -167,6 +167,11 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setCreditType(int value) {
+    _creditType = value;
+    notifyListeners();
+  }
+
   void saveData() {
     _transactionService.insert(
       Transaction(

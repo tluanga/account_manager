@@ -2,11 +2,13 @@ import 'package:account_manager/services/serviceLocator.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../services/ledgerMaster/ledgeMaster.service.dart';
+import '../../../static/constants.dart';
 import '../../models/ledgermaster.models.dart';
 
 class PartySelectViewModel extends ChangeNotifier {
   List<LedgerMaster> partyList;
   LedgerMaster selectedParty;
+  int isPartialCredit = NONE;
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
   bool isLoading;
@@ -16,6 +18,11 @@ class PartySelectViewModel extends ChangeNotifier {
     partyList = await _ledgerMasterService.getPartyList();
     isLoading = false;
     print('loading party data');
+    notifyListeners();
+  }
+
+  void setPartialCredit(int value) {
+    isPartialCredit = value;
     notifyListeners();
   }
 

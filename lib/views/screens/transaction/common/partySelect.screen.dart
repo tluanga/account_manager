@@ -6,6 +6,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
+import '../../../../static/constants.dart';
+import '../../../../static/constants.dart';
+import '../../../../static/constants.dart';
 import '../../../../static/route.dart';
 
 class PartySelectScreen extends StatefulWidget {
@@ -82,24 +85,72 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                                       fontWeight: FontWeight.w900,
                                       letterSpacing: 1))),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, rNewParty);
-                            },
-                            child: Container(
-                              width: 100,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: HexColor(PRIMARYCOLOR),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text('New Party'),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  model.setPartialCredit(NONE);
+                                },
+                                child: Container(
+                                  width: 100,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        model.isPartialCredit == cPartialCredit
+                                            ? Colors.grey.shade400
+                                            : HexColor(PRIMARYCOLOR),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text('Full Credit'),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  model.setPartialCredit(cPartialCredit);
+                                },
+                                child: Container(
+                                  width: 100,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        model.isPartialCredit == cPartialCredit
+                                            ? HexColor(PRIMARYCOLOR)
+                                            : Colors.grey.shade400,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text('Partial Credit'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, rNewParty);
+                                },
+                                child: Container(
+                                  width: 100,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: HexColor(PRIMARYCOLOR),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text('New Party'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 10),
                         Expanded(

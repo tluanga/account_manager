@@ -129,6 +129,7 @@ void journalConfirmBottomSheet(context) {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        model.saveData();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => MyApp()),
