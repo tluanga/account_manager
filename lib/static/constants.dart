@@ -5,24 +5,24 @@ const int NONE = 0;
 const int DEBIT = 1;
 const int CREDIT = 2;
 
-const int CASH = 3;
-const int BANK = 4;
+const int CASH = 0;
+const int BANK = 1;
 //--Credit Or CashDown
-const int cCredit = 5;
-const int cCashDown = 6;
+const int cCredit = 0;
+const int cCashDown = 1;
 //----PARTY OR NOT PARTY--
-const int cPartyAc = 7;
-const int cNotPartyAc = 8;
+const int cPartyAc = 0;
+const int cNotPartyAc = 1;
 //----Direct Or Indirect--
-const int cDirectAc = 9;
-const int cIndirectAc = 10;
+const int cDirectAc = 0;
+const int cIndirectAc = 1;
 
 //----Type of Credit
-const int cPartialCredit = 11;
+const int cPartialCredit = 1;
 
 //---------ASSET or NON ASSET-------
-const int cASSET = 12;
-const int cNonASSET = 13;
+const int cASSET = 0;
+const int cNonASSET = 1;
 
 //---Sum Chet Vel dan
 const int cSale = 0;

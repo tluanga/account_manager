@@ -2,15 +2,12 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
-import 'package:account_manager/views/screens/transaction/common/AssetSelection.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
-import '../../../../static/ledgerId.constants.dart';
-import '../../../../static/route.dart';
-import '../../../../static/route.dart';
+
 import '../../../../static/route.dart';
 
 class TransactionTypeSelectScreen extends StatefulWidget {

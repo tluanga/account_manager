@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../static/constants.dart';
 import '../../../../static/route.dart';
-import '../../../../static/route.dart';
 
 class AssetSelectScreen extends StatefulWidget {
   @override

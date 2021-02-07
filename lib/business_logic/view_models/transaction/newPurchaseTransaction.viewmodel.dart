@@ -127,7 +127,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         _debitSideLedgerId = LedgerID.PURCHASEAC;
         _creditSideLedgerId = LedgerID.CASHAC;
         _purchaseType = PurchaseType.nonAssetCashDownCash;
-        // notifyListeners();
+        notifyListeners();
       }
     } else if (_isCredit == cCredit) {
       if (_creditType != cPartialCredit) {
@@ -152,9 +152,9 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         // notifyListeners();
       }
     }
+    notifyListeners();
   }
 
-  notifyListeners();
   void setDebitAndCreditSideLedgerName() async {
     _debitSideLedgerName =
         await _ledgerMasterService.getLedgerMasterName(_debitSideLedgerId);
@@ -528,6 +528,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   void printData() {
+    print('-------Start of Print----');
     print('Amount:$_amount');
     print('Particular:$_particular');
     print('Ba or Balo:$_isCredit');
@@ -536,6 +537,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('Party Id:$_partyId');
     print('Party Name :$_partyName');
     print('Debit Side Ledger:$_debitSideLedgerId');
+    print('Credit Side Ledger:$_creditSideLedgerId');
+    print('----end of print----');
   }
 
   void getFilterdPartyLedgerMaster(String _searchString) async {
@@ -647,26 +650,16 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   String getDebitSideLedgerName() => _debitSideLedgerName;
   String getCreditSideLedgerName() => _creditSideLedgerName;
 
-  //-----Mock----The Business Model--
-
-  // Transaction _purchasemock1 = Transaction(
-  //   amount:
-  //   particular:
-  //   isCredit:
-  //   cashOrBank:
-  //   date:
-  //   creditType:
-  //   partyId:
-  //   partyName:
-  //   assetLedger:
-  //   transactionTypeId:
-  //   transactionTypeName:
-  //   debitSideLedgerId:
-  //   debitSideLedgerName:
-  //   creditSideLedgerId:
-  //   creditSideLedgerName:
-  // );
-  // To Test Type -1 Purchase Transaction
+  Transaction journalConfirmBottomSheet() {
+    print(_debitSideLedgerName);
+    return Transaction(
+      amount: _amount,
+      debitSideLedgerName: _debitSideLedgerName,
+      creditSideLedgerName: _creditSideLedgerName,
+      partyName: _partyName,
+      assetLedger: _assetLedger,
+    );
+  }
 
   void processMockData() {
     List<Transaction> _purchaseMockData = [];
