@@ -16,6 +16,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newAssetL
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/transaction/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/static/constants.dart';
@@ -115,6 +116,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => LedgerMainDashboardViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PartySelectViewModel(),
         ),
         // ChangeNotifierProvider(
         //   create: (context) => TransactionDashboardViewModel(),

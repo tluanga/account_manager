@@ -1,11 +1,9 @@
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/screens/transaction/common/widget/partySelect.modal.dart';
+import 'package:account_manager/views/screens/transaction/common/partySelect.screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'modalBottomSheet.modal.dart';
 
 class SelectBaOrBaloToggle extends StatelessWidget {
   final BuildContext context;
@@ -49,7 +47,7 @@ class SelectBaOrBaloToggle extends StatelessWidget {
                 // modalBottomSheet(context);
                 Navigator.of(context).push(new MaterialPageRoute<Null>(
                     builder: (BuildContext context) {
-                      return new PartySelect();
+                      return new PartySelectScreen();
                     },
                     fullscreenDialog: true));
               },
