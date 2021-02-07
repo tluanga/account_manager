@@ -13,7 +13,7 @@ class PartySelectViewModel extends ChangeNotifier {
 
   void loadData() async {
     isLoading = true;
-    partyList = await _ledgerMasterService.getList();
+    partyList = await _ledgerMasterService.getPartyList();
     isLoading = false;
     notifyListeners();
   }

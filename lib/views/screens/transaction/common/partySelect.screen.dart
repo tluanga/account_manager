@@ -72,7 +72,7 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                                     Icons.search,
                                     color: Colors.white,
                                   ),
-                                  hintText: 'Search Transaction Type...',
+                                  hintText: 'Select Party...',
                                   hintStyle: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -86,20 +86,6 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
-                                  model.setSelectedTransactionType(
-                                      model.partyList[index]);
-
-                                  if (model.partyList[index].id ==
-                                      TransactionTypeConstant
-                                          .cPURCHASEOFASSET) {
-                                    print('asset selected');
-                                    Navigator.of(context)
-                                        .push(new MaterialPageRoute<Null>(
-                                            builder: (BuildContext context) {
-                                              return new AssetSelectScreen();
-                                            },
-                                            fullscreenDialog: true));
-                                  }
                                   Navigator.pop(context);
                                 },
                                 child: Padding(
@@ -113,42 +99,28 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                                         borderRadius: BorderRadius.circular(5),
                                         border:
                                             Border.all(color: Colors.black12)),
-                                    child: Row(children: [
-                                      Container(
-                                          height: 50,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                              color: cprimaryColor,
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(5),
-                                                  bottomLeft:
-                                                      Radius.circular(5))),
-                                          child: Center(
-                                              child: Text(model
-                                                  .partyList[index].name
-                                                  .toString()))),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          model.partyList[index].name,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            height: 50,
+                                            width: 300,
+                                            decoration: BoxDecoration(
+                                                color: cprimaryColor,
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(5),
+                                                    bottomLeft:
+                                                        Radius.circular(5))),
+                                            child: Center(
+                                                child: Text(model
+                                                    .partyList[index].name
+                                                    .toString()))),
+                                        SizedBox(
+                                          width: 2,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          model.partyList[index].description,
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                              color: Colors.grey[700]),
-                                        ),
-                                      )
-                                    ]),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
