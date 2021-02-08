@@ -54,7 +54,7 @@ class LedgerDashboard extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Container(
-                                    width: 180,
+                                    width: MediaQuery.of(context).size.width*0.45,
                                     height: 40,
                                     decoration: BoxDecoration(
                                       color: HexColor(PRIMARYCOLOR),
@@ -68,17 +68,16 @@ class LedgerDashboard extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                  Flexible(
                                     child: Container(
-                                      width: 100,
+                                      padding: EdgeInsets.only(left: 5),
+                                      alignment: Alignment.centerLeft,
                                       height: 50,
                                       child: Text(
                                         model.ledgerMasterList[index]
                                             .description,
-                                        maxLines: 3,
-                                        softWrap: true,
-                                        overflow: TextOverflow.fade,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
                                       ),
                                     ),
                                   ),
