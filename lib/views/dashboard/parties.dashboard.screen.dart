@@ -1,7 +1,6 @@
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class PartiesDashBoardScreen extends StatefulWidget {
@@ -29,7 +28,7 @@ class _PartiesDashBoardScreenState extends State<PartiesDashBoardScreen> {
                           height: 40,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: HexColor(PRIMARYCOLOR),
+                              color: cprimaryColor,
                             ),
                             borderRadius: BorderRadius.circular(
                               5,
