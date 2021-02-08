@@ -6,7 +6,6 @@ import 'package:account_manager/business_logic/view_models/transaction/newSaleTr
 import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 
-import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/baOrBaloToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/common/widget/cashOrBankToggle.widget.dart';
 import 'package:account_manager/views/screens/transaction/newPurchaseTransaction/newPurchaseTransactionConfirm.modal.dart';
