@@ -2,6 +2,7 @@ import 'package:account_manager/business_logic/view_models/party/partySelect.vie
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
@@ -54,13 +55,14 @@ class _NewPurchaseTransactionScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer4<
+      body: Consumer5<
           NewPurchaseTransactionViewModel,
           TransactionTypeSelectViewModel,
           PartySelectViewModel,
+          BaOrBaloToggleViewModel,
           AssetSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, partySelect,
-            assetSelect, child) {
+            baOrBaloToggle, assetSelect, child) {
           String labelText = 'Please Select Transaction Type';
           if (transactionTypeSelect.selectedTransactionType != null) {
             labelText = transactionTypeSelect.selectedTransactionType.name;
@@ -211,14 +213,25 @@ class _NewPurchaseTransactionScreenState
                               onPressed: () {
                                 //  newTransaction.setData();
                                 print('value of partySelect');
-                                if (partySelect.selectedParty != null) {
-                                  newTransaction
-                                      .setPartyId(partySelect.selectedParty.id);
-                                  newTransaction.setPartyName(
-                                      partySelect.selectedParty.name);
-                                  newTransaction.setCreditType(
-                                      partySelect.isPartialCredit);
+                                if (baOrBaloToggle.getBaOrBalo() == cCredit) {
+                                  newTransaction.setBaOrBalo(cCredit);
+                                  if (partySelect.selectedParty != null) {
+                                    newTransaction.setPartyId(
+                                        partySelect.selectedParty.id);
+
+                                    newTransaction.setPartyName(
+                                        partySelect.selectedParty.name);
+                                    print('is Partial Credit');
+                                    print(
+                                        partySelect.isPartialCredit.toString());
+                                    newTransaction.setCreditType(
+                                        partySelect.isPartialCredit);
+                                  }
+                                } else if (baOrBaloToggle.getBaOrBalo() ==
+                                    cCashDown) {
+                                  newTransaction.setBaOrBalo(cCashDown);
                                 }
+
                                 if (assetSelect.selectedAsset != null) {
                                   newTransaction.setAssetLedger(
                                       assetSelect.selectedAsset.id);

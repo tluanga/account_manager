@@ -79,19 +79,21 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   }
 
   void setPurchaseType() async {
+    print(_isCredit);
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
         if (_cashOrBank == BANK) {
           print('1) Asset-CashDown-Bank');
           setDebitSideLedger(_assetLedger);
           setCreditSideLedger(LedgerID.BANK);
-
+          setPartyId(null);
           _purchaseType = PurchaseType.assetCashDownBank;
           notifyListeners();
         } else if (_cashOrBank == CASH) {
           print('2) Asset-CashDown-Cash');
           setDebitSideLedger(_assetLedger);
           setCreditSideLedger(LedgerID.CASHAC);
+          setPartyId(null);
           _purchaseType = PurchaseType.assetCashDownCash;
           notifyListeners();
         }
@@ -121,12 +123,14 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         print('6) Non-Asset-CashDown-Bank');
         setDebitSideLedger(LedgerID.PURCHASEAC);
         setCreditSideLedger(LedgerID.BANK);
+        setPartyId(null);
         _purchaseType = PurchaseType.nonAssetCashDownBank;
         notifyListeners();
       } else if (_cashOrBank == CASH) {
         print('7) Non-Asset-Cashdown-Cash-');
         setDebitSideLedger(LedgerID.PURCHASEAC);
         setCreditSideLedger(LedgerID.CASHAC);
+        setPartyId(null);
         _purchaseType = PurchaseType.nonAssetCashDownCash;
         notifyListeners();
       }
@@ -566,6 +570,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('Party Name :$_partyName');
     print('Debit Side Ledger:$_debitSideLedgerId');
     print('Credit Side Ledger:$_creditSideLedgerId');
+    print('Is Credit:$_isCredit');
     print('----end of print----');
   }
 

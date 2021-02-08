@@ -1,4 +1,5 @@
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/views/screens/transaction/common/partySelect.screen.dart';
 
@@ -35,8 +36,7 @@ class SelectBaOrBaloToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NewPurchaseTransactionViewModel>(
-        builder: (context, model, child) {
+    return Consumer<BaOrBaloToggleViewModel>(builder: (context, model, child) {
       return Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

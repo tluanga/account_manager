@@ -3,6 +3,7 @@ import 'package:account_manager/business_logic/view_models/settings/assetAccount
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 
 import 'package:account_manager/views/screens/transaction/common/transactionTypeSelect.screen.dart';
@@ -54,13 +55,14 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer4<
+      body: Consumer5<
           NewSaleTransactionViewModel,
           TransactionTypeSelectViewModel,
           PartySelectViewModel,
-          AssetSelectViewModel>(
+          AssetSelectViewModel,
+          BaOrBaloToggleViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, partySelect,
-            assetSelect, child) {
+            assetSelect, baOrBaloToggle, child) {
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
@@ -174,7 +176,7 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                               onPressed: () {
                                 //  newTransaction.setData();
                                 print('value of partySelect');
-                                if (newTransaction.getBaOrBalo() == cCredit) {
+                                if (baOrBaloToggle.getBaOrBalo() == cCredit) {
                                   print('Ba');
                                   if (partySelect.selectedParty != null) {
                                     newTransaction.setPartyId(

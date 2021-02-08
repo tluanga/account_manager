@@ -22,6 +22,7 @@ import 'package:account_manager/business_logic/view_models/transaction/newSaleTr
 import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
+import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
 
 import 'package:account_manager/business_logic/view_models/books/generalJournal/generalJournal.viewmodel.dart';
@@ -152,6 +153,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TradingAccountViewModel(),
+        ),
+        //---------WIDGETS--------------------
+        ChangeNotifierProvider(
+          create: (context) => BaOrBaloToggleViewModel(),
         ),
       ],
       child: MaterialApp(
