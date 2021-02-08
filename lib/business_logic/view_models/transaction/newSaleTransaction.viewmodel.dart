@@ -95,7 +95,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
     } else if (_isCredit == cCredit) {
       if (_creditType != cPartialCredit) {
         print('3) Sale -Ba- ');
-        setDebitSideLedger(LedgerID.BANK);
+        setDebitSideLedger(_partyId);
         setCreditSideLedger(LedgerID.SALESAC);
         _saleType = SaleType.saleDebt;
         notifyListeners();
@@ -475,45 +475,42 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   }
 
   void processMockData() {
-    List<Transaction> _purchaseMockData = [];
+    List<Transaction> _saleMockData = [];
     //--copy parameter to variable
-    // ---Purchase Transaction Type -1
-
-    // --copy parameter to variable
-    // ---Purchase Transaction Type -1
-    _purchaseMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Chair HRalhna',
-      isCredit: cCashDown,
-      cashOrBank: BANK,
-      date: DateTime.now(),
-      creditType: NONE,
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-    ));
-    // ---saleCashDownCash - Type 2
-    _purchaseMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Chair HRalhna',
-      isCredit: cCashDown,
-      cashOrBank: BANK,
-      date: DateTime.now(),
-      creditType: NONE,
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-    ));
-    // ---saleCashDownCash - Type 3
-    _purchaseMockData.add(Transaction(
+    // Sale Balo Bank payment Type 1
+    // _saleMockData.add(Transaction(
+    //   amount: 5000,
+    //   particular: 'Chair HRalhna',
+    //   isCredit: cCashDown,
+    //   cashOrBank: BANK,
+    //   date: DateTime.now(),
+    //   creditType: NONE,
+    //   transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    // ));
+    // // Sale Balo Cash payment Type 2
+    // _saleMockData.add(Transaction(
+    //   amount: 5000,
+    //   particular: 'Chair HRalhna',
+    //   isCredit: cCashDown,
+    //   cashOrBank: CASH,
+    //   date: DateTime.now(),
+    //   creditType: NONE,
+    //   transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    // ));
+    // Sale Ba (not Partial) Type 3
+    _saleMockData.add(Transaction(
       amount: 3000,
       particular: 'Chair HRalhna',
       isCredit: cCredit,
-      cashOrBank: BANK,
       date: DateTime.now(),
+      partyId: cPartyAc,
       creditType: NONE,
       transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
     ));
-    // ---saleBaPartialBank - Type 4
-    _purchaseMockData.add(Transaction(
+    //---saleBaPartialBank - Type 4
+    _saleMockData.add(Transaction(
       amount: 300,
-      particular: 'Bottle HRalhna',
+      particular: 'Bottle Hralhna',
       isCredit: cCredit,
       cashOrBank: BANK,
       partyId: cPartyAc,
@@ -521,8 +518,8 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
       creditType: cPartialCredit,
       transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
     ));
-    // ---saleBaPartialBank - Type 4
-    _purchaseMockData.add(Transaction(
+    // ---saleBaPartialCash - Type 5
+    _saleMockData.add(Transaction(
       amount: 200,
       particular: 'Bottle HRalhna',
       isCredit: cCredit,
@@ -533,18 +530,18 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
       transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
     ));
 
-    for (int i = 0; i < _purchaseMockData.length; i++) {
-      _amount = _purchaseMockData[i].amount;
-      _particular = _purchaseMockData[i].particular;
-      _isCredit = _purchaseMockData[i].isCredit;
-      _cashOrBank = _purchaseMockData[i].cashOrBank;
-      _date = _purchaseMockData[i].date;
-      _creditType = _purchaseMockData[i].creditType;
-      _partyId = _purchaseMockData[i].partyId;
-      _partyName = _purchaseMockData[i].partyName;
-      _assetLedger = _purchaseMockData[i].assetLedger;
-      _transactionTypeId = _purchaseMockData[i].transactionTypeId;
-      _transactionTypeName = _purchaseMockData[i].transactionTypeName;
+    for (int i = 0; i < _saleMockData.length; i++) {
+      _amount = _saleMockData[i].amount;
+      _particular = _saleMockData[i].particular;
+      _isCredit = _saleMockData[i].isCredit;
+      _cashOrBank = _saleMockData[i].cashOrBank;
+      _date = _saleMockData[i].date;
+      _creditType = _saleMockData[i].creditType;
+      _partyId = _saleMockData[i].partyId;
+      _partyName = _saleMockData[i].partyName;
+      _assetLedger = _saleMockData[i].assetLedger;
+      _transactionTypeId = _saleMockData[i].transactionTypeId;
+      _transactionTypeName = _saleMockData[i].transactionTypeName;
       print('inside mock data looop');
       print(_cashOrBank.toString());
       setSaleType();

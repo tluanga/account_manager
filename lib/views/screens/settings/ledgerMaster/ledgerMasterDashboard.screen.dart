@@ -18,7 +18,7 @@ class LedgerMasterDashboard extends StatelessWidget {
         backgroundColor: HexColor(PRIMARYCOLOR),
       ),
       body: Container(
-        decoration: BoxDecoration(color: HexColor(SECONDARYGREYCOLOR)),
+        // decoration: BoxDecoration(color: HexColor(SECONDARYGREYCOLOR)),
         child: Column(
           children: [
             Expanded(

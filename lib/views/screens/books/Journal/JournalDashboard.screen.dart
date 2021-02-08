@@ -140,26 +140,35 @@ class _GeneralJournalDashboardScreenState
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    model.transactionList[index].particular,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0.8,
-                                      fontSize: 15,
+                                  Expanded(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width*0.7,
+                                      child: Text(
+                                        model.transactionList[index].particular,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: 0.8,
+                                          fontSize: 15,
+                                        ),
+                                        maxLines: 1,
+                                        softWrap: true,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                    maxLines: 1,
-                                    softWrap: true,
-                                    overflow: TextOverflow.fade,
                                   ),
-                                  Text(
-                                    model.transactionList[index].amount
-                                        .toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15),
+                                  Expanded(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width*0.3,
+                                      child: Text(
+                                        model.transactionList[index].amount
+                                            .toString(),
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15),
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
