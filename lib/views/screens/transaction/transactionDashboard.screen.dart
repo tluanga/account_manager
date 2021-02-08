@@ -42,9 +42,9 @@ class TransactionDashboardScreen extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -113,6 +113,7 @@ class TransactionDashboardScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -169,6 +170,7 @@ class TransactionDashboardScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -225,6 +227,7 @@ class TransactionDashboardScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
                       child: Padding(
@@ -282,22 +285,26 @@ class TransactionDashboardScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                        width: width,
-                        height: height,
-                        decoration: BoxDecoration(
-                          color: cprimaryColor,
-                          border: Border.all(
-                            color: HexColor(SECONDARYGREYCOLOR),
-                          ),
-                          borderRadius: BorderRadius.circular(10),
+                      width: width,
+                      height: height,
+                      decoration: BoxDecoration(
+                        color: cprimaryColor,
+                        border: Border.all(
+                          color: HexColor(SECONDARYGREYCOLOR),
                         ),
-                        child: Center(
-                          child: Text('Test Transaction',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: HexColor(TEXTCOLOR),
-                                  fontWeight: FontWeight.bold)),
-                        )),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Test Transaction',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: HexColor(TEXTCOLOR),
+                            fontWeight: FontWeight.bold
+                          )
+                        ),
+                      )
+                    ),
                   ),
                 ),
               ],

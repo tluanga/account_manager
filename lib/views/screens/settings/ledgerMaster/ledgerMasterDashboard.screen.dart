@@ -12,6 +12,7 @@ class LedgerMasterDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Ledger Master Dashboard'),
@@ -55,47 +56,45 @@ class LedgerMasterDashboard extends StatelessWidget {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(left: 8,right: 10),
+                                width: size.width*0.5,
+                                child: Text(
                                   ledgerMaster.ledgerMasterList[index].name ??
                                       'null',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                SizedBox(
-                                  width: 50,
+                              ),
+                              Container(
+                                width: size.width * 0.18,
+                                child: Text(
+                                  ledgerMaster.ledgerMasterList[index].party ==
+                                          cPartyAc
+                                      ? 'Party \nAccount'
+                                      : 'Not a Party \nAccount',
+                                  textAlign: TextAlign.center,
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    ledgerMaster.ledgerMasterList[index]
-                                                .party ==
-                                            cPartyAc
-                                        ? 'Party Account'
-                                        : 'Not a Party Account',
-                                    textAlign: TextAlign.right,
-                                  ),
+                              ),
+                              SizedBox(width: size.width * 0.14),
+                              Container(
+                                width: size.width * 0.13,
+                                child: Text(
+                                  ledgerMaster.ledgerMasterList[index]
+                                              .directOrIndirect ==
+                                          cDirectAc
+                                      ? 'Direct \nAccount'
+                                      : 'Indirect \nAccount',
+                                  textAlign: TextAlign.center,
                                 ),
-                                SizedBox(
-                                  width: 50,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    ledgerMaster.ledgerMasterList[index]
-                                                .directOrIndirect ==
-                                            cDirectAc
-                                        ? 'Direct Account'
-                                        : 'Indirect Account',
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

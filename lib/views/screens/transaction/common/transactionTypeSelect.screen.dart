@@ -118,20 +118,21 @@ class _TransactionTypeSelectScreenState
                                     child: Row(
                                       children: [
                                         Container(
-                                          height: 40,
-                                          width: 40,
+                                          alignment: Alignment.center,
+                                          height: 30,
+                                          width: MediaQuery.of(context).size.width*0.12,
                                           decoration: BoxDecoration(
                                             color: HexColor(PRIMARYCOLOR),
                                           ),
-                                          child: Text(_sumChetVeldan),
+                                          child: Text(_sumChetVeldan, textAlign: TextAlign.center,),
                                         ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              model.transactionTypeList[index]
-                                                  .name,
-                                            )
-                                          ],
+                                        Container(
+                                          padding: const EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            model.transactionTypeList[index]
+                                                .name,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         )
                                       ],
                                     ),

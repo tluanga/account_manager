@@ -81,6 +81,7 @@ class TransactionTypeListItem extends StatelessWidget {
               child: Text(
                 this.transactionType.name,
                 style: TextStyle(fontSize: 20, color: Color(0xFF757575)),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),

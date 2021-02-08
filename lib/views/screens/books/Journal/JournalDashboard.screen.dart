@@ -140,10 +140,12 @@ class _GeneralJournalDashboardScreenState
                           child: Column(
                             children: [
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(
+                                  Flexible(
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width*0.7,
+                                      padding: EdgeInsets.only(right: 15),
                                       child: Text(
                                         model.transactionList[index].particular,
                                         style: TextStyle(
@@ -151,24 +153,16 @@ class _GeneralJournalDashboardScreenState
                                           letterSpacing: 0.8,
                                           fontSize: 15,
                                         ),
-                                        maxLines: 1,
-                                        softWrap: true,
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width*0.3,
-                                      child: Text(
-                                        model.transactionList[index].amount
-                                            .toString(),
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15),
-                                      ),
-                                    ),
+                                  Text(
+                                    model.transactionList[index].amount
+                                        .toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15),
                                   )
                                 ],
                               ),
