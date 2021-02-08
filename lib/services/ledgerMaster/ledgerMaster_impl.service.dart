@@ -89,7 +89,7 @@ class LedgerMasterImpl implements LedgerMasterService {
      SELECT * FROM masterLedger_table
      WHERE asset=$cASSET
       ''');
-    ;
+
     final List<LedgerMaster> ledgerMasterList = [];
     _partyList.forEach((ledgerMasterMap) {
       ledgerMasterList.add(LedgerMaster.fromMap(ledgerMasterMap));

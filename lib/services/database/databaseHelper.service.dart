@@ -68,6 +68,7 @@ class DatabaseHelper {
   String transactionDebitSideLedgerName = 'debitSideLedgerName';
   String transactionCreditSideLedgerId = 'creditSideLedgerId';
   String transactionCreditSideLedgerName = 'creditSideLedgerName';
+  String transactionideLedgerName = 'creditSideLedgerName';
   String transactionIsReturn = 'isReturn';
 
   //------TABLE 6 LEDGER TRANSACTION TABLE---------

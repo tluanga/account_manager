@@ -3,7 +3,6 @@ import 'package:account_manager/business_logic/view_models/books/tradingAccount/
 import 'package:account_manager/business_logic/view_models/books/trialBalance/trialBalance.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/dashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/party/newParty.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/newAsset.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
@@ -11,6 +10,8 @@ import 'package:account_manager/business_logic/view_models/settings/companyProfi
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/newParty.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
@@ -19,7 +20,7 @@ import 'package:account_manager/business_logic/view_models/settings/transactionT
 import 'package:account_manager/business_logic/view_models/transaction/newOutwardTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
+
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/bottomNavigationBarProvider.dart';
 import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';

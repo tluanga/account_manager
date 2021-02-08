@@ -7,8 +7,8 @@ class EditLedgerMasterViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  void updateLedgerMaster(LedgerMaster payload) async {
-    var result = await _ledgerMasterService.update(payload);
+  void updateLedgerMaster(LedgerMaster payload) {
+    _ledgerMasterService.update(payload);
     print(payload.name);
     print(payload.description);
     notifyListeners();

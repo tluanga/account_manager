@@ -1,5 +1,6 @@
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
+import 'package:account_manager/views/screens/transaction/common/widget/baTypeToggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -66,8 +67,8 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                               color: Colors.grey[400],
                               borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
-                              onChanged: (value) =>
-                                  model.setFilteredData(value),
+                              onChanged: (_searchString) =>
+                                  model.getFilteredData(_searchString),
                               cursorColor: Colors.white,
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
@@ -85,50 +86,6 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                         ),
                         Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  model.setPartialCredit(NONE);
-                                },
-                                child: Container(
-                                  width: 100,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        model.isPartialCredit == cPartialCredit
-                                            ? Colors.grey.shade400
-                                            : HexColor(PRIMARYCOLOR),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: Text('Full Credit'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  model.setPartialCredit(cPartialCredit);
-                                },
-                                child: Container(
-                                  width: 100,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        model.isPartialCredit == cPartialCredit
-                                            ? HexColor(PRIMARYCOLOR)
-                                            : Colors.grey.shade400,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: Text('Partial Credit'),
-                                  ),
-                                ),
-                              ),
-                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
@@ -158,10 +115,10 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                               return GestureDetector(
                                 onTap: () {
                                   print('---selected Party is---');
+
                                   model
                                       .setSelectedParty(model.partyList[index]);
-                                  print(model.selectedParty.name);
-                                  print(model.selectedParty.name);
+
                                   Navigator.pop(context);
                                 },
                                 child: Padding(

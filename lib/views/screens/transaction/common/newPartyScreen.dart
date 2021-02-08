@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/view_models/party/newParty.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/newParty.viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';

@@ -1,13 +1,9 @@
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
+import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
+import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/static/constants.dart';
 import 'package:flutter/foundation.dart';
-
-import '../../../services/ledgerMaster/ledgeMaster.service.dart';
-
-import '../../../services/serviceLocator.dart';
-
-import '../../../static/constants.dart';
-
-import '../../models/ledgermaster.models.dart';
 
 class NewPartyViewModel extends ChangeNotifier {
   String _name = '';

@@ -2,8 +2,6 @@
 // anywhere we need them in the app.
 
 import 'package:account_manager/business_logic/view_models/dashboard/ledger_mainDashboard.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/party/newParty.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/newAsset.screen.dart';
 import 'package:account_manager/business_logic/view_models/settings/companyProfile/companyProfile.viewmodel.dart';
@@ -11,6 +9,8 @@ import 'package:account_manager/business_logic/view_models/settings/companyProfi
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/editLedgerMaster.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/ledgerMasterDashboard.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/ledgerMaster/newLedgerMaster.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/newParty.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/newTransactionType.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeDashboard.viewmodel.dart';
 
@@ -24,6 +24,8 @@ import 'package:account_manager/services/companyProfile/companyProfile_impl.serv
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction_impl.service.dart';
+import 'package:account_manager/services/party/party.service.dart';
+import 'package:account_manager/services/party/party_impl.service.dart';
 
 import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/services/transaction/transaction_implementation.service.dart';
@@ -52,6 +54,9 @@ void setUpServiceLocator() {
 
   serviceLocator.registerLazySingleton<LedgerTransactionService>(
     () => LedgerTransactionImpl(),
+  );
+  serviceLocator.registerLazySingleton<PartyService>(
+    () => PartyImpl(),
   );
 
   // --------Report Service--------

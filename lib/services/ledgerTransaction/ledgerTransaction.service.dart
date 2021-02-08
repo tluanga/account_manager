@@ -8,5 +8,7 @@ abstract class LedgerTransactionService {
   Future<int> insert(LedgerTransaction ledgerTransaction);
   Future<int> update(LedgerTransaction ledgerTransaction);
   Future<int> delete(int id);
+
+  // Future<int> debitAmountForMonth();
   Future<List<int>> getIds();
 }

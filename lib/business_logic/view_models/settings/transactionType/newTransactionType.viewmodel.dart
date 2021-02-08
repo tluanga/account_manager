@@ -3,7 +3,6 @@ import 'package:account_manager/business_logic/models/transactionType.models.dar
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
-import 'package:account_manager/views/screens/transaction/transactionDashboard.screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -48,15 +47,21 @@ class NewTransactionTypeViewModel extends ChangeNotifier {
   }
 
   int formatSumChetdanType(String value) {
+    int _value;
     switch (value) {
       case 'Lei':
-        return 0;
+        _value = 0;
+        break;
       case 'Hralh':
-        return 1;
+        _value = 1;
+        break;
       case 'Lakluh':
-        return 2;
+        _value = 2;
+        break;
       case 'Pekchhuah':
-        return 3;
+        _value = 3;
+        break;
     }
+    return _value;
   }
 }

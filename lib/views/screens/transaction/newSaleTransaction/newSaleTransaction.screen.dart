@@ -1,5 +1,5 @@
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
@@ -33,8 +33,6 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
   DateTime _dateTime = DateTime.now();
   NewPurchaseTransactionViewModel model =
       serviceLocator<NewPurchaseTransactionViewModel>();
-  PartySelectViewModel _partySelectViewModel =
-      serviceLocator<PartySelectViewModel>();
 
   _submit() {
     if (_formKey.currentState.validate()) {
@@ -91,6 +89,7 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                           focusColor: HexColor(TEXTCOLOR),
                           hoverColor: HexColor(TEXTCOLOR),
                         ),
+                        // ignore: missing_return
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Amount';
@@ -174,25 +173,25 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                             child: FlatButton(
                               onPressed: () {
                                 //  newTransaction.setData();
-                                print('value of partySelect');
-                                if (baOrBaloToggle.getBaOrBalo() == cCredit) {
-                                  newTransaction.setBaOrBalo(cCredit);
-                                  if (partySelect.selectedParty != null) {
-                                    newTransaction.setPartyId(
-                                        partySelect.selectedParty.id);
+                                // print('value of partySelect');
+                                // if (baOrBaloToggle.getBaOrBalo() == cCredit) {
+                                //   newTransaction.setBaOrBalo(cCredit);
+                                //   if (partySelect.selectedParty != null) {
+                                //     newTransaction.setPartyId(
+                                //         partySelect.selectedParty.id);
 
-                                    newTransaction.setPartyName(
-                                        partySelect.selectedParty.name);
-                                    print('is Partial Credit');
-                                    print(
-                                        partySelect.isPartialCredit.toString());
-                                    newTransaction.setCreditType(
-                                        partySelect.isPartialCredit);
-                                  }
-                                } else if (baOrBaloToggle.getBaOrBalo() ==
-                                    cCashDown) {
-                                  newTransaction.setBaOrBalo(cCashDown);
-                                }
+                                //     newTransaction.setPartyName(
+                                //         partySelect.selectedParty.name);
+                                //     print('is Partial Credit');
+                                //     print(
+                                //         partySelect.isPartialCredit.toString());
+                                //     newTransaction.setCreditType(
+                                //         partySelect.isPartialCredit);
+                                //   }
+                                // } else if (baOrBaloToggle.getBaOrBalo() ==
+                                //     cCashDown) {
+                                //   newTransaction.setBaOrBalo(cCashDown);
+                                // }
                                 newTransaction.setSaleType();
                                 _submit();
                               },
