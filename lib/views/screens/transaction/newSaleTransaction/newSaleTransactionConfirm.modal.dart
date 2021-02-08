@@ -12,7 +12,8 @@ void journalConfirmBottomSheet(context) {
     builder: (BuildContext contex) {
       return Consumer2<NewSaleTransactionViewModel, PartySelectViewModel>(
         builder: (context, model, partySelect, child) {
-          model.printData();
+          print('Inside confirm modal');
+          print(model.getAmount());
           return Container(
             child: Column(children: [
               Row(

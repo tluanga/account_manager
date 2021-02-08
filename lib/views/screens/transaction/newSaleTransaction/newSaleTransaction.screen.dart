@@ -40,8 +40,8 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      Provider.of<NewSaleTransactionViewModel>(context, listen: false)
-          .setSaleType();
+      // Provider.of<NewSaleTransactionViewModel>(context, listen: false)
+      //     .setSaleType();
 
       journalConfirmBottomSheet(context);
     }
@@ -194,7 +194,7 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                                     cCashDown) {
                                   newTransaction.setBaOrBalo(cCashDown);
                                 }
-
+                                newTransaction.setSaleType();
                                 _submit();
                               },
                               child: Text(

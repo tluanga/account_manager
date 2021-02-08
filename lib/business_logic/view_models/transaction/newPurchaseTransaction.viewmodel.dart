@@ -80,6 +80,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
 
   void setPurchaseType() async {
     print(_isCredit);
+    print('amount :$_amount');
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
         if (_cashOrBank == BANK) {
