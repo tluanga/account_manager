@@ -1,21 +1,17 @@
-import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/assetAccount/newAsset.screen.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 void newAssetModal(context) {
-  String _name;
-  String _description;
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        String _name;
-        String _description;
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
-            child: Consumer<NewPurchaseTransactionViewModel>(
+            child: Consumer<NewAssetViewModel>(
               builder: (context, model, child) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -35,7 +31,7 @@ void newAssetModal(context) {
                           decoration: InputDecoration(
                             labelText: 'Name',
                           ),
-                          onChanged: (value) => _name = value,
+                          onChanged: (value) => model.setName(value),
                         ),
                         SizedBox(
                           height: 10,
@@ -44,7 +40,7 @@ void newAssetModal(context) {
                           decoration: InputDecoration(
                             labelText: 'Description',
                           ),
-                          onChanged: (value) => _description = value,
+                          onChanged: (value) => model.setName(value),
                         ),
                         Expanded(
                           child: Row(
@@ -79,7 +75,7 @@ void newAssetModal(context) {
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    model.newAssetLedger(_name, _description);
+                                    model.newAssetLedger();
 
                                     Navigator.pop(context);
                                   },

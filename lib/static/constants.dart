@@ -18,6 +18,7 @@ const int cDirectAc = 0;
 const int cIndirectAc = 1;
 
 //----Type of Credit
+const int cFullCredit = 0;
 const int cPartialCredit = 1;
 
 //---------ASSET or NON ASSET-------

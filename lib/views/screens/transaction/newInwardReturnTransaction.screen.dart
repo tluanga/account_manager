@@ -34,7 +34,6 @@ class _NewInwardReturnTransactionScreenState
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      _newPurchaseTransactionViewModel.processMockData();
       _journalConfirmBottomSheet(context);
     }
   }
@@ -53,11 +52,6 @@ class _NewInwardReturnTransactionScreenState
       body: Consumer2<NewPurchaseTransactionViewModel,
           TransactionTypeSelectViewModel>(
         builder: (context, newTransaction, transactionTypeSelect, child) {
-          String labelText = 'Please Select Transaction Type';
-          // if (transactionTypeSelect.selectedTransactionType != null) {
-          //   labelText = transactionTypeSelect.selectedTransactionType.name;
-          // }
-          newTransaction.loadParty();
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
@@ -87,11 +81,11 @@ class _NewInwardReturnTransactionScreenState
                           focusColor: HexColor(TEXTCOLOR),
                           hoverColor: HexColor(TEXTCOLOR),
                         ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please Enter Amount';
-                          }
-                        },
+                        // validator: (value) {
+                        //   if (value.isEmpty) {
+                        //     return 'Please Enter Amount';
+                        //   }
+                        // },
                         onChanged: (value) {
                           setState(() {
                             newTransaction.setAmount(int.parse(value));
@@ -268,8 +262,6 @@ class _NewInwardReturnTransactionScreenState
           builder: (context, model, child) {
             String _debitLedgerName = model.getDebitSideLedgerName();
             String _creditSideLedgerName = model.getCreditSideLedgerName();
-            String _partyName = model.getPartyName();
-            String _assetLedgerName = model.getAssetLedgerName();
             int _amount = model.getAmount();
 
             return Container(

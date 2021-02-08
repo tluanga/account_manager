@@ -1,4 +1,4 @@
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newSaleTransaction.viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +135,6 @@ void journalConfirmBottomSheet(context) {
                       onTap: () {
                         print('inside the confirm dialog');
                         model.saveData();
-                        partySelect.clearData();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => MyApp()),

@@ -10,7 +10,12 @@ class DashboardViewModel extends ChangeNotifier {
   void loadData() async {
     // -Todo-- Sevice needs to modify to gel only the last 10 transactions
     lastTenTransactions = await _transactionService.getList();
+
     print(lastTenTransactions.length.toString());
     notifyListeners();
+  }
+
+  void getTotalTransactionForTheMonth() {
+    _transactionService.creditAmountForMonth();
   }
 }

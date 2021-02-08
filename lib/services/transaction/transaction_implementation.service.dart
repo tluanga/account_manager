@@ -78,4 +78,23 @@ class TransactionImpl implements TransactionService {
   //   print(data.particular);
   //   _list.add(data);
   // }
+  void creditAmountForMonth() async {
+    Database db = await DatabaseHelper.instance.db;
+
+    List<Map<String, dynamic>> _data = await db.rawQuery('''
+    SELECT * 
+    from transactionType_table
+    ''');
+    _data.forEach((element) {
+      print('Element');
+    });
+  }
 }
+
+// Select
+//     SUM(lt.[amount]) as[TotalAmount],
+//     from ledgerTranction_table lt
+//     INNER JOIN transactionType_table tt
+//     ON lt.[transactionTypeId]=lt.[ID]
+//     WHERE lt.sumChetVelDanType==$cLakluh &&
+//     lt.sumChetVelDanType==$cHralh

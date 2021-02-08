@@ -1,5 +1,5 @@
-import 'package:account_manager/business_logic/view_models/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/transactionType/transactionTypeSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
@@ -34,14 +34,12 @@ class _NewPurchaseTransactionScreenState
   DateTime _dateTime = DateTime.now();
   NewPurchaseTransactionViewModel model =
       serviceLocator<NewPurchaseTransactionViewModel>();
-  PartySelectViewModel _partySelectViewModel =
-      serviceLocator<PartySelectViewModel>();
 
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      Provider.of<NewPurchaseTransactionViewModel>(context, listen: false)
-          .setPurchaseType();
+      // Provider.of<NewPurchaseTransactionViewModel>(context, listen: false)
+      //     .setPurchaseType();
 
       journalConfirmBottomSheet(context);
     }
@@ -80,7 +78,7 @@ class _NewPurchaseTransactionScreenState
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 24,
+                        height: 35,
                       ),
                       Text(
                         'Purchase',
@@ -97,6 +95,7 @@ class _NewPurchaseTransactionScreenState
                           focusColor: HexColor(TEXTCOLOR),
                           hoverColor: HexColor(TEXTCOLOR),
                         ),
+                        // ignore: missing_return
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please Enter Amount';
@@ -212,25 +211,25 @@ class _NewPurchaseTransactionScreenState
                             child: FlatButton(
                               onPressed: () {
                                 //  newTransaction.setData();
-                                print('value of partySelect');
-                                if (baOrBaloToggle.getBaOrBalo() == cCredit) {
-                                  newTransaction.setBaOrBalo(cCredit);
-                                  if (partySelect.selectedParty != null) {
-                                    newTransaction.setPartyId(
-                                        partySelect.selectedParty.id);
+                                // print('value of partySelect');
+                                // if (baOrBaloToggle.getBaOrBalo() == cCredit) {
+                                //   newTransaction.setBaOrBalo(cCredit);
+                                //   if (partySelect.selectedParty != null) {
+                                //     newTransaction.setPartyId(
+                                //         partySelect.selectedParty.id);
 
-                                    newTransaction.setPartyName(
-                                        partySelect.selectedParty.name);
-                                    print('is Partial Credit');
-                                    print(
-                                        partySelect.isPartialCredit.toString());
-                                    newTransaction.setCreditType(
-                                        partySelect.isPartialCredit);
-                                  }
-                                } else if (baOrBaloToggle.getBaOrBalo() ==
-                                    cCashDown) {
-                                  newTransaction.setBaOrBalo(cCashDown);
-                                }
+                                //     newTransaction.setPartyName(
+                                //         partySelect.selectedParty.name);
+                                //     print('is Partial Credit');
+                                //     print(
+                                //         partySelect.isPartialCredit.toString());
+                                //     newTransaction.setCreditType(
+                                //         partySelect.isPartialCredit);
+                                //   }
+                                // } else if (baOrBaloToggle.getBaOrBalo() ==
+                                //     cCashDown) {
+                                //   newTransaction.setBaOrBalo(cCashDown);
+                                // }
 
                                 if (assetSelect.selectedAsset != null) {
                                   newTransaction.setAssetLedger(

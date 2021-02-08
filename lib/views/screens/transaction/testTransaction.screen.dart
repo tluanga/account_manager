@@ -49,7 +49,7 @@ class TestTransactionScreen extends StatelessWidget {
                 builder: (contex, model, child) {
                   return GestureDetector(
                     onTap: () {
-                      model.processMockData();
+                      // model.processMockData();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

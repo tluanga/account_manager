@@ -1,9 +1,12 @@
+import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/models/party.model.dart';
 import 'package:account_manager/services/database/databaseHelper.service.dart';
 import 'package:account_manager/services/party/party.service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class PartyImpl implements PartyService {
+  LedgerMaster _selectedParty;
+
   Future<List<Map<String, dynamic>>> partyMapList() async {
     Database db = await DatabaseHelper.instance.db;
     final List<Map<String, dynamic>> result = await db.query('party_table');
@@ -46,5 +49,10 @@ class PartyImpl implements PartyService {
       whereArgs: [id],
     );
     return result;
+  }
+
+  @override
+  void setSelectedParty(LedgerMaster _ledgerMaster) {
+    _selectedParty = _ledgerMaster;
   }
 }

@@ -1,24 +1,26 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
-import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/static/assetMockData.constant.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
+import 'package:account_manager/static/partyMock.constant.dart';
 import 'package:account_manager/static/purchaseType.constant.dart';
+import 'package:account_manager/static/transactionType.constant.dart';
 
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
-import '../../../static/constants.dart';
+import '../../../../static/constants.dart';
 
-import '../../../static/ledgerId.constants.dart';
+import '../../../../static/ledgerId.constants.dart';
 
-import '../../models/ledgerTransaction.model.dart';
-import '../../models/ledgermaster.models.dart';
-import '../../models/transaction.model.dart';
+import '../../../models/ledgerTransaction.model.dart';
+import '../../../models/ledgermaster.models.dart';
+import '../../../models/transaction.model.dart';
+import '../../../models/transactionType.models.dart';
 
-import '../../../services/transaction/transaction.service.dart';
+import '../../../../services/transaction/transaction.service.dart';
 
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 
@@ -57,23 +59,28 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  //----------View Model import----------
-  PartySelectViewModel _partySelectViewModel =
-      serviceLocator<PartySelectViewModel>();
-  AssetSelectViewModel _assetSelectViewModel =
-      serviceLocator<AssetSelectViewModel>();
+  List<TransactionType> transactionTypeList = [];
+  void setTransactionTypeList(_searchString) async {
+    transactionTypeList =
+        await _transactionTypeService.getTransactionTypeList(_searchString);
+    print(transactionTypeList.length.toString());
+    notifyListeners();
+  }
 
-  void setupPurchase() async {
-    //Initial Setup---
-    //---- Party Setup
-    if (_partySelectViewModel.getSelectedParty() != null) {
-      // if a party is Selected
-      setPartyLedger(_partySelectViewModel.getSelectedParty().id);
-      setPartyName(_partySelectViewModel.getSelectedParty().name);
-    }
-    //-----Asset Setup-------------
+  void newAssetLedger(String _name, String _description) async {
+    await _ledgerMasterService.insert(
+      LedgerMaster(
+          name: _name,
+          description: _description,
+          directOrIndirect: cDirectAc,
+          party: cNotPartyAc,
+          asset: cASSET),
+    );
+  }
 
-    //--------Set Purchase type--------
+  void setPurchaseType() async {
+    print(_isCredit);
+    print('amount :$_amount');
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
         if (_cashOrBank == BANK) {
@@ -151,6 +158,35 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         notifyListeners();
       }
     }
+    notifyListeners();
+  }
+
+  void setDebitSideLedger(int id) async {
+    _debitSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _debitSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setCreditSideLedger(int id) async {
+    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _creditSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setAssetLedger(int id) async {
+    _assetLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _assetLedger = id;
+    notifyListeners();
+  }
+
+  void setPArtyLedger(int id) async {
+    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _creditSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setCreditType(int value) {
+    _creditType = value;
     notifyListeners();
   }
 
@@ -539,6 +575,39 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('----end of print----');
   }
 
+  void getFilterdPartyLedgerMaster(String _searchString) async {
+    List<LedgerMaster> _ledgerMasterList =
+        await _ledgerMasterService.getFilterdPartyLedgerList(_searchString);
+    print(_searchString);
+    String _length = _ledgerMasterList.length.toString();
+    partyList = _ledgerMasterList;
+    print('The search Returned $_length result in the viewmodel');
+    notifyListeners();
+  }
+
+  Future<int> newPartyLedger({
+    name,
+    description,
+  }) async {
+    var payload = LedgerMaster(
+        name: name,
+        description: description,
+        directOrIndirect: cDirectAc,
+        party: cPartyAc,
+        asset: cNonASSET);
+    var result = await _ledgerMasterService.insert(payload);
+
+    notifyListeners();
+    return result;
+  }
+
+  void loadParty() async {
+    final _partyList = await _ledgerMasterService.getPartyList();
+
+    partyList = _partyList;
+    notifyListeners();
+  }
+
   int getAmount() => _amount;
   void setAmount(int value) {
     _amount = value;
@@ -607,35 +676,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setDebitSideLedger(int id) async {
-    _debitSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
-    _debitSideLedgerId = id;
-    notifyListeners();
-  }
-
-  void setCreditSideLedger(int id) async {
-    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
-    _creditSideLedgerId = id;
-    notifyListeners();
-  }
-
-  void setAssetLedger(int id) async {
-    _assetLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
-    _assetLedger = id;
-    notifyListeners();
-  }
-
-  void setPartyLedger(int id) async {
-    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
-    _creditSideLedgerId = id;
-    notifyListeners();
-  }
-
-  void setCreditType(int value) {
-    _creditType = value;
-    notifyListeners();
-  }
-
   String getAssetLedgerName() => _assetLedgerName;
   String getDebitSideLedgerName() => _debitSideLedgerName;
   int getDebitSideLedgerId() => _debitSideLedgerId;
@@ -651,5 +691,197 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       partyName: _partyName,
       assetLedger: _assetLedger,
     );
+  }
+
+  void processMockData() {
+    List<Transaction> _purchaseMockData = [];
+    //--copy parameter to variable
+    // ---Purchase Transaction Type -1
+
+    // --copy parameter to variable
+    // ---Purchase Transaction Type -1
+    _purchaseMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Chair Leina',
+      isCredit: cCashDown,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: cCredit,
+      partyId: PartyMockConstant.AlexTelles,
+      partyName: 'Alex Telles',
+      assetLedger: AssetMockData.chair,
+      transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+      transactionTypeName: 'Purchase of Asset',
+    ));
+
+    //--Purchase Transaction Type-2
+    _purchaseMockData.add(
+      Transaction(
+        amount: 20000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: CASH,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.Rema,
+        partyName: 'Alex Telles',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    // --Purchase Transaction Type-3
+    _purchaseMockData.add(
+      Transaction(
+        amount: 30000,
+        particular: 'Chair Leina',
+        isCredit: cCredit,
+        cashOrBank: NONE,
+        date: DateTime.now(),
+        creditType: NONE,
+        partyId: PartyMockConstant.Rotluanga,
+        partyName: 'Rotluanga',
+        assetLedger: AssetMockData.chair,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Asset',
+      ),
+    );
+
+    //--Purchase Transaction Type-4
+    _purchaseMockData.add(
+      Transaction(
+        amount: 5000,
+        particular: 'Eitur Leina',
+        isCredit: cCashDown,
+        cashOrBank: CASH,
+        date: DateTime.now(),
+        creditType: cCredit,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of Non - Asset',
+      ),
+    );
+    //--Purchase Transaction Type-5
+    // debt of non asset non partial
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'card board bat na',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+        transactionTypeName: 'Purchase of Raw Material',
+      ),
+    );
+
+    //--Purchase Transaction Type-6
+    _purchaseMockData.add(
+      Transaction(
+        amount: 7000,
+        particular: 'Thil Hralh leh tur 7000 man leina(from Bank acc)',
+        isCredit: cCashDown,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: NONE,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of Raw Material',
+      ),
+    );
+
+    //--Purchase Transaction Type-7
+    _purchaseMockData.add(
+      Transaction(
+        amount: 7000,
+        particular: 'Thil Hralh leh tur 7000 man leina(from cash acc)',
+        isCredit: cCashDown,
+        cashOrBank: CASH,
+        date: DateTime.now(),
+        creditType: NONE,
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of Raw Material',
+      ),
+    );
+
+    //--Purchase Transaction Type-8
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Purchase of raw material',
+        isCredit: cCredit,
+        cashOrBank: NONE,
+        date: DateTime.now(),
+        creditType: cCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of raw material',
+      ),
+    );
+    //--Purchase Transaction Type-9
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Purchase of raw Material',
+        isCredit: cCredit,
+        cashOrBank: CASH,
+        date: DateTime.now(),
+        creditType: cPartialCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of raw Material',
+      ),
+    );
+
+    //--Purchase Transaction Type-10
+    _purchaseMockData.add(
+      Transaction(
+        amount: 10000,
+        particular: 'Purchase of raw Material',
+        isCredit: cCredit,
+        cashOrBank: BANK,
+        date: DateTime.now(),
+        creditType: cPartialCredit,
+        partyId: PartyMockConstant.AlexTelles,
+        partyName: 'Alex Telles',
+        transactionTypeId: TransactionTypeConstant.cPURCHASEOFRAWMATERIAL,
+        transactionTypeName: 'Purchase of raw Material',
+      ),
+    );
+    _purchaseMockData.add(
+      Transaction(
+          particular: 'Chair Leina',
+          isCredit: cCredit,
+          cashOrBank: CASH,
+          date: DateTime.now(),
+          creditType: cPartialCredit,
+          partyId: PartyMockConstant.Zasiama,
+          partyName: 'Zasiama',
+          assetLedger: AssetMockData.chair,
+          transactionTypeId: TransactionTypeConstant.cPURCHASEOFASSET,
+          transactionTypeName: 'Purchase of Asset'),
+    );
+
+    for (int i = 0; i < _purchaseMockData.length; i++) {
+      _amount = _purchaseMockData[i].amount;
+      _particular = _purchaseMockData[i].particular;
+      _isCredit = _purchaseMockData[i].isCredit;
+      _cashOrBank = _purchaseMockData[i].cashOrBank;
+      _date = _purchaseMockData[i].date;
+      _creditType = _purchaseMockData[i].creditType;
+      _partyId = _purchaseMockData[i].partyId;
+      _partyName = _purchaseMockData[i].partyName;
+      _assetLedger = _purchaseMockData[i].assetLedger;
+      _transactionTypeId = _purchaseMockData[i].transactionTypeId;
+      _transactionTypeName = _purchaseMockData[i].transactionTypeName;
+      print('inside mock data looop');
+      print(_cashOrBank.toString());
+      setPurchaseType();
+      saveData();
+    }
   }
 }

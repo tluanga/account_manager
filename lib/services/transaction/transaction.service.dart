@@ -12,4 +12,6 @@ abstract class TransactionService {
   Future<int> insert(Transaction transaction);
   Future<int> update(Transaction transaction);
   Future<int> delete(int id);
+
+  void creditAmountForMonth();
 }
