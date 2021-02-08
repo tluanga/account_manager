@@ -3,7 +3,7 @@ import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
-import 'package:account_manager/static/partyMock.constant.dart';
+
 import 'package:account_manager/static/saleType.constant.dart';
 import 'package:account_manager/static/transactionType.constant.dart';
 
@@ -34,8 +34,8 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   String _partyName; //Computed
   int _assetLedger; //if the purchase is of asset//user input
   String _assetLedgerName;
-  int _transactionTypeId = 0;
-  String _transactionTypeName = ''; //user input
+  int _transactionTypeId = TransactionTypeConstant.cSALEOFGOODS;
+  String _transactionTypeName = 'Sale of Goods'; //user input
   // ignore: unused_field
   int _debitSideLedgerId = 0; //computed-
   String _debitSideLedgerName; //computed --
@@ -44,7 +44,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   int _creditSideLedgerId = 0;
   String _creditSideLedgerName; //--computer
   // ignore: unused_field
-  int _salesType;
+  int _saleType;
   List<LedgerMaster> partyList = [];
 
   // ignore: unused_field
@@ -80,27 +80,64 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   void setSaleType() async {
     if (_isCredit == cCashDown) {
       if (_cashOrBank == BANK) {
-        //type -1 --saleCashDownBank
-        _salesType = SaleType.saleCashDownBank;
-      }
-      if (_cashOrBank == CASH) {
-        //Type-2--saleCashDownCash
-        _salesType = SaleType.saleCashDownCash;
+        print('1)Sale -Balo - Bank payment-');
+        setDebitSideLedger(LedgerID.BANK);
+        setCreditSideLedger(LedgerID.SALESAC);
+        _saleType = SaleType.saleCashDownBank;
+        notifyListeners();
+      } else if (_cashOrBank == CASH) {
+        print('2) Sale -Balo - Cash payment-');
+        setDebitSideLedger(LedgerID.CASHAC);
+        setCreditSideLedger(LedgerID.SALESAC);
+        _saleType = SaleType.saleCashDownCash;
+        notifyListeners();
       }
     } else if (_isCredit == cCredit) {
       if (_creditType != cPartialCredit) {
-        //Type 3-Sales BA
-        _salesType = SaleType.saleDebt;
-      }
-    } else if (_creditType == cPartialCredit) {
-      if (_cashOrBank == BANK) {
-        //Type 4 Sales Partial BA - Bank
-        _salesType = SaleType.saleBaPartialBank;
+        print('3) Sale -Ba- ');
+        setDebitSideLedger(LedgerID.BANK);
+        setCreditSideLedger(LedgerID.SALESAC);
+        _saleType = SaleType.saleDebt;
+        notifyListeners();
       } else if (_cashOrBank == CASH) {
-        //Type 5 Sales Partial BA - CASH
-        _salesType = SaleType.saleBaPartialCash;
+        print('4) Sale-Ba-Partial Paymen Bank');
+        setDebitSideLedger(LedgerID.BANK);
+        setCreditSideLedger(LedgerID.SALESAC);
+        _saleType = SaleType.saleBaPartialBank;
+        notifyListeners();
+      } else if (_cashOrBank == BANK) {
+        print('5) Asset-Credit-Partial-Bank');
+        setDebitSideLedger(LedgerID.CASHAC);
+        setCreditSideLedger(LedgerID.SALESAC);
+        _saleType = SaleType.saleBaPartialCash;
+        notifyListeners();
       }
     }
+
+    notifyListeners();
+  }
+
+  void setDebitSideLedger(int id) async {
+    _debitSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _debitSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setCreditSideLedger(int id) async {
+    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _creditSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setPArtyLedger(int id) async {
+    _creditSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
+    _creditSideLedgerId = id;
+    notifyListeners();
+  }
+
+  void setCreditType(int value) {
+    _creditType = value;
+    notifyListeners();
   }
 
   void saveData() {
@@ -115,18 +152,21 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
         partyId: _partyId,
         partyName: _partyName,
         assetLedger: _assetLedger,
+        assetLedgerName: _assetLedgerName,
         transactionTypeId: _transactionTypeId,
+        debitSideLedgerId: _debitSideLedgerId,
+        debitSideLedgerName: _debitSideLedgerName,
+        creditSideLedgerId: _creditSideLedgerId,
+        creditSideLedgerName: _creditSideLedgerName,
         transactionTypeName: _transactionTypeName,
       ),
     );
 
-    switch (_salesType) {
+    switch (_saleType) {
       case SaleType.saleCashDownBank:
         {
-          // --process debit side
           print('type-1:saleCashDownBank');
-          _debitSideLedgerId = LedgerID.BANK;
-          _creditSideLedgerId = LedgerID.SALESAC;
+          // --process debit side
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -135,6 +175,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -146,16 +187,15 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
         break;
       case SaleType.saleCashDownCash:
         {
-          print('type-2:saleCashDownCash');
+          print('2) saleCashDownCash');
           // --process debit side
-          _debitSideLedgerId = LedgerID.CASHAC;
-          _creditSideLedgerId = LedgerID.SALESAC;
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -164,6 +204,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -175,6 +216,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -182,9 +224,11 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
       case SaleType.saleDebt:
         // ---Type 3----
         {
-          print('type-3:saleDebt');
-          _debitSideLedgerId = _partyId;
-          _creditSideLedgerId = LedgerID.SALESAC;
+          print('3)Save Data- Asset-Credit--');
+          // --process debit side
+          print('---Before Saving data----');
+          print('_debitSideLedgerId:$_debitSideLedgerId');
+          print('_creditSideLedgerId:$_creditSideLedgerId');
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
@@ -193,6 +237,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
@@ -204,6 +249,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
               date: _date,
               debitOrCredit: CREDIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
         }
@@ -214,31 +260,38 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
           print('type-4:saleBaPartialBank');
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: LedgerID.BANK,
+              ledgerId: _assetLedger,
               amount: _amount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: DEBIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.CASHAC,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
+            ),
           );
           //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: LedgerID.SALESAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _partyId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
+            ),
           );
         }
         break;
@@ -248,31 +301,38 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
           print('type-5:saleBaPartialCash');
           _ledgerTransactionService.insert(
             LedgerTransaction(
-              ledgerId: LedgerID.CASHAC,
+              ledgerId: _assetLedger,
               amount: _amount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
               cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
             ),
           );
           //process credit Side
-          LedgerTransaction(
-            ledgerId: _partyId,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: LedgerID.BANK,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
+            ),
           );
           //process credit side-party ac
-          LedgerTransaction(
-            ledgerId: LedgerID.SALESAC,
-            amount: _amount,
-            particular: _particular,
-            date: _date,
-            debitOrCredit: CREDIT,
-            cashOrBank: _cashOrBank,
+          _ledgerTransactionService.insert(
+            LedgerTransaction(
+              ledgerId: _partyId,
+              amount: _amount,
+              particular: _particular,
+              date: _date,
+              debitOrCredit: CREDIT,
+              cashOrBank: _cashOrBank,
+              transactionTypeId: _transactionTypeId,
+            ),
           );
         }
         break;
@@ -280,6 +340,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   }
 
   void printData() {
+    print('-------Start of Print----');
     print('Amount:$_amount');
     print('Particular:$_particular');
     print('Ba or Balo:$_isCredit');
@@ -287,6 +348,9 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
     print('Ba Type:$_creditType');
     print('Party Id:$_partyId');
     print('Party Name :$_partyName');
+    print('Debit Side Ledger:$_debitSideLedgerId');
+    print('Credit Side Ledger:$_creditSideLedgerId');
+    print('----end of print----');
   }
 
   void getFilterdPartyLedgerMaster(String _searchString) async {
@@ -319,11 +383,6 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
     final _partyList = await _ledgerMasterService.getPartyList();
 
     partyList = _partyList;
-    notifyListeners();
-  }
-
-  void loadTransactionType() async {
-    transactionTypeList = await _transactionTypeService.getList();
     notifyListeners();
   }
 
@@ -382,10 +441,6 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   }
 
   int getAssetLedger() => _assetLedger;
-  void setAssetLedger(int value) {
-    _assetLedger = value;
-    notifyListeners();
-  }
 
   int getTransactionTypeId() => _transactionTypeId;
   void setTransactionTypeId(int value) {
@@ -401,123 +456,94 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
 
   String getAssetLedgerName() => _assetLedgerName;
   String getDebitSideLedgerName() => _debitSideLedgerName;
+  int getDebitSideLedgerId() => _debitSideLedgerId;
   String getCreditSideLedgerName() => _creditSideLedgerName;
+  int getCreditSideLedgerID() => _creditSideLedgerId;
 
-  //-----Mock----The Business Model--
+  Transaction journalConfirmBottomSheet() {
+    print(_debitSideLedgerName);
+    return Transaction(
+      amount: _amount,
+      debitSideLedgerName: _debitSideLedgerName,
+      creditSideLedgerName: _creditSideLedgerName,
+      partyName: _partyName,
+      assetLedger: _assetLedger,
+    );
+  }
 
-  // Transaction _saleMockData = Transaction(
-  //   amount:
-  //   particular:
-  //   isCredit:
-  //   cashOrBank:
-  //   date:
-  //   creditType:
-  //   partyId:
-  //   partyName:
-  //   assetLedger:
-  //   transactionTypeId:
-  //   transactionTypeName:
-  //   debitSideLedgerId:
-  //   debitSideLedgerName:
-  //   creditSideLedgerId:
-  //   creditSideLedgerName:
-  // );
-  // To Test Type -1 Purchase Transaction
-  // Sale test type 1 Sale without debt
-  // void processMockData() {
-  //   List<Transaction> _saleMockData = [];
-  //   _saleMockData.add(Transaction(
-  //     amount: 10000,
-  //     particular: 'Sale of Goods',
-  //     isCredit: cCashDown,
-  //     cashOrBank: CASH,
-  //     date: DateTime.now(),
-  //     creditType: cCredit,
-  //     transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-  //     transactionTypeName: 'Sales of Goods',
-  //   ));
-  // Sale test type 1 SALECASHDOWNBANK
   void processMockData() {
-    List<Transaction> _saleMockData = [];
-    _saleMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Sale of Goods full debt',
-      isCredit: cCashDown,
-      cashOrBank: BANK,
-      date: DateTime.now(),
-      creditType: NONE,
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-      transactionTypeName: 'Sales of Goods',
-    ));
-
-    // sale test type 2 SALECASHDOWNCASH
-    _saleMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Sale of Goods full debt',
-      isCredit: cCashDown,
-      cashOrBank: CASH,
-      date: DateTime.now(),
-      creditType: NONE,
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-      transactionTypeName: 'Sales of Goods',
-    ));
-
-    // sale test type 3 saledebt
-    _saleMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Sale of Goods full debt',
-      isCredit: cCredit,
-      cashOrBank: NONE,
-      date: DateTime.now(),
-      creditType: cCredit,
-      partyId: PartyMockConstant.Zomawia,
-      partyName: 'Zomawia',
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-      transactionTypeName: 'Sales of Goods',
-    ));
-
-    // sale test type 4 SALEBAPARTIALBANK
-    _saleMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Sale of Goods full debt',
-      isCredit: cCredit,
-      cashOrBank: BANK,
-      date: DateTime.now(),
-      creditType: cPartialCredit,
-      partyId: PartyMockConstant.Zomawia,
-      partyName: 'Zomawia',
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-      transactionTypeName: 'Sales of Goods',
-    ));
-
-    // sale test type 5 SALEBAPARTIALCASH
-    _saleMockData.add(Transaction(
-      amount: 5000,
-      particular: 'Sale of Goods full debt',
-      isCredit: cCredit,
-      cashOrBank: CASH,
-      date: DateTime.now(),
-      creditType: cPartialCredit,
-      partyId: PartyMockConstant.Zomawia,
-      partyName: 'Zomawia',
-      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
-      transactionTypeName: 'Sales of Goods',
-    ));
-    
+    List<Transaction> _purchaseMockData = [];
     //--copy parameter to variable
-    for (int i = 0; i < _saleMockData.length; i++) {
-      _amount = _saleMockData[i].amount;
-      _particular = _saleMockData[i].particular;
-      _isCredit = _saleMockData[i].isCredit;
-      _cashOrBank = _saleMockData[i].cashOrBank;
-      _date = _saleMockData[i].date;
-      _creditType = _saleMockData[i].creditType;
-      _partyId = _saleMockData[i].partyId;
-      _partyName = _saleMockData[i].partyName;
-      _assetLedger = _saleMockData[i].assetLedger;
-      _transactionTypeId = _saleMockData[i].transactionTypeId;
-      _transactionTypeName = _saleMockData[i].transactionTypeName;
+    // ---Purchase Transaction Type -1
+
+    // --copy parameter to variable
+    // ---Purchase Transaction Type -1
+    _purchaseMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Chair HRalhna',
+      isCredit: cCashDown,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: NONE,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    ));
+    // ---saleCashDownCash - Type 2
+    _purchaseMockData.add(Transaction(
+      amount: 5000,
+      particular: 'Chair HRalhna',
+      isCredit: cCashDown,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: NONE,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    ));
+    // ---saleCashDownCash - Type 3
+    _purchaseMockData.add(Transaction(
+      amount: 3000,
+      particular: 'Chair HRalhna',
+      isCredit: cCredit,
+      cashOrBank: BANK,
+      date: DateTime.now(),
+      creditType: NONE,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    ));
+    // ---saleBaPartialBank - Type 4
+    _purchaseMockData.add(Transaction(
+      amount: 300,
+      particular: 'Bottle HRalhna',
+      isCredit: cCredit,
+      cashOrBank: BANK,
+      partyId: cPartyAc,
+      date: DateTime.now(),
+      creditType: cPartialCredit,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    ));
+    // ---saleBaPartialBank - Type 4
+    _purchaseMockData.add(Transaction(
+      amount: 200,
+      particular: 'Bottle HRalhna',
+      isCredit: cCredit,
+      cashOrBank: CASH,
+      partyId: cPartyAc,
+      date: DateTime.now(),
+      creditType: cPartialCredit,
+      transactionTypeId: TransactionTypeConstant.cSALEOFGOODS,
+    ));
+
+    for (int i = 0; i < _purchaseMockData.length; i++) {
+      _amount = _purchaseMockData[i].amount;
+      _particular = _purchaseMockData[i].particular;
+      _isCredit = _purchaseMockData[i].isCredit;
+      _cashOrBank = _purchaseMockData[i].cashOrBank;
+      _date = _purchaseMockData[i].date;
+      _creditType = _purchaseMockData[i].creditType;
+      _partyId = _purchaseMockData[i].partyId;
+      _partyName = _purchaseMockData[i].partyName;
+      _assetLedger = _purchaseMockData[i].assetLedger;
+      _transactionTypeId = _purchaseMockData[i].transactionTypeId;
+      _transactionTypeName = _purchaseMockData[i].transactionTypeName;
       print('inside mock data looop');
+      print(_cashOrBank.toString());
       setSaleType();
       saveData();
     }

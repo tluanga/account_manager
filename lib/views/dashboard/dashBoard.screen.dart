@@ -142,13 +142,13 @@ class _DashBoardState extends State<DashBoard> {
                               Tab(
                                 child: Align(
                                   alignment: Alignment.center,
-                                  child: Text("Ledgers"),
+                                  child: Text("Transactions"),
                                 ),
                               ),
                               Tab(
                                 child: Align(
                                   alignment: Alignment.center,
-                                  child: Text("Transactions"),
+                                  child: Text("Ledgers"),
                                 ),
                               ),
                               Tab(
@@ -168,8 +168,8 @@ class _DashBoardState extends State<DashBoard> {
         ),
         body: TabBarView(
           children: [
-            LedgerDashboardScreen(),
             TransactionDashboardWidget(),
+            LedgerDashboardScreen(),
             PartiesDashBoardScreen()
           ],
         ),

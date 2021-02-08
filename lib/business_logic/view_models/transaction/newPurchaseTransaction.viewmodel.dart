@@ -88,7 +88,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
 
           _purchaseType = PurchaseType.assetCashDownBank;
           notifyListeners();
-        } else if (_cashOrBank == BANK) {
+        } else if (_cashOrBank == CASH) {
           print('2) Asset-CashDown-Cash');
           setDebitSideLedger(_assetLedger);
           setCreditSideLedger(LedgerID.CASHAC);
