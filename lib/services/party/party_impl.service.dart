@@ -55,4 +55,9 @@ class PartyImpl implements PartyService {
   void setSelectedParty(LedgerMaster _ledgerMaster) {
     _selectedParty = _ledgerMaster;
   }
+
+  @override
+  LedgerMaster getSelectedParty() {
+    return _selectedParty;
+  }
 }

@@ -8,4 +8,5 @@ abstract class PartyService {
   Future<int> update(Party party);
   Future<int> delete(int id);
   void setSelectedParty(LedgerMaster _ledgerMaster);
+  LedgerMaster getSelectedParty();
 }

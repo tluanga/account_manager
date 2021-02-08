@@ -113,7 +113,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
         notifyListeners();
       }
     }
-
+    printData();
     notifyListeners();
   }
 
@@ -433,7 +433,6 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   int getPartyId() => _partyId;
   void setPartyId(int value) {
     _partyId = value;
-    print('The new party id is$_partyId');
     notifyListeners();
   }
 

@@ -1,9 +1,10 @@
+import 'package:account_manager/business_logic/models/ledgerTransaction.model.dart';
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
-import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
-import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
+import 'package:account_manager/business_logic/models/transaction.model.dart';
+
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
+import 'package:account_manager/services/transaction/transaction.service.dart';
 import 'package:account_manager/static/constants.dart';
 import 'package:account_manager/static/ledgerId.constants.dart';
 import 'package:account_manager/static/purchaseType.constant.dart';
@@ -11,15 +12,6 @@ import 'package:account_manager/static/purchaseType.constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:account_manager/services/transactionType/transactionType.service.dart';
-import '../../../static/constants.dart';
-
-import '../../../static/ledgerId.constants.dart';
-
-import '../../models/ledgerTransaction.model.dart';
-import '../../models/ledgermaster.models.dart';
-import '../../models/transaction.model.dart';
-
-import '../../../services/transaction/transaction.service.dart';
 
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 
@@ -58,33 +50,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   LedgerMasterService _ledgerMasterService =
       serviceLocator<LedgerMasterService>();
 
-  //----------View Model import----------
-  PartySelectViewModel _partySelectViewModel =
-      serviceLocator<PartySelectViewModel>();
-  AssetSelectViewModel _assetSelectViewModel =
-      serviceLocator<AssetSelectViewModel>();
-  BaOrBaloToggleViewModel _baOrBaloToggleViewModel =
-      serviceLocator<BaOrBaloToggleViewModel>();
-
   void setupPurchase() async {
-    //Initial Setup---
-    //---- Party Setup
-    if (_partySelectViewModel.getSelectedParty() != null) {
-      // if a party is Selected
-      setPartyLedger(_partySelectViewModel.getSelectedParty().id);
-      setPartyName(_partySelectViewModel.getSelectedParty().name);
-    }
-    //-----Asset Setup-------------
-    if (_assetSelectViewModel.selectedAsset != null) {
-      _assetLedger = _assetSelectViewModel.selectedAsset.id;
-      _assetLedgerName = _assetSelectViewModel.selectedAsset.name;
-    }
-    // ----BA Or BALO Setup----------
-    if (_baOrBaloToggleViewModel.getBaOrBalo() != null) {
-      _isCredit = _baOrBaloToggleViewModel.getBaOrBalo();
-      _creditType = _baOrBaloToggleViewModel.getBaType();
-    }
-    //-------CASH OR BANK Setup-------------
     printData();
 
     //--------Set Purchase type--------
@@ -597,7 +563,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
   int getPartyId() => _partyId;
   void setPartyId(int value) {
     _partyId = value;
-    print('The new party id is$_partyId');
+
     notifyListeners();
   }
 

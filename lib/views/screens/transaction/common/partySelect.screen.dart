@@ -113,8 +113,6 @@ class _PartySelectScreenState extends State<PartySelectScreen> {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
-                                  print('---selected Party is---');
-
                                   model
                                       .setSelectedParty(model.partyList[index]);
 

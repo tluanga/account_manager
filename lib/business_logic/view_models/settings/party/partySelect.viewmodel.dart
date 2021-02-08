@@ -25,6 +25,7 @@ class PartySelectViewModel extends ChangeNotifier {
   LedgerMaster getSelectedParty() => _selectedParty;
   void setSelectedParty(LedgerMaster _party) {
     _selectedParty = _party;
+    print(_selectedParty.name);
     notifyListeners();
   }
 

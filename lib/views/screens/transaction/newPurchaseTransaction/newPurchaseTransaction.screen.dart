@@ -102,9 +102,11 @@ class _NewPurchaseTransactionScreenState
                           }
                         },
                         onChanged: (value) {
-                          setState(() {
-                            newTransaction.setAmount(int.parse(value));
-                          });
+                          setState(
+                            () {
+                              newTransaction.setAmount(int.parse(value));
+                            },
+                          );
                         },
                       ),
                       SizedBox(height: 10),
@@ -195,10 +197,22 @@ class _NewPurchaseTransactionScreenState
                       ),
                       GestureDetector(
                         onTap: () {
-                          //------Reset Part
-                          // transactionTypeSelect.deSelectTransactionType(
-                          //     transactionTypeSelect.selectedTransactionType.id);
-                          // Navigator.pushNamed(context, rMyApp);
+                          //-------------Set BA-------------
+                          if (baOrBaloToggle.getBaOrBalo() != null) {
+                            newTransaction
+                                .setBaOrBalo(baOrBaloToggle.getBaOrBalo());
+                            newTransaction
+                                .setBaType(baOrBaloToggle.getBaType());
+                          }
+                          //------------Set Party-----------------------
+                          if (partySelect.getSelectedParty() != null) {
+                            newTransaction
+                                .setPartyId(partySelect.getSelectedParty().id);
+                            newTransaction.setPartyName(
+                                partySelect.getSelectedParty().name);
+                          }
+                          //-------------Call Setup-------------------
+                          _submit();
                         },
                         child: Container(
                           width: double.infinity,
@@ -208,52 +222,11 @@ class _NewPurchaseTransactionScreenState
                             color: HexColor(PRIMARYCOLOR),
                           ),
                           child: Center(
-                            child: FlatButton(
-                              onPressed: () {
-                                //  newTransaction.setData();
-                                // print('value of partySelect');
-                                // if (baOrBaloToggle.getBaOrBalo() == cCredit) {
-                                //   newTransaction.setBaOrBalo(cCredit);
-                                //   if (partySelect.selectedParty != null) {
-                                //     newTransaction.setPartyId(
-                                //         partySelect.selectedParty.id);
-
-                                //     newTransaction.setPartyName(
-                                //         partySelect.selectedParty.name);
-                                //     print('is Partial Credit');
-                                //     print(
-                                //         partySelect.isPartialCredit.toString());
-                                //     newTransaction.setCreditType(
-                                //         partySelect.isPartialCredit);
-                                //   }
-                                // } else if (baOrBaloToggle.getBaOrBalo() ==
-                                //     cCashDown) {
-                                //   newTransaction.setBaOrBalo(cCashDown);
-                                // }
-
-                                if (assetSelect.selectedAsset != null) {
-                                  newTransaction.setAssetLedger(
-                                      assetSelect.selectedAsset.id);
-                                }
-                                if (transactionTypeSelect
-                                        .selectedTransactionType !=
-                                    null) {
-                                  newTransaction.setTransactionTypeId(
-                                      transactionTypeSelect
-                                          .selectedTransactionType.id);
-                                  newTransaction.setTransactionTypeName(
-                                    transactionTypeSelect
-                                        .selectedTransactionType.name,
-                                  );
-                                }
-                                _submit();
-                              },
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(
-                                  color: HexColor(TEXTCOLOR),
-                                  fontSize: 19,
-                                ),
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                color: HexColor(TEXTCOLOR),
+                                fontSize: 19,
                               ),
                             ),
                           ),
