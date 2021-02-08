@@ -51,8 +51,6 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       serviceLocator<LedgerMasterService>();
 
   void setupPurchase() async {
-    printData();
-
     //--------Set Purchase type--------
     if (_assetLedger != null) {
       if (_isCredit == cCashDown) {
