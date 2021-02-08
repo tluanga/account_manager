@@ -58,12 +58,18 @@ class TransactionDashboardWidget extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      model.lastTenTransactions[index]
-                                          .particular,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
+                                    Flexible(
+                                      child: Container(
+                                        padding: EdgeInsets.only(right: 15),
+                                        child: Text(
+                                          model.lastTenTransactions[index]
+                                              .particular,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
                                     ),
                                     Text(
