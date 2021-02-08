@@ -21,9 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
+    return Scaffold(
+          backgroundColor: cprimaryColor,
           body: Container(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   )
                 ]),
           ),
-        ));
+        );
   }
 }
 
