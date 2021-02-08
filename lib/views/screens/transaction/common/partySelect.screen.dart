@@ -1,6 +1,5 @@
 import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
 import 'package:account_manager/static/constants.dart';
-import 'package:account_manager/views/screens/transaction/common/widget/baTypeToggle.widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';

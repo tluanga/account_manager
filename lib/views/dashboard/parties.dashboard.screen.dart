@@ -10,9 +10,6 @@ class PartiesDashBoardScreen extends StatefulWidget {
 }
 
 class _PartiesDashBoardScreenState extends State<PartiesDashBoardScreen> {
-  String text = 'To be Displayed';
-
-  bool shouldDisplay = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +18,6 @@ class _PartiesDashBoardScreenState extends State<PartiesDashBoardScreen> {
         return Container(
           child: Column(
             children: [
-              Container(
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(Icons.add),
-                  FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          shouldDisplay = !shouldDisplay;
-                        });
-                      },
-                      child: Text('Add Parties')),
-                ]),
-              ),
-              shouldDisplay ? Text(text) : Spacer(),
               Expanded(
                 child: ListView.builder(
                     itemCount: model.ledgerMasterListSorted.length,
@@ -42,6 +25,7 @@ class _PartiesDashBoardScreenState extends State<PartiesDashBoardScreen> {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
+                          alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -51,10 +35,9 @@ class _PartiesDashBoardScreenState extends State<PartiesDashBoardScreen> {
                               5,
                             ),
                           ),
-                          child: Column(
-                            children: [
-                              Text(model.ledgerMasterListSorted[index].name)
-                            ],
+                          child: Text(
+                            model.ledgerMasterListSorted[index].name,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       );
