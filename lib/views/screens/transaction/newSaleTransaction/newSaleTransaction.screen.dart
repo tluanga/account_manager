@@ -177,17 +177,23 @@ class _NewSaleTransactionScreenState extends State<NewSaleTransactionScreen> {
                                 //  newTransaction.setData();
                                 print('value of partySelect');
                                 if (baOrBaloToggle.getBaOrBalo() == cCredit) {
-                                  print('Ba');
+                                  newTransaction.setBaOrBalo(cCredit);
                                   if (partySelect.selectedParty != null) {
                                     newTransaction.setPartyId(
                                         partySelect.selectedParty.id);
+
                                     newTransaction.setPartyName(
                                         partySelect.selectedParty.name);
+                                    print('is Partial Credit');
+                                    print(
+                                        partySelect.isPartialCredit.toString());
                                     newTransaction.setCreditType(
                                         partySelect.isPartialCredit);
                                   }
-                                } else
-                                  print('Balo');
+                                } else if (baOrBaloToggle.getBaOrBalo() ==
+                                    cCashDown) {
+                                  newTransaction.setBaOrBalo(cCashDown);
+                                }
 
                                 _submit();
                               },

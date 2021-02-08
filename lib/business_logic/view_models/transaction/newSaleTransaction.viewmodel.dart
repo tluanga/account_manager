@@ -117,6 +117,8 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //-----------------------Setters----------------------------
+
   void setDebitSideLedger(int id) async {
     _debitSideLedgerName = await _ledgerMasterService.getLedgerMasterName(id);
     _debitSideLedgerId = id;
@@ -389,6 +391,7 @@ class NewSaleTransactionViewModel extends ChangeNotifier {
   int getAmount() => _amount;
   void setAmount(int value) {
     _amount = value;
+    print(_amount);
     notifyListeners();
   }
 
