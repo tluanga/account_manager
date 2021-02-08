@@ -14,7 +14,7 @@ class BaOrBaloToggleViewModel extends ChangeNotifier {
 
   //-----get and set Ba Type
   // ----possible values 0-FullCredit and 1 -For Partial Credit
-  void getBaType() => _baType;
+  int getBaType() => _baType;
   void setBaType(int _type) {
     _baType = _type;
     notifyListeners();

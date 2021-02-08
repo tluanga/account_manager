@@ -287,7 +287,7 @@ class NewInwardTransactionViewModel extends ChangeNotifier {
     );
 
     for (int i = 0; i < _inwardMockData.length; i++) {
-      String id = _inwardMockData[i].cashOrBank.toString();
+      _inwardMockData[i].cashOrBank.toString();
 
       _amount = _inwardMockData[i].amount;
       _particular = _inwardMockData[i].particular;

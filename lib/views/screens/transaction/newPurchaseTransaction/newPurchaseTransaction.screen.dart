@@ -38,8 +38,8 @@ class _NewPurchaseTransactionScreenState
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      // Provider.of<NewPurchaseTransactionViewModel>(context, listen: false)
-      //     .setPurchaseType();
+      Provider.of<NewPurchaseTransactionViewModel>(context, listen: false)
+          .setupPurchase();
 
       journalConfirmBottomSheet(context);
     }

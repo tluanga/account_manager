@@ -1,6 +1,7 @@
 import 'package:account_manager/business_logic/models/ledgermaster.models.dart';
 import 'package:account_manager/business_logic/view_models/settings/assetAccount/assetSelect.viewmodel.dart';
 import 'package:account_manager/business_logic/view_models/settings/party/partySelect.viewmodel.dart';
+import 'package:account_manager/business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
 import 'package:account_manager/services/ledgerMaster/ledgeMaster.service.dart';
 import 'package:account_manager/services/serviceLocator.dart';
 import 'package:account_manager/static/constants.dart';
@@ -62,6 +63,8 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       serviceLocator<PartySelectViewModel>();
   AssetSelectViewModel _assetSelectViewModel =
       serviceLocator<AssetSelectViewModel>();
+  BaOrBaloToggleViewModel _baOrBaloToggleViewModel =
+      serviceLocator<BaOrBaloToggleViewModel>();
 
   void setupPurchase() async {
     //Initial Setup---
@@ -72,6 +75,17 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
       setPartyName(_partySelectViewModel.getSelectedParty().name);
     }
     //-----Asset Setup-------------
+    if (_assetSelectViewModel.selectedAsset != null) {
+      _assetLedger = _assetSelectViewModel.selectedAsset.id;
+      _assetLedgerName = _assetSelectViewModel.selectedAsset.name;
+    }
+    // ----BA Or BALO Setup----------
+    if (_baOrBaloToggleViewModel.getBaOrBalo() != null) {
+      _isCredit = _baOrBaloToggleViewModel.getBaOrBalo();
+      _creditType = _baOrBaloToggleViewModel.getBaType();
+    }
+    //-------CASH OR BANK Setup-------------
+    printData();
 
     //--------Set Purchase type--------
     if (_assetLedger != null) {

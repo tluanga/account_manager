@@ -44,15 +44,21 @@ class TransactionTypeDetailViewModel extends ChangeNotifier {
   }
 
   int formatSumChetdanType(String value) {
+    int _return;
     switch (value) {
       case 'Lei':
-        return 0;
+        _return = 0;
+        break;
       case 'Hralh':
-        return 1;
+        _return = 1;
+        break;
       case 'Lakluh':
-        return 2;
+        _return = 2;
+        break;
       case 'Pekchhuah':
-        return 3;
+        _return = 3;
+        break;
     }
+    return _return;
   }
 }
