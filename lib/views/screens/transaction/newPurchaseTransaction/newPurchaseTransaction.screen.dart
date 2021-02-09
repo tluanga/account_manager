@@ -17,7 +17,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
 import '../../../../services/serviceLocator.dart';
-import '../../../../static/route.dart';
 
 class NewPurchaseTransactionScreen extends StatefulWidget {
   const NewPurchaseTransactionScreen({Key key}) : super(key: key);
@@ -104,7 +103,7 @@ class _NewPurchaseTransactionScreenState
                         onChanged: (value) {
                           setState(
                             () {
-                              newTransaction.setAmount(int.parse(value));
+                              newTransaction.setDebitAmount(int.parse(value));
                             },
                           );
                         },
@@ -203,6 +202,8 @@ class _NewPurchaseTransactionScreenState
                                 .setBaOrBalo(baOrBaloToggle.getBaOrBalo());
                             newTransaction
                                 .setBaType(baOrBaloToggle.getBaType());
+                            newTransaction.setCreditBankCashPartialPayment(
+                                baOrBaloToggle.getDebitAmountBankOrCash());
                           }
                           //------------Set Party-----------------------
                           if (partySelect.getSelectedParty() != null) {

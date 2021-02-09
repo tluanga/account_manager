@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../business_logic/view_models/transaction/newPurchaseTransaction.viewmodel.dart';
+import '../../../../static/constants.dart';
 import '../../myApp.screen.dart';
 
 void journalConfirmBottomSheet(context) {
@@ -46,45 +47,23 @@ void journalConfirmBottomSheet(context) {
                     TableRow(children: [
                       Row(
                         children: [
-                          Text(model.getDebitSideLedgerName()),
                           Text(
-                            // particulars of transaction
-                            ' Dr.',
-                            textAlign: TextAlign.left,
-                          )
-                        ],
-                      ),
-                      Text(
-                          //debit amount for first ledger
-                          model.getAmount().toString(),
-                          textAlign: TextAlign.center),
-                      Text(
-                          // credit amount for first ledger
-                          '0',
-                          textAlign: TextAlign.center),
-                    ]),
-                    TableRow(children: [
-                      Row(
-                        children: [
-                          Text(
-                            model.getCreditSideLedgerName(),
+                            model.getDebitSideLedgerName(),
                           ),
                           Text('To ', textAlign: TextAlign.center),
                         ],
                       ),
                       Text(
                           //debit amount fro second ledger
-                          '0',
+                          model.getDebitAmount().toString(),
                           textAlign: TextAlign.center),
                       Text(
                           // credit amount for second ledger
-                          model.getAmount().toString(),
+                          '0',
                           textAlign: TextAlign.center),
                     ]),
-                    model.getPartyId() != model.getCreditSideLedgerID() &&
-                            model.getPartyId() !=
-                                model.getDebitSideLedgerId() &&
-                            model.getPartyId() != null
+                    // ----------Credit Side Row--------------
+                    model.getPartyId() != model.getCreditSideLedgerID()
                         ? TableRow(children: [
                             Row(
                               children: [
@@ -100,27 +79,72 @@ void journalConfirmBottomSheet(context) {
                                 textAlign: TextAlign.center),
                             Text(
                                 // credit amount for second ledger
-                                model.getAmount().toString(),
+                                model.getCreditAmount().toString(),
                                 textAlign: TextAlign.center),
                           ])
                         : TableRow(children: [
                             Row(
                               children: [
+                                Text(model.getCreditSideLedgerName()),
                                 Text(
-                                  '',
+                                  // particulars of transaction
+                                  ' Dr.',
+                                  textAlign: TextAlign.left,
+                                )
+                              ],
+                            ),
+                            Text(
+                                //debit amount for first ledger
+                                '0',
+                                textAlign: TextAlign.center),
+                            Text(
+                                // credit amount for first ledger
+                                model.getCreditAmount().toString(),
+                                textAlign: TextAlign.center),
+                          ]),
+                    //--------get partial ---------------------
+
+                    model.getBaType() == cPartialCredit
+                        ? TableRow(children: [
+                            Row(
+                              children: [
+                                Text(
+                                  model.getCreditSideLedgerName(),
                                 ),
-                                Text('', textAlign: TextAlign.center),
+                                Text('To ', textAlign: TextAlign.center),
                               ],
                             ),
                             Text(
                                 //debit amount fro second ledger
-                                '',
+                                '0',
                                 textAlign: TextAlign.center),
                             Text(
                                 // credit amount for second ledger
-                                '',
+                                model
+                                    .getCreditBankCashPartialPayment()
+                                    .toString(),
                                 textAlign: TextAlign.center),
                           ])
+                        : TableRow(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    '',
+                                  ),
+                                  Text('', textAlign: TextAlign.center),
+                                ],
+                              ),
+                              Text(
+                                  //debit amount fro second ledger
+                                  '',
+                                  textAlign: TextAlign.center),
+                              Text(
+                                  // credit amount for second ledger
+                                  '',
+                                  textAlign: TextAlign.center),
+                            ],
+                          )
                   ],
                 ),
               ),

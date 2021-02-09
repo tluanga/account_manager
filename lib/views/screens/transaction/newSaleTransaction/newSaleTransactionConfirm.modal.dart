@@ -13,7 +13,7 @@ void journalConfirmBottomSheet(context) {
       return Consumer2<NewSaleTransactionViewModel, PartySelectViewModel>(
         builder: (context, model, partySelect, child) {
           print('Inside confirm modal');
-          print(model.getAmount());
+          print(model.getDebitAmount());
           return Container(
             child: Column(children: [
               Row(
@@ -57,7 +57,7 @@ void journalConfirmBottomSheet(context) {
                       ),
                       Text(
                           //debit amount for first ledger
-                          model.getAmount().toString(),
+                          model.getDebitAmount().toString(),
                           textAlign: TextAlign.center),
                       Text(
                           // credit amount for first ledger
@@ -79,7 +79,7 @@ void journalConfirmBottomSheet(context) {
                           textAlign: TextAlign.center),
                       Text(
                           // credit amount for second ledger
-                          model.getAmount().toString(),
+                          model.getDebitAmount().toString(),
                           textAlign: TextAlign.center),
                     ]),
                     model.getPartyId() != model.getCreditSideLedgerID() &&
@@ -101,7 +101,7 @@ void journalConfirmBottomSheet(context) {
                                 textAlign: TextAlign.center),
                             Text(
                                 // credit amount for second ledger
-                                model.getAmount().toString(),
+                                model.getDebitAmount().toString(),
                                 textAlign: TextAlign.center),
                           ])
                         : TableRow(children: [

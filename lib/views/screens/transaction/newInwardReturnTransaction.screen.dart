@@ -88,7 +88,7 @@ class _NewInwardReturnTransactionScreenState
                         // },
                         onChanged: (value) {
                           setState(() {
-                            newTransaction.setAmount(int.parse(value));
+                            newTransaction.setDebitAmount(int.parse(value));
                           });
                         },
                       ),
@@ -262,7 +262,7 @@ class _NewInwardReturnTransactionScreenState
           builder: (context, model, child) {
             String _debitLedgerName = model.getDebitSideLedgerName();
             String _creditSideLedgerName = model.getCreditSideLedgerName();
-            int _amount = model.getAmount();
+            int _amount = model.getDebitAmount();
 
             return Container(
               child: Column(children: [

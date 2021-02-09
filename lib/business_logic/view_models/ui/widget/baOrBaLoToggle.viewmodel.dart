@@ -2,10 +2,9 @@ import 'package:account_manager/static/constants.dart';
 import 'package:flutter/widgets.dart';
 
 class BaOrBaloToggleViewModel extends ChangeNotifier {
-  int _baOrBalo = cCashDown;
-  int _baType = cFullCredit;
+  int _baOrBalo;
+  int _baType;
   int _amountBankOrCash;
-  int _amountParty;
 
   //-----get and set Ba and Balo
   int getBaOrBalo() => _baOrBalo;
@@ -22,15 +21,9 @@ class BaOrBaloToggleViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int getAmountBankOrCash() => _amountBankOrCash;
+  int getDebitAmountBankOrCash() => _amountBankOrCash;
   void setAmountBankOrCash(int _type) {
     _amountBankOrCash = _type;
-    notifyListeners();
-  }
-
-  int getAmountParty() => _amountParty;
-  void setAmountParty(int _type) {
-    _amountParty = _type;
     notifyListeners();
   }
 }

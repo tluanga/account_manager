@@ -15,8 +15,13 @@ import 'package:account_manager/services/transactionType/transactionType.service
 
 import 'package:account_manager/services/ledgerTransaction/ledgerTransaction.service.dart';
 
+import '../../../static/constants.dart';
+
 class NewPurchaseTransactionViewModel extends ChangeNotifier {
-  int _amount;
+  int _debitAmount;
+  int _creditAmount;
+  int _creditPartialPaymentBankOrCash;
+
   String _particular; //--user input
   int _isCredit = cCashDown; //user input
   int _cashOrBank = CASH; //user input
@@ -80,6 +85,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           print('4) Asset-Credit-Partial-Cash');
           setDebitSideLedger(_assetLedger);
           setCreditSideLedger(LedgerID.CASHAC);
+          setCreditAmount();
           _purchaseType = PurchaseType.assetDebtPartialCash;
           notifyListeners();
         } else if (_cashOrBank == BANK) {
@@ -87,6 +93,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           setDebitSideLedger(_assetLedger);
           setCreditSideLedger(LedgerID.BANK);
           _purchaseType = PurchaseType.assetDebtPartialBank;
+          setCreditAmount();
           notifyListeners();
         }
       }
@@ -120,11 +127,13 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
         setDebitSideLedger(LedgerID.PURCHASEAC);
         setCreditSideLedger(LedgerID.CASHAC);
         _purchaseType = PurchaseType.nonAssetDebtCashPartial;
+        setCreditAmount();
         notifyListeners();
       } else if (_cashOrBank == BANK) {
         print('10) Non-Asset-Ba-Bank Partial');
         setDebitSideLedger(LedgerID.PURCHASEAC);
         setCreditSideLedger(LedgerID.BANK);
+        setCreditAmount();
         _purchaseType = PurchaseType.assetDebtPartialBank;
         notifyListeners();
       }
@@ -132,10 +141,24 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setCreditAmount() {
+    // if partial payment exist
+    if (_creditType == cPartialCredit) {
+      //set the credit amount
+      print('Partial Payment');
+      _creditAmount = _debitAmount - _creditPartialPaymentBankOrCash;
+      notifyListeners();
+    } else {
+      print('full Payment');
+      _creditAmount = _debitAmount;
+      notifyListeners();
+    }
+  }
+
   void saveData() {
     _transactionService.insert(
       Transaction(
-        amount: _amount,
+        amount: _debitAmount,
         particular: _particular,
         isCredit: _isCredit,
         cashOrBank: _cashOrBank,
@@ -162,7 +185,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -174,7 +197,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _creditSideLedgerId,
-              amount: _amount,
+              amount: _creditAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -191,7 +214,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -203,7 +226,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _creditSideLedgerId,
-              amount: _amount,
+              amount: _creditAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -224,7 +247,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -236,7 +259,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _creditSideLedgerId,
-              amount: _amount,
+              amount: _creditAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -253,7 +276,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _assetLedger,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -265,7 +288,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.CASHAC,
-              amount: _amount,
+              amount: _creditPartialPaymentBankOrCash,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -277,7 +300,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _partyId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -294,7 +317,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _assetLedger,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -306,7 +329,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.BANK,
-              amount: _amount,
+              amount: _creditPartialPaymentBankOrCash,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -318,7 +341,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _partyId,
-              amount: _amount,
+              amount: _creditAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -336,7 +359,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -348,7 +371,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _creditSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -365,7 +388,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -377,7 +400,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _creditSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -395,7 +418,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _debitSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -407,7 +430,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _creditSideLedgerId,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -424,7 +447,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -436,7 +459,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.CASHAC,
-              amount: _amount,
+              amount: _creditPartialPaymentBankOrCash,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -448,7 +471,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _partyId,
-              amount: _amount,
+              amount: _creditAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -465,7 +488,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.PURCHASEAC,
-              amount: _amount,
+              amount: _debitAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: DEBIT,
@@ -477,7 +500,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: LedgerID.BANK,
-              amount: _amount,
+              amount: _creditPartialPaymentBankOrCash,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -489,7 +512,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
           _ledgerTransactionService.insert(
             LedgerTransaction(
               ledgerId: _partyId,
-              amount: _amount,
+              amount: _creditAmount,
               particular: _particular,
               date: _date,
               debitOrCredit: CREDIT,
@@ -504,7 +527,7 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
 
   void printData() {
     print('-------Start of Print----');
-    print('Amount:$_amount');
+    print('Amount:$_debitAmount');
     print('Particular:$_particular');
     print('Ba or Balo:$_isCredit');
     print('Cash or Bank:$_cashOrBank');
@@ -517,9 +540,9 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     print('----end of print----');
   }
 
-  int getAmount() => _amount;
-  void setAmount(int value) {
-    _amount = value;
+  int getDebitAmount() => _debitAmount;
+  void setDebitAmount(int value) {
+    _debitAmount = value;
     notifyListeners();
   }
 
@@ -614,16 +637,23 @@ class NewPurchaseTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  int getCreditBankCashPartialPayment() => _creditPartialPaymentBankOrCash;
+  void setCreditBankCashPartialPayment(int value) {
+    _creditPartialPaymentBankOrCash = value;
+    notifyListeners();
+  }
+
   String getAssetLedgerName() => _assetLedgerName;
   String getDebitSideLedgerName() => _debitSideLedgerName;
   int getDebitSideLedgerId() => _debitSideLedgerId;
   String getCreditSideLedgerName() => _creditSideLedgerName;
   int getCreditSideLedgerID() => _creditSideLedgerId;
+  int getCreditAmount() => _creditAmount;
 
   Transaction journalConfirmBottomSheet() {
     print(_debitSideLedgerName);
     return Transaction(
-      amount: _amount,
+      amount: _debitAmount,
       debitSideLedgerName: _debitSideLedgerName,
       creditSideLedgerName: _creditSideLedgerName,
       partyName: _partyName,

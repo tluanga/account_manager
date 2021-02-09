@@ -138,16 +138,6 @@ class SelectBaOrBaloToggle extends StatelessWidget {
                           labelText: 'Amount for Bank/Cash A/c'),
                       keyboardType: TextInputType.number,
                     ),
-                    TextFormField(
-                      onChanged: (value) => {
-                        baOrBalo.setAmountBankOrCash(
-                          int.parse(value),
-                        )
-                      },
-                      decoration:
-                          InputDecoration(labelText: 'Amount for Party A/c'),
-                      keyboardType: TextInputType.number,
-                    ),
                     SizedBox(height: 26),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -179,7 +179,7 @@ class NewOutwardTransactionViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int getAmount() => _amount;
+  int getDebitAmount() => _amount;
   void setAmount(int value) {
     _amount = value;
     notifyListeners();
