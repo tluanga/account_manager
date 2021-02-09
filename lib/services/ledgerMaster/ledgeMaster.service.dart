@@ -12,6 +12,7 @@ abstract class LedgerMasterService {
   Future<List<LedgerMaster>> getAssetLedgerList();
   Future<List<LedgerMaster>> getFilterdLedgerList(String _searchString);
   Future<List<LedgerMaster>> getFilterdPartyLedgerList(String _searchString);
-  Future<List<LedgerMaster>> getFilteredAssetList(String _searchString);
+
+  Future<List<LedgerMaster>> getFilteredAssetLedgerList(String _searchString);
   Future<List<LedgerMaster>> getTopTenLedgerList();
 }

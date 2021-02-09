@@ -21,7 +21,7 @@ class AssetSelectViewModel extends ChangeNotifier {
 
   void setFilteredData(String _searchString) async {
     assetList =
-        await _ledgerMasterService.getFilterdPartyLedgerList(_searchString);
+        await _ledgerMasterService.getFilteredAssetLedgerList(_searchString);
 
     notifyListeners();
   }

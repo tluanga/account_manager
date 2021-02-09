@@ -1,8 +1,10 @@
 import 'package:account_manager/static/constants.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../../static/constants.dart';
+
 class BaOrBaloToggleViewModel extends ChangeNotifier {
-  int _baOrBalo;
+  int _baOrBalo = cCashDown;
   int _baType;
   int _amountBankOrCash;
 
