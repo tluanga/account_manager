@@ -4,6 +4,8 @@ import 'package:account_manager/views/screens/transaction/common/partySelect.scr
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../business_logic/view_models/ui/widget/baOrBaLoToggle.viewmodel.dart';
+
 class SelectBaOrBaloToggle extends StatelessWidget {
   final BuildContext context;
   SelectBaOrBaloToggle({this.context});
@@ -120,52 +122,80 @@ class SelectBaOrBaloToggle extends StatelessWidget {
               fontWeight: FontWeight.w500,
             );
             return Container(
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.7,
               width: MediaQuery.of(context).size.width * 0.6,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print('Full Credit');
-                      baOrBalo.setBaType(cFullCredit);
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      decoration: baOrBalo.getBaOrBalo() == cCashDown
-                          ? _activeBoxDecoration
-                          : _inActiveBoxDecoration,
-                      child: Center(
-                        child: Text('Full Credit',
-                            style: baOrBalo.getBaOrBalo() == cCashDown
-                                ? _activeTextStyle
-                                : _inActiveTextStyle),
-                      ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (value) => {
+                        baOrBalo.setAmountBankOrCash(
+                          int.parse(value),
+                        )
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Amount for Bank/Cash A/c'),
+                      keyboardType: TextInputType.number,
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      print('Partial Credit');
-                      baOrBalo.setBaType(cPartialCredit);
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      decoration: baOrBalo.getBaOrBalo() == cCashDown
-                          ? _activeBoxDecoration
-                          : _inActiveBoxDecoration,
-                      child: Center(
-                        child: Text('Partial Credit',
-                            style: baOrBalo.getBaOrBalo() == cCashDown
-                                ? _activeTextStyle
-                                : _inActiveTextStyle),
-                      ),
+                    TextFormField(
+                      onChanged: (value) => {
+                        baOrBalo.setAmountBankOrCash(
+                          int.parse(value),
+                        )
+                      },
+                      decoration:
+                          InputDecoration(labelText: 'Amount for Party A/c'),
+                      keyboardType: TextInputType.number,
                     ),
-                  ),
-                ],
+                    SizedBox(height: 26),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            print('Full Credit');
+                            baOrBalo.setBaType(cFullCredit);
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            decoration: baOrBalo.getBaOrBalo() == cCashDown
+                                ? _activeBoxDecoration
+                                : _inActiveBoxDecoration,
+                            child: Center(
+                              child: Text('Full Credit',
+                                  style: baOrBalo.getBaOrBalo() == cCashDown
+                                      ? _activeTextStyle
+                                      : _inActiveTextStyle),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print('Partial Credit');
+                            baOrBalo.setBaType(cPartialCredit);
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            decoration: baOrBalo.getBaOrBalo() == cCashDown
+                                ? _activeBoxDecoration
+                                : _inActiveBoxDecoration,
+                            child: Center(
+                              child: Text('Partial Credit',
+                                  style: baOrBalo.getBaOrBalo() == cCashDown
+                                      ? _activeTextStyle
+                                      : _inActiveTextStyle),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
           },

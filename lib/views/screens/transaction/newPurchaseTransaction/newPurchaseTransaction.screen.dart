@@ -243,7 +243,8 @@ class _NewPurchaseTransactionScreenState
                         child: Center(
                           child: FlatButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, rMyApp);
+                              // Navigator.pushNamed(context, rMyApp);
+                              Navigator.pop(context);
                             },
                             child: Text(
                               'Back',
